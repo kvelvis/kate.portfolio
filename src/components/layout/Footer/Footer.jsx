@@ -31,7 +31,7 @@ export default function Footer() {
         <div className="footer__col">
           <span className="t-mono footer__label">Contacts</span>
           {profile.contacts.map((c) => (
-            <a key={c.label} href={c.href} target="_blank" rel="noopener noreferrer" className="footer__link">
+            <a key={c.label} href={c.href} {...(c.external === false ? {} : { target: "_blank", rel: "noopener noreferrer" })} className="footer__link">
               {c.value}
             </a>
           ))}

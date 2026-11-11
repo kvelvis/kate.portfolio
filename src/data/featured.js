@@ -1,15 +1,23 @@
 import mockup from "../assets/img/figma2.png";
 
 export const featured = {
-  name: "Tano",
+  name: "Dano",
+  nameKo: "단어",
   label: "Figma project",
-  meta: ["Mobile app", "UI/UX", "Figma"],
+  tagline: "단어가 찾아오는 한국어 단어 앱",
+  meta: ["개인 프로젝트", "2026.11", "Mobile app", "UI/UX", "Figma"], // TODO: Kate — confirm period "2026.11"
   mockup,
+  mockupAlt: "Dano 단어 앱 화면",
+  mascot: null, // TODO: Kate — 3D cat mascot image (import it here), shown next to the phone mockup
+  figmaUrl: "", // TODO: Kate — public Figma link (optional)
   summary:
-    "타노(Tano)는 한국어 단어 학습을 쉽고 꾸준하게 만들어주는 어휘학습 앱이에요. 알림과 위젯을 통해 매일 자연스럽게 단어를 접하고, 기억력을 높일 수 있도록 도와줍니다.",
+    "앱을 열지 않아도 단어를 외울 수 있도록, 원하는 단어를 뜻과 예문과 함께 잠금 화면 알림으로 보내주는 앱입니다. 시험일에 맞춰 단어를 자동으로 나눠 보내 줍니다.",
+  role: "기획 · UI/UX · 캐릭터 디자인",
   features: [
-    { no: "01", title: "알림", en: "Push", text: "하루 중 정해진 시간에 단어가 도착해요. 공부하려고 앱을 열 필요가 없어요." },
-    { no: "02", title: "위젯", en: "Widget", text: "홈 화면 위젯으로 단어를 한눈에. 스쳐 보기만 해도 기억에 남아요." },
-    { no: "03", title: "맞춤 설정", en: "Routine", text: "요일 · 시간 · 단어 빈도까지 세부 설정으로 나에게 맞는 학습 루틴을 만들어요." },
+    { no: "01", title: "알림 중심 UX", en: "Notifications", text: "앱을 열지 않아도 단어가 뜻 · 예문과 함께 잠금 화면 알림으로 도착해요." },
+    { no: "02", title: "한 화면 설정", en: "One-screen setup", text: "" }, // TODO: Kate — one-line description
+    { no: "03", title: "Figma Variables 디자인 시스템", en: "Design system", text: "" }, // TODO: Kate — one-line description
+    { no: "04", title: "AI로 만든 3D 고양이 캐릭터", en: "3D mascot", text: "" }, // TODO: Kate — one-line description
   ],
+  next: ["탭하면 뜻이 보이는 알림", "간격 반복 학습"],
 };

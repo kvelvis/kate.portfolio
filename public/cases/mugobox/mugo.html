@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <!-- Link Swiper's CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<link rel="stylesheet" href="./mugo.css">
+    <!-- Demo styles -->
+    <style>
+        html,
+        body {
+            position: relative;
+            height: 100%;
+        }
+
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        box-sizing: border-box;
+        }
+        .swiper-h .swiper-pagination{
+            position: absolute;
+            bottom:15%;
+            left:-25%;
+           
+        }
+        .swiper-h .swiper-pagination-bullet{
+        width: 60px;
+        height: 3px;    
+        border-radius: 0;
+        background: rgba(255, 0, 0, 0);
+        border:1px solid red;
+        opacity: 1;
+        }
+        .swiper-h .swiper-pagination-bullet-active{
+            border:1px solid red !important;
+        }
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            border: 3px solid white;
+            background: transparent;
+    
+        }
+
+        swiper-pagination-bullet{
+            background: none !important;
+            border:2px solid white !important;
+        }
+        .swiper-pagination-bullet-active{
+        background: red !important;
+        border:3px solid red !important;
+        
+        }
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .swiper-v {
+            background: #eee;
+        }
+
+      
+        .swiper-slide:nth-child(1) .slogon {
+            font-size: 76px;
+        }
+
+        .swiper-slide span {
+            font-size: 47px;
+        }
+
+        .swiper-slide:nth-child(2) .summary {
+            position: absolute;
+            left: 10%;
+            bottom: 10%;
+            text-align: left;
+        }
+
+        .swiper-slide:nth-child(3) .summary,
+        .swiper-slide:nth-child(4) .summary {
+            position: absolute;
+            left: 10%;
+            top: 30%;
+            text-align: left;
+        }
+
+        .swiper-slide:nth-child(7) .summary {
+            font-size: 62px;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <h1><img src="./img/logo.svg" alt=""></h1>
+    <nav>
+        <ul>
+            <li><a href=""><span data-hover="회사소개">COMPANY</span></a></li>
+            <li><a href=""><span data-hover="제품소개">PRODUCT</span></a></li>
+            <li><a href=""><span data-hover="구입하기">MU:GO MALL</span></a></li>
+            <li><a href=""><span data-hover="회원서비스">EDUCATIONAL SUPPORT</span></a></li>
+            <li><a href=""><span data-hover="고객서비스">CUSTROMER SERVICE</span></a></li>
+        </ul>
+    </nav>
+    <div class="login">
+        <ul>
+            <li><a href="">LOGIN</a></li>
+            <li><a href="">SIGN UP</a></li>
+        </ul>
+    </div>
+</header>
+
+    <!-- Swiper -->
+    <div class="mark">처음 만나는 유아영어 시스템 전집 <i>MU:GO Q-Box</i></div>
+    <div class="quick">
+        <img src="./img/quick-menu-line.png" alt="">
+        <button type="button"><span>QUICK MENU</span></button>
+    </div>
+    <div class="swiper vslide swiper-v">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="swiper hslide swiper-h">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide inslide1"> <img src="./img/main-visual-item-book-bg.jpg" alt="">
+                            <div class="scroll_icon"></div>
+                           
+                            <div class="sunsmall">
+                                <img src="./img/main-visual-item-book-firecracker-01.png" alt="">
+                            </div>
+                            <div class="sunbig">
+                                <img src="./img/main-visual-item-book-firecracker-02.png" alt="">
+                            </div>
+                            <div class="dotcic"><img src="./img/main-visual-item-book-circle-dot.png" alt=""></div>
+                            <div class="tit">
+                                <img src="./img/mugo-box-title-white.svg" alt="">
+                                <p><br>
+                                    우리 아이 영어를 Q 하세요</p>
+                            </div>
+                           
+                        </div>
+                        <div class="swiper-slide inslide2"> 
+                            <div class="bg">
+                                <div class="char3">
+                                    <img src="./img/main-visual-item-character-mugo-three.jpg" alt="">
+
+                                </div>
+                                <div class="tit">
+                                    <h2>살아 있는 캐릭터, 뮤고가 <br>
+                                        우리 아이의 영어 친구가 됩니다.</h2>
+                                        <p>진짜 살아 있는 교감형 캐릭터 뮤고는 아이가 거부감 없이 <br>스스로 영어를 받아들일 수 있도록, 아이와 모든 일상을 함께합니다.</p>
+                                </div>
+                            </div>
+                            <div class="char">
+                                <img src="./img/main-visual-item-character-mugo.png" alt="">
+                            </div>
+                            <div class="cicbig">
+                                <img src="./img/main-visual-item-character-circle-dot-big.png" alt="">
+                            </div>
+                            <div class="cicsmall">
+                                <img src="./img/main-visual-item-character-circle-dot-small.png" alt="">
+                            </div>
+                            <div class="cicli">
+                                <img src="./img/main-visual-item-character-circle-line.png" alt="">
+                            </div>
+
+                            
+                        </div>
+                       
+                    </div>
+                    <div class="swiper-pagination vred"></div>
+                </div>
+            </div>
+            <div class="swiper-slide slide2">
+                <!-- <div class="color">
+                        
+                    <div class="red"></div>
+                    <ul class="color_select">
+                        <li class="yellow on"></li>
+                        <li class="green"></li>
+                        <li class="skyblue"></li>
+                        <li class="orange"></li>
+                        <li class="sand"></li>
+                        <li class="purple"></li>
+                    </ul>
+                    
+                    
+                </div> -->
+                <div class="tit_che">
+                    <h2>
+                        살아 있는 캐릭터, 뮤고가
+                        <br><span>우리 아이의 영어 친구가 됩니다.</span>
+                    </h2>
+                </div>
+                <ul class="char_list">
+                    <li class="select"><a href=""><img src="./img/friend-mugo-thumb.png" alt=""><span>MUGO</span></a></li>
+                    <li><a href=""><img src="./img/friend-chichi-thumb.png" alt=""><span>CHICHI</span></a></li>
+                    <li><a href=""><img src="./img/friend-windy-thumb.png" alt=""><span>WINDY</span></a></li>
+                    <li><a href=""><img src="./img/friend-cago-thumb.png" alt=""><span>CAGO</span></a></li>
+                    <li><a href=""><img src="./img/friend-ari-thumb.png" alt=""><span>ARI</span></a></li>
+                    <li><a href=""><img src="./img/friend-rok-thumb.png" alt=""><span>ROK</span></a></li>
+                </ul>
+                <ul class="char">
+                    <li id="mugo" class="on">
+                        <div class="color yellow"><img src="./img/friend-mugo.png" alt=""></div>
+                        <div class="detail">
+                            <div class="inner">
+                                <h4><span>MU:GO</span> 뮤고</h4>
+                                <p>모든 일에 호기심이 많아 엉뚱한 행동을 잘해요. <br>늘 좌충우돌하지만 문제가 생기면 지혜롭게 잘 헤쳐 나가요. </p>
+                                <div class="hexagon"></div>
+                            </div>
+                        </div>
+                    </li>
+                 
+                    <li id="chichi"><div class="color green"><img src="./img/friend-chichi.png" alt=""></div>
+                        <div class="detail">
+                            <div class="inner">
+                                <h4><span>CHICHI</span> 치치
+                                </h4>
+                                <p>친구들 중에서 몸집이 가장 커요. <br>부끄러움이 많고 앞에 나서는 것을 좋아하지 않지만, <br>위기 상황이 생기면 가장 먼저 친구들을 도와요</p>
+                                <div class="hexagon"></div>
+                            </div>
+                              
+                        </div>
+                    </li>
+                    <li id="windy"><div class="color blue"><img src="./img/friend-windy.png" alt=""></div>
+                        <div class="detail">
+                            <div class="inner">
+                                <h4><span>WINDY</span> 윈디</h4>
+                                <p> 아는 것도 많고, 여기저기서 들은 소식을 알리고 다니는 것을 좋아해요. 공상하고 상상하는 것을 좋아하며, 다정하고 섬세한 성격이라 다른 친구들의 이야기도 잘 들어주지요.</p>
+                                <div class="hexagon"></div>
+                            </div>
+                        </div></li>
+                    <li id="cago"><div class="color orange"><img src="./img/friend-cago.png" alt=""></div>
+                        <div class="detail">
+                            <div class="inner">
+                                <h4><span>CAGO</span> 카고</h4>
+                                <p> 급하고 불같은 성격으로 친구들이 위험에 처했다고 생각이 들면, <br>앞뒤를 가리지 않아 곤란한 상황이 생길 때도 있어요. 하지만 잘못을 금방 인정하는 단순한 성격이라 미워할 수 없는 친구예요.</p>
+                                <div class="hexagon"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="ari"><div class="color sand"><img src="./img/friend-ari.png" alt=""></div>
+                        <div class="detail">
+                            <div class="inner">
+                                <h4><span>ARI</span> 아리</h4>
+                                <p>앙증맞고 귀여운 아리는 평소 겁이 많아 위험한 순간에는 <br>빛보다 빠르게 도망가는 능력을 가지고 있어요. </p>
+                                <div class="hexagon"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="rok"><div class="color purple"><img src="./img/friend-rok.png" alt=""></div>
+                    <div class="detail">
+                        <div class="inner">
+                            <h4><span>ROK</span> 로크</h4>
+                            <p>악당 로크는 친구들을 괴롭히는 것이 취미예요. 친구들을 괴롭히려고 열심히 계획을 세우지만 어딘가 늘 허술해 매번 자신이 당하고 말지요</p>
+                            <div class="hexagon"></div>
+                        </div>
+                    </div></li>
+                </ul>
+                
+            </div>
+            <div class="swiper-slide slide3">
+              <h2>직접 체험해 보세요!</h2>
+              <ul class="books">
+                <li><a href=""><span>스토리북</span></a></li>
+                <li><a href=""><span>송 애니메이션</span></a></li>
+                <li><a href=""><span>스토리 애니메이션</span></a></li>
+                <li><a href=""><span>AR 스토리텔링</span></a></li>
+                <li><a href=""><span>AR 스티커</span></a></li>
+              </ul>
+              <ul class="books_img">
+                <li class="on trans"><img src="./img/video-small-book.png" alt=""></li>
+                <li><img src="./img/video-song-animation.png" alt=""></li>
+                <li><img src="./img/video-story-animation.png" alt=""></li>
+                <li><img src="./img/video-ar-storytelling.png" alt=""></li>
+                <li><img src="./img/video-ar-sticker.png" alt=""></li>
+              </ul>
+              <ul class="books_tit">
+                <li class="on">
+                    <h4>STORYBOOK</h4>
+                    <p>뛰어난 색감과 생기 넘치고 세련된 젊은 감각의 그림,<br>
+                        유달리 감각적인 그림책으로 우리 아이들에게 그림책 이상의<br>
+                        감동을 선사합니다.</p>
+                </li>
+                <li>
+                    <h4>SONG ANIMATION</h4>
+                    <p>수많은 유아 히트곡을 만들어 낸 감각 있는 젊은
+                        작곡가들과 함께 만들어, 새로운 감각의 세련된
+                        사운드를 만나 볼 수 있습니다.</p>
+                </li>
+                <li>
+                    <h4>STORY ANIMATION
+                       </h4>
+                    <p> 스토리를 재미있는 애니메이션으로 볼 수 있습니다.</p>
+                </li>
+                <li>
+                    <h4>AR STORYTELLING</h4>
+                    <p>책 속에서 증강현실(AR)로 불러낸 뮤고가
+                        영어 스토리를 직접 읽어 줍니다.</p>
+                </li>
+                <li>
+                    <h4>AR STICKER</h4>
+                    <p>집안 곳곳에 AR 스티커를 붙여 두고,
+                        증강현실(AR) 뮤고를 불러내 간단한
+                        생활 영어를 재미있게 습득할 수 있습니다.</p>
+                </li>
+              </ul>
+            </div>
+            
+            
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="./js/code.jquery.com_jquery-3.7.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="./js/splitText.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+
+
+
+
+        var swiper = new Swiper(".hslide", {
+            autoplay: {
+                delay: 35000,
+                disableOnInteraction: false,
+            },
+            effect: "fade",
+         
+        });
+        var swiper2 = new Swiper(".vslide", {
+            direction: "vertical",
+            mousewheel: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    </script>
+    <script>
+        var swiper = new Swiper(".hslide", {
+            effect: "fade",
+            autoplay: {
+                delay: 35000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            on: {
+                slideChange: function () {
+                    let activeSlide = this.slides[this.activeIndex]
+                    gsap.set[activeSlide.querySelectorAll('div.summary p')]
+
+                    const split = new SplitText(activeSlide.querySelectorAll('.summary p'),  { type: 'chars' })
+
+                    gsap.from(split.chars, {
+                        y: 100,
+                        x: -10,
+                        opacity: 0,
+                        duration: 1,
+                        stagger: {
+                            each: 0.02,
+                            from: 'start'
+                        }
+                    })
+                }
+
+            }
+        });
+        var swiper2 = new Swiper(".vslide", {
+            direction: "vertical",
+     
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+
+        $('ul.char_list li').click(function(e){
+            e.preventDefault();
+            
+    let cl=$(this).index()
+    
+    $('.char li').stop().fadeOut(0)
+    $('.char li').eq(cl).stop().fadeIn(0)
+    $('.char li').eq(cl).addClass('on')
+    $(this).find('.char li').removeClass('on')
+})
+
+
+
+
+
+     
+//         $('ul.char_list li').click(function(e){
+//             e.preventDefault();
+            
+//     let cl=$(this).index()
+    
+//     $('.char_anim li').stop().fadeOut()
+//     $('.char_anim li').eq(cl).stop().fadeIn()
+//     $('.char_anim li').addClass('on')
+//     $(this).find('.char_anim li').removeClass('on')
+// })
+
+   
+// $('ul.char_list li').click(function(e){
+//             e.preventDefault();
+            
+//     let cl=$(this).index()
+    
+//     $('.color_select li').stop().fadeOut()
+//     $('.color_select li').eq(cl).stop().fadeIn()
+//     $('.color_select li').addClass('on')
+//     $(this).find('.color_select li').removeClass('on')
+// })
+
+// $('ul.char_list li').click(function(e){
+//             e.preventDefault();
+            
+//     let cl2=$(this).index()
+    
+//     $('.char_txt li').stop().fadeOut()
+//     $('.char_txt li').eq(cl2).stop().fadeIn()
+//     $('.char_txt li').addClass('on')
+//     $(this).find('.char_txt li').removeClass('on')
+// })
+
+$('ul.char_list li').click(function(e){
+            e.preventDefault();
+            
+    let br=$(this).index()
+    $('.char_list li').removeClass('select')
+    $('.char_list li').eq(br).addClass('select')
+   
+    
+})
+
+// // $('ul.char_list li').click(function(e){
+// //     e.preventDefault();
+// //     let br1 = 0;
+// //     br1 = !br1;
+// //     if(br1){
+// //         $('.char_list li img').eq(br1).addClass('select')
+// //     } else{
+// //         $(this).find('.char_list li img').removeClass('select')
+// //     }
+// // })
+
+
+
+
+
+$('ul.books li').click(function(e){
+    e.preventDefault();
+    let bk=$(this).index()
+    $('ul.books_img li').addClass('on')
+    $(this).find('ul.books_img li').removeClass('on')
+    $('ul.books_img li').stop().fadeOut(0)
+    $('ul.books_img li').eq(bk).stop().fadeIn(500)
+   
+
+})
+$('ul.books li').click(function(e){
+    e.preventDefault();
+    let bk1=$(this).index()
+    $('ul.books_img li').removeClass('trans')
+   
+    $('ul.books_img li').eq(bk1).addClass('trans')
+    
+
+})
+
+
+    
+
+
+// $('ul.books li').click(function(e){
+//     e.preventDefault();
+//     let bk_tit=$(this).index()
+//     $('ul.books_tit li').stop().fadeOut()
+//     $('ul.books_tit li').eq(bk_tit).stop().fadeIn()
+//     $('ul.books_tit li').addClass('on')
+//     $(this).find('ul.books_tit li').removeClass('on')
+
+// })
+
+    
+    </script>
+</body>
+
+</html>

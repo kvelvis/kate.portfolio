@@ -44,7 +44,7 @@ export default function Cases() {
     <section ref={root} id="cases" className="cases section">
       <div className="container">
         <SectionHeading
-          index="04"
+          index="03"
           kicker="cases"
           title="Web cases"
           aside="퍼블리싱 & 리디자인 프로젝트. 카드를 누르면 실제 페이지가 열려요."

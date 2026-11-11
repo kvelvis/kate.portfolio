@@ -1,0 +1,40 @@
+li{
+    list-style: none;
+}
+.slider{
+    width: 100%;
+    
+}
+.char_list{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+}
+.char{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.char li{
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+.char li .color{
+
+    width: 50%;
+}
+.char li#chichi .color{
+    background-color: green;
+}
+.char li .detail{
+    width: 50%;
+    background-color: blue;
+}

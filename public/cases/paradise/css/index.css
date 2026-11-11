@@ -1,0 +1,170 @@
+body{
+    font-family: 'Gowun Batang', serif;
+    padding:0;
+    margin:0;
+    width: 100%;
+    height: 100%;
+    background-color: #96866f6f;
+}
+ul,li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+.wrap{
+    width: 1300px;
+    height: 700px;
+    margin: 100px auto;
+    background-image: url('../img/bacground2.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+}
+.logosmall{
+    position: absolute;
+    width: 200px;
+    height: 70px;
+    top:10px;
+    left:50%;
+    transform: translate(-50%);
+    z-index: 99;
+
+
+}
+.logosmall img{
+    position: absolute;
+    width: 200px;
+    height: 70px;
+
+}
+.logobig{
+    position: absolute;
+    width: 550px;
+    height: 250px;
+    top:200px;
+    left:100px;
+   
+
+
+}
+.logobig img{
+    position: absolute;
+    width: 550px;
+    height: 250px;
+   
+}
+ul.txt{
+    position: absolute;
+    top:30px;
+    right: 0;
+    width: 190px;
+    text-align: center;
+    color: #96866F;
+    animation: text 3s linear forwards;
+    animation-delay: 3s;
+}
+.txt li{
+    float: left;
+  
+    padding-right: 20px;
+}
+
+.right{
+    width: 650px;
+    height: 700px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top:0;
+    right:0;
+    animation: right 4s linear forwards;
+    animation-delay: 1s;
+}
+.big{
+    width: 270px;
+    height: 350px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+.big img{
+    width: 270px;
+    height: 350px;
+    object-fit: cover;
+    animation: sajin 5s linear forwards;
+    animation-delay: 1s;
+    
+}
+h1{
+    width: 270px;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    position: absolute;
+    bottom: 125px;
+    left:190px;
+    font-size: 21px;
+    font-family: 'Italiana', serif;
+    color: #96866F;
+    border-bottom: 1px solid #96866F;
+}
+h2{
+    bottom: 80px;
+    left:197px;
+    font-size: 13px;
+    position: absolute;
+    color: #96866F;
+}
+.next{
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    bottom: 30px;
+    right: 150px;
+    color: #96866F;
+}
+.next img{
+    width: 200px;
+    height: 8px;
+    position: absolute;
+    bottom: 13px;
+    right: -85px;
+}
+.mouse, .mouse-guide {
+    position: absolute;
+  border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, border-width 0.1s, opacity 0.1s;
+    transition-delay: 0.05s;
+    z-index: 2;
+  }
+  
+  .welcome{
+    width: 100%;
+    height: 100%;
+    font-size: 35px;
+    color: white;
+    z-index: 5;
+    background-color: rgb(255, 255, 255,0.5);
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    display: none;
+}
+
+  
+  
+  
+  .mouse-guide {
+    width: 5px;
+    height: 5px;
+    background-color: #96866F;
+  }
+  
+  

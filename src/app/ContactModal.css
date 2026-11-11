@@ -45,6 +45,14 @@
 }
 .contact-modal__copy:hover { background: var(--c-acid); color: var(--c-ink); }
 
+.contact-modal__resume {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+}
+
 @media (max-width: 639px) {
   .contact-modal__list li { grid-template-columns: 1fr auto; }
   .contact-modal__list li > span { grid-column: 1 / -1; }

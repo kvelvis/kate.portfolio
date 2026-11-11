@@ -3,6 +3,7 @@ import { gsap, useGSAP, MQ } from "../../../lib/gsap";
 import { featured } from "../../../data/featured";
 import RevealText from "../../ui/RevealText/RevealText";
 import Sticker from "../../ui/Sticker/Sticker";
+import Button from "../../ui/Button/Button";
 import FeatureItem from "./FeatureItem";
 import "./Featured.css";
 
@@ -14,7 +15,7 @@ export default function Featured() {
       const mm = gsap.matchMedia();
 
       mm.add(MQ.motion, () => {
-        // синий блок раскрывается из «карточки» на весь экран
+        // blue panel expands from a card to full width
         gsap.fromTo(
           ".featured__panel",
           { clipPath: "inset(8% 6% 0% 6% round 48px)" },
@@ -25,7 +26,7 @@ export default function Featured() {
           }
         );
 
-        // огромное слово TANO едет навстречу скроллу
+        // giant DANO word moves against the scroll
         gsap.fromTo(
           ".featured__giant",
           { xPercent: 10 },
@@ -36,7 +37,7 @@ export default function Featured() {
           }
         );
 
-        // телефон слегка поворачивается
+        // phone mockup tilts slightly
         gsap.fromTo(
           ".featured__phone",
           { rotate: -8, y: 60 },
@@ -64,8 +65,11 @@ export default function Featured() {
         <div className="featured__grid container">
           <div className="featured__media">
             <div className="featured__phone">
-              <img src={featured.mockup} alt={`${featured.name} app screens`} loading="lazy" />
+              <img src={featured.mockup} alt={featured.mockupAlt} loading="lazy" decoding="async" />
             </div>
+            {featured.mascot && (
+              <img src={featured.mascot} alt="Dano 3D 고양이 캐릭터" className="featured__mascot" loading="lazy" decoding="async" />
+            )}
             <Sticker color="acid" rotate={-12} className="featured__st-1">단어 +1</Sticker>
             <Sticker shape="circle" color="pink" rotate={10} className="featured__st-2">
               daily
@@ -76,12 +80,15 @@ export default function Featured() {
 
           <div className="featured__content">
             <div className="featured__meta t-mono">
-              <span>(03)</span>
+              <span>(02)</span>
               <span className="featured__label">{featured.label}</span>
             </div>
             <RevealText as="h2" by="chars" className="featured__title t-display">
               {featured.name}
             </RevealText>
+            <p className="featured__tagline">
+              <span lang="ko">{featured.nameKo}</span> — {featured.tagline}
+            </p>
             <ul className="featured__tags t-mono">
               {featured.meta.map((m) => (
                 <li key={m}>{m}</li>
@@ -96,6 +103,23 @@ export default function Featured() {
                 <FeatureItem key={f.no} {...f} />
               ))}
             </ol>
+
+            <dl className="featured__facts">
+              <div>
+                <dt className="t-mono">Role</dt>
+                <dd>{featured.role}</dd>
+              </div>
+              <div>
+                <dt className="t-mono">Next</dt>
+                <dd>{featured.next.join(" · ")}</dd>
+              </div>
+            </dl>
+
+            {featured.figmaUrl && (
+              <Button href={featured.figmaUrl} variant="acid" icon="↗" className="featured__cta">
+                View in Figma
+              </Button>
+            )}
           </div>
         </div>
       </div>

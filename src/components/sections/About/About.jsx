@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { gsap, useGSAP, MQ } from "../../../lib/gsap";
-import { profile, skills, education, languages, licenses } from "../../../data/profile";
+import { profile, skills, education, languages, licenses, yearsInKorea } from "../../../data/profile";
 import SectionHeading from "../../ui/SectionHeading/SectionHeading";
 import RevealText from "../../ui/RevealText/RevealText";
 import BentoCard from "./BentoCard";
@@ -13,7 +13,7 @@ import "./About.css";
 export default function About() {
   const root = useRef(null);
 
-  // карточки «падают» в сетку
+  // bento cards drop into the grid
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
@@ -25,7 +25,7 @@ export default function About() {
           duration: 1,
           ease: "expo.out",
           stagger: 0.08,
-          clearProps: "transform,opacity", // чтобы работал CSS hover
+          clearProps: "transform,opacity", // so the CSS hover works afterwards
           scrollTrigger: { trigger: ".bento", start: "top 80%", once: true },
         });
       });
@@ -55,7 +55,7 @@ export default function About() {
             <Timeline items={education} />
           </BentoCard>
 
-          <FactCard className="bento__fact" value={13} suffix="y" label="living in Korea 🇰🇷" />
+          <FactCard className="bento__fact" value={yearsInKorea} suffix="y" label="living in Korea 🇰🇷" />
 
           <BentoCard title="Language" tag="3 langs" className="bento__lang" tone="blue">
             <ul className="lang-list">
@@ -63,7 +63,6 @@ export default function About() {
                 <li key={l.name}>
                   <span className="lang-list__name">{l.name}</span>
                   <span className="lang-list__note">{l.note}</span>
-                  <span className="t-mono lang-list__date">{l.date}</span>
                 </li>
               ))}
             </ul>
@@ -73,7 +72,7 @@ export default function About() {
             <ul className="license-list">
               {licenses.map((l) => (
                 <li key={l.name}>
-                  <span className="t-mono t-muted">{l.date}</span>
+                  {l.date && <span className="t-mono t-muted">{l.date}</span>}
                   <span>{l.name}</span>
                 </li>
               ))}

@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { gsap, useGSAP, MQ } from "../../../lib/gsap";
 import { useContact } from "../../../app/ContactProvider";
 import { useScrollTo } from "../../../app/SmoothScroll";
+import { profile } from "../../../data/profile";
 import Button from "../../ui/Button/Button";
 import LikeHeart from "../../ui/LikeHeart/LikeHeart";
 import Sticker from "../../ui/Sticker/Sticker";
@@ -31,7 +32,7 @@ export default function Contact() {
   return (
     <section ref={root} id="contact" className="contact section">
       <div className="container contact__inner">
-        <p className="contact__kicker t-mono">(06) — if you are interested in my portfolio</p>
+        <p className="contact__kicker t-mono">(05) — if you are interested in my portfolio</p>
 
         <h2 className="contact__title t-display">
           <span className="contact__line"><span>Like</span></span>
@@ -60,6 +61,11 @@ export default function Contact() {
           <Button size="lg" onClick={openContact} icon="↗">
             Contact me
           </Button>
+          {profile.resume.map((r) => (
+            <Button key={r.lang} size="lg" variant="acid" href={r.href} target="_blank" rel="noopener noreferrer" icon="↓">
+              {r.label}
+            </Button>
+          ))}
           <Button size="lg" variant="ghost" href="#top" onClick={(e) => { e.preventDefault(); scrollTo("top", { duration: 2 }); }}>
             Back to top ↑
           </Button>

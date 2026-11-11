@@ -24,7 +24,7 @@ export default function FeatureItem({ no, title, en, text }) {
         <h3 className="feature__title">
           {title} <span className="t-mono">/ {en}</span>
         </h3>
-        <p className="feature__text">{text}</p>
+        {text && <p className="feature__text">{text}</p>}
       </div>
     </li>
   );

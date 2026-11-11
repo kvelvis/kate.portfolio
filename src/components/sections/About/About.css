@@ -331,7 +331,6 @@
   font-size: var(--fs-xs);
   font-weight: 700;
 }
-.lang-list__date { opacity: 0.6; }
 
 /* ---------- license ---------- */
 .license-list {
@@ -347,6 +346,7 @@
   font-family: var(--f-kr);
   font-weight: 500;
 }
+.license-list li > :last-child { grid-column: 2; } /* name stays in column 2 even without a date */
 
 /* ---------- tablet ---------- */
 @media (max-width: 1023px) {

@@ -6,7 +6,7 @@ import "./ContactModal.css";
 
 const ContactContext = createContext(() => {});
 
-/** Даёт любому компоненту функцию openContact() — одна модалка на весь сайт. */
+/** Gives any component openContact() — one contact modal for the whole site. */
 export function ContactProvider({ children }) {
   const [open, setOpen] = useState(false);
   const openContact = useCallback(() => setOpen(true), []);
@@ -19,7 +19,7 @@ export function ContactProvider({ children }) {
       setCopied(value);
       setTimeout(() => setCopied(null), 1400);
     } catch {
-      /* clipboard недоступен — просто ссылка */
+      /* clipboard unavailable — the link still works */
     }
   };
 
@@ -35,7 +35,7 @@ export function ContactProvider({ children }) {
             {profile.contacts.map((c) => (
               <li key={c.label}>
                 <span className="t-mono t-muted">{c.label}</span>
-                <a href={c.href} target="_blank" rel="noopener noreferrer">
+                <a href={c.href} {...(c.external === false ? {} : { target: "_blank", rel: "noopener noreferrer" })}>
                   {c.value}
                 </a>
                 <button className="contact-modal__copy t-mono" onClick={() => copy(c.value)}>
@@ -44,6 +44,15 @@ export function ContactProvider({ children }) {
               </li>
             ))}
           </ul>
+          {profile.resume.length > 0 && (
+            <div className="contact-modal__resume">
+              {profile.resume.map((r) => (
+                <a key={r.lang} href={r.href} className="contact-modal__copy t-mono" target="_blank" rel="noopener noreferrer">
+                  {r.label} ↓
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </Modal>
     </ContactContext.Provider>

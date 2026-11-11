@@ -41,7 +41,7 @@ export default function StyleGuide() {
   return (
     <section ref={root} id="styleguide" className="sg section">
       <div className="container">
-        <SectionHeading index="05" kicker="portfolio info" title="Style guide" aside="Шрифты, цвета и стек, на которых собран этот сайт." />
+        <SectionHeading index="04" kicker="portfolio info" title="Style guide" aside="이 사이트에 사용한 폰트, 컬러, 기술 스택이에요." />
 
         <h3 className="sg__sub t-mono">Typography</h3>
         <ul className="sg__fonts">
