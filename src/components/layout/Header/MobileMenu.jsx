@@ -1,14 +1,19 @@
 import { useRef } from "react";
-import { gsap, useGSAP } from "../../../lib/gsap";
+import { gsap, useGSAP, prefersReducedMotion } from "../../../lib/gsap";
 import { navLinks, profile } from "../../../data/profile";
 
-/** Полноэкранное меню для tablet/phone */
+/** Full-screen menu for tablet/phone */
 export default function MobileMenu({ open, onNavigate, active }) {
   const root = useRef(null);
   const tl = useRef(null);
 
   useGSAP(
     () => {
+      if (prefersReducedMotion()) {
+        // no circle reveal: just show / hide
+        tl.current = gsap.timeline({ paused: true }).set(root.current, { visibility: "visible" }).to({}, { duration: 0.01 });
+        return;
+      }
       tl.current = gsap
         .timeline({ paused: true })
         .set(root.current, { visibility: "visible" })
@@ -26,8 +31,11 @@ export default function MobileMenu({ open, onNavigate, active }) {
   useGSAP(
     () => {
       if (!tl.current) return;
-      if (open) tl.current.timeScale(1).play();
-      else tl.current.timeScale(1.8).reverse();
+      if (open) {
+        tl.current.timeScale(1).play();
+        // wait until the timeline has made the menu visible, then move focus into it
+        gsap.delayedCall(0.1, () => root.current?.querySelector(".mm__link")?.focus({ preventScroll: true }));
+      } else tl.current.timeScale(1.8).reverse();
     },
     { dependencies: [open] }
   );

@@ -30,11 +30,12 @@ export default function App() {
 
   return (
     <>
+      <a href="#main" className="skip-link">본문 바로가기</a>
       <Header />
       <Preloader onDone={onLoaded} />
       <Cursor />
 
-      <main>
+      <main id="main" tabIndex={-1}>
         <Hero ready={ready} />
         <Marquee items={marqueeWords} tilt={-3} className="app__marquee" />
         <About />

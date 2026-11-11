@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { gsap } from "../../../lib/gsap";
+import { gsap, prefersReducedMotion } from "../../../lib/gsap";
 import "./LikeHeart.css";
 
 const STORAGE_KEY = "portfolio-liked";
@@ -12,7 +12,7 @@ function readLiked() {
   }
 }
 
-/** Сердечко-лайк с «взрывом» частиц. Запоминается в браузере. */
+/** Like heart with a particle burst. Remembered in the browser. */
 export default function LikeHeart() {
   const [liked, setLiked] = useState(readLiked);
   const ref = useRef(null);
@@ -25,7 +25,7 @@ export default function LikeHeart() {
     } catch {
       /* ignore */
     }
-    if (!next) return;
+    if (!next || prefersReducedMotion()) return;
 
     gsap.fromTo(ref.current.querySelector("svg"), { scale: 0.6 }, { scale: 1, duration: 0.7, ease: "elastic.out(1.2, 0.35)" });
     const dots = ref.current.querySelectorAll(".heart__dot");

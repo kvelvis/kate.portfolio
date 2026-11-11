@@ -18,7 +18,7 @@
   --bg: var(--c-cream);
   --bg-2: #f6f2ec;
   --fg: var(--c-ink);
-  --fg-muted: rgb(13 13 16 / 0.58);
+  --fg-muted: rgb(13 13 16 / 0.62); /* ≥ 4.5:1 on cream */
   --line: rgb(13 13 16 / 0.14);
   --surface: var(--c-white);
   --accent: var(--c-blue);

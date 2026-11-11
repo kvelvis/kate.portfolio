@@ -5,7 +5,7 @@ import { gsap, ScrollTrigger, prefersReducedMotion } from "../lib/gsap";
 
 const LenisContext = createContext(null);
 
-/** Плавный скролл Lenis, синхронизированный с тикером GSAP и ScrollTrigger. */
+/** Lenis smooth scroll, synced with the GSAP ticker and ScrollTrigger. */
 export function SmoothScroll({ children }) {
   const [lenis, setLenis] = useState(null);
   const rafRef = useRef(null);
@@ -35,13 +35,16 @@ export function SmoothScroll({ children }) {
 
 export const useLenis = () => useContext(LenisContext);
 
-/** Скролл к секции по id с учётом фиксированной шапки. */
+/** Scrolls to a section by id (minus the fixed header) and moves keyboard focus there. */
 export function useScrollTo() {
   const lenis = useLenis();
   return (target, opts = {}) => {
     const el = typeof target === "string" ? document.getElementById(target) : target;
     if (!el) return;
-    if (lenis) lenis.scrollTo(el, { offset: -72, ...opts });
-    else el.scrollIntoView({ behavior: "smooth" });
+    const reduce = prefersReducedMotion();
+    if (lenis) lenis.scrollTo(el, { offset: -72, immediate: reduce, ...opts });
+    else el.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
+    el.focus({ preventScroll: true });
   };
 }

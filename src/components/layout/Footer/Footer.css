@@ -19,7 +19,7 @@
   align-content: start;
   gap: 0.5rem;
 }
-.footer__label { opacity: 0.6; }
+.footer__label { opacity: 0.8; } /* ≥ 4.5:1 on blue */
 .footer__big {
   font-size: var(--fs-xl);
   color: var(--c-acid);

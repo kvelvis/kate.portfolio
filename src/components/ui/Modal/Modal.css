@@ -13,14 +13,22 @@
 .modal__box {
   position: relative;
   width: min(100%, 520px);
+  display: flex;
+  flex-direction: column;
   max-height: calc(100dvh - 2 * var(--gutter));
-  overflow: auto;
+  overflow: visible; /* scrolling happens in .modal__scroll, so decorations can stick out */
   background: var(--surface);
   color: var(--fg);
   border: 1.5px solid var(--c-ink);
   border-radius: var(--radius-lg);
   box-shadow: 8px 8px 0 var(--accent);
   padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.modal__scroll {
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
 }
 
 .modal--media .modal__box {

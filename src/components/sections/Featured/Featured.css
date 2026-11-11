@@ -121,7 +121,7 @@
   line-height: 1.15;
   margin-bottom: 0.4rem;
 }
-.feature__title .t-mono { opacity: 0.6; vertical-align: middle; }
+.feature__title .t-mono { opacity: 0.8; vertical-align: middle; } /* ≥ 4.5:1 on blue */
 .feature__text {
   max-width: 40ch;
   opacity: 0.85;

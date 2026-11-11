@@ -3,6 +3,7 @@ import { gsap, ScrollTrigger, useGSAP } from "../../../lib/gsap";
 import { useScrollTo, useLenis } from "../../../app/SmoothScroll";
 import { useContact } from "../../../app/ContactProvider";
 import { navLinks } from "../../../data/profile";
+import { inertOutside } from "../../../lib/a11y";
 import Button from "../../ui/Button/Button";
 import MobileMenu from "./MobileMenu";
 import ThemeToggle from "./ThemeToggle";
@@ -16,17 +17,22 @@ export default function Header() {
   const scrollTo = useScrollTo();
   const lenis = useLenis();
   const openContact = useContact();
+  const burger = useRef(null);
+  const menuOpenRef = useRef(menuOpen);
+  menuOpenRef.current = menuOpen;
 
-  // прячем шапку при скролле вниз, показываем при скролле вверх
+  // hide the header on scroll down, show it on scroll up (and whenever it gets keyboard focus)
   useGSAP(
     () => {
       const show = gsap.quickTo(root.current, "yPercent", { duration: 0.45, ease: "power3.out" });
+      const onFocus = () => show(0);
+      root.current.addEventListener("focusin", onFocus);
       ScrollTrigger.create({
         start: 0,
         end: "max",
         onUpdate: (self) => {
           root.current.classList.toggle("is-scrolled", self.scroll() > 40);
-          if (menuOpen) return;
+          if (menuOpenRef.current || root.current.contains(document.activeElement)) return;
           show(self.direction === 1 && self.scroll() > 400 ? -130 : 0);
         },
       });
@@ -40,24 +46,25 @@ export default function Header() {
         ease: "none",
         scrollTrigger: { start: 0, end: "max", scrub: 0.3 },
       });
+      return () => root.current?.removeEventListener("focusin", onFocus);
     },
-    { scope: root, dependencies: [menuOpen] }
+    { scope: root }
   );
 
-  // подсветка активного пункта
+  // highlight the nav item of the section in view
   useEffect(() => {
     const triggers = navLinks.map(({ id }) =>
       ScrollTrigger.create({
         trigger: `#${id}`,
         start: "top 50%",
         end: "bottom 50%",
-        onToggle: (self) => self.isActive && setActive(id),
+        onToggle: (self) => setActive((cur) => (self.isActive ? id : cur === id ? "" : cur)),
       })
     );
     return () => triggers.forEach((t) => t.kill());
   }, []);
 
-  // блокируем скролл, пока открыто меню (start — только после закрытия меню)
+  // lock scrolling while the menu is open (start again only after it was open)
   const wasOpen = useRef(false);
   useEffect(() => {
     if (!lenis) return;
@@ -65,6 +72,22 @@ export default function Header() {
     else if (wasOpen.current) lenis.start();
     wasOpen.current = menuOpen;
   }, [menuOpen, lenis]);
+
+  // mobile menu keyboard support: Esc closes it, the page behind is unreachable, focus returns to the burger
+  useEffect(() => {
+    if (!menuOpen) return;
+    const restore = inertOutside(["main", "footer"]);
+    const onKey = (e) => {
+      if (e.key !== "Escape") return;
+      setMenuOpen(false);
+      burger.current?.focus();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      restore();
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [menuOpen]);
 
   const go = (id) => (e) => {
     e.preventDefault();
@@ -107,11 +130,12 @@ export default function Header() {
               Contact
             </Button>
             <button
+              ref={burger}
               className={`header__burger ${menuOpen ? "is-open" : ""}`}
               onClick={() => setMenuOpen((v) => !v)}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
-              aria-label="Menu"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
             >
               <span />
               <span />

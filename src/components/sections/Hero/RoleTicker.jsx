@@ -1,14 +1,17 @@
 import { useRef } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "../../../lib/gsap";
 
-/** Роли сменяют друг друга по кругу: Web Designer → Web Publisher → Front-end */
+/** Roles rotate in a loop: Web Designer → Web Publisher → Front-end */
 export default function RoleTicker({ roles }) {
   const ref = useRef(null);
 
   useGSAP(
     () => {
-      if (prefersReducedMotion()) return;
       const items = gsap.utils.toArray(".role-ticker__item");
+      if (prefersReducedMotion()) {
+        gsap.set(items.slice(1), { autoAlpha: 0 }); // static: show the first role only
+        return;
+      }
       gsap.set(items, { yPercent: 110 });
       gsap.set(items[0], { yPercent: 0 });
       const tl = gsap.timeline({ repeat: -1 });
@@ -22,7 +25,8 @@ export default function RoleTicker({ roles }) {
   );
 
   return (
-    <span ref={ref} className="role-ticker" aria-label={roles.join(", ")}>
+    <span ref={ref} className="role-ticker">
+      <span className="visually-hidden">{roles.join(", ")}</span>
       <span className="role-ticker__dot" />
       <span className="role-ticker__window" aria-hidden="true">
         {roles.map((r) => (

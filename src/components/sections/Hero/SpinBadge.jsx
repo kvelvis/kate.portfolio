@@ -1,11 +1,12 @@
 import { useId } from "react";
 
-/** Круглый бейдж с текстом по кругу и звездой в центре */
+/** Round badge with text on a circle and a star in the middle */
 export default function SpinBadge({ text }) {
   const id = useId().replace(/:/g, "");
 
   return (
-    <div className="spin-badge" aria-label={text}>
+    <div className="spin-badge">
+      <span className="visually-hidden">{text}</span>
       <svg viewBox="0 0 200 200" className="spin-badge__ring" aria-hidden="true">
         <defs>
           <path id={id} d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />

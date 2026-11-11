@@ -1,15 +1,17 @@
 import { useRef } from "react";
-import { gsap, useGSAP } from "../../../lib/gsap";
+import { gsap, useGSAP, prefersReducedMotion } from "../../../lib/gsap";
 import star from "../../../assets/img/star.png";
 
-/** Кислотная карточка с большим счётчиком */
+/** Acid card with a big counter */
 export default function FactCard({ value, suffix = "", label, className = "" }) {
   const ref = useRef(null);
 
   useGSAP(
     () => {
+      if (prefersReducedMotion()) return;
       const num = ref.current.querySelector(".fact__num");
       const c = { v: 0 };
+      num.textContent = "0"; // start from 0 (the real value stays in the HTML for no-JS / reduced motion)
       gsap.to(c, {
         v: value,
         duration: 2,

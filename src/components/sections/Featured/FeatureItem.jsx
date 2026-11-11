@@ -1,11 +1,12 @@
 import { useRef } from "react";
-import { gsap, useGSAP } from "../../../lib/gsap";
+import { gsap, useGSAP, prefersReducedMotion } from "../../../lib/gsap";
 
 export default function FeatureItem({ no, title, en, text }) {
   const ref = useRef(null);
 
   useGSAP(
     () => {
+      if (prefersReducedMotion()) return;
       gsap.from(ref.current, {
         y: 50,
         opacity: 0,

@@ -43,7 +43,7 @@ export default function ProfileCard() {
   );
 
   return (
-    <div ref={root} className="id-wrap" aria-label="Profile card">
+    <div ref={root} className="id-wrap">
       <span className="id-strap" aria-hidden="true" />
       <article className="id-card" data-cursor="pull">
         <span className="id-card__hole" aria-hidden="true" />

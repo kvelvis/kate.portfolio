@@ -71,10 +71,33 @@ ol {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus, var(--accent));
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* focus ring stays visible on blue backgrounds */
+.footer,
+.mm,
+.featured__panel,
+.bento__card--blue {
+  --focus: var(--c-acid);
+}
+[tabindex="-1"]:focus { outline: none; } /* skip-link / nav targets: no ring around a whole section */
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9900;
+  padding: 0.7em 1.2em;
+  border-radius: 999px;
+  background: var(--c-acid);
+  color: var(--c-ink);
+  font-weight: 600;
+  transform: translateY(-160%);
+}
+.skip-link:focus-visible { transform: none; }
 
 /* ---------- layout helpers ---------- */
 .container {

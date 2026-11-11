@@ -1,12 +1,13 @@
 import { useRef } from "react";
-import { gsap, useGSAP } from "../../../lib/gsap";
+import { gsap, useGSAP, prefersReducedMotion } from "../../../lib/gsap";
 
-/** Вертикальная линия образования «прорисовывается» скроллом */
+/** The vertical education line draws itself on scroll */
 export default function Timeline({ items }) {
   const ref = useRef(null);
 
   useGSAP(
     () => {
+      if (prefersReducedMotion()) return;
       gsap.fromTo(
         ".timeline__progress",
         { scaleY: 0 },
@@ -30,7 +31,7 @@ export default function Timeline({ items }) {
 
   return (
     <ol ref={ref} className="timeline">
-      <span className="timeline__progress" aria-hidden="true" />
+      <li className="timeline__progress" aria-hidden="true" />
       {items.map((it) => (
         <li className="timeline__item" key={it.year}>
           <span className="timeline__dot" aria-hidden="true" />

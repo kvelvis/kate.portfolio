@@ -34,7 +34,7 @@ export default function Contact() {
       <div className="container contact__inner">
         <p className="contact__kicker t-mono">(05) — if you are interested in my portfolio</p>
 
-        <h2 className="contact__title t-display">
+        <h2 className="contact__title t-display" aria-label="Like & contact me">
           <span className="contact__line"><span>Like</span></span>
           <span className="contact__line">
             <span>

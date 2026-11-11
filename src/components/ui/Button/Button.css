@@ -40,7 +40,7 @@
   box-shadow: 3px 3px 0 var(--c-ink);
 }
 
-/* текст уезжает вверх, снизу выезжает копия */
+/* the label rolls up and a copy rolls in from below */
 .btn__roll {
   position: relative;
   display: inline-block;
@@ -53,6 +53,7 @@
 }
 .btn__roll[data-text]::after {
   content: attr(data-text);
+  content: attr(data-text) / ""; /* empty alt text: screen readers don't read the label twice */
   position: absolute;
   left: 0;
   top: 100%;
