@@ -210,11 +210,21 @@
 /* ---------- skills ---------- */
 .skills {
   display: grid;
-  gap: 0.9rem;
+  gap: 1.25rem;
+}
+.skills__group,
+.skills__list {
+  display: grid;
+  gap: 0.6rem;
+}
+.skills__label {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px dashed var(--line);
+  font-weight: 400;
 }
 .skill {
   display: grid;
-  grid-template-columns: 7.5rem 1fr 3rem;
+  grid-template-columns: minmax(0, 1.5fr) minmax(48px, 1fr) 4.6rem;
   align-items: center;
   gap: 0.75rem;
   font-size: var(--fs-sm);
@@ -364,6 +374,6 @@
     grid-template-columns: 1fr;
     grid-template-areas: "fact" "skills" "edu" "lang" "license";
   }
-  .skill { grid-template-columns: 6rem 1fr 2.6rem; }
+  .skill { grid-template-columns: minmax(0, 1.6fr) minmax(40px, 1fr) 4.2rem; }
   .fact { min-height: 180px; }
 }

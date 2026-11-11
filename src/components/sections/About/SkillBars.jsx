@@ -1,48 +1,43 @@
 import { useRef } from "react";
-import { gsap, useGSAP } from "../../../lib/gsap";
+import { gsap, useGSAP, prefersReducedMotion } from "../../../lib/gsap";
+import { skillLevels } from "../../../data/profile";
 
-/** Полоски навыков заполняются и считают проценты, когда попадают в экран */
-export default function SkillBars({ items }) {
+/** Grouped skills with a 3-level bar; bars fill in when they scroll into view */
+export default function SkillBars({ groups }) {
   const ref = useRef(null);
 
   useGSAP(
     () => {
-      const rows = gsap.utils.toArray(".skill");
-      rows.forEach((row, i) => {
-        const fill = row.querySelector(".skill__fill");
-        const num = row.querySelector(".skill__num");
-        const level = Number(row.dataset.level);
-        const counter = { v: 0 };
-        gsap
-          .timeline({
-            scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
-            delay: i * 0.06,
-          })
-          .fromTo(fill, { scaleX: 0 }, { scaleX: level / 100, duration: 1.4, ease: "expo.out" })
-          .to(counter, {
-            v: level,
-            duration: 1.4,
-            ease: "expo.out",
-            onUpdate: () => (num.textContent = Math.round(counter.v)),
-          }, 0);
+      if (prefersReducedMotion()) return; // bars are already drawn at their level via inline style
+      gsap.from(".skill__fill", {
+        scaleX: 0,
+        duration: 1.4,
+        ease: "expo.out",
+        stagger: 0.04,
+        scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
       });
     },
     { scope: ref }
   );
 
   return (
-    <ul ref={ref} className="skills">
-      {items.map((s) => (
-        <li className="skill" key={s.name} data-level={s.level}>
-          <span className="skill__name">{s.name}</span>
-          <span className="skill__track">
-            <span className="skill__fill" />
-          </span>
-          <span className="skill__val t-mono">
-            <span className="skill__num">{s.level}</span>%
-          </span>
-        </li>
+    <div ref={ref} className="skills">
+      {groups.map((g) => (
+        <div key={g.group} className="skills__group">
+          <h4 className="skills__label t-mono t-muted">{g.group}</h4>
+          <ul className="skills__list">
+            {g.items.map((s) => (
+              <li className="skill" key={s.name}>
+                <span className="skill__name">{s.name}</span>
+                <span className="skill__track" aria-hidden="true">
+                  <span className="skill__fill" style={{ transform: `scaleX(${s.level / 3})` }} />
+                </span>
+                <span className="skill__val t-mono">{skillLevels[s.level]}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }

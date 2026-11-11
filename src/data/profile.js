@@ -41,16 +41,47 @@ export const navLinks = [
   { id: "contact", label: "Contact" },
 ];
 
-export const skills = [
-  { name: "HTML", level: 95 },
-  { name: "CSS/SCSS", level: 95 },
-  { name: "JavaScript", level: 85 },
-  { name: "jQuery", level: 80 },
-  { name: "Git", level: 90 },
-  { name: "Illustrator", level: 90 },
-  { name: "Blender", level: 90 },
-  { name: "Photoshop", level: 75 },
-  { name: "Figma", level: 75 },
+// level: 3 = daily use, 2 = working knowledge, 1 = familiar
+// TODO: Kate — confirm the levels you didn't set yourself (you set Figma 3, React 2, Blender 2)
+export const skillLevels = { 3: "daily", 2: "working", 1: "familiar" };
+
+export const skillGroups = [
+  {
+    group: "Front-end",
+    items: [
+      { name: "HTML5 · 웹표준", level: 3 },
+      { name: "CSS / SCSS", level: 3 },
+      { name: "JavaScript (ES6+)", level: 2 },
+      { name: "React", level: 2 },
+      { name: "GSAP · Lenis", level: 2 },
+      { name: "jQuery", level: 2 },
+      { name: "Git / GitHub", level: 2 },
+    ],
+  },
+  {
+    group: "Publishing",
+    items: [
+      { name: "Responsive (PC · Tablet · Mobile)", level: 3 },
+      { name: "Web accessibility (KWCAG · WCAG 2.1)", level: 2 },
+      { name: "Cross-browser", level: 2 },
+    ],
+  },
+  {
+    group: "Design",
+    items: [
+      { name: "Figma · Design systems", level: 3 },
+      { name: "Photoshop", level: 3 },
+      { name: "Illustrator", level: 3 },
+      { name: "Blender (3D)", level: 2 },
+    ],
+  },
+  {
+    group: "AI workflow",
+    items: [
+      { name: "AI-assisted coding", level: 2 },
+      { name: "AI image generation", level: 2 },
+    ],
+  },
 ];
 
 export const education = [
@@ -64,6 +95,7 @@ export const languages = [
   { name: "한국어", note: "TOPIK 6급" },
   { name: "English", note: "TOEIC 875" },
   { name: "Русский", note: "Native" },
+  { name: "KO ↔ RU", note: "Localization" },
 ];
 
 // Empty dates are hidden on the site until filled in (format "YYYY.MM").

@@ -96,8 +96,9 @@ ol {
   color: var(--c-ink);
   font-weight: 600;
   transform: translateY(-160%);
+  opacity: 0;
 }
-.skip-link:focus-visible { transform: none; }
+.skip-link:focus-visible { transform: none; opacity: 1; }
 
 /* ---------- layout helpers ---------- */
 .container {

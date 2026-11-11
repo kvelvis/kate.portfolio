@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { gsap, useGSAP, MQ } from "../../../lib/gsap";
-import { profile, skills, education, languages, licenses, yearsInKorea } from "../../../data/profile";
+import { profile, skillGroups, education, languages, licenses, yearsInKorea } from "../../../data/profile";
 import SectionHeading from "../../ui/SectionHeading/SectionHeading";
 import RevealText from "../../ui/RevealText/RevealText";
 import BentoCard from "./BentoCard";
@@ -48,7 +48,7 @@ export default function About() {
 
         <div className="bento">
           <BentoCard title="Skills" tag="tools I use" className="bento__skills">
-            <SkillBars items={skills} />
+            <SkillBars groups={skillGroups} />
           </BentoCard>
 
           <BentoCard title="Education" tag="since 2012" className="bento__edu">
@@ -57,7 +57,7 @@ export default function About() {
 
           <FactCard className="bento__fact" value={yearsInKorea} suffix="y" label="living in Korea 🇰🇷" />
 
-          <BentoCard title="Language" tag="3 langs" className="bento__lang" tone="blue">
+          <BentoCard title="Language" tag="3 langs + l10n" className="bento__lang" tone="blue">
             <ul className="lang-list">
               {languages.map((l) => (
                 <li key={l.name}>
