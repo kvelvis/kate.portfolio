@@ -6,10 +6,12 @@ import Sticker from "../../ui/Sticker/Sticker";
 import Button from "../../ui/Button/Button";
 import CaseStudyButton from "../CaseStudy/CaseStudy";
 import FeatureItem from "./FeatureItem";
+import { useLang } from "../../../app/I18n";
 import "./Featured.css";
 
 export default function Featured() {
   const root = useRef(null);
+  const { lang, t } = useLang();
 
   useGSAP(
     () => {
@@ -66,7 +68,7 @@ export default function Featured() {
         <div className="featured__grid container">
           <div className="featured__media">
             <div className="featured__phone">
-              <img src={featured.mockup} alt={featured.mockupAlt} width="494" height="615" loading="lazy" decoding="async" />
+              <img src={featured.mockup} alt={t(featured.mockupAlt)} width="494" height="615" loading="lazy" decoding="async" />
             </div>
             {featured.mascot && (
               <img src={featured.mascot} alt="Dano 3D 고양이 캐릭터" className="featured__mascot" loading="lazy" decoding="async" />
@@ -88,15 +90,15 @@ export default function Featured() {
               {featured.name}
             </RevealText>
             <p className="featured__tagline">
-              <span lang="ko">{featured.nameKo}</span> — {featured.tagline}
+              <span lang="ko">{featured.nameKo}</span> — {t(featured.tagline)}
             </p>
             <ul className="featured__tags t-mono">
               {featured.meta.map((m) => (
-                <li key={m}>{m}</li>
+                <li key={t(m)}>{t(m)}</li>
               ))}
             </ul>
-            <RevealText as="p" className="featured__summary">
-              {featured.summary}
+            <RevealText key={lang} as="p" className="featured__summary">
+              {t(featured.summary)}
             </RevealText>
 
             <ol className="featured__features">
@@ -108,11 +110,11 @@ export default function Featured() {
             <dl className="featured__facts">
               <div>
                 <dt className="t-mono">Role</dt>
-                <dd>{featured.role}</dd>
+                <dd>{t(featured.role)}</dd>
               </div>
               <div>
                 <dt className="t-mono">Next</dt>
-                <dd>{featured.next.join(" · ")}</dd>
+                <dd>{featured.next.map(t).join(" · ")}</dd>
               </div>
             </dl>
 

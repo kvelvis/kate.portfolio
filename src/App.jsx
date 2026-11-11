@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { ScrollTrigger } from "./lib/gsap";
 import { marqueeWords } from "./data/profile";
+import { useLang } from "./app/I18n";
 
 import Preloader from "./components/layout/Preloader/Preloader";
 import Header from "./components/layout/Header/Header";
@@ -19,6 +20,7 @@ import Marquee from "./components/ui/Marquee/Marquee";
 export default function App() {
   const [ready, setReady] = useState(false);
   const onLoaded = useCallback(() => setReady(true), []);
+  const { t } = useLang();
 
   // recalculate all ScrollTriggers once fonts and images have loaded
   useEffect(() => {
@@ -30,7 +32,7 @@ export default function App() {
 
   return (
     <>
-      <a href="#main" className="skip-link">본문 바로가기</a>
+      <a href="#main" className="skip-link">{t({ ko: "본문 바로가기", en: "Skip to content" })}</a>
       <Header />
       <Preloader onDone={onLoaded} />
       <Cursor />

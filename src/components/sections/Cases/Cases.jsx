@@ -5,10 +5,12 @@ import SectionHeading from "../../ui/SectionHeading/SectionHeading";
 import Marquee from "../../ui/Marquee/Marquee";
 import CaseCard from "./CaseCard";
 import CaseRow from "./CaseRow";
+import { useLang } from "../../../app/I18n";
 import "./Cases.css";
 
 export default function Cases() {
   const root = useRef(null);
+  const { t } = useLang();
 
   useGSAP(
     () => {
@@ -47,7 +49,10 @@ export default function Cases() {
           index="03"
           kicker="cases"
           title="Web cases"
-          aside="퍼블리싱 & 리디자인 프로젝트. 카드를 누르면 실제 페이지가 열려요."
+          aside={t({
+            ko: "퍼블리싱 & 리디자인 프로젝트. 카드를 누르면 실제 페이지가 열려요.",
+            en: "Publishing & redesign projects. Click a card to open the live page.",
+          })}
         />
 
         <ul className="cases__grid">

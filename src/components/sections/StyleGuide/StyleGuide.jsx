@@ -3,10 +3,12 @@ import { gsap, useGSAP, MQ } from "../../../lib/gsap";
 import { fonts, colors, stack } from "../../../data/styleguide";
 import SectionHeading from "../../ui/SectionHeading/SectionHeading";
 import Swatch from "./Swatch";
+import { useLang } from "../../../app/I18n";
 import "./StyleGuide.css";
 
 export default function StyleGuide() {
   const root = useRef(null);
+  const { t } = useLang();
 
   useGSAP(
     () => {
@@ -41,7 +43,7 @@ export default function StyleGuide() {
   return (
     <section ref={root} id="styleguide" className="sg section">
       <div className="container">
-        <SectionHeading index="04" kicker="portfolio info" title="Style guide" aside="이 사이트에 사용한 폰트, 컬러, 기술 스택이에요." />
+        <SectionHeading index="04" kicker="portfolio info" title="Style guide" aside={t({ ko: "이 사이트에 사용한 폰트, 컬러, 기술 스택이에요.", en: "Fonts, colors and the stack this site is built with." })} />
 
         <h3 className="sg__sub t-mono">Typography</h3>
         <ul className="sg__fonts">
@@ -56,7 +58,7 @@ export default function StyleGuide() {
           ))}
         </ul>
 
-        <h3 className="sg__sub t-mono">Colors — click to copy</h3>
+        <h3 className="sg__sub t-mono">{t({ ko: "Colors — 클릭하면 복사돼요", en: "Colors — click to copy" })}</h3>
         <ul className="sg__colors">
           {colors.map((c) => (
             <Swatch key={c.hex} {...c} />

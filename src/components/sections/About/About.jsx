@@ -8,10 +8,12 @@ import SkillBars from "./SkillBars";
 import Timeline from "./Timeline";
 import FactCard from "./FactCard";
 import ProfileCard from "./ProfileCard";
+import { useLang } from "../../../app/I18n";
 import "./About.css";
 
 export default function About() {
   const root = useRef(null);
+  const { lang, t } = useLang();
 
   // bento cards drop into the grid
   useGSAP(
@@ -37,11 +39,12 @@ export default function About() {
   return (
     <section ref={root} id="about" className="about section">
       <div className="container">
-        <SectionHeading index="01" kicker="{background}" title="About me" aside="Chelyabinsk → Busan → Seoul. 경영학 전공 → 디자인 → 코드." />
+        <SectionHeading index="01" kicker="{background}" title="About me" aside={t(profile.aboutAside)} />
 
         <div className="about__top">
-          <RevealText as="p" by="words" mode="scrub" className="about__intro">
-            {profile.intro}
+          {/* key: re-split the text when the language changes */}
+          <RevealText key={lang} as="p" by="words" mode="scrub" className="about__intro">
+            {t(profile.intro)}
           </RevealText>
           <ProfileCard />
         </div>
@@ -55,14 +58,14 @@ export default function About() {
             <Timeline items={education} />
           </BentoCard>
 
-          <FactCard className="bento__fact" value={yearsInKorea} suffix="y" label="living in Korea 🇰🇷" />
+          <FactCard className="bento__fact" value={yearsInKorea} suffix="y" label={t(profile.factLabel)} />
 
           <BentoCard title="Language" tag="3 langs + l10n" className="bento__lang" tone="blue">
             <ul className="lang-list">
               {languages.map((l) => (
                 <li key={l.name}>
                   <span className="lang-list__name">{l.name}</span>
-                  <span className="lang-list__note">{l.note}</span>
+                  <span className="lang-list__note">{t(l.note)}</span>
                 </li>
               ))}
             </ul>
@@ -71,9 +74,9 @@ export default function About() {
           <BentoCard title="License" tag="certified" className="bento__license">
             <ul className="license-list">
               {licenses.map((l) => (
-                <li key={l.name}>
+                <li key={t(l.name)}>
                   {l.date && <span className="t-mono t-muted">{l.date}</span>}
-                  <span>{l.name}</span>
+                  <span>{t(l.name)}</span>
                 </li>
               ))}
             </ul>

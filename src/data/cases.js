@@ -34,7 +34,7 @@ export const featuredCases = [
 ];
 
 export const moreCases = [
-  { title: "밤도깨비 야시장", type: "Public / Festival", href: "/cases/bandokkaebi/index.html" },
+  { title: { ko: "밤도깨비 야시장", en: "Bamdokkaebi Night Market" }, type: "Public / Festival", href: "/cases/bandokkaebi/index.html" },
   { title: "Cube Hospital", type: "Medical", href: "/cases/cubehospital/index.html" },
   { title: "THOMe", type: "Beauty", href: "/cases/thome/index.html" },
   { title: "Paradise", type: "Resort", href: "/cases/paradise/index.html" },

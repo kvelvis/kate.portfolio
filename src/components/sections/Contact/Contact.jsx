@@ -3,6 +3,7 @@ import { gsap, useGSAP, MQ } from "../../../lib/gsap";
 import { useContact } from "../../../app/ContactProvider";
 import { useScrollTo } from "../../../app/SmoothScroll";
 import { profile } from "../../../data/profile";
+import { useLang } from "../../../app/I18n";
 import Button from "../../ui/Button/Button";
 import LikeHeart from "../../ui/LikeHeart/LikeHeart";
 import Sticker from "../../ui/Sticker/Sticker";
@@ -13,6 +14,7 @@ export default function Contact() {
   const root = useRef(null);
   const openContact = useContact();
   const scrollTo = useScrollTo();
+  const { t } = useLang();
 
   useGSAP(
     () => {
@@ -32,7 +34,7 @@ export default function Contact() {
   return (
     <section ref={root} id="contact" className="contact section">
       <div className="container contact__inner">
-        <p className="contact__kicker t-mono">(05) — if you are interested in my portfolio</p>
+        <p className="contact__kicker t-mono">(05) — {t({ ko: "포트폴리오가 마음에 드셨다면", en: "if you are interested in my portfolio" })}</p>
 
         <h2 className="contact__title t-display" aria-label="Like & contact me">
           <span className="contact__line"><span>Like</span></span>

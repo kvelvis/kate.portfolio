@@ -1,9 +1,11 @@
 import { useRef } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "../../../lib/gsap";
+import { useLang } from "../../../app/I18n";
 
 /** The vertical education line draws itself on scroll */
 export default function Timeline({ items }) {
   const ref = useRef(null);
+  const { t } = useLang();
 
   useGSAP(
     () => {
@@ -36,7 +38,7 @@ export default function Timeline({ items }) {
         <li className="timeline__item" key={it.year}>
           <span className="timeline__dot" aria-hidden="true" />
           <span className="t-mono t-muted">{it.year}</span>
-          <span className="timeline__text">{it.desc}</span>
+          <span className="timeline__text">{t(it.desc)}</span>
         </li>
       ))}
     </ol>

@@ -1,8 +1,10 @@
 import { useRef } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "../../../lib/gsap";
+import { useLang } from "../../../app/I18n";
 
 export default function FeatureItem({ no, title, en, text }) {
   const ref = useRef(null);
+  const { lang, t } = useLang();
 
   useGSAP(
     () => {
@@ -23,9 +25,9 @@ export default function FeatureItem({ no, title, en, text }) {
       <span className="feature__no t-mono">{no}</span>
       <div>
         <h3 className="feature__title">
-          {title} <span className="t-mono">/ {en}</span>
+          {t(title)} {lang === "ko" && <span className="t-mono">/ {en}</span>}
         </h3>
-        {text && <p className="feature__text">{text}</p>}
+        {t(text) && <p className="feature__text">{t(text)}</p>}
       </div>
     </li>
   );

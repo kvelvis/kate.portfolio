@@ -2,23 +2,25 @@ import { useState } from "react";
 import Modal from "../../ui/Modal/Modal";
 import Button from "../../ui/Button/Button";
 import { caseStudies, hasCaseStudy } from "../../../data/caseStudies";
+import { useLang } from "../../../app/I18n";
 import "./CaseStudy.css";
 
 /** Case study content: problem → process → result. Empty parts are not shown. */
 function CaseStudyBody({ cs }) {
+  const { t } = useLang();
   return (
     <article className="cs">
-      {cs.type && <p className="cs__kicker t-mono t-muted">{cs.type}</p>}
+      {cs.type && <p className="cs__kicker t-mono t-muted">{t(cs.type)}</p>}
       <h3 className="cs__title t-display">
         {cs.title} {cs.titleKo && <span className="cs__ko t-blob">{cs.titleKo}</span>}
       </h3>
-      {cs.lead && <p className="cs__lead">{cs.lead}</p>}
+      {t(cs.lead) && <p className="cs__lead">{t(cs.lead)}</p>}
 
       <dl className="cs__meta">
-        {cs.role && (
+        {t(cs.role) && (
           <div>
             <dt className="t-mono">Role</dt>
-            <dd>{cs.role}</dd>
+            <dd>{t(cs.role)}</dd>
           </div>
         )}
         {cs.period && (
@@ -30,15 +32,15 @@ function CaseStudyBody({ cs }) {
         {cs.tools?.length > 0 && (
           <div>
             <dt className="t-mono">Tools</dt>
-            <dd>{cs.tools.join(" · ")}</dd>
+            <dd>{cs.tools.map(t).join(" · ")}</dd>
           </div>
         )}
       </dl>
 
-      {cs.problem && (
+      {t(cs.problem) && (
         <section className="cs__block">
           <h4 className="cs__label t-mono">01 — Problem</h4>
-          <p>{cs.problem}</p>
+          <p>{t(cs.problem)}</p>
         </section>
       )}
       {cs.process?.length > 0 && (
@@ -46,9 +48,9 @@ function CaseStudyBody({ cs }) {
           <h4 className="cs__label t-mono">02 — Process</h4>
           <ol className="cs__steps">
             {cs.process.map((step) => (
-              <li key={step.title}>
-                <strong>{step.title}</strong>
-                {step.text && <p>{step.text}</p>}
+              <li key={t(step.title)}>
+                <strong>{t(step.title)}</strong>
+                {t(step.text) && <p>{t(step.text)}</p>}
               </li>
             ))}
           </ol>
@@ -57,20 +59,20 @@ function CaseStudyBody({ cs }) {
       {cs.images?.length > 0 && (
         <div className="cs__images">
           {cs.images.map((img) => (
-            <img key={img.src} src={img.src} alt={img.alt} width={img.width} height={img.height} loading="lazy" decoding="async" />
+            <img key={img.src} src={img.src} alt={t(img.alt)} width={img.width} height={img.height} loading="lazy" decoding="async" />
           ))}
         </div>
       )}
-      {cs.result && (
+      {t(cs.result) && (
         <section className="cs__block">
           <h4 className="cs__label t-mono">03 — Result</h4>
-          <p>{cs.result}</p>
+          <p>{t(cs.result)}</p>
         </section>
       )}
       {cs.next?.length > 0 && (
         <section className="cs__block">
           <h4 className="cs__label t-mono">Next</h4>
-          <p>{cs.next.join(" · ")}</p>
+          <p>{cs.next.map(t).join(" · ")}</p>
         </section>
       )}
 

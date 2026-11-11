@@ -1,4 +1,6 @@
 // All portfolio text content lives here — components read from this file.
+// Text that differs by language is { ko, en }; components pick one with t() from useLang().
+// EN versions are translations of Kate's Korean text — TODO: Kate — review EN.
 
 const YEAR = 2026;
 const IN_KOREA_SINCE = 2012;
@@ -20,7 +22,15 @@ export const profile = {
   year: YEAR,
   roles: ["Web Designer", "Web Publisher", "Front-end"],
   route: ["Chelyabinsk", "Busan", "Seoul"],
-  intro: `안녕하세요. 저는 러시아에서 왔고 한국에서 ${yearsInKorea}년째 살고 있어요. 부산대학교 경영학과를 졸업하고 국비지원 프론트엔드 개발자 과정 6개월을 수료한 웹디자이너 케이트입니다.`,
+  intro: {
+    ko: `안녕하세요. 저는 러시아에서 왔고 한국에서 ${yearsInKorea}년째 살고 있어요. 부산대학교 경영학과를 졸업하고 국비지원 프론트엔드 개발자 과정 6개월을 수료한 웹디자이너 케이트입니다.`,
+    en: `Hi, I'm Kate. I'm from Russia and have lived in Korea for ${yearsInKorea} years. I graduated in Business Administration from Pusan National University and completed a 6-month government-funded front-end developer course — now I'm a web designer.`,
+  },
+  aboutAside: {
+    ko: "Chelyabinsk → Busan → Seoul. 경영학 전공 → 디자인 → 코드.",
+    en: "Chelyabinsk → Busan → Seoul. Business major → design → code.",
+  },
+  factLabel: { ko: "한국 거주 🇰🇷", en: "living in Korea 🇰🇷" },
   contacts: [
     links.email && { label: "Email", value: links.email, href: `mailto:${links.email}`, external: false },
     links.github && { label: "GitHub", value: links.github.replace(/^https?:\/\/(www\.)?/, ""), href: links.github },
@@ -49,7 +59,7 @@ export const skillGroups = [
   {
     group: "Front-end",
     items: [
-      { name: "HTML5 · 웹표준", level: 3 },
+      { name: { ko: "HTML5 · 웹표준", en: "HTML5 · Web standards" }, level: 3 },
       { name: "CSS / SCSS", level: 3 },
       { name: "JavaScript (ES6+)", level: 2 },
       { name: "React", level: 2 },
@@ -85,14 +95,14 @@ export const skillGroups = [
 ];
 
 export const education = [
-  { year: "2012–2014", desc: "러시아 외교관 고등학교" },
-  { year: "2014–2016", desc: "부산대학교 언어교육원" },
-  { year: "2016–2020", desc: "부산대학교 경영학 졸업" },
-  { year: "2023.05–11", desc: "이젠컴퓨터아카데미" },
+  { year: "2012–2014", desc: { ko: "러시아 외교관 고등학교", en: "Diplomatic high school, Russia" } },
+  { year: "2014–2016", desc: { ko: "부산대학교 언어교육원", en: "Pusan National University — Language Education Institute" } },
+  { year: "2016–2020", desc: { ko: "부산대학교 경영학 졸업", en: "Pusan National University — B.A. Business Administration" } },
+  { year: "2023.05–11", desc: { ko: "이젠컴퓨터아카데미", en: "EZEN Computer Academy — front-end course" } },
 ];
 
 export const languages = [
-  { name: "한국어", note: "TOPIK 6급" },
+  { name: "한국어", note: { ko: "TOPIK 6급", en: "TOPIK Level 6" } },
   { name: "English", note: "TOEIC 875" },
   { name: "Русский", note: "Native" },
   { name: "KO ↔ RU", note: "Localization" },
@@ -100,9 +110,9 @@ export const languages = [
 
 // Empty dates are hidden on the site until filled in (format "YYYY.MM").
 export const licenses = [
-  { date: "", name: "컴퓨터그래픽스운용기능사" }, // TODO: Kate — real date
-  { date: "", name: "웹디자인기능사" }, // TODO: Kate — real date
-  { date: "", name: "2종보통 운전면허" }, // TODO: Kate — real date
+  { date: "", name: { ko: "컴퓨터그래픽스운용기능사", en: "Craftsman Computer Graphics Operation" } }, // TODO: Kate — real date
+  { date: "", name: { ko: "웹디자인기능사", en: "Craftsman Web Design" } }, // TODO: Kate — real date
+  { date: "", name: { ko: "2종보통 운전면허", en: "Driver's license (Class 2)" } }, // TODO: Kate — real date
   { date: "", name: "Meta Front-End Developer" }, // TODO: Kate — real date
   { date: "", name: "Google UX Design" }, // TODO: Kate — real date
 ];

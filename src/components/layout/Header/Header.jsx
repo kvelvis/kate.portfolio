@@ -7,6 +7,7 @@ import { inertOutside } from "../../../lib/a11y";
 import Button from "../../ui/Button/Button";
 import MobileMenu from "./MobileMenu";
 import ThemeToggle from "./ThemeToggle";
+import LangToggle from "./LangToggle";
 import logo from "../../../assets/img/star.png";
 import "./Header.css";
 
@@ -125,6 +126,7 @@ export default function Header() {
           </nav>
 
           <div className="header__actions">
+            <LangToggle />
             <ThemeToggle />
             <Button size="sm" onClick={openContact} className="header__cta" icon="↗">
               Contact

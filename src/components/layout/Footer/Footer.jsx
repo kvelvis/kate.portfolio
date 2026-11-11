@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { profile } from "../../../data/profile";
 import { stack } from "../../../data/styleguide";
 import Marquee from "../../ui/Marquee/Marquee";
+import { useLang } from "../../../app/I18n";
 import "./Footer.css";
 
 function useSeoulTime() {
@@ -17,6 +18,7 @@ function useSeoulTime() {
 
 export default function Footer() {
   const time = useSeoulTime();
+  const { t } = useLang();
 
   return (
     <footer className="footer">
@@ -44,7 +46,12 @@ export default function Footer() {
       </div>
 
       <div className="footer__legal container t-mono">
-        <span>해당 웹사이트는 개인 포트폴리오 사이트이며 모든 작업에는 상업적 이용 목적이 없습니다.</span>
+        <span>
+          {t({
+            ko: "해당 웹사이트는 개인 포트폴리오 사이트이며 모든 작업에는 상업적 이용 목적이 없습니다.",
+            en: "This is a personal portfolio site. None of the works are used for commercial purposes.",
+          })}
+        </span>
         <span>Copyright © {profile.year} {profile.name.toUpperCase()}</span>
       </div>
     </footer>
