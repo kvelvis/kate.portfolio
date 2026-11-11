@@ -78,7 +78,7 @@ export default function Header() {
       <header ref={root} className="header">
         <div className="header__inner">
           <a href="#top" className="header__logo" onClick={go("top")} aria-label="Home">
-            <img src={logo} alt="" />
+            <img src={logo} alt="" width="250" height="170" />
             <span className="t-mono">kate.dev</span>
           </a>
 

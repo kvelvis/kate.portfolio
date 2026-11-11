@@ -56,7 +56,7 @@
   overflow: hidden;
   background: var(--bg-2);
 }
-.case-card__media img {
+.case-card__media video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -94,7 +94,7 @@
     transform: translate(-4px, -4px) rotate(-1deg);
     box-shadow: 12px 12px 0 var(--accent);
   }
-  .case-card__link:hover .case-card__media img { transform: scale(1.06); }
+  .case-card__link:hover .case-card__media video { transform: scale(1.06); }
   .case-card__link:hover .case-card__arrow {
     background: var(--accent);
     border-color: var(--accent);

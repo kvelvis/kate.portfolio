@@ -1,20 +1,36 @@
-import celine from "../assets/gif/celine.gif";
-import weeknd from "../assets/gif/weeknd.gif";
-import fashion from "../assets/gif/fashion.gif";
-import tamburins from "../assets/gif/tamburins.gif";
-import sanrio from "../assets/gif/sanrio.gif";
-import cat from "../assets/gif/cat.gif";
-import fairy from "../assets/gif/fairy.gif";
+import celineMp4 from "../assets/video/celine.mp4";
+import celineWebm from "../assets/video/celine.webm";
+import celinePoster from "../assets/video/celine-poster.webp";
+import weekndMp4 from "../assets/video/weeknd.mp4";
+import weekndWebm from "../assets/video/weeknd.webm";
+import weekndPoster from "../assets/video/weeknd-poster.webp";
+import fashionMp4 from "../assets/video/fashion.mp4";
+import fashionWebm from "../assets/video/fashion.webm";
+import fashionPoster from "../assets/video/fashion-poster.webp";
+import tamburinsMp4 from "../assets/video/tamburins.mp4";
+import tamburinsWebm from "../assets/video/tamburins.webm";
+import tamburinsPoster from "../assets/video/tamburins-poster.webp";
+import sanrioMp4 from "../assets/video/sanrio.mp4";
+import sanrioWebm from "../assets/video/sanrio.webm";
+import sanrioPoster from "../assets/video/sanrio-poster.webp";
+import catMp4 from "../assets/video/cat.mp4";
+import catWebm from "../assets/video/cat.webm";
+import catPoster from "../assets/video/cat-poster.webp";
+import fairyMp4 from "../assets/video/fairy.mp4";
+import fairyWebm from "../assets/video/fairy.webm";
+import fairyPoster from "../assets/video/fairy-poster.webp";
+
+const video = (mp4, webm, poster) => ({ mp4, webm, poster });
 
 // Links point to pages in public/cases
 export const featuredCases = [
-  { title: "Celine", type: "Brand renewal", href: "/cases/celine/celine.html", cover: celine },
-  { title: "The Weeknd", type: "Artist landing", href: "/cases/weeknd/weeknd.html", cover: weeknd },
-  { title: "Vestiaire Collective", type: "E-commerce", href: "/cases/fashion/fashion.html", cover: fashion },
-  { title: "Tamburins", type: "Brand site", href: "/cases/tamburins/index2.html", cover: tamburins },
-  { title: "Sanrio", type: "Character site", href: "/cases/sanrio/sanrio.html", cover: sanrio },
-  { title: "Gatto", type: "Cafe website redesign", href: "/cases/cat cafe/cat.html", cover: cat }, // TODO: Kate — switch href to "/cases/cat cafe/renew/index.html" once confirmed
-  { title: "Fairy Tales", type: "Illustrated stories", href: "/cases/fairy/index.html", cover: fairy },
+  { title: "Celine", type: "Brand renewal", href: "/cases/celine/celine.html", cover: video(celineMp4, celineWebm, celinePoster) },
+  { title: "The Weeknd", type: "Artist landing", href: "/cases/weeknd/weeknd.html", cover: video(weekndMp4, weekndWebm, weekndPoster) },
+  { title: "Vestiaire Collective", type: "E-commerce", href: "/cases/fashion/fashion.html", cover: video(fashionMp4, fashionWebm, fashionPoster) },
+  { title: "Tamburins", type: "Brand site", href: "/cases/tamburins/index2.html", cover: video(tamburinsMp4, tamburinsWebm, tamburinsPoster) },
+  { title: "Sanrio", type: "Character site", href: "/cases/sanrio/sanrio.html", cover: video(sanrioMp4, sanrioWebm, sanrioPoster) },
+  { title: "Gatto", type: "Cafe website redesign", href: "/cases/cat cafe/cat.html", cover: video(catMp4, catWebm, catPoster) }, // TODO: Kate — switch href to "/cases/cat cafe/renew/index.html" once confirmed
+  { title: "Fairy Tales", type: "Illustrated stories", href: "/cases/fairy/index.html", cover: video(fairyMp4, fairyWebm, fairyPoster) },
 ];
 
 export const moreCases = [

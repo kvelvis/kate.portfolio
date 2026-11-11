@@ -1,4 +1,4 @@
-import mockup from "../assets/img/figma2.png";
+import mockup from "../assets/img/dano-mockup.webp";
 
 export const featured = {
   name: "Dano",

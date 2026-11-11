@@ -42,6 +42,10 @@ svg {
   display: block;
   max-width: 100%;
 }
+img,
+video {
+  height: auto; /* keep aspect ratio when width/height attributes are set */
+}
 
 a {
   color: inherit;

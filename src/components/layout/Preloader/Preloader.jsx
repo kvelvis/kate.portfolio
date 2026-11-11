@@ -4,7 +4,16 @@ import { useLenis } from "../../../app/SmoothScroll";
 import { profile } from "../../../data/profile";
 import "./Preloader.css";
 
-/** Синий экран со счётчиком 0→100, затем уезжает вверх и вызывает onDone. */
+const SEEN_KEY = "preloader-seen";
+const alreadySeen = () => {
+  try {
+    return sessionStorage.getItem(SEEN_KEY) === "1";
+  } catch {
+    return false;
+  }
+};
+
+/** Blue screen with a 0→100 counter, then slides up and calls onDone. Skipped on repeat visits in the same tab. */
 export default function Preloader({ onDone }) {
   const root = useRef(null);
   const [gone, setGone] = useState(false);
@@ -12,14 +21,14 @@ export default function Preloader({ onDone }) {
   const lenisRef = useRef(lenis);
   lenisRef.current = lenis;
 
-  // пока идёт загрузка — скролл заблокирован
+  // scrolling is locked while the preloader is shown
   useEffect(() => {
     if (!gone) lenis?.stop();
   }, [lenis, gone]);
 
   useGSAP(
     () => {
-      if (prefersReducedMotion()) {
+      if (prefersReducedMotion() || alreadySeen()) {
         setGone(true);
         onDone?.();
         return;
@@ -31,6 +40,11 @@ export default function Preloader({ onDone }) {
       gsap
         .timeline({
           onComplete: () => {
+            try {
+              sessionStorage.setItem(SEEN_KEY, "1");
+            } catch {
+              /* ignore */
+            }
             lenisRef.current?.start();
             setGone(true);
           },

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { gsap, Draggable, useGSAP, MQ } from "../../../lib/gsap";
 import { profile } from "../../../data/profile";
-import memoji from "../../../assets/img/img.png";
+import memoji from "../../../assets/img/memoji.webp";
 
 /** «Бейдж на ленте»: качается при скролле, на десктопе его можно оттянуть — пружинит обратно */
 export default function ProfileCard() {
@@ -54,7 +54,7 @@ export default function ProfileCard() {
           </span>
         </header>
         <div className="id-card__photo">
-          <img src={memoji} alt="Kate memoji" draggable="false" />
+          <img src={memoji} alt="Kate memoji" draggable="false" width="420" height="420" loading="lazy" decoding="async" />
         </div>
         <p className="id-card__name t-display">{profile.firstName}</p>
         <p className="id-card__nick t-blob">{profile.nickname}</p>

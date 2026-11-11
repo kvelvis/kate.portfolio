@@ -24,7 +24,7 @@ export default function FactCard({ value, suffix = "", label, className = "" }) 
 
   return (
     <article ref={ref} className={`bento__card bento__card--acid fact ${className}`}>
-      <img src={star} alt="" className="fact__star" />
+      <img src={star} alt="" className="fact__star" width="250" height="170" loading="lazy" />
       <p className="fact__value t-display">
         <span className="fact__num">{value}</span>
         <span className="fact__suffix">{suffix}</span>

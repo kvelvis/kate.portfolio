@@ -65,7 +65,7 @@ export default function Featured() {
         <div className="featured__grid container">
           <div className="featured__media">
             <div className="featured__phone">
-              <img src={featured.mockup} alt={featured.mockupAlt} loading="lazy" decoding="async" />
+              <img src={featured.mockup} alt={featured.mockupAlt} width="494" height="615" loading="lazy" decoding="async" />
             </div>
             {featured.mascot && (
               <img src={featured.mascot} alt="Dano 3D 고양이 캐릭터" className="featured__mascot" loading="lazy" decoding="async" />

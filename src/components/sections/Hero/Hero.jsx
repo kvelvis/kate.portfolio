@@ -1,35 +1,39 @@
 import { useRef } from "react";
-import { gsap, useGSAP, MQ } from "../../../lib/gsap";
+import { gsap, useGSAP, MQ, prefersReducedMotion } from "../../../lib/gsap";
 import { profile } from "../../../data/profile";
 import Sticker from "../../ui/Sticker/Sticker";
 import RoleTicker from "./RoleTicker";
 import CityRoute from "./CityRoute";
 import SpinBadge from "./SpinBadge";
-import nameBlob from "../../../assets/img/33.png";
-import memoji from "../../../assets/img/img.png";
+import nameBlob from "../../../assets/img/hero-name.webp";
+import memoji from "../../../assets/img/memoji.webp";
 import "./Hero.css";
 
 export default function Hero({ ready }) {
   const root = useRef(null);
   const intro = useRef(null);
 
-  // интро-анимация (стартует после прелоадера)
+  // intro animation (starts after the preloader).
+  // fromTo with explicit end values: plain .from() could record the hidden state as the end
+  // when the intro starts during page load (preloader skipped), leaving letters stuck.
+  // Reduced motion: no intro, content is shown as is.
   useGSAP(
     () => {
+      if (prefersReducedMotion()) return;
       intro.current = gsap
         .timeline({ paused: true, defaults: { ease: "expo.out" } })
-        .from(".hero__letter", { yPercent: 110, rotate: 4, duration: 1.3, stagger: 0.05 })
-        .from(".hero__blob", { scale: 0.4, rotate: -14, opacity: 0, duration: 1.4, ease: "elastic.out(1, 0.55)" }, 0.35)
-        .from(".hero__meta > *", { y: 20, opacity: 0, stagger: 0.06, duration: 0.8 }, 0.4)
-        .from(".hero__bottom > *", { y: 40, opacity: 0, stagger: 0.08, duration: 0.9 }, 0.6)
-        .from(".hero .sticker", { scale: 0, duration: 0.8, stagger: 0.1, ease: "back.out(2.5)" }, 0.9);
+        .fromTo(".hero__letter", { yPercent: 110, rotate: 4 }, { yPercent: 0, rotate: 0, duration: 1.3, stagger: 0.05 })
+        .fromTo(".hero__blob", { scale: 0.4, rotate: -14, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: 1.4, ease: "elastic.out(1, 0.55)" }, 0.35)
+        .fromTo(".hero__meta > *", { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.06, duration: 0.8 }, 0.4)
+        .fromTo(".hero__bottom > *", { y: 40, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08, duration: 0.9 }, 0.6)
+        .fromTo(".hero .sticker", { scale: 0 }, { scale: 1, duration: 0.8, stagger: 0.1, ease: "back.out(2.5)" }, 0.9);
     },
     { scope: root }
   );
 
   useGSAP(() => { if (ready) intro.current?.play(); }, { dependencies: [ready] });
 
-  // параллакс от мыши + уход при скролле
+  // mouse parallax + scroll-out
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
@@ -81,11 +85,11 @@ export default function Hero({ ready }) {
         </h1>
 
         <div className="hero__blob-wrap">
-          <img src={nameBlob} alt="Ekaterina" className="hero__blob" draggable="false" />
+          <img src={nameBlob} alt="Ekaterina" className="hero__blob" draggable="false" width="1920" height="472" fetchPriority="high" />
         </div>
 
         <Sticker shape="image" rotate={8} className="hero__memoji" data-cursor="drag">
-          <img src={memoji} alt="Kate memoji waving" />
+          <img src={memoji} alt="Kate memoji waving" width="420" height="420" />
         </Sticker>
         <Sticker color="pink" rotate={-10} className="hero__st-1">✦ hi, i&apos;m kate</Sticker>
         <Sticker color="blue" rotate={6} className="hero__st-2">UI · UX · WEB</Sticker>

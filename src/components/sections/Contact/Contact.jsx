@@ -49,7 +49,7 @@ export default function Contact() {
         </h2>
 
         <Sticker shape="image" rotate={-8} className="contact__memoji" data-cursor="drag">
-          <img src={sticker} alt="Kate memoji calling" />
+          <img src={sticker} alt="Kate memoji calling" width="512" height="512" loading="lazy" decoding="async" />
         </Sticker>
         <Sticker shape="star" color="acid" rotate={12} className="contact__star">
           hire

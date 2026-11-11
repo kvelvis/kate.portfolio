@@ -1,4 +1,30 @@
-/** Кейс в рамке «окна браузера» */
+import { useEffect, useRef } from "react";
+import { prefersReducedMotion } from "../../../lib/gsap";
+
+/** Looping preview video: loads and plays only while on screen; reduced motion shows the poster only */
+function CaseCover({ cover }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v || prefersReducedMotion()) return;
+    const io = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? v.play().catch(() => {}) : v.pause()),
+      { rootMargin: "200px 0px" }
+    );
+    io.observe(v);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <video ref={ref} poster={cover.poster} muted loop playsInline preload="none" aria-hidden="true" tabIndex={-1}>
+      <source src={cover.webm} type="video/webm" />
+      <source src={cover.mp4} type="video/mp4" />
+    </video>
+  );
+}
+
+/** Case card in a "browser window" frame */
 export default function CaseCard({ item, index }) {
   const slug = item.href.split("/")[2];
 
@@ -15,7 +41,7 @@ export default function CaseCard({ item, index }) {
             <span className="case-card__url t-mono">~/cases/{slug.replace(" ", "-")}</span>
           </div>
           <div className="case-card__media">
-            <img src={item.cover} alt={`${item.title} preview`} loading="lazy" decoding="async" />
+            <CaseCover cover={item.cover} />
           </div>
         </div>
         <div className="case-card__info">

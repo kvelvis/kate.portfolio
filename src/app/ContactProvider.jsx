@@ -28,7 +28,7 @@ export function ContactProvider({ children }) {
       {children}
       <Modal open={open} onClose={close} label="Contact">
         <div className="contact-modal">
-          <img src={sticker} alt="" className="contact-modal__sticker" />
+          <img src={sticker} alt="" className="contact-modal__sticker" width="512" height="512" />
           <p className="t-mono t-muted">say hi 👋 / 연락주세요</p>
           <h3 className="contact-modal__title t-display">Let&apos;s talk</h3>
           <ul className="contact-modal__list">
