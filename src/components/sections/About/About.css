@@ -16,27 +16,27 @@
   transform-origin: top center;
 }
 .id-strap {
-   --strap: var(--c-blue);
+  --strap: var(--c-blue);
   position: relative;
-  z-index: 2;                       /* поверх карточки, клип ложится на прорезь */
+  z-index: 2;                       /* above the card, the clip sits on the hole */
   width: 34px;
   height: clamp(80px, 12vw, 160px);
-  margin-bottom: -15px;             /* низ ленты = центр прорези (top 10px + 10px/2) */
+  margin-bottom: -15px;             /* strap bottom = hole center (top 10px + 10px/2) */
   pointer-events: none;
 
   background-color: var(--strap);
   background-image:
-    /* прострочка */
+    /* stitching */
     linear-gradient(to bottom, rgba(255,255,255,.38) 55%, transparent 0),
     linear-gradient(to bottom, rgba(255,255,255,.38) 55%, transparent 0),
-    /* зерно ткани */
+    /* fabric grain */
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E"),
-    /* объём */
+    /* volume */
     linear-gradient(90deg,
       rgba(0,0,0,.32) 0%, rgba(0,0,0,0) 18%,
       rgba(255,255,255,.12) 50%,
       rgba(0,0,0,0) 82%, rgba(0,0,0,.32) 100%),
-    /* плетение */
+    /* weave */
     repeating-linear-gradient(0deg, rgba(255,255,255,.08) 0 1px, transparent 1px 3px),
     repeating-linear-gradient(90deg, rgba(0,0,0,.12) 0 1px, transparent 1px 2px),
     repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 2px, transparent 2px 6px);
@@ -53,17 +53,16 @@
   position: relative;
   width: 100%;
   padding: 1.1rem 1.1rem 1.25rem;
-  border-radius: 24px;
-   background: linear-gradient(160deg, rgba(255,255,255,.35), rgba(255,255,255,.10));
-     backdrop-filter: blur(16px) saturate(160%);
-     -webkit-backdrop-filter: blur(16px) saturate(160%);
-     border: 1.5px solid rgba(255,255,255,.6);
-     border-radius: 32px;
-     box-shadow:
-       inset 0 1px 0 rgba(255,255,255,.7),   /* блик по верхней кромке */
-       0 20px 50px rgba(20,20,60,.18);       /* тень */
+  border-radius: 32px;
+  background: linear-gradient(160deg, rgba(255,255,255,.35), rgba(255,255,255,.10));
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1.5px solid rgba(255,255,255,.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.7), /* highlight on the top edge */
+    0 20px 50px rgba(20,20,60,.18);     /* shadow */
   user-select: none;
-  touch-action: pan-y;
+  touch-action: pan-y; /* vertical swipes scroll the page, horizontal ones pull the card */
 }
 :root[data-theme="dark"] .id-card { box-shadow: 8px 8px 0 var(--c-acid); border-color: var(--line); }
 .id-card__hole {
