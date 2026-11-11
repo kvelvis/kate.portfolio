@@ -1,0 +1,65 @@
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+
+.cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  pointer-events: none;
+}
+
+.cursor__dot,
+.cursor__ring {
+  opacity: 0; /* показываем после первого движения мыши */
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  translate: -50% -50%;
+}
+
+.cursor__dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+}
+
+.cursor__ring {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--fg);
+  transition: width 0.35s var(--ease-out), height 0.35s var(--ease-out),
+    background-color 0.35s, border-color 0.35s;
+  mix-blend-mode: difference;
+  border-color: #fff;
+}
+
+.cursor__ring[data-state="hover"] {
+  width: 64px;
+  height: 64px;
+  background: #fff;
+}
+
+.cursor__ring[data-state="label"] {
+  width: 96px;
+  height: 96px;
+  mix-blend-mode: normal;
+  background: var(--c-acid);
+  border-color: var(--c-ink);
+}
+
+.cursor__label {
+  color: var(--c-ink);
+  font-weight: 600;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.25s, transform 0.35s var(--ease-out);
+}
+.cursor__ring[data-state="label"] .cursor__label {
+  opacity: 1;
+  transform: scale(1);
+}

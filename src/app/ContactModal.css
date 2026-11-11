@@ -1,0 +1,51 @@
+.contact-modal {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.contact-modal__sticker {
+  position: absolute;
+  top: -70px;
+  right: 40px;
+  width: 120px;
+  rotate: 10deg;
+  pointer-events: none;
+}
+
+.contact-modal__title {
+  font-size: var(--fs-xl);
+  color: var(--accent);
+}
+
+.contact-modal__list {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.contact-modal__list li {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.contact-modal__list a {
+  font-weight: 500;
+  word-break: break-all;
+}
+.contact-modal__list a:hover { color: var(--accent); }
+
+.contact-modal__copy {
+  padding: 0.35em 0.8em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.contact-modal__copy:hover { background: var(--c-acid); color: var(--c-ink); }
+
+@media (max-width: 639px) {
+  .contact-modal__list li { grid-template-columns: 1fr auto; }
+  .contact-modal__list li > span { grid-column: 1 / -1; }
+}

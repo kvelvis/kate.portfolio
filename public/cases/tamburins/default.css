@@ -1,0 +1,71 @@
+@charset "UTF-8";
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+.hidden {
+  visibility: visible;
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  font-size: 100%;
+  line-height: 100%;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+@font-face {
+  font-family: "Caprasimo-Regular";
+  src: url(../fonts/KOPUB_fonts/KoPubWorld\ Dotum\ Medium.eot);
+  src: local("※"), url(../fonts/KOPUB_fonts/KoPubWorld\ Dotum\ Medium.woff) format("woff"), url(../assets/fonts/Caprasimo-Regular.ttf) format("truetype");
+}
+html {
+  font-size: 62.5%;
+}/*# sourceMappingURL=default.css.map */

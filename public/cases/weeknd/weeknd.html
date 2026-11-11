@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Weeknd — Responsive Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Michroma&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bar: 60px;
+      --ink: #f4eef2;
+      --mute: rgba(244,238,242,.55);
+      --stage: #05040a;
+      --line: rgba(244,238,242,.12);
+      --red: #ff2340;
+      --ease: cubic-bezier(.22,.61,.2,1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font: 400 12px/1 "JetBrains Mono", Menlo, monospace;
+      color: var(--ink);
+      background: radial-gradient(60% 60% at 50% 120%, rgba(255,35,64,.18), transparent 70%), radial-gradient(50% 50% at 0% 0%, rgba(47,107,255,.14), transparent 70%), var(--stage);
+      overflow: hidden;
+    }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+
+    .bar {
+      height: var(--bar);
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 0 24px;
+      background: rgba(10,8,16,.9); border-bottom: 1px solid var(--line);
+      letter-spacing: .18em; text-transform: uppercase;
+    }
+    .bar__brand { display: flex; align-items: center; gap: 14px; white-space: nowrap; }
+    .bar__brand b { font: 400 13px/1 "Michroma", sans-serif; letter-spacing: .2em; }
+    .bar__brand i { font-style: normal; font: 400 11px/1 "Michroma", sans-serif; padding: 5px 6px; border: 1px solid var(--red); border-radius: 5px; color: #ff5a6e; text-shadow: 0 0 8px var(--red); }
+    .bar__brand span { color: var(--mute); font-size: 10px; }
+
+    .seg { display: flex; padding: 4px; gap: 2px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.03); position: relative; }
+    .seg button {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 8px;
+      height: 34px; padding: 0 16px; border-radius: 999px;
+      font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute);
+      transition: color .4s var(--ease);
+    }
+    .seg button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.3; }
+    .seg button[aria-pressed="true"] { color: #fff; }
+    .seg__pill {
+      position: absolute; top: 4px; bottom: 4px; left: 0; border-radius: 999px; background: var(--red);
+      box-shadow: 0 0 18px rgba(255,35,64,.6);
+      transition: transform .5s var(--ease), width .5s var(--ease);
+    }
+
+    .bar__right { display: flex; justify-content: flex-end; align-items: center; gap: 20px; }
+    .bar__size { color: var(--mute); font-size: 10px; font-variant-numeric: tabular-nums; }
+    .bar__open { display: flex; align-items: center; gap: 6px; font-size: 10px; padding: 8px 0; border-bottom: 1px solid currentColor; }
+    .bar__open:hover { color: #ff5a6e; }
+
+    .stage {
+      height: calc(100% - var(--bar));
+      display: flex; align-items: center; justify-content: center;
+      transition: padding .6s var(--ease);
+    }
+    .frame {
+      width: 100%; height: 100%;
+      background: #07060b; overflow: hidden; position: relative;
+      transition: width .7s var(--ease), height .7s var(--ease), border-radius .7s var(--ease), box-shadow .7s var(--ease), border-width .7s var(--ease);
+      border: 0 solid #16131f;
+    }
+    .frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+    .stage.tablet, .stage.mobile { padding: 24px; }
+    .stage.tablet .frame {
+      width: 834px; height: min(1112px, 100%);
+      border-radius: 22px; border-width: 12px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 40px 100px -30px rgba(255,35,64,.45);
+    }
+    .stage.mobile .frame {
+      width: 414px; height: min(868px, 100%);
+      border-radius: 46px; border-width: 12px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 40px 100px -30px rgba(47,107,255,.5);
+    }
+
+    @media (max-width: 900px) {
+      .seg button.tb, .bar__size { display: none; }
+    }
+    @media (max-width: 640px) {
+      :root { --bar: 52px; }
+      .bar { grid-template-columns: 1fr auto; padding: 0 16px; }
+      .seg, .bar__brand span { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <div class="bar__brand"><i>XO</i><b>THE WEEKND</b><span>Ticket reservation · Responsive</span></div>
+
+    <div class="seg" role="group" aria-label="Preview device">
+      <span class="seg__pill" aria-hidden="true"></span>
+      <button type="button" data-mode="desktop" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg>PC
+      </button>
+      <button type="button" class="tb" data-mode="tablet" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M11 18h2"/></svg>Tablet
+      </button>
+      <button type="button" class="tb" data-mode="mobile" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>Mobile
+      </button>
+    </div>
+
+    <div class="bar__right">
+      <span class="bar__size" data-size></span>
+      <a class="bar__open" href="./site.html" target="_blank" rel="noopener">Open site ↗</a>
+    </div>
+  </header>
+
+  <div class="stage" data-stage>
+    <div class="frame"><iframe src="./site.html" title="The Weeknd website preview" data-frame></iframe></div>
+  </div>
+
+  <script>
+    (() => {
+      const stage = document.querySelector('[data-stage]');
+      const frame = document.querySelector('[data-frame]');
+      const size = document.querySelector('[data-size]');
+      const pill = document.querySelector('.seg__pill');
+      const btns = [...document.querySelectorAll('[data-mode]')];
+
+      const movePill = () => {
+        const b = btns.find(x => x.getAttribute('aria-pressed') === 'true');
+        if (!b || !b.offsetWidth) return;
+        pill.style.width = b.offsetWidth + 'px';
+        pill.style.transform = `translateX(${b.offsetLeft}px)`;
+      };
+      const showSize = () => { size.textContent = `${frame.clientWidth} × ${frame.clientHeight}`; };
+
+      const set = (mode) => {
+        stage.className = 'stage ' + mode;
+        btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === mode));
+        movePill();
+      };
+      btns.forEach(b => b.addEventListener('click', () => set(b.dataset.mode)));
+
+      new ResizeObserver(showSize).observe(frame);
+      addEventListener('resize', () => { if (innerWidth <= 900) set('desktop'); movePill(); });
+      document.fonts && document.fonts.ready.then(movePill);
+      set('desktop');
+    })();
+  </script>
+</body>
+</html>

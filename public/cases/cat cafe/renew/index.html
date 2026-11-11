@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gato Pingado — Cat Café</title>
+  <meta name="description" content="커피, 디저트, 그리고 입양까지. 상파울루의 고양이 카페 Gato Pingado 리디자인 컨셉.">
+  <link rel="icon" href="./img/catface.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div class="loader" aria-hidden="true">
+    <img class="loader__cat" src="./img/catface.png" alt="">
+    <p class="loader__num"><span>0</span>%</p>
+    <p class="loader__txt">brewing coffee &amp; waking up cats…</p>
+  </div>
+
+  <!-- CURSOR -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__label">meow</span></div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <a href="#hero" class="header__logo" aria-label="Gato Pingado 홈">
+      <img src="./img/catface.png" alt="">
+      <span>gato pingado</span>
+    </a>
+    <nav class="header__nav" aria-label="메인 메뉴">
+      <a href="#about">카페</a>
+      <a href="#cats">냥이들</a>
+      <a href="#menu">메뉴</a>
+      <a href="#goods">굿즈</a>
+      <a href="#adopt">입양</a>
+    </nav>
+    <a href="#visit" class="btn btn--sm btn--red header__cta">방문하기</a>
+    <button class="burger" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <div class="mnav" aria-hidden="true">
+    <nav>
+      <a href="#about">카페</a>
+      <a href="#cats">냥이들</a>
+      <a href="#menu">메뉴</a>
+      <a href="#goods">굿즈</a>
+      <a href="#adopt">입양</a>
+      <a href="#visit">방문하기</a>
+    </nav>
+    <img src="./img/kitty.gif" alt="" class="mnav__gif">
+  </div>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div class="hero__grid" aria-hidden="true"></div>
+
+      <h1 class="hero__title">
+        <span class="line"><span class="word" data-split>GATO</span>
+          <span class="hero__video" data-cursor="play">
+            <video src="./img/videoplayback.mp4" autoplay muted loop playsinline></video>
+          </span>
+        </span>
+        <span class="line"><span class="word word--outline" data-split>PIN</span><span class="word" data-split>GADO</span></span>
+      </h1>
+
+      <div class="hero__bottom">
+        <p class="hero__lead">
+          커피 한 잔 ☕ 고양이 한 마리 🐈<br>
+          그리고 <mark>평생 가족</mark>까지 만나는 곳.
+        </p>
+        <div class="hero__btns">
+          <a href="#cats" class="btn btn--red magnetic">냥이 만나러 가기 <i>→</i></a>
+          <a href="#menu" class="btn btn--line magnetic">메뉴 보기</a>
+        </div>
+      </div>
+
+      <!-- stickers -->
+      <div class="sticker sticker--kitty" data-depth="0.6"><img src="./img/kitty.gif" alt="춤추는 고양이 캐릭터"></div>
+      <div class="sticker sticker--ok" data-depth="1"><img src="./img/okhuman.gif" alt="ok, humano 말풍선"></div>
+      <div class="sticker sticker--face" data-depth="1.4"><img src="./img/catface.png" alt=""></div>
+      <div class="sticker sticker--star" data-depth="0.8" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><path d="M50 0 61 35 98 32 68 55 80 92 50 70 20 92 32 55 2 32 39 35Z"/></svg>
+      </div>
+
+      <div class="badge" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <defs><path id="circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text><textPath href="#circle">ADOTE NÃO COMPRE ✦ 사지 말고 입양하세요 ✦ </textPath></text>
+        </svg>
+        <span class="badge__paw">🐾</span>
+      </div>
+
+      <p class="hero__scroll"><span></span>scroll</p>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__row marquee__row--red">
+        <div class="marquee__track">
+          <span>SPECIALTY COFFEE</span><b>✦</b><span>GRANDMA CAKES</span><b>✦</b><span>고양이 상주중</span><b>✦</b><span>ADOPT A CAT</span><b>✦</b><span>SÃO PAULO</span><b>✦</b>
+        </div>
+      </div>
+      <div class="marquee__row marquee__row--green">
+        <div class="marquee__track marquee__track--rev">
+          <span>ok, humano</span><b>🐾</b><span>냥생은 짧다</span><b>🐾</b><span>DESDE 2022</span><b>🐾</b><span>골골송 무한재생</span><b>🐾</b><span>cats &amp; coffee</span><b>🐾</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+      <div class="container">
+        <p class="label">(01) — about us</p>
+        <h2 class="about__statement" data-words>
+          The cat's finally out of the bag. 상파울루의 오래된 2층 집에서 스페셜티 커피와 할머니표 케이크, 그리고 <em>입양을 기다리는 고양이들</em>이 당신을 기다려요.
+        </h2>
+
+        <div class="about__collage">
+          <figure class="ph ph--1" data-speed="-0.15" data-cursor="meow"><img src="./img/store.jpg" alt="빨간 문의 Gato Pingado 카페 외관"></figure>
+          <figure class="ph ph--2" data-speed="0.12" data-cursor="meow"><img src="./img/personcat.jpg" alt="고양이를 안고 있는 직원"></figure>
+          <figure class="ph ph--3" data-speed="-0.25" data-cursor="meow"><img src="./img/cups.jpg" alt="고양이 일러스트가 그려진 컵"></figure>
+          <img class="about__jump" src="./img/jump.jpg" alt="" aria-hidden="true">
+        </div>
+
+        <ul class="stats">
+          <li><strong data-count="2022">0</strong><span>오픈 연도</span></li>
+          <li><strong data-count="12">0</strong><span>상주 냥이</span></li>
+          <li><strong data-count="2">0</strong><span>층짜리 하우스</span></li>
+          <li><strong>∞</strong><span>골골송</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CATS (horizontal) -->
+    <section id="cats" class="cats">
+      <div class="cats__pin">
+        <div class="cats__head container">
+          <p class="label label--light">(02) — meet the crew</p>
+          <h2 class="title">오늘의<br><span class="hl">냥이들</span></h2>
+          <p class="cats__hint">← drag / scroll →</p>
+        </div>
+        <div class="cats__track">
+          <article class="cat-card" style="--c: var(--yellow)">
+            <figure data-cursor="pet me"><img src="./img/cat-siam.jpg" alt="샴 고양이 미소" loading="lazy"></figure>
+            <div class="cat-card__body">
+              <h3>미소 <small>Miso · 2y</small></h3>
+              <ul class="chips"><li>#입양가능</li><li>#간식요정</li></ul>
+            </div>
+            <button class="like" aria-label="좋아요">♥</button>
+          </article>
+          <article class="cat-card" style="--c: var(--lilac)">
+            <figure data-cursor="pet me"><img src="./img/cat-tux.jpg" alt="턱시도 고양이 오레오" loading="lazy"></figure>
+            <div class="cat-card__body">
+              <h3>오레오 <small>Oreo · 3y</small></h3>
+              <ul class="chips"><li>#깜짝놀람전문</li><li>#턱시도</li></ul>
+            </div>
+            <button class="like" aria-label="좋아요">♥</button>
+          </article>
+          <article class="cat-card" style="--c: var(--cream)">
+            <figure data-cursor="pet me"><img src="./img/flatlay.jpg" alt="굿즈 사이의 고양이들 라떼" loading="lazy"></figure>
+            <div class="cat-card__body">
+              <h3>라떼 <small>Latte · 1y</small></h3>
+              <ul class="chips"><li>#입양가능</li><li>#수다쟁이</li></ul>
+            </div>
+            <button class="like" aria-label="좋아요">♥</button>
+          </article>
+          <article class="cat-card" style="--c: var(--pink)">
+            <figure data-cursor="pet me"><img src="./img/bag-cat.jpg" alt="종이봉투에 들어간 고양이 두부" loading="lazy"></figure>
+            <div class="cat-card__body">
+              <h3>두부 <small>Tofu · 4y</small></h3>
+              <ul class="chips"><li>#봉투러버</li><li>#집순이</li></ul>
+            </div>
+            <button class="like" aria-label="좋아요">♥</button>
+          </article>
+          <article class="cat-card" style="--c: var(--green-l)">
+            <figure data-cursor="pet me"><img src="./img/sock-cat.jpg" alt="양말을 노리는 고양이 양말이" loading="lazy"></figure>
+            <div class="cat-card__body">
+              <h3>양말이 <small>Socks · 2y</small></h3>
+              <ul class="chips"><li>#입양가능</li><li>#사냥꾼</li></ul>
+            </div>
+            <button class="like" aria-label="좋아요">♥</button>
+          </article>
+          <article class="cat-card" style="--c: var(--yellow)">
+            <figure data-cursor="pet me"><img src="./img/cats-bowl.jpg" alt="밥그릇 앞의 두 고양이" loading="lazy"></figure>
+            <div class="cat-card__body">
+              <h3>콩 &amp; 팥 <small>Duo · 1y</small></h3>
+              <ul class="chips"><li>#세트입양</li><li>#먹방</li></ul>
+            </div>
+            <button class="like" aria-label="좋아요">♥</button>
+          </article>
+          <article class="cat-card cat-card--cta">
+            <img src="./img/okhuman.gif" alt="">
+            <h3>너의 최애는?</h3>
+            <a href="#adopt" class="btn btn--cream">입양 절차 보기 →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU (bento) -->
+    <section id="menu" class="menu">
+      <div class="container">
+        <div class="sec-head">
+          <p class="label">(03) — menu</p>
+          <h2 class="title">마시고 먹고<br><span class="hl hl--red">냥냥</span></h2>
+        </div>
+
+        <div class="bento">
+          <article class="tile tile--a" data-cursor="yum">
+            <img src="./img/mug-milk.jpg" alt="빨간 법랑 머그와 우유" loading="lazy">
+            <div class="tile__info"><span class="tag">SIGNATURE</span><h3>냥냥 라떼</h3><p class="price">R$ 14</p></div>
+          </article>
+          <article class="tile tile--b" data-cursor="yum">
+            <img src="./img/toast.jpg" alt="고양이 모양 그릴 토스트" loading="lazy">
+            <div class="tile__info"><span class="tag">BEST</span><h3>냥발 토스트</h3><p class="price">R$ 22</p></div>
+          </article>
+          <article class="tile tile--c tile--green">
+            <img src="./img/kitty.gif" alt="" class="tile__gif">
+            <p class="tile__big">오늘의<br>추천 🍰</p>
+          </article>
+          <article class="tile tile--d" data-cursor="yum">
+            <img src="./img/favorito.jpg" alt="고양이 모양 푸딩 Favorito" loading="lazy">
+            <div class="tile__info"><span class="tag">NEW</span><h3>푸딩 파보리토</h3><p class="price">R$ 16</p></div>
+          </article>
+          <article class="tile tile--e" data-cursor="yum">
+            <img src="./img/table.jpg" alt="친구들과 함께하는 디저트 테이블" loading="lazy">
+            <div class="tile__info"><span class="tag">SHARE</span><h3>할머니표 케이크</h3><p class="price">R$ 18</p></div>
+          </article>
+          <article class="tile tile--f tile--red">
+            <ul class="menu-list">
+              <li><span>에스프레소</span><i></i><b>9</b></li>
+              <li><span>콜드브루</span><i></i><b>13</b></li>
+              <li><span>캐러멜 마끼아또</span><i></i><b>15</b></li>
+              <li><span>말차 라떼</span><i></i><b>15</b></li>
+              <li><span>치즈 토스트</span><i></i><b>20</b></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GOODS -->
+    <section id="goods" class="goods">
+      <div class="container">
+        <div class="sec-head sec-head--row">
+          <div>
+            <p class="label">(04) — shop</p>
+            <h2 class="title">ok, <span class="hl hl--lilac">humano</span><br>굿즈샵</h2>
+          </div>
+          <p class="sec-head__desc">수익금 일부는 유기묘 보호에 쓰여요. 사람용 & 고양이용 라이프스타일 굿즈.</p>
+        </div>
+
+        <div class="goods__grid">
+          <article class="product" style="--bg: var(--cream-d)">
+            <div class="product__img">
+              <img src="./img/tote.jpg" alt="ok humano 에코백" loading="lazy">
+              <img src="./img/tote-man.jpg" alt="" class="alt" loading="lazy">
+            </div>
+            <span class="product__badge">NEW</span>
+            <h3>ok, humano 토트</h3><p>₩ 32,000</p>
+          </article>
+          <article class="product" style="--bg: var(--pink)">
+            <div class="product__img">
+              <img src="./img/can.jpg" alt="통조림 패키지 양말" loading="lazy">
+              <img src="./img/socks-play.jpg" alt="" class="alt" loading="lazy">
+            </div>
+            <span class="product__badge product__badge--red">HOT</span>
+            <h3>양말 통조림</h3><p>₩ 18,000</p>
+          </article>
+          <article class="product" style="--bg: var(--lilac-l)">
+            <div class="product__img">
+              <img src="./img/tee.jpg" alt="Gato Pingado 티셔츠" loading="lazy">
+              <img src="./img/boys.jpg" alt="" class="alt" loading="lazy">
+            </div>
+            <h3>Café &amp; Gatos 티</h3><p>₩ 39,000</p>
+          </article>
+          <article class="product" style="--bg: var(--green-l)">
+            <div class="product__img">
+              <img src="./img/mugs.jpg" alt="법랑 머그 세트" loading="lazy">
+              <img src="./img/boxes.jpg" alt="" class="alt" loading="lazy">
+            </div>
+            <h3>법랑 머그</h3><p>₩ 24,000</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADOPT (stacked cards) -->
+    <section id="adopt" class="adopt">
+      <div class="container">
+        <div class="sec-head">
+          <p class="label">(05) — adopt, don't shop</p>
+          <h2 class="title">입양은<br><span class="hl hl--red">이렇게</span> 🐾</h2>
+        </div>
+
+        <div class="steps">
+          <article class="step" style="--bg: var(--red); --fg: var(--cream)">
+            <span class="step__num">01</span>
+            <div class="step__txt"><h3>놀러오기</h3><p>예약 없이 언제든. 커피 마시면서 냥이들과 먼저 친해져요.</p></div>
+            <img src="./img/store.jpg" alt="" loading="lazy">
+          </article>
+          <article class="step" style="--bg: var(--green); --fg: var(--cream)">
+            <span class="step__num">02</span>
+            <div class="step__txt"><h3>운명의 냥 찾기</h3><p>스태프가 성격, 나이, 건강 상태를 전부 알려드려요.</p></div>
+            <img src="./img/personcat.jpg" alt="" loading="lazy">
+          </article>
+          <article class="step" style="--bg: var(--lilac); --fg: var(--ink)">
+            <span class="step__num">03</span>
+            <div class="step__txt"><h3>신청 &amp; 인터뷰</h3><p>간단한 신청서 + 짧은 대화. 서로에게 꼭 맞는지 확인하는 시간.</p></div>
+            <img src="./img/adote.jpg" alt="" loading="lazy">
+          </article>
+          <article class="step" style="--bg: var(--yellow); --fg: var(--ink)">
+            <span class="step__num">04</span>
+            <div class="step__txt"><h3>집으로 GO!</h3><p>웰컴 키트와 함께 새 가족 탄생 🎉 이후에도 계속 연락해요.</p></div>
+            <img src="./img/paperbag.jpg" alt="" loading="lazy">
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section id="visit" class="visit">
+      <div class="container visit__inner">
+        <figure class="visit__img" data-cursor="hi!">
+          <img src="./img/hero.jpg" alt="벽에 그려진 Gato Pingado 로고와 손님" loading="lazy">
+        </figure>
+        <div class="visit__info">
+          <p class="label label--light">(06) — visit</p>
+          <h2 class="title">놀러와<br><span class="hl hl--yellow">냥!</span></h2>
+          <dl class="visit__list">
+            <div><dt>where</dt><dd>São Paulo, Brasil<br>빨간 문 2층 집</dd></div>
+            <div><dt>when</dt><dd>화–일 10:00 – 20:00<br>월요일은 냥이도 쉬어요</dd></div>
+            <div><dt>rule</dt><dd>자는 냥이는 깨우지 않기 💤</dd></div>
+          </dl>
+          <a href="#hero" class="btn btn--yellow btn--xl magnetic">길찾기 <i>↗</i></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__top container">
+      <p class="footer__q">고양이가<br>기다리고 있어요.</p>
+      <ul class="footer__links">
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">Pinterest</a></li>
+      </ul>
+    </div>
+    <img class="footer__logo" src="./img/logowhite.png" alt="gato pingado">
+    <div class="footer__bottom container">
+      <span>© 2026 Gato Pingado — concept redesign</span>
+      <span>Portfolio · Web design &amp; publishing</span>
+      <a href="#hero" class="to-top">TOP ↑</a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>

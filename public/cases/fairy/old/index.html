@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fairy tail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<style>
+ 
+</style>
+<body>
+    <section id="sect1" class="item" >
+        <span class="item_num">01</span>
+        <figure class="item_img">
+            <img src="../img/1a.png" alt="">
+        </figure>
+        <figcaption class="item_title">
+            <h2>"The witch's secret"</h2>
+        </figcaption>
+    </section>
+    <section id="sect2" class="item" >
+        <span class="item_num">01</span>
+        <figure class="item_img">
+            <img src="../img/2a.png" alt="">
+        </figure>
+        <figcaption class="item_title">
+            <p>On a full moon you may encounter a black bird carrying a branch of pink berries in its beak.</p>
+        </figcaption>
+    </section>
+    <main id="h-slide">
+        <section class="h-sect1 item">
+            <span class="item_num">01</span>
+            <figure class="item_img">
+                <img src="../img/3a.png" alt="">
+            </figure>
+            <figcaption class="item_title">
+                <p>Only once a year, it can take on the true appearance with these pink berries. There are so many enchanced birds, but not everyone is able to become human.</p>
+            </figcaption>
+        </section>
+        <section class="h-sect2 item" >
+            <span class="item_num">02</span>
+            <figure class="item_img">
+                <img src="../img/1b.png" alt="">
+            </figure>
+            <figcaption class="item_title">
+                <h2>"Asterskin house"</h2>
+            </figcaption>
+        </section>
+        <section class="h-sect3 item" >
+            <span class="item_num">02</span>
+            <figure class="item_img">
+                <img src="../img/2b.png" alt="">
+            </figure>
+            <figcaption class="item_title">
+                <p>Everyone has a choice, so many starts choose life on earth.</p>
+            </figcaption>
+        </section>
+
+        <section class="h-sect4 item">
+            <span class="item_num">02</span>
+            <figure class="item_img">
+                <img src="../img/3b.png" alt="">
+            </figure>
+            <figcaption class="item_title">
+                <p>They build small houses in dense forests and tame little wild birdsso that at any moment they can return to where their heart is.</p>
+            </figcaption>
+        </section>
+        <!-- <section class="h-sect4 item">
+            <span class="item_num">2</span>
+            <figure class="item_img">
+                <img src="../img/6.png" alt="">
+            </figure>
+            <figcaption class="item_title">
+                <p>some title</p>
+            </figcaption>
+        </section>
+        <section class="h-sect5 item">
+            <span class="item_num">3</span>
+            <figure class="item_img">
+                <img src="../img/7.png" alt="">
+            </figure>
+            <figcaption class="item_title">
+                <p>some title</p>
+            </figcaption>
+        </section> -->
+    </main>
+    <section id="sect3" class="item">
+        <span class="item_num">03</span>
+        <figure class="item_img">
+            <img src="../img/1c.png" alt="">
+        </figure>
+        <figcaption class="item_title">
+            <h2>"The story of a strange kitty"</h2>
+        </figcaption>
+    </section>
+    <section id="sect4" class="item">
+        <span class="item_num">03</span>
+        <figure class="item_img">
+            <img src="../img/2c.png" alt="">
+        </figure>
+        <figcaption class="item_title">
+            <p>At first glancem it's just a regular little black kitten.But if you look closely, you can see a little black crown on his head.</p>
+        </figcaption>
+    </section>
+    <section id="sect5" class="item">
+        <span class="item_num">03</span>
+        <figure class="item_img">
+            <img src="../img/3c.png" alt="">
+        </figure>
+        <figcaption class="item_title">
+            <p>The kitten  has no master, but she has a very close friend. And a little bit of car magic.</p>
+        </figcaption>
+    </section>
+    <p><a href="https://www.behance.net/kittykeks">Work made by: https://www.behance.net/kittykeks</a></p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script> 
+    <script src="./splitText.js"></script>
+    <script>
+ const horizontal = document.querySelector('#h-slide')
+ let sections = gsap.utils.toArray('#h-slide>section')
+
+ let scrollTween = gsap.to(sections, {
+    xPercent:-100*(sections.length -1 ),
+    ease:'none',
+    scrollTrigger:{
+        trigger:horizontal,
+        start:'top top',
+        end:()=>'+='+(horizontal.offsetWidth - innerWidth),
+        pin:true,
+        scrub:1,
+        invalidateOnRefresh: true,
+    }
+ })
+ //------------------------------------------smooth scroll
+ const lenis = new Lenis()
+ function raf(time){
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+ }
+ requestAnimationFrame(raf)
+
+ const imageElements = gsap.utils.toArray('#h-slide .item_img img')
+ imageElements.forEach(function(imgBox){
+    gsap.timeline({
+        scrollTrigger:{
+            trigger:imgBox,
+            containerAnimation: scrollTween, // on the top function conection
+            start:'center right',
+            end:'center center',
+            scrub:true
+
+        }
+    })
+    .to(imgBox,{'clip-path':'inset(0%)', ease:'none', duration:3},0)
+     gsap.timeline({
+        scrollTrigger:{
+            trigger:imgBox,
+            containerAnimation: scrollTween, // on the top function conection
+            start:'center right',
+            end:'center left',
+            scrub:true
+
+        }
+    })
+    .to(imgBox,{'clip-path':'inset(10%)', ease:'none', duration:3},3)
+ })
+ // text
+ gsap.utils.toArray('.item').forEach(item=>{
+        const bgColor= item.getAttribute('data-bgcolor')
+        gsap.to('body',{
+            scrollTrigger:{
+                trigger:item,
+                start:'bottom 50%', 
+                end:'top 50%',
+                onEnter:()=>gsap.to('body',{backgroundColor:bgColor, duration:1.5}),
+                onEnterBack:()=>gsap.to('body',{backgroundColor:bgColor, duration:2}),
+                toggleActions:'restart none none none'
+            }
+        })
+
+        const itemTitle = item.querySelector('.item_title')
+        if(itemTitle){
+            const {chars, words}=new SplitText(itemTitle,{
+                type:'words, chars'
+
+            })
+            words.forEach((word,i)=>{
+                if(i%2 === 0){
+                    gsap.set(word,{color:'#fff'})
+                }else{
+                    gsap.set(word,{color:'skyblue'}),
+                    gsap.set(word,{textShadow:'2px 1px 2px purple'})
+                }
+            })
+            gsap.to(chars,{
+                y:-100,
+                opacity:1,
+                duration:3,
+                stagger:{
+                    each:0.5, 
+                    from:'random'
+                },
+                scrollTrigger:{
+                    trigger:itemTitle,
+                    start:'center center',
+                    end:'center center',
+                    scrub:2,
+                    
+                }
+            })
+        }
+       })
+    </script>
+</body>
+</html>

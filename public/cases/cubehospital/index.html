@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>큐브성형외과 피부과 — Cube Plastic Surgery &amp; Dermatology</title>
+<meta name="description" content="과하지 않게, 자연스럽게. 성형외과 전문의가 상담부터 수술, 경과까지 직접 책임지는 큐브성형외과 피부과. 디큐브시티 10층.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --ivory:#F7F4EF;
+  --stone:#EDE7DD;
+  --line:#DDD4C6;
+  --ink:#1D1B18;
+  --ink-2:#55504A;
+  --ink-3:#8C857C;
+  --gold:#A8874E;
+  --gold-soft:#D9C7A0;
+  --brown:#4E3D2C;
+  --white:#fff;
+  --radius:18px;
+  --wrap:1240px;
+  --serif:"Cormorant Garamond", "Times New Roman", serif;
+  --sans:"Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:var(--sans);color:var(--ink);background:var(--ivory);line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.eyebrow{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--gold);letter-spacing:.02em;display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+h1,h2,h3{font-weight:600;letter-spacing:-.025em;line-height:1.3}
+h2{font-size:clamp(28px,3.6vw,44px)}
+.lead{color:var(--ink-2);font-size:17px;max-width:560px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 28px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:.25s}
+.btn-dark{background:var(--ink);color:var(--ivory)}
+.btn-dark:hover{background:var(--brown)}
+.btn-line{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-line:hover{background:var(--ink);color:var(--ivory)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:#94753f}
+.btn svg{width:18px;height:18px}
+section{padding:120px 0}
+
+/* ---------- header ---------- */
+.header{position:fixed;inset:0 0 auto;z-index:50;transition:.3s;background:rgba(247,244,239,.0)}
+.header.scrolled{background:rgba(247,244,239,.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
+.header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{width:38px;height:38px;background:url(img/imgi_57_logo2.png) 0 50%/auto 100% no-repeat;flex:none}
+.logo-text{display:flex;flex-direction:column;line-height:1.15}
+.logo-text b{font-size:17px;letter-spacing:-.02em}
+.logo-text small{font-size:10.5px;color:var(--ink-3);letter-spacing:.04em}
+.nav{display:flex;gap:36px;font-size:15px;color:var(--ink-2)}
+.nav a:hover{color:var(--ink)}
+.header-cta{display:flex;align-items:center;gap:18px}
+.header-cta .tel{font-weight:600;font-size:15px}
+.header-cta .btn{height:44px;padding:0 22px;font-size:14px}
+.burger{display:none;width:44px;height:44px;border:0;background:none;cursor:pointer}
+.burger span{display:block;width:22px;height:1.5px;background:var(--ink);margin:5px auto;transition:.3s}
+
+/* ---------- hero ---------- */
+.hero{padding:140px 0 90px;position:relative;overflow:hidden}
+.hero::after{content:"CUBE";position:absolute;right:-2vw;bottom:-6vw;font-family:var(--serif);font-size:28vw;line-height:1;color:var(--stone);z-index:-1;pointer-events:none;letter-spacing:-.04em}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(34px,4.4vw,58px);margin:22px 0 24px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .lead{margin-bottom:36px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-facts{display:flex;gap:32px;margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
+.hero-facts div{font-size:13px;color:var(--ink-3)}
+.hero-facts b{display:block;font-size:15px;color:var(--ink);font-weight:600;margin-bottom:2px}
+.hero-visual{position:relative;aspect-ratio:3/4.3;border-radius:999px 999px 20px 20px;overflow:hidden;background:var(--stone)}
+.hero-visual img{width:100%;height:100%;object-fit:cover;object-position:68% 30%}
+.hero-badge{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:rgba(255,255,255,.88);backdrop-filter:blur(8px);border-radius:999px;padding:10px 18px;font-size:13px;white-space:nowrap;display:flex;gap:8px;align-items:center}
+.hero-badge i{width:8px;height:8px;border-radius:50%;background:#5DB47A;box-shadow:0 0 0 4px rgba(93,180,122,.18)}
+
+/* ---------- booking card ---------- */
+.booking{background:var(--white);border-radius:24px;padding:32px;box-shadow:0 30px 80px -40px rgba(60,45,25,.35);border:1px solid #EFE9DF}
+.booking h3{font-size:22px;margin-bottom:4px}
+.booking .sub{font-size:13.5px;color:var(--ink-3);margin-bottom:22px}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--ivory);border-radius:12px;padding:4px;margin-bottom:14px}
+.seg button{border:0;background:none;height:40px;border-radius:9px;font-size:14px;font-weight:600;color:var(--ink-3);cursor:pointer;transition:.2s}
+.seg button.on{background:var(--white);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12.5px;color:var(--ink-2);margin-bottom:6px;font-weight:500}
+.field input,.field select{width:100%;height:46px;border:1px solid var(--line);border-radius:12px;padding:0 14px;background:var(--white);outline:none;transition:.2s;font-size:15px;appearance:none}
+.field select{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238C857C' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 14px center no-repeat #fff}
+.field input:focus,.field select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(168,135,78,.14)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.slots button{height:36px;border:1px solid var(--line);background:#fff;border-radius:9px;font-size:13px;cursor:pointer;transition:.15s}
+.slots button:hover{border-color:var(--gold)}
+.slots button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.slots-empty{grid-column:1/-1;font-size:13px;color:var(--ink-3);padding:8px 0}
+.agree{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink-3);margin:14px 0 16px;cursor:pointer}
+.agree input{accent-color:var(--ink);margin-top:3px}
+.booking .btn{width:100%}
+.booking .err{color:#B4553B;font-size:12.5px;min-height:18px;margin-top:8px;text-align:center}
+.booking-done{display:none;text-align:center;padding:30px 0}
+.booking-done .check{width:64px;height:64px;border-radius:50%;background:var(--stone);display:grid;place-items:center;margin:0 auto 18px;color:var(--gold)}
+.booking-done p{color:var(--ink-2);font-size:14.5px;margin:8px 0 22px}
+.booking.done form{display:none}
+.booking.done .booking-done{display:block}
+
+/* ---------- promise strip ---------- */
+.promise{padding:0 0 30px}
+.promise-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.promise-item{padding:34px 32px;display:flex;gap:20px;align-items:baseline}
+.promise-item+.promise-item{border-left:1px solid var(--line)}
+.promise-item span{font-family:var(--serif);font-size:30px;color:var(--gold);font-style:italic;min-width:120px}
+.promise-item p{font-size:15.5px;color:var(--ink-2)}
+
+/* ---------- story ---------- */
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center}
+.story-img{position:relative}
+.story-img img{border-radius:var(--radius);width:100%;aspect-ratio:4/5;object-fit:cover;object-position:60% 50%}
+.story-img .quote{position:absolute;right:-40px;bottom:40px;background:var(--brown);color:#F1E8D8;padding:26px 28px;border-radius:16px;max-width:280px;font-size:15px;line-height:1.6}
+.story-img .quote b{display:block;font-family:var(--serif);font-weight:400;font-size:40px;line-height:.6;color:var(--gold-soft);margin-bottom:10px}
+.story h2{margin:18px 0 24px}
+.reasons{margin-top:44px;display:grid;gap:0}
+.reason{display:grid;grid-template-columns:56px 1fr;gap:6px 10px;padding:22px 0;border-top:1px solid var(--line)}
+.reason:last-child{border-bottom:1px solid var(--line)}
+.reason .n{font-family:var(--serif);font-size:26px;color:var(--gold);line-height:1.2}
+.reason h3{font-size:18px}
+.reason p{grid-column:2;color:var(--ink-3);font-size:14.5px}
+
+/* ---------- doctor ---------- */
+.doctor{background:var(--stone)}
+.doctor-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center}
+.doctor-photo{position:relative;border-radius:var(--radius);overflow:hidden;background:#BDB3AA}
+.doctor-photo img{width:100%;aspect-ratio:598/654;object-fit:cover}
+.doctor-photo figcaption{position:absolute;left:20px;top:20px;background:rgba(255,255,255,.9);font-size:12.5px;padding:7px 14px;border-radius:999px;font-weight:600}
+.doctor blockquote{font-size:clamp(22px,2.4vw,30px);font-weight:500;letter-spacing:-.02em;line-height:1.5;margin:22px 0 32px}
+.doctor blockquote em{font-style:normal;color:var(--gold)}
+.doctor-name{display:flex;align-items:baseline;gap:14px;margin-bottom:18px}
+.doctor-name b{font-size:24px}
+.doctor-name span{color:var(--ink-3);font-size:14px}
+.creds{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:36px}
+.creds li{background:var(--ivory);border-radius:12px;padding:14px 16px;font-size:14.5px;display:flex;gap:10px;align-items:center}
+.creds li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);flex:none}
+
+/* ---------- clinics ---------- */
+.clinic-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:56px}
+.clinic-head h2{margin-top:18px}
+.tabs{display:inline-flex;gap:6px;background:var(--stone);padding:5px;border-radius:999px;margin-bottom:48px}
+.tabs button{border:0;background:none;padding:12px 26px;border-radius:999px;font-weight:600;font-size:15px;color:var(--ink-2);cursor:pointer;transition:.2s}
+.tabs button.on{background:var(--ink);color:#fff}
+.panel{display:none}
+.panel.on{display:block;animation:fade .45s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.clinic-intro{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;margin-bottom:56px;align-items:stretch}
+.clinic-intro .pic{border-radius:var(--radius);overflow:hidden;min-height:360px}
+.clinic-intro .pic img{width:100%;height:100%;object-fit:cover}
+.clinic-intro .txt{display:flex;flex-direction:column;justify-content:center}
+.clinic-intro h3{font-size:clamp(22px,2.4vw,30px);margin-bottom:16px}
+.clinic-intro .txt>p{color:var(--ink-2);margin-bottom:28px}
+.feats{display:grid;gap:12px}
+.feat{display:flex;gap:16px;align-items:center;background:var(--white);border-radius:14px;padding:12px 18px 12px 12px}
+.feat img{width:54px;height:54px;background:var(--ivory);border-radius:12px;padding:6px;flex:none}
+.feat span{font-size:15px;font-weight:500}
+.procs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.proc{background:var(--white);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:14px;border:1px solid transparent;transition:.25s;position:relative}
+.proc:hover{border-color:var(--gold-soft);transform:translateY(-4px);box-shadow:0 20px 40px -28px rgba(60,45,25,.35)}
+.proc-top{display:flex;justify-content:space-between;align-items:flex-start}
+.proc img{width:72px;height:72px;border-radius:50%;background:var(--ivory)}
+.proc .num{font-family:var(--serif);color:var(--ink-3);font-size:18px}
+.proc h4{font-size:19px;font-weight:600;letter-spacing:-.02em}
+.proc p{color:var(--ink-3);font-size:14px;margin-top:-8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:12.5px;background:var(--ivory);padding:5px 11px;border-radius:999px;color:var(--ink-2)}
+.proc .go{margin-top:auto;padding-top:10px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px;color:var(--ink);background:none;border:0;cursor:pointer;align-self:flex-start;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.proc .go:hover{color:var(--gold);border-color:var(--gold)}
+
+/* ---------- process ---------- */
+.process{background:var(--ink);color:#EFE8DC}
+.process .eyebrow{color:var(--gold-soft)}
+.process h2{margin:18px 0 60px;max-width:680px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+.step{padding:30px 28px 0 0;border-top:1px solid #3A3631;position:relative}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--serif);font-size:15px;color:var(--gold-soft);position:absolute;top:-12px;left:0;background:var(--ink);padding-right:12px}
+.step h3{font-size:19px;margin:10px 0 10px;color:#fff}
+.step p{font-size:14.5px;color:#A9A196}
+
+/* ---------- cta band ---------- */
+.cta{padding:0}
+.cta-box{background:var(--brown) url(img/imgi_63_background3.png) center/cover;color:#F3EBDD;border-radius:28px;padding:80px 64px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;margin-top:120px}
+.cta-box h2{color:#fff}
+.cta-box p{color:#D8CBB5;margin-top:16px}
+.cta-actions{display:flex;flex-direction:column;gap:12px;align-items:stretch;max-width:340px;justify-self:end;width:100%}
+.cta-actions .btn-line{border-color:#D8CBB5;color:#fff}
+.cta-actions .btn-line:hover{background:#fff;color:var(--ink)}
+
+/* ---------- location ---------- */
+.loc-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;margin-top:48px}
+.info-list{display:grid;gap:0}
+.info{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:22px 0;border-top:1px solid var(--line)}
+.info:last-child{border-bottom:1px solid var(--line)}
+.info .ic{width:44px;height:44px;border-radius:50%;background:var(--stone);display:grid;place-items:center;color:var(--gold)}
+.info .ic svg{width:19px;height:19px}
+.info h4{font-size:13px;color:var(--ink-3);font-weight:500;margin-bottom:4px}
+.info p,.info a{font-size:16px;font-weight:500}
+.hours{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;font-size:15px}
+.hours dt{color:var(--ink-3)}
+.hours .off{grid-column:1/-1;color:#B4553B;font-size:13.5px;margin-top:4px}
+.map{border-radius:var(--radius);overflow:hidden;background:#fff;border:1px solid var(--line)}
+.map>img{width:100%;aspect-ratio:1280/473;object-fit:cover}
+.route-tabs{display:flex;gap:4px;padding:16px 16px 0}
+.route-tabs button{border:0;background:var(--ivory);padding:9px 16px;border-radius:999px;font-size:13.5px;font-weight:600;color:var(--ink-2);cursor:pointer}
+.route-tabs button.on{background:var(--ink);color:#fff}
+.route{display:none;padding:16px}
+.route.on{display:block}
+.route-steps{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+.route-steps img{width:200px;flex:none;border-radius:10px;scroll-snap-align:start}
+.route-note{font-size:13.5px;color:var(--ink-2);margin-top:12px;line-height:1.7}
+
+/* ---------- footer ---------- */
+footer{background:#14120F;color:#8F887E;padding:64px 0 120px;font-size:13.5px;margin-top:120px}
+.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+footer .logo-text b{color:#fff}
+footer .logo-text small{color:#8F887E}
+.foot-info{display:grid;gap:6px;margin-top:22px}
+.foot-tel{text-align:right}
+.foot-tel b{display:block;font-size:30px;color:#fff;font-weight:600;letter-spacing:-.02em;margin:6px 0}
+
+/* ---------- mobile sticky ---------- */
+.sticky{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none;gap:8px;padding:8px;background:rgba(29,27,24,.94);backdrop-filter:blur(10px);border-radius:999px;transform:translateY(120%);transition:.35s}
+.sticky.show{transform:none}
+.sticky a{flex:1;height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:15px;color:#fff}
+.sticky a.book{background:var(--gold)}
+.sticky svg{width:17px;height:17px}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .hero-grid{grid-template-columns:1fr 1fr}
+  .hero-visual{display:none}
+  .nav{gap:24px}
+}
+@media (max-width:980px){
+  section{padding:88px 0}
+  .nav,.header-cta .tel{display:none}
+  .burger{display:block}
+  .nav.open{display:flex;position:absolute;top:76px;left:0;right:0;flex-direction:column;gap:0;background:var(--ivory);border-bottom:1px solid var(--line);padding:8px 24px 20px}
+  .nav.open a{padding:14px 0;border-bottom:1px solid var(--line);font-size:16px}
+  .hero-grid,.story-grid,.doctor-grid,.clinic-head,.clinic-intro,.loc-grid,.cta-box{grid-template-columns:1fr}
+  .hero-grid{gap:48px}
+  .story-grid,.doctor-grid{gap:48px}
+  .story-img .quote{right:16px;bottom:16px}
+  .clinic-head{gap:20px}
+  .procs{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr;gap:40px 0}
+  .promise-grid{grid-template-columns:1fr}
+  .promise-item+.promise-item{border-left:0;border-top:1px solid var(--line)}
+  .cta-box{padding:56px 36px}
+  .cta-actions{justify-self:stretch;max-width:none}
+  .sticky{display:flex}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .hero{padding:110px 0 64px}
+  .hero::after{display:none}
+  .hero-facts{gap:20px;flex-wrap:wrap}
+  .booking{padding:24px 18px}
+  .slots{grid-template-columns:repeat(3,1fr)}
+  .procs,.steps,.creds{grid-template-columns:1fr}
+  .promise-item{padding:24px 4px;flex-direction:column;gap:4px}
+  .header-cta .btn{display:none}
+  .tabs{display:flex}
+  .tabs button{flex:1;padding:12px 10px}
+  .clinic-intro .pic{min-height:260px}
+  .cta-box{padding:44px 22px;border-radius:22px;margin-top:88px}
+  .foot-tel{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="큐브성형외과 홈">
+      <span class="logo-mark"></span>
+      <span class="logo-text"><b>큐브성형외과</b><small>PLASTIC SURGERY · DERMATOLOGY</small></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#story">병원 소개</a>
+      <a href="#doctor">의료진</a>
+      <a href="#clinic" data-tab="surgery">성형 클리닉</a>
+      <a href="#clinic" data-tab="skin">피부 클리닉</a>
+      <a href="#location">오시는 길</a>
+    </nav>
+    <div class="header-cta">
+      <a href="tel:0222110070" class="tel">02. 2211. 0070</a>
+      <a href="#booking" class="btn btn-dark">상담 예약</a>
+      <button class="burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO + BOOKING ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="rv">
+      <span class="eyebrow">Cube Plastic Surgery &amp; Dermatology</span>
+      <h1>아름다움은<br>바꾸는 것이 아니라,<br><em>간직하는 것</em>입니다</h1>
+      <p class="lead">과하지 않게, 자연스럽게. 성형외과 전문의가 당신에게 가장 잘 어울리는 아름다움을 찾아드립니다.</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn btn-dark">상담 예약하기
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="tel:0222110070" class="btn btn-line">전화 상담</a>
+      </div>
+      <div class="hero-facts">
+        <div><b>성형외과 전문의</b>대표원장 직접 진료</div>
+        <div><b>정직한 상담</b>과잉진료 없는 솔루션</div>
+        <div><b>주차 지원</b>디큐브시티 10층</div>
+      </div>
+    </div>
+
+    <div class="hero-visual rv">
+      <img src="img/imgi_4_features1.png" alt="자연스러운 얼굴 라인의 모델">
+      <div class="hero-badge" id="openBadge"><i></i><span>오늘 진료 중</span></div>
+    </div>
+
+    <div class="booking rv" id="booking">
+      <form id="bookForm" novalidate>
+        <h3>방문 상담 예약</h3>
+        <p class="sub">원하시는 날짜를 남겨주시면 확인 후 연락드립니다.</p>
+
+        <div class="seg" role="tablist">
+          <button type="button" class="on" data-cat="surgery">성형</button>
+          <button type="button" data-cat="skin">피부</button>
+        </div>
+
+        <div class="field">
+          <label for="proc">관심 시술</label>
+          <select id="proc" name="proc"></select>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="name">성함</label>
+            <input id="name" name="name" placeholder="홍길동" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="phone">연락처</label>
+            <input id="phone" name="phone" type="tel" inputmode="numeric" placeholder="010-0000-0000" autocomplete="tel">
+          </div>
+        </div>
+        <div class="field">
+          <label for="date">희망 날짜</label>
+          <input id="date" name="date" type="date">
+        </div>
+        <div class="field">
+          <label>희망 시간</label>
+          <div class="slots" id="slots"><div class="slots-empty">날짜를 먼저 선택해 주세요</div></div>
+        </div>
+        <label class="agree"><input type="checkbox" id="agree"> 상담 예약을 위한 개인정보 수집·이용에 동의합니다.</label>
+        <button class="btn btn-dark" type="submit">예약 신청하기</button>
+        <div class="err" id="err" role="alert"></div>
+      </form>
+
+      <div class="booking-done" aria-live="polite">
+        <div class="check"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3>예약 신청이 접수되었습니다</h3>
+        <p id="doneText"></p>
+        <button class="btn btn-line" type="button" id="again">다시 예약하기</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROMISE ============ -->
+<div class="promise">
+  <div class="wrap">
+    <div class="promise-grid rv">
+      <div class="promise-item"><span>Belief</span><p>숙련된 성형외과 전문의 시술</p></div>
+      <div class="promise-item"><span>Confidence</span><p>신뢰를 바탕으로 한 고객 중심의 시술</p></div>
+      <div class="promise-item"><span>Sense</span><p>다양한 경험의 섬세하고 꼼꼼한 손길</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ STORY ============ -->
+<section class="story" id="story">
+  <div class="wrap story-grid">
+    <div class="story-img rv">
+      <img src="img/imgi_7_features3.png" alt="얼굴 라인을 섬세하게 확인하는 진료">
+      <div class="quote"><b>“</b>누군가를 닮는 것이 아니라, 본래의 나를 가장 조화롭게 표현하는 것.</div>
+    </div>
+    <div class="rv">
+      <span class="eyebrow">Cube Story</span>
+      <h2>아름다운 당신,<br>세상에 하나뿐이기에 소중합니다</h2>
+      <p class="lead">큐브성형외과는 과한 변화보다 자연스러움과 균형을 우선합니다. 겉모습의 변화가 아닌, 자신감을 되찾는 경험을 드리는 병원이 되겠습니다.</p>
+      <div class="reasons">
+        <div class="reason"><span class="n">01</span><h3>자연스러운 디자인 중심 수술</h3><p>얼굴 전체의 조화를 고려한 맞춤 디자인으로 자연스럽게 달라지는 변화를 약속합니다.</p></div>
+        <div class="reason"><span class="n">02</span><h3>풍부한 임상경험의 전문의 진료</h3><p>처음 상담부터 수술, 경과까지 전문의가 직접 책임집니다.</p></div>
+        <div class="reason"><span class="n">03</span><h3>수술·시술 후 관리 시스템</h3><p>결과만큼 중요한 회복 과정까지 체계적으로 관리합니다.</p></div>
+        <div class="reason"><span class="n">04</span><h3>과잉진료 없는 정직한 상담</h3><p>불필요한 시술 권유 없이, 꼭 필요한 솔루션으로만 상담합니다.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOCTOR ============ -->
+<section class="doctor" id="doctor">
+  <div class="wrap doctor-grid">
+    <figure class="doctor-photo rv">
+      <img src="img/imgi_8_doctor.png" alt="김환익 대표원장">
+      <figcaption>성형외과 전문의</figcaption>
+    </figure>
+    <div class="rv">
+      <span class="eyebrow">Doctor</span>
+      <blockquote>“내 얼굴에 맞는 성형이 <em>가장 좋은 성형</em>입니다. 개개인의 이미지와 조화를 이루는 수술만을 지향합니다.”</blockquote>
+      <div class="doctor-name"><b>김환익</b><span>대표원장 · 성형외과 전문의</span></div>
+      <ul class="creds">
+        <li>대한성형외과의사회 부회장 역임</li>
+        <li>대한성형외과학회 정회원</li>
+        <li>대한미용성형외과학회 정회원</li>
+        <li>상담부터 경과까지 직접 진료</li>
+      </ul>
+      <a href="#booking" class="btn btn-dark">원장 직접 상담 예약</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLINICS ============ -->
+<section class="clinic" id="clinic">
+  <div class="wrap">
+    <div class="clinic-head rv">
+      <div>
+        <span class="eyebrow">Clinic</span>
+        <h2>나에게 어울리는 변화,<br>무엇부터 시작할까요?</h2>
+      </div>
+      <p class="lead">유행하는 얼굴이 아니라 내 이미지와 조화를 이루는 디자인이 가장 자연스럽고, 가장 오래 만족할 수 있는 결과입니다.</p>
+    </div>
+
+    <div class="tabs" id="clinicTabs">
+      <button class="on" data-tab="surgery">성형 클리닉</button>
+      <button data-tab="skin">피부 클리닉</button>
+    </div>
+
+    <!-- surgery -->
+    <div class="panel on" data-panel="surgery">
+      <div class="clinic-intro">
+        <div class="pic"><img src="img/imgi_9_service1.png" alt="자연스러운 이목구비의 모델"></div>
+        <div class="txt">
+          <h3>성형에서 가장 중요한 한 가지,<br>내 얼굴에 어울리는 수술일까?</h3>
+          <p>얼굴 전체의 비율을 읽고, 자연스러운 변화의 방향을 함께 정합니다.</p>
+          <div class="feats">
+            <div class="feat"><img src="img/imgi_10_char1.png" alt=""><span>얼굴 전체 비율을 고려한 맞춤 디자인</span></div>
+            <div class="feat"><img src="img/imgi_11_char2.png" alt=""><span>자연스러운 변화 중심의 수술 방향</span></div>
+            <div class="feat"><img src="img/imgi_12_char3.png" alt=""><span>수술 이후 케어까지 직접하는 책임진료</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="procs" id="procSurgery"></div>
+    </div>
+
+    <!-- skin -->
+    <div class="panel" data-panel="skin">
+      <div class="clinic-intro">
+        <div class="pic"><img src="img/imgi_19_service2.png" alt="맑은 피부의 모델"></div>
+        <div class="txt">
+          <h3>피부가 좋아 보이면<br>인상이 달라집니다</h3>
+          <p>큰 변화 없이도 피부톤, 결, 탄력 개선만으로 이미지 전환과 더 어려 보이는 효과를 기대할 수 있습니다.</p>
+          <div class="feats">
+            <div class="feat"><img src="img/imgi_20_char5.png" alt=""><span>피부 상태에 맞춘 맞춤 레이저 조합</span></div>
+            <div class="feat"><img src="img/imgi_21_char4.png" alt=""><span>색소·잡티·홍조·모공 등 복합 고민 개선</span></div>
+            <div class="feat"><img src="img/imgi_22_char6.png" alt=""><span>일상생활 지장을 최소화한 시술 중심</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="procs" id="procSkin"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="process">
+  <div class="wrap">
+    <span class="eyebrow">Process</span>
+    <h2>첫 상담부터 회복까지,<br>한 명의 전문의가 끝까지 함께합니다</h2>
+    <div class="steps">
+      <div class="step rv"><h3>1:1 정밀 상담</h3><p>고민과 원하는 이미지를 충분히 듣고, 얼굴 전체의 비율을 분석합니다.</p></div>
+      <div class="step rv"><h3>맞춤 디자인</h3><p>유행이 아닌 내 얼굴에 어울리는 방향을 제안합니다. 불필요한 시술은 권하지 않습니다.</p></div>
+      <div class="step rv"><h3>전문의 직접 수술</h3><p>상담한 전문의가 직접, 섬세하고 꼼꼼하게 진행합니다.</p></div>
+      <div class="step rv"><h3>사후 관리</h3><p>결과만큼 중요한 회복 과정까지 체계적으로 관리합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-box rv">
+      <div>
+        <h2>가장 잘 어울리는 아름다움,<br>첫 상담에서 시작됩니다</h2>
+        <p>평일 10:00–18:30 · 수요일 야간 20:30까지 · 토요일 09:00–13:30</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#booking" class="btn btn-gold">온라인 상담 예약</a>
+        <a href="tel:0222110070" class="btn btn-line">02) 2211-0070</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCATION ============ -->
+<section id="location">
+  <div class="wrap">
+    <span class="eyebrow">Location</span>
+    <h2 style="margin-top:18px">큐브클리닉 오시는 길</h2>
+    <div class="loc-grid">
+      <div class="info-list rv">
+        <div class="info">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <div><h4>주소</h4><p>서울특별시 구로구 경인로 662<br>현대백화점 디큐브시티 10층</p></div>
+        </div>
+        <div class="info">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <div><h4>진료시간</h4>
+            <dl class="hours">
+              <dt>월–금</dt><dd>10:00 ~ 18:30</dd>
+              <dt>수요일</dt><dd>10:00 ~ 20:30</dd>
+              <dt>토요일</dt><dd>09:00 ~ 13:30</dd>
+              <dd class="off">일요일 및 공휴일 휴무</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="info">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <div><h4>예약 및 상담</h4><a href="tel:0222110070">02) 2211-0070</a></div>
+        </div>
+      </div>
+
+      <div class="map rv">
+        <img src="img/imgi_35_map.png" alt="디큐브시티 위치 지도">
+        <div class="route-tabs" id="routeTabs">
+          <button class="on" data-route="car">자가용</button>
+          <button data-route="subway">지하철</button>
+          <button data-route="bus">버스</button>
+        </div>
+        <div class="route on" data-route="car">
+          <div class="route-steps">
+            <img src="img/imgi_37_car1.png" alt="1"><img src="img/imgi_38_car2.png" alt="2"><img src="img/imgi_39_car3.png" alt="3"><img src="img/imgi_40_car4.png" alt="4"><img src="img/imgi_41_car5.png" alt="5"><img src="img/imgi_42_car6.png" alt="6">
+          </div>
+          <p class="route-note">디큐브시티 지하주차장은 디큐브 아파트를 지나 <b>오피스동 주차장</b>으로 들어오셔야 합니다 (주차요금 지원).<br>영등포 방향: 디큐브시티 건물을 지나 좌회전 신호에 진입 · 구로 방향: GS주유소 우측 진입로로 바로 우회전</p>
+        </div>
+        <div class="route" data-route="subway">
+          <div class="route-steps">
+            <img src="img/imgi_51_subway2.png" alt="1"><img src="img/imgi_52_subway3.png" alt="2"><img src="img/imgi_53_subway4.png" alt="3"><img src="img/imgi_54_subway5.png" alt="4"><img src="img/imgi_55_subway6.png" alt="5"><img src="img/imgi_56_subway7.png" alt="6">
+          </div>
+          <p class="route-note">신도림역 1번 개찰구로 나와 디큐브 오피스 방향으로 이동 후, 엘리베이터로 10층에 오시면 됩니다.</p>
+        </div>
+        <div class="route" data-route="bus">
+          <div class="route-steps">
+            <img src="img/imgi_44_bus2.png" alt="1"><img src="img/imgi_45_bus6.png" alt="2"><img src="img/imgi_46_bus3.png" alt="3"><img src="img/imgi_47_bus4.png" alt="4"><img src="img/imgi_48_bus5.png" alt="5"><img src="img/imgi_49_bus7.png" alt="6">
+          </div>
+          <p class="route-note">신도림역 정류장 하차 후 경인로변 횡단보도를 건너 디큐브 오피스 GATE6로 진입, 엘리베이터로 10층.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="logo"><span class="logo-mark"></span><span class="logo-text"><b>큐브성형외과의원</b><small>진료과목 피부과</small></span></div>
+      <div class="foot-info">
+        <span>대표자 김환익 · 사업자번호 113-22-17639</span>
+        <span>서울특별시 구로구 경인로 662 현대백화점 디큐브시티 10층</span>
+        <span>EMAIL cube0070@naver.com</span>
+      </div>
+    </div>
+    <div class="foot-tel">
+      예약 및 상담
+      <b>02) 2211-0070</b>
+      월–금 10:00~18:30 · 수 ~20:30 · 토 09:00~13:30 · 일/공휴일 휴무
+    </div>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <a href="tel:0222110070"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>전화</a>
+  <a href="#booking" class="book">상담 예약</a>
+</div>
+
+<script>
+/* ---------- data ---------- */
+const PROCS = {
+  surgery: [
+    {t:"눈 성형", d:"또렷하지만 자연스러운 눈매", c:["쌍커풀","눈매교정","트임"], i:"imgi_13_list5.png"},
+    {t:"코 성형", d:"얼굴 비율에 맞춘 라인", c:["콧대","코끝","라인개선"], i:"imgi_14_list6.png"},
+    {t:"주름 성형", d:"표정은 살리고 주름은 부드럽게", c:["보톡스","필러"], i:"imgi_15_list1.png"},
+    {t:"쁘띠 성형", d:"짧은 시간, 자연스러운 개선", c:["보톡스","필러"], i:"imgi_16_list4.png"},
+    {t:"피부양성종양", d:"흉터를 최소화한 제거", c:["표피낭종","피지낭종","지방종 등"], i:"imgi_17_list3.png"},
+    {t:"상처봉합", d:"성형외과 전문의의 섬세한 봉합", c:["열상","찰과상"], i:"imgi_18_list2.png"}
+  ],
+  skin: [
+    {t:"레이저", d:"필요한 부위에 맞춘 피부개선 효과", c:["톤","결","탄력"], i:"imgi_23_list1.png"},
+    {t:"여드름", d:"상태에 알맞은 복합적 치료", c:["염증","흔적"], i:"imgi_24_list2.png"},
+    {t:"모공", d:"더 타이트하고 탄력 있는 피부", c:["모공","탄력"], i:"imgi_25_list3.png"},
+    {t:"점·검버섯·문신제거", d:"피부 손상을 최소화한 깨끗한 피부", c:["점","검버섯","문신"], i:"imgi_28_list4.png"},
+    {t:"기미·주근깨", d:"균일하게 맑고 깨끗한 피부", c:["기미","주근깨","잡티"], i:"imgi_27_list5.png"},
+    {t:"안티에이징", d:"보다 어려 보이고 생기 있는 피부", c:["리프팅","생기"], i:"imgi_26_list6.png"}
+  ]
+};
+const HOURS = {1:[10,18.5],2:[10,18.5],3:[10,20.5],4:[10,18.5],5:[10,18.5],6:[9,13.5]}; // 0 = Sunday closed
+
+/* ---------- procedure cards ---------- */
+const arrow = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+for (const cat of ["surgery","skin"]) {
+  const box = document.getElementById(cat === "surgery" ? "procSurgery" : "procSkin");
+  box.innerHTML = PROCS[cat].map((p,n) => `
+    <article class="proc rv">
+      <div class="proc-top"><img src="img/${p.i}" alt=""><span class="num">0${n+1}</span></div>
+      <h4>${p.t}</h4><p>${p.d}</p>
+      <div class="chips">${p.c.map(x=>`<span>${x}</span>`).join("")}</div>
+      <button class="go" data-cat="${cat}" data-proc="${p.t}">이 시술 상담 예약 ${arrow}</button>
+    </article>`).join("");
+}
+
+/* ---------- clinic tabs ---------- */
+function showClinic(tab){
+  document.querySelectorAll("#clinicTabs button").forEach(b=>b.classList.toggle("on", b.dataset.tab===tab));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on", p.dataset.panel===tab));
+  document.querySelectorAll(".panel.on .rv").forEach(el=>el.classList.add("in"));
+}
+document.querySelectorAll("#clinicTabs button").forEach(b=>b.onclick=()=>showClinic(b.dataset.tab));
+document.querySelectorAll(".nav a[data-tab]").forEach(a=>a.addEventListener("click",()=>showClinic(a.dataset.tab)));
+
+/* ---------- booking ---------- */
+const form = document.getElementById("bookForm");
+const procSel = document.getElementById("proc");
+const dateIn = document.getElementById("date");
+const slotsBox = document.getElementById("slots");
+const err = document.getElementById("err");
+let cat = "surgery", slot = null;
+
+function setCat(c, proc){
+  cat = c;
+  document.querySelectorAll(".seg button").forEach(b=>b.classList.toggle("on", b.dataset.cat===c));
+  procSel.innerHTML = PROCS[c].map(p=>`<option>${p.t}</option>`).join("") + `<option>상담 후 결정</option>`;
+  if (proc) procSel.value = proc;
+}
+document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>setCat(b.dataset.cat));
+setCat("surgery");
+
+document.addEventListener("click", e=>{
+  const go = e.target.closest(".go");
+  if (!go) return;
+  setCat(go.dataset.cat, go.dataset.proc);
+  document.getElementById("booking").scrollIntoView({behavior:"smooth", block:"center"});
+  setTimeout(()=>document.getElementById("name").focus({preventScroll:true}), 600);
+});
+
+const pad = n => String(n).padStart(2,"0");
+const ymd = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const today = new Date();
+dateIn.min = ymd(today);
+const max = new Date(); max.setDate(max.getDate()+60); dateIn.max = ymd(max);
+
+function renderSlots(){
+  slot = null;
+  if (!dateIn.value){ slotsBox.innerHTML = '<div class="slots-empty">날짜를 먼저 선택해 주세요</div>'; return; }
+  const d = new Date(dateIn.value + "T00:00");
+  const h = HOURS[d.getDay()];
+  if (!h){ slotsBox.innerHTML = '<div class="slots-empty">일요일은 휴진입니다. 다른 날짜를 선택해 주세요.</div>'; return; }
+  const isToday = ymd(d) === ymd(today);
+  const nowH = today.getHours() + today.getMinutes()/60 + 1; // at least 1h ahead
+  const list = [];
+  for (let t = h[0]; t <= h[1] - 1; t += 0.5){
+    if (isToday && t < nowH) continue;
+    list.push(`${pad(Math.floor(t))}:${t%1 ? "30" : "00"}`);
+  }
+  slotsBox.innerHTML = list.length
+    ? list.map(s=>`<button type="button">${s}</button>`).join("")
+    : '<div class="slots-empty">오늘 예약 가능한 시간이 마감되었습니다.</div>';
+}
+dateIn.addEventListener("change", renderSlots);
+slotsBox.addEventListener("click", e=>{
+  const b = e.target.closest("button"); if (!b) return;
+  slotsBox.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); slot = b.textContent;
+});
+
+const phone = document.getElementById("phone");
+phone.addEventListener("input", ()=>{
+  const v = phone.value.replace(/\D/g,"").slice(0,11);
+  phone.value = v.length < 4 ? v : v.length < 8 ? `${v.slice(0,3)}-${v.slice(3)}` : `${v.slice(0,3)}-${v.slice(3,v.length-4)}-${v.slice(-4)}`;
+});
+
+form.addEventListener("submit", e=>{
+  e.preventDefault();
+  const name = form.name.value.trim();
+  const tel = phone.value.replace(/\D/g,"");
+  err.textContent =
+    !name ? "성함을 입력해 주세요." :
+    tel.length < 10 ? "연락처를 정확히 입력해 주세요." :
+    !dateIn.value ? "희망 날짜를 선택해 주세요." :
+    !slot ? "희망 시간을 선택해 주세요." :
+    !document.getElementById("agree").checked ? "개인정보 수집·이용에 동의해 주세요." : "";
+  if (err.textContent) return;
+  const d = new Date(dateIn.value + "T00:00");
+  const days = "일월화수목금토";
+  document.getElementById("doneText").innerHTML =
+    `${name}님, <b>${d.getMonth()+1}월 ${d.getDate()}일(${days[d.getDay()]}) ${slot}</b><br>${procSel.value} 상담 신청을 받았습니다.<br>확인 후 ${phone.value}로 연락드리겠습니다.`;
+  document.getElementById("booking").classList.add("done");
+});
+document.getElementById("again").onclick = ()=>{
+  form.reset(); setCat(cat); renderSlots(); err.textContent="";
+  document.getElementById("booking").classList.remove("done");
+};
+
+/* ---------- open-now badge ---------- */
+(function(){
+  const h = HOURS[today.getDay()], t = today.getHours() + today.getMinutes()/60;
+  const el = document.querySelector("#openBadge span"), dot = document.querySelector("#openBadge i");
+  if (h && t >= h[0] && t < h[1]) { el.textContent = `오늘 진료 중 · ${h[1]===20.5?"20:30":h[1]===13.5?"13:30":"18:30"}까지`; }
+  else { el.textContent = "온라인 예약 24시간 가능"; dot.style.background = "#A8874E"; dot.style.boxShadow = "0 0 0 4px rgba(168,135,78,.2)"; }
+})();
+
+/* ---------- route tabs ---------- */
+document.querySelectorAll("#routeTabs button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("#routeTabs button").forEach(x=>x.classList.toggle("on", x===b));
+  document.querySelectorAll(".route").forEach(r=>r.classList.toggle("on", r.dataset.route===b.dataset.route));
+});
+
+/* ---------- header, menu, sticky ---------- */
+const header = document.getElementById("header"), sticky = document.getElementById("sticky");
+const onScroll = ()=>{
+  header.classList.toggle("scrolled", scrollY > 20);
+  const b = document.getElementById("booking").getBoundingClientRect();
+  sticky.classList.toggle("show", scrollY > 500 && (b.bottom < 0 || b.top > innerHeight));
+};
+addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+const burger = document.getElementById("burger"), nav = document.getElementById("nav");
+burger.onclick = ()=>{ const o = nav.classList.toggle("open"); burger.setAttribute("aria-expanded", o); };
+nav.querySelectorAll("a").forEach(a=>a.addEventListener("click", ()=>nav.classList.remove("open")));
+
+/* ---------- reveal on scroll ---------- */
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.12});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

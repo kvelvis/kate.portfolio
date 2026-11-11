@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>청와대, 국민 품으로 — 리디자인</title>
+  <meta name="description" content="2022 청와대 개방 누리집 리디자인 컨셉. 반응형(PC·태블릿·모바일) + GSAP 인터랙션.">
+  <meta name="theme-color" content="#0b2f6b">
+  <link rel="icon" href="./img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="preload" as="image" href="./img/hero-01.jpg">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="is-loading">
+
+  <a class="skip" href="#main">본문 바로가기</a>
+
+  <!-- LOADER -->
+  <div class="loader" aria-hidden="true">
+    <img class="loader__spin" src="./img/indicator-1.gif" alt="">
+    <img class="loader__logo" src="./img/logo.png" alt="">
+    <p class="loader__num"><span>0</span>%</p>
+  </div>
+
+  <!-- MASTHEAD (KRDS 스타일 식별 배너) -->
+  <div class="masthead">
+    <div class="inner">
+      <p><span class="masthead__flag" aria-hidden="true"></span><span class="masthead__long">본 페이지는&nbsp;</span><strong>포트폴리오용 리디자인 컨셉</strong><span class="masthead__long">입니다.</span></p>
+      <a href="https://www.opentheblueh.kr" target="_blank" rel="noopener">실제 누리집 바로가기 <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header__bar inner">
+      <h1 class="header__logo">
+        <a href="#top" aria-label="청와대 홈">
+          <img class="logo--white" src="./img/logowhite.png" alt="">
+          <img class="logo--color" src="./img/logo.png" alt="">
+        </a>
+      </h1>
+
+      <nav class="gnb" aria-label="주 메뉴">
+        <ul class="gnb__list">
+          <li class="gnb__item"><a href="#about">개방의 의미</a>
+            <ul class="gnb__sub"><li><a href="#about">개방의 의미</a></li><li><a href="#about">개방 기록</a></li></ul>
+          </li>
+          <li class="gnb__item"><a href="#places">청와대 소개</a>
+            <ul class="gnb__sub"><li><a href="#about">역사</a></li><li><a href="#places">지도 및 주요시설</a></li><li><a href="#places">경내 주요 유적</a></li></ul>
+          </li>
+          <li class="gnb__item"><a href="#quick">관람 안내</a>
+            <ul class="gnb__sub"><li><a href="#quick">관람 규칙 및 규정</a></li><li><a href="#quick">관람 시간 및 해설</a></li><li><a href="#booking">관람 신청</a></li><li><a href="#places">관람 안내도</a></li><li><a href="#culture">함께 가 볼 만한 장소</a></li><li><a href="#culture">공연 프로그램</a></li></ul>
+          </li>
+          <li class="gnb__item"><a href="#route">등산로</a>
+            <ul class="gnb__sub"><li><a href="#route">개요</a></li><li><a href="#route">등산로 코스</a></li><li><a href="#route">등산로 이모저모</a></li></ul>
+          </li>
+          <li class="gnb__item"><a href="#route">오시는 길</a>
+            <ul class="gnb__sub"><li><a href="#route">오시는 길</a></li><li><a href="#route">관람 순환버스</a></li><li><a href="#route">자율주행버스(청와대A01)</a></li></ul>
+          </li>
+          <li class="gnb__item"><a href="#notice">국민소통</a>
+            <ul class="gnb__sub"><li><a href="#notice">공지사항</a></li><li><a href="#stories">미디어센터</a></li><li><a href="#faq">자주하는 질문</a></li></ul>
+          </li>
+          <li class="gnb__item"><a href="#stories">내가 만드는 청와대</a>
+            <ul class="gnb__sub"><li><a href="#stories">관람후기</a></li></ul>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="util">
+        <a href="#" class="util__btn util__sns" aria-label="인스타그램"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg></a>
+        <a href="#" class="util__btn util__lang" lang="en">EN</a>
+        <button class="util__btn util__all" type="button" aria-label="전체 메뉴 열기" aria-expanded="false" aria-controls="sitemap">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="gnb__bg" aria-hidden="true"></div>
+  </header>
+
+  <!-- SITEMAP / MOBILE DRAWER -->
+  <div class="sitemap" id="sitemap" aria-hidden="true">
+    <div class="sitemap__inner inner">
+      <div class="sitemap__head">
+        <img src="./img/logo.png" alt="청와대">
+        <button class="sitemap__close" type="button" aria-label="전체 메뉴 닫기"><span></span><span></span></button>
+      </div>
+      <ul class="sitemap__list"></ul>
+      <a href="#booking" class="btn btn--primary btn--block sitemap__cta">관람 신청하기</a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero" id="top" aria-roledescription="carousel" aria-label="청와대 개방 이야기">
+      <div class="hero__media">
+        <figure class="hero__slide is-active"><img src="./img/hero-01.jpg" alt="상춘재 처마와 벚꽃"></figure>
+        <figure class="hero__slide"><img src="./img/hero-02.jpg" alt="청와대 정문 너머 본관" loading="lazy"></figure>
+        <figure class="hero__slide"><img src="./img/hero-03.jpg" alt="밤의 영빈관" loading="lazy"></figure>
+        <figure class="hero__slide"><img src="./img/hero-04.jpg" alt="벚나무 가지 위의 새" loading="lazy"></figure>
+        <figure class="hero__slide"><img src="./img/hero-05.jpg" alt="북악산 능선" loading="lazy"></figure>
+        <figure class="hero__slide"><img src="./img/hero-06.jpg" alt="맞잡은 두 손" loading="lazy"></figure>
+      </div>
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <div class="hero__body inner">
+        <div class="hero__texts" aria-live="polite">
+          <div class="hero__text is-active">
+            <p class="hero__eyebrow">2022. 05. 10.</p>
+            <h2 class="hero__title">청와대,<br>국민 품으로</h2>
+          </div>
+          <div class="hero__text">
+            <p class="hero__eyebrow">약속</p>
+            <h2 class="hero__title hero__title--sm">“청와대는 임기 시작인 <em>5월 10일</em>에 개방하여 <em>국민께</em> 돌려 드리겠습니다.”</h2>
+          </div>
+          <div class="hero__text">
+            <p class="hero__eyebrow">공간</p>
+            <h2 class="hero__title hero__title--sm">본관, 영빈관을 비롯하여</h2>
+          </div>
+          <div class="hero__text">
+            <p class="hero__eyebrow">정원</p>
+            <h2 class="hero__title hero__title--sm">최고의 정원이라 불리는 녹지원과 상춘재를 <em>모두</em> 국민의 품으로</h2>
+          </div>
+          <div class="hero__text">
+            <p class="hero__eyebrow">길</p>
+            <h2 class="hero__title hero__title--sm">북악산으로의 등반로 역시 <em>개방</em>됩니다</h2>
+          </div>
+          <div class="hero__text">
+            <p class="hero__eyebrow">시작</p>
+            <h2 class="hero__title">약속 실천으로<br>시작합니다</h2>
+          </div>
+        </div>
+
+        <div class="hero__ctrl">
+          <p class="hero__count"><b class="hero__cur">01</b><span>/</span><span class="hero__total">06</span></p>
+          <div class="hero__bar"><i></i></div>
+          <button type="button" class="hero__btn hero__prev" aria-label="이전 슬라이드"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="hero__btn hero__play" aria-label="자동 재생 정지" aria-pressed="false"><svg class="i-pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></svg><svg class="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></button>
+          <button type="button" class="hero__btn hero__next" aria-label="다음 슬라이드"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <a href="#quick" class="hero__scroll" aria-label="아래로 스크롤"><span>SCROLL</span><i></i></a>
+    </section>
+
+    <!-- BOOKING + QUICK MENU -->
+    <section class="quick" id="quick" aria-labelledby="quick-title">
+      <div class="inner quick__grid">
+
+        <form class="booking card" id="booking" aria-labelledby="booking-title">
+          <div class="booking__head">
+            <h2 id="booking-title">관람 신청</h2>
+            <p class="status" data-status><span class="status__dot"></span><span class="status__txt">확인 중</span></p>
+          </div>
+          <div class="field">
+            <label for="b-date">관람일</label>
+            <input id="b-date" type="date" required>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="b-time">회차</label>
+              <select id="b-time">
+                <option>09:00 – 10:30</option><option>10:30 – 12:00</option><option>13:30 – 15:00</option><option>15:00 – 16:30</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="b-num">인원</label>
+              <div class="stepper">
+                <button type="button" data-step="-1" aria-label="인원 줄이기">−</button>
+                <input id="b-num" type="number" value="2" min="1" max="6" inputmode="numeric">
+                <button type="button" data-step="1" aria-label="인원 늘리기">+</button>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--block" type="submit">예약 가능 여부 조회</button>
+          <p class="booking__note">매주 화요일 휴관 · 1인 최대 6명까지 신청</p>
+        </form>
+
+        <div class="quick__menu">
+          <h2 class="quick__title" id="quick-title">자주 찾는 서비스</h2>
+          <ul class="quick__list">
+            <li><a href="#booking"><span class="ico"><svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="20" rx="3"/><path d="M5 13h22M11 4v6M21 4v6M12 19l3 3 5-6"/></svg></span>관람 신청</a></li>
+            <li><a href="#quick"><span class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M16 9v7l5 3"/></svg></span>관람 시간·해설</a></li>
+            <li><a href="#places"><span class="ico"><svg viewBox="0 0 32 32"><path d="M4 8l8-3 8 3 8-3v19l-8 3-8-3-8 3z"/><path d="M12 5v19M20 8v19"/></svg></span>지도·주요시설</a></li>
+            <li><a href="#route"><span class="ico"><svg viewBox="0 0 32 32"><path d="M3 26l9-14 5 7 4-5 8 12z"/><circle cx="23" cy="8" r="2.5"/></svg></span>북악산 등산로</a></li>
+            <li><a href="#route"><span class="ico"><svg viewBox="0 0 32 32"><rect x="6" y="5" width="20" height="18" rx="4"/><path d="M6 15h20M10 27l2-4M22 27l-2-4"/><circle cx="11" cy="19" r="1"/><circle cx="21" cy="19" r="1"/></svg></span>오시는 길·버스</a></li>
+            <li><a href="#faq"><span class="ico"><svg viewBox="0 0 32 32"><path d="M5 7h22v15H14l-6 5v-5H5z"/><path d="M13.5 12a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5M16 18.5v.5"/></svg></span>자주하는 질문</a></li>
+          </ul>
+          <dl class="today">
+            <div><dt>관람 시간</dt><dd>09:00 – 18:00 <small>(입장 마감 17:30)</small></dd></div>
+            <div><dt>휴관일</dt><dd>매주 화요일</dd></div>
+            <div class="today__crowd"><dt>현재 혼잡도</dt><dd><span class="meter" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></span><b data-crowd>-</b></dd></div>
+          </dl>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about section" id="about" aria-labelledby="about-title">
+      <div class="inner">
+        <p class="kicker">청와대 소개</p>
+        <h2 class="about__title" id="about-title" data-split>과거와 현재, 미래를 관통하는 역사문화 공간</h2>
+
+        <div class="about__grid">
+          <figure class="about__img reveal-clip">
+            <img src="./img/intro-main.jpg" alt="북악산 아래 청와대 본관과 대정원" loading="lazy">
+            <figcaption>본관과 대정원, 그 뒤로 북악산</figcaption>
+          </figure>
+          <div class="about__txt">
+            <p class="lead">2022년 5월 10일부터 청와대가 온전히 국민의 공간이 되었습니다. 74년 동안 닫혀 있던 문을 열고, 청와대의 미래를 함께 그려 갑니다.</p>
+            <ul class="stats">
+              <li><b data-count="74">0</b><span>년</span><p>만에 열린 문</p></li>
+              <li><b data-count="25">0</b><span>만㎡</span><p>경내 면적 (약)</p></li>
+              <li><b data-count="1960">0</b><span>년</span><p>‘청와대’ 명칭 사용</p></li>
+            </ul>
+            <a href="#booking" class="btn btn--primary">청와대 관람 신청 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+
+        <ul class="links3">
+          <li><a href="#places" class="linkcard"><img src="./img/gate.jpg" alt="" loading="lazy"><span class="linkcard__t">지도로 보는 시설소개</span><span class="linkcard__arr" aria-hidden="true">→</span></a></li>
+          <li><a href="#places" class="linkcard"><img src="./img/photo-roofs.jpg" alt="" loading="lazy"><span class="linkcard__t">청와대 역사</span><span class="linkcard__arr" aria-hidden="true">→</span></a></li>
+          <li><a href="#places" class="linkcard"><img src="./img/photo-ceremony.jpg" alt="" loading="lazy"><span class="linkcard__t">경내 주요 유적</span><span class="linkcard__arr" aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PLACES (horizontal) -->
+    <section class="places" id="places" aria-labelledby="places-title">
+      <div class="places__pin">
+        <div class="places__head inner">
+          <p class="kicker kicker--light">경내 주요 시설</p>
+          <h2 id="places-title">걸으며 만나는<br>여섯 개의 공간</h2>
+          <div class="places__progress" aria-hidden="true"><i></i></div>
+        </div>
+        <div class="places__track">
+          <article class="place">
+            <div class="place__img"><img src="./img/place-bongwan.jpg" alt="정문 너머 본관" loading="lazy"></div>
+            <p class="place__num">01</p><h3>본관 <span lang="zh">本館</span></h3>
+            <p>청기와 15만여 장을 얹은 대통령 집무 공간. 전통 궁궐 양식을 현대적으로 재해석했습니다.</p>
+          </article>
+          <article class="place">
+            <div class="place__img"><img src="./img/hero-03.jpg" alt="밤의 영빈관" loading="lazy"></div>
+            <p class="place__num">02</p><h3>영빈관 <span lang="zh">迎賓館</span></h3>
+            <p>국빈 만찬과 대규모 행사가 열리던 곳. 18개의 돌기둥이 건물을 떠받칩니다.</p>
+          </article>
+          <article class="place">
+            <div class="place__img"><img src="./img/place-sangchunjae.jpg" alt="진달래 너머 상춘재" loading="lazy"></div>
+            <p class="place__num">03</p><h3>상춘재 <span lang="zh">常春齋</span></h3>
+            <p>‘늘 봄이 머무는 집’. 외빈에게 한옥의 멋을 소개하던 전통 가옥입니다.</p>
+          </article>
+          <article class="place">
+            <div class="place__img"><img src="./img/blossom-sky.jpg" alt="파란 하늘과 벚꽃" loading="lazy"></div>
+            <p class="place__num">04</p><h3>녹지원 <span lang="zh">綠地園</span></h3>
+            <p>120여 종의 나무가 자라는 경내 최고의 정원. 너른 잔디 위에서 쉬어 가세요.</p>
+          </article>
+          <article class="place">
+            <div class="place__img"><img src="./img/place-gwanjeo.jpg" alt="소나무 옆 관저 야경" loading="lazy"></div>
+            <p class="place__num">05</p><h3>관저 <span lang="zh">官邸</span></h3>
+            <p>대통령과 가족이 생활하던 공간. 처음으로 국민에게 문을 열었습니다.</p>
+          </article>
+          <article class="place">
+            <div class="place__img"><img src="./img/place-forest.jpg" alt="숲속 계곡과 연못" loading="lazy"></div>
+            <p class="place__num">06</p><h3>숲길과 계곡</h3>
+            <p>오래된 나무 사이로 물이 흐르는 산책로. 도심 속 가장 조용한 길입니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CULTURE -->
+    <section class="culture section" id="culture" aria-labelledby="culture-title">
+      <div class="inner culture__grid">
+        <div class="culture__txt">
+          <p class="kicker">문화행사</p>
+          <h2 id="culture-title" data-split>희망과 기쁨을 함께할 다양한 문화행사</h2>
+          <p class="lead">역사적인 청와대 개방을 기념하고 새 시대를 여는 희망과 기쁨을 국민과 함께하기 위해 다양한 문화행사를 준비했습니다.</p>
+          <ul class="navi">
+            <li><a href="#quick">관람시간 및 해설안내<span aria-hidden="true">→</span></a></li>
+            <li><a href="#culture">공연 프로그램<span aria-hidden="true">→</span></a></li>
+            <li><a href="#route">함께 가 볼 만한 장소<span aria-hidden="true">→</span></a></li>
+          </ul>
+          <div class="slider-nav">
+            <button type="button" class="round-btn" data-slide="-1" aria-label="이전 행사"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <button type="button" class="round-btn" data-slide="1" aria-label="다음 행사"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
+        <div class="events" tabindex="0" aria-label="문화행사 목록">
+          <article class="event"><div class="event__img"><img src="./img/event-01.jpg" alt="" loading="lazy"><span class="tag">공연</span></div><h3>약속을 담다</h3><p>74년 만에 국민의 품으로 돌아오는 순간을 축하하는 공연을 본관 앞 대정원에 담습니다.</p><p class="event__meta">본관 대정원 · 매일 14:00</p></article>
+          <article class="event"><div class="event__img"><img src="./img/event-02.jpg" alt="" loading="lazy"><span class="tag">축제</span></div><h3>희망을 나누다</h3><p>푸른 잔디가 펼쳐진 녹지원과 춘추관 앞에서 즐거운 문화예술로 희망을 나눕니다.</p><p class="event__meta">녹지원 · 주말 11:00</p></article>
+          <article class="event"><div class="event__img"><img src="./img/event-03.jpg" alt="" loading="lazy"><span class="tag">전시</span></div><h3>역사를 그리다</h3><p>청와대의 시간을 기록한 사진과 기록물로 지난 역사를 따라 걷습니다.</p><p class="event__meta">춘추관 2층 · 상설</p></article>
+          <article class="event"><div class="event__img"><img src="./img/event-04.jpg" alt="" loading="lazy"><span class="tag">의식</span></div><h3>수문장 교대식</h3><p>전통 복식을 갖춘 수문장이 정문을 지키는 교대 의식을 재현합니다.</p><p class="event__meta">정문 앞 · 10:00 / 14:00</p></article>
+          <article class="event"><div class="event__img"><img src="./img/event-05.jpg" alt="" loading="lazy"><span class="tag">체험</span></div><h3>경내 해설 투어</h3><p>문화해설사와 함께 본관부터 상춘재까지 숨은 이야기를 듣습니다.</p><p class="event__meta">사전 신청 · 회당 30명</p></article>
+          <article class="event"><div class="event__img"><img src="./img/event-06.jpg" alt="" loading="lazy"><span class="tag">공연</span></div><h3>달빛 음악회</h3><p>해 질 녘 녹지원에서 열리는 작은 음악회로 하루를 마무리합니다.</p><p class="event__meta">녹지원 · 금요일 18:30</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROUTE -->
+    <section class="route" id="route" aria-labelledby="route-title">
+      <div class="route__bg" aria-hidden="true"><img src="./img/bugaksan.jpg" alt="" loading="lazy"></div>
+      <div class="inner route__grid">
+        <div class="route__txt">
+          <p class="kicker kicker--light">등산로 · 오시는 길</p>
+          <h2 id="route-title" data-split>청와대에서 북악산까지</h2>
+          <p class="lead">광화문에서 북악산까지 이어지는 길 위에서 때로는 느긋하게 산책하고, 때로는 역사와 문화를 탐방하세요.</p>
+
+          <div class="steps">
+          <span class="steps__line" aria-hidden="true"></span>
+          <ol>
+            <li><b>경복궁역</b><span>3호선 4번 출구에서 출발</span></li>
+            <li><b>경복궁 · 청와대 정문</b><span>도보 약 15분</span></li>
+            <li><b>본관 · 녹지원 · 상춘재</b><span>경내 관람 약 90분</span></li>
+            <li><b>청와대 전망대</b><span>서울 도심이 한눈에</span></li>
+            <li><b>북악산 정상 (백악마루)</b><span>해발 342m · 왕복 약 2시간</span></li>
+          </ol>
+          </div>
+        </div>
+
+        <div class="route__side">
+          <figure class="gifcard">
+            <img src="./img/seasons.gif" alt="상춘재의 봄, 숲길의 여름, 북악산, 청와대 앞 야경이 차례로 바뀌는 애니메이션" loading="lazy">
+            <figcaption><span class="tag tag--light">GIF</span>청와대의 사계 · 봄부터 밤까지</figcaption>
+          </figure>
+          <ul class="trail">
+            <li><a href="#route"><img src="./img/trail.jpg" alt="" loading="lazy"><span>등산로 유적 탐방하기</span><i aria-hidden="true">+</i></a></li>
+            <li><a href="#route"><img src="./img/hero-05.jpg" alt="" loading="lazy"><span>등산로 추천 코스</span><i aria-hidden="true">+</i></a></li>
+            <li><a href="#route"><img src="./img/night-plaza.jpg" alt="" loading="lazy"><span>관람 순환버스 노선</span><i aria-hidden="true">+</i></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORIES -->
+    <section class="stories section" id="stories" aria-labelledby="stories-title">
+      <div class="inner">
+        <div class="stories__head">
+          <div>
+            <p class="kicker">내가 만드는 청와대</p>
+            <h2 id="stories-title" data-split>함께 나누는 이야기</h2>
+          </div>
+          <div class="tabs" role="tablist" aria-label="이야기 종류">
+            <button role="tab" id="tab-review" aria-controls="panel-review" aria-selected="true">관람후기</button>
+            <button role="tab" id="tab-photo" aria-controls="panel-photo" aria-selected="false" tabindex="-1">사진</button>
+            <button role="tab" id="tab-video" aria-controls="panel-video" aria-selected="false" tabindex="-1">영상</button>
+            <button role="tab" id="tab-news" aria-controls="panel-news" aria-selected="false" tabindex="-1">카드뉴스</button>
+            <span class="tabs__ink" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="panel-review" aria-labelledby="tab-review">
+          <ul class="reviews">
+            <li class="review"><img src="./img/review-01.jpg" alt="" loading="lazy"><div><p class="review__meta"><b>클린스카이</b><time>2022.05.24</time></p><p class="review__txt">날씨도 화창했고 공기도 좋아 청와대의 아름다움을 더 실감했습니다. 드넓은 풀밭과 조그마한 계곡까지, 상상보다 훨씬 멋진 곳이었습니다.</p></div></li>
+            <li class="review"><img src="./img/review-02.jpg" alt="" loading="lazy"><div><p class="review__meta"><b>딩딩가족</b><time>2022.05.24</time></p><p class="review__txt">너무 넓고 광활해서 입장 후에도 여유롭게 가족과 안내도를 따라 산책을 즐겼습니다. 건물이 개방되면 또 놀러 가고 싶어요!</p></div></li>
+            <li class="review"><img src="./img/review-03.jpg" alt="" loading="lazy"><div><p class="review__meta"><b>맥국</b><time>2022.05.21</time></p><p class="review__txt">산책 코스가 좋아요. 청와대, 경복궁, 남산이 한 장의 사진에. 아름다운 서울.</p></div></li>
+            <li class="review"><img src="./img/trail.jpg" alt="" loading="lazy"><div><p class="review__meta"><b>이강훈</b><time>2022.05.16</time></p><p class="review__txt">잘 정돈된 탐방로와 아름드리 숲. 전망대에서 바라본 광화문과 남산의 풍경은 숨이 막힐 정도로 웅장했습니다.</p></div></li>
+          </ul>
+        </div>
+        <div class="panel" role="tabpanel" id="panel-photo" aria-labelledby="tab-photo" hidden>
+          <ul class="gallery">
+            <li class="g-wide"><img src="./img/photo-ceremony.jpg" alt="수문장 교대식" loading="lazy"></li>
+            <li><img src="./img/night-plaza.jpg" alt="청와대 앞 야경" loading="lazy"></li>
+            <li><img src="./img/place-bongwan.jpg" alt="본관" loading="lazy"></li>
+            <li><img src="./img/trail.jpg" alt="등산로 계단" loading="lazy"></li>
+            <li class="g-tall"><img src="./img/place-sangchunjae.jpg" alt="상춘재" loading="lazy"></li>
+            <li><img src="./img/photo-roofs.jpg" alt="한옥 지붕" loading="lazy"></li>
+            <li><img src="./img/photo-pond.jpg" alt="벚꽃과 연못" loading="lazy"></li>
+            <li><img src="./img/place-gwanjeo.jpg" alt="관저 야경" loading="lazy"></li>
+          </ul>
+        </div>
+        <div class="panel" role="tabpanel" id="panel-video" aria-labelledby="tab-video" hidden>
+          <ul class="videos">
+            <li><a href="#stories"><img src="./img/video-01.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span><b>청와대, 국민 품으로</b><time>03:24</time></a></li>
+            <li><a href="#stories"><img src="./img/video-02.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span><b>개방 첫날 스케치</b><time>02:10</time></a></li>
+            <li><a href="#stories"><img src="./img/video-03.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span><b>북악산 등산로 걷기</b><time>05:41</time></a></li>
+            <li><a href="#stories"><img src="./img/video-04.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span><b>상춘재의 사계</b><time>01:58</time></a></li>
+          </ul>
+        </div>
+        <div class="panel" role="tabpanel" id="panel-news" aria-labelledby="tab-news" hidden>
+          <ul class="cards">
+            <li><img src="./img/card-01.jpg" alt="카드뉴스: 과거와 현재를 관통하는 역사 여행" loading="lazy"></li>
+            <li><img src="./img/card-02.jpg" alt="카드뉴스 2" loading="lazy"></li>
+            <li><img src="./img/card-03.jpg" alt="카드뉴스 3" loading="lazy"></li>
+            <li><img src="./img/card-04.jpg" alt="카드뉴스 4" loading="lazy"></li>
+          </ul>
+        </div>
+        <div class="stories__more"><a href="#stories" class="btn btn--line">전체 보러가기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </section>
+
+    <!-- NOTICE + FAQ -->
+    <section class="board section" id="notice" aria-label="공지사항과 자주하는 질문">
+      <div class="inner board__grid">
+        <div class="notice">
+          <div class="board__head"><h2>공지사항</h2><a href="#notice" class="more">더보기 +</a></div>
+          <ul class="notice__list">
+            <li><a href="#notice"><span class="badge">중요</span><p>관람 신청 시 본인 인증 절차 변경 안내</p><time>2022.06.02</time></a></li>
+            <li><a href="#notice"><span class="badge badge--gray">안내</span><p>우천 시 야외 공연 프로그램 운영 변경</p><time>2022.05.30</time></a></li>
+            <li><a href="#notice"><span class="badge badge--gray">안내</span><p>청와대 관람 순환버스 운행 시간표</p><time>2022.05.24</time></a></li>
+            <li><a href="#notice"><span class="badge badge--gray">안내</span><p>북악산 등산로 일부 구간 정비 공사</p><time>2022.05.18</time></a></li>
+          </ul>
+        </div>
+        <div class="faq" id="faq">
+          <div class="board__head"><h2>자주하는 질문</h2><a href="#faq" class="more">더보기 +</a></div>
+          <div class="acc">
+            <details><summary>관람료가 있나요?</summary><p>청와대 관람은 무료입니다. 단, 사전 신청을 통해 배정된 회차에만 입장할 수 있습니다.</p></details>
+            <details><summary>반려동물과 함께 입장할 수 있나요?</summary><p>안내견을 제외한 반려동물은 경내에 입장할 수 없습니다.</p></details>
+            <details><summary>주차장이 있나요?</summary><p>별도 주차장이 없으니 대중교통과 관람 순환버스를 이용해 주세요.</p></details>
+            <details><summary>휠체어·유모차 대여가 가능한가요?</summary><p>정문 안내소에서 신분증을 맡기고 무료로 대여할 수 있습니다.</p></details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="inner">
+      <div class="footer__top">
+        <img src="./img/f_logo_kor.png" alt="청와대" class="footer__logo">
+        <ul class="footer__links">
+          <li><a href="#" class="strong">개인정보처리방침</a></li>
+          <li><a href="#">영상정보처리기기 운영방침</a></li>
+          <li><a href="#">저작권 정책</a></li>
+          <li><a href="#">웹 접근성 품질인증</a></li>
+        </ul>
+      </div>
+      <address>(우) 03048 서울특별시 종로구 청와대로 1</address>
+      <p class="footer__ci">청와대 업무 표장[CI]은 상표권이 있는 국가 재산입니다. 사적·상업적 무단 사용은 법적인 규제 대상이 됩니다.</p>
+      <p class="footer__copy">Redesign concept for portfolio · Web Design &amp; Publishing · 2026</p>
+    </div>
+    <button type="button" class="totop" aria-label="맨 위로"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>

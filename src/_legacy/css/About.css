@@ -1,0 +1,172 @@
+
+.theme-light .about-wrap{
+color: black !important;
+}
+.theme-light h2.title{
+    color:blue !important;
+    font-size: 90px;
+}
+h2.title{ 
+    color:white !important;
+    font-size: 80px;
+    margin: 0;
+}
+h4.section-title{
+    text-align: start;
+}
+h5{
+    font-size: 40px !important;
+    color:white !important;
+}
+p.intro{
+    font-size: 25px;
+}
+.theme-light .sect-wrap{
+    color:black !important;
+}
+.sect-wrap{
+    color:white !important;
+}
+
+  .theme-light .timeline-item{
+    color: black !important;
+  }
+  .timeline-item {
+    display: flex;
+    align-items: start;
+    font-size: 1.2rem;
+    color: white;
+  }
+  
+  .timeline-year {
+    width: 85px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+  
+  .timeline-dot-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 15px;
+    position: relative;
+  }
+  .theme-light  .timeline-dot{
+    background: blue !important;
+  }
+  .timeline-dot {
+    width: 14px;
+    height: 14px;
+    background-color: white;
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .theme-light  .timeline-line{
+    background: black !important;
+  }
+  .timeline-line {
+    width: 3px;
+    height: 20px;
+    background-color: white;
+    margin-top: 2px;
+  }
+  
+  .timeline-text {
+    flex: 1;
+    text-align: start;
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: -1px;
+}
+  .skills {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .theme-light  .skill-bar {
+    color:black !important;
+  }
+  .skill-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-size: 0.9rem;
+  }
+  
+  .skill-name {
+    width: 100px;
+    font-weight: bold;
+    text-align: left;
+  }
+  .theme-light  .bar-container{
+    background: none !important;
+    border: 2px solid black;
+  }
+  .bar-container {
+    flex: 1;
+    height: 20px;
+    background-color: #444;
+    margin: 0 10px;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+  }
+  .theme-light .bar-fill{
+    background: black !important;
+  }
+  .bar-fill {
+    margin-top: 1px;
+    height: 90%;
+    background-color: white !important;
+    width: 0%;
+    transition: width 0.4s ease-in-out;
+    border-radius: 3px;
+  }
+  
+  .skill-percent {
+    width: 40px;
+    text-align: right;
+    font-weight: bold;
+  }
+ul li span{
+    margin-right: 10px;
+    width: 60px;
+    font-weight: 700;
+    display: inline-block;
+  }
+.avatar-wrap{
+    position: relative;
+    width: 100%;
+    height: 250px;
+}
+.avatar{
+    position: absolute;
+    width: 300px;
+    top:-350px;
+    left:90px;
+   
+}
+.circle{
+    position: absolute;
+    left:0px;
+    top:-390px;
+    width: 450px;
+}
+@media (max-width: 768px) {
+    .avatar{
+        width: 200px;
+        top:-20px;
+        left:50%;
+        transform: translateX(-50%);
+    }
+    .circle{
+        left:50%;
+        top:-50px;
+        width: 300px;
+        transform: translateX(-50%);
+    }
+}

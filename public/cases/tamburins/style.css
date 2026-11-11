@@ -1,0 +1,377 @@
+
+body{background: #eee;}
+ .flex{display: flex;}
+ .spaceb{justify-content: space-between;}
+nav{
+    width: 664px;
+    align-self: flex-end;
+}
+nav>ul>li.main-menu:hover>a{
+    font-weight: 900;
+}
+nav li a {
+    display: block;
+}
+
+li.main-menu>a {
+    height: 60px;
+   
+    
+    background-repeat: no-repeat;
+    color: black;
+    transition: .35s;
+}
+
+li.main-menu:nth-child(1)>a {
+    width: 83px;
+    background-size:83px 0;
+    
+}
+
+li.main-menu:nth-child(2)>a {
+    width: 105px;
+    background-position-x: -92px;
+}
+
+li.main-menu:nth-child(3)>a {
+    width: 60px;
+    background-position-x: -205px;
+}
+
+li.main-menu:nth-child(4)>a {
+    width: 78px;
+    background-position-x: -273px;
+}
+
+li.main-menu:hover>a {
+    background-position-y: bottom;
+}
+header h1 img{
+    height: 80px;
+}
+header{
+    background-image: url(./img/bg_header_wrap.gif);
+    border-bottom: 2px solid #000;
+    background-color: #fff;
+    font-size: 15px;
+    line-height: 30px;
+}
+header .inner{
+    width: 1200px;
+    margin: auto;
+    height: 100px;
+    align-items: center;
+}
+
+
+section{
+    width:1200px;
+    margin: 40px auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    background-color: #eee;
+}
+main{
+    width: 712px; 
+    flex-wrap: wrap;
+ 
+}
+main div{
+    width: 226px;
+    height: 206px;
+    transition: .35s;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+main div:not(:nth-child(5)):hover {background-position-y: bottom;}
+div.notice,div.cs{width:469px ;}
+div.goods{background-image: url(./img2/by3.png);
+background-size: cover;
+background-repeat: no-repeat;}
+div.pay{background-image: url(./img2/tam33.png);
+    background-size: cover;
+    background-repeat: no-repeat;}
+div.game{background-image: url(./img2/tam53.png);
+    background-size: cover;
+    background-repeat: no-repeat;}
+div.event{background-image: url(./img2/tam23.png);
+    background-size: cover;
+    background-repeat: no-repeat;}
+div.ip{background-image: url(./img2/tam43.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+div.refund{background-image: url(./img2/tam63.png);
+    background-size: cover;
+    background-repeat: no-repeat;}
+div.tax{background-image: url(./img2/tam73.png);
+    background-size: cover;
+    background-repeat: no-repeat;}
+div.cs{background-image:url(./img2/tamswipe4.png);
+background-size: cover;
+background-repeat: no-repeat;}
+div.remote{background-image: url(./img2/tam83.png);
+    background-size: cover;
+    background-repeat: no-repeat;}
+aside{width: 470px;}
+
+.sub-menu{
+    width: 100%;
+    z-index: 101;
+    position: absolute;
+    display: none;
+}
+.sub-menu li{
+   margin-top: 20px;
+}
+.sub-menu li a{
+    display: inline;
+    color: black;
+}
+.sub-menu li:hover>a{
+    background-color: #000;
+    color:white;
+}
+nav>ul:hover .sub-menu{
+    display: block;
+}
+.slide{
+    width: 100%;
+
+    height: 200px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    z-index: 100;
+    display: none;
+}
+div.notice{
+    position: relative;
+   
+    
+    background: #fff url(./img2/tit_notice.gif) no-repeat 27px 28px;
+}
+div.notice ul{
+    padding: 70px 0 0 30px;
+}
+div.notice>li{
+    position: relative;
+    padding: 70px 0px 0px 0px;
+}
+div.notice ul>li>a {
+    display: block;
+    width: 320px;
+    font-size: 14px;
+    line-height: 28px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+.notice ul>li>span {
+    position: absolute;
+    right: 0;
+    margin-right: 15px;
+    margin-top: -23px;
+    font-size: 14px;
+    color:gray;
+}
+ .notice span.more {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+.login_ip {
+    position: relative;
+    float: right;
+    width: 470px;
+    z-index: 99;
+}
+.hidden {
+    text-indent: -9999px;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    height: 0;
+}
+.login_ip label {
+    margin-left: 5px;
+    margin-right: 15px;
+}
+.login_ip input {
+    width: 360px;
+    padding: 14px 25px;
+    font-family: inherit;
+    font-size: 15px;
+    border: 1px #d7d7d9 solid;
+  
+}
+.login_ip input:focus{
+    outline: none;
+}
+.login_ip .btn_login {
+    position: absolute;
+    top: 0;
+    right: 0;
+   
+}
+.login_ip .util {
+    margin: 10px 0;
+    padding: 0 0 10px 0;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 12px;
+}
+.login_ip .util ul{
+    display: flex;
+}
+
+.login_ip .util ul li em{
+    font-weight: 900;
+    font-style: normal;
+}
+.login_ip .util ul li:not(:last-child)::after{
+    position: absolute;
+    width: 1px;
+    height: 13px;
+    background-color: gray;
+    content: "";
+    top:0px;
+    right: -10px;
+}
+.login_ip .util ul li{
+    position: relative;
+    margin-right: 20px;
+}
+
+
+.login_ip .ip_address {
+    float: right;
+    background-color: black;
+    width: 459px;
+    margin-bottom: 18px;
+    padding: 10px 0 12px 10px;
+    font-size: 16px;
+    line-height: 18px;
+    color: white;
+}
+/* ad swiper */
+.swiper {
+    width: 100%;
+    height: 873px;
+    position: relative;
+    color:white;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.swiper-slide:nth-child(2){
+    background-image: url(img2/swiptam1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.swiper-slide:nth-child(3){
+    background-image: url(img2/jslide3.avif);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.swiper-slide:nth-child(4){
+    background-image: url(img2/switam2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.swiper-slide:nth-child(5){
+    background-image: url(img2/swiptam4.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.swiper-slide:nth-child(6){
+    background-image: url(img2/swiptam6.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+
+.swiper-pagination{
+    font-size: 30px;
+    
+}
+
+.swiper-pagination span.swiper-pagination-current{
+   
+    color:#ffffff;
+    font-weight: 500;
+}
+.swiper-pagination span.swiper-pagination-total{
+    
+    color:rgb(255, 255, 255);
+    font-weight: 500;
+}
+
+.swiper-pagination-fraction {
+    color: white;
+}
+div.jp-title{
+    position:relative;
+    height:24px;
+    width:100%;
+    display:block;
+    overflow:hidden;
+    border:none;
+}
+.scrollingtext{
+    position:absolute;
+    white-space:nowrap;
+    font-family:'Trebuchet MS',Arial;
+    font-size:18px;
+    color:white;
+    padding-top: 5px;
+}
+
+footer{
+    background-color: #000;
+    height: 200px;
+    color:white;
+    text-align: center;
+    
+}
+footer a{
+    color: white;
+}
+.ft_wrap{
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer h1{
+    line-height: 200px;
+    
+}
+footer .company-info{
+    padding: 50px;
+    opacity: 0.5;
+}
+footer .inline{
+    
+    text-align: center;
+}

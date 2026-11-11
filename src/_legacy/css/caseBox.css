@@ -1,0 +1,8 @@
+.caseBox{
+    display: block;
+    border-radius: 8px;
+}
+.caseBox img{
+    width: 100%;
+    border-radius: 8px;
+}

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THOMe — Private Aesthetic at Home</title>
+  <meta name="description" content="THOMe — aesthetic devices and skincare programs for a private aesthetic ritual at home.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.v1.css">
+</head>
+<body>
+
+  <!-- ===== Announcement ===== -->
+  <div class="announce">
+    <b>Black Friday</b> — up to 72% off devices &amp; programs. Ends Nov 30.
+    <a href="#bestsellers">Shop the edit</a>
+  </div>
+
+  <!-- ===== Header ===== -->
+  <header class="header" id="header">
+    <div class="wrap header__in">
+      <a href="#" class="logo" aria-label="THOMe home">THOM<span>e</span></a>
+
+      <nav class="nav" id="nav">
+        <a href="#bestsellers">Devices</a>
+        <a href="#programs">Programs</a>
+        <a href="#shop">Shop all</a>
+        <a href="#packaging">Our design</a>
+        <a href="#pharmacy">Pharmacy</a>
+        <a href="#bestsellers" class="is-hot">Black Friday</a>
+      </nav>
+
+      <div class="tools">
+        <button class="tool tool--hide" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <a href="#" class="tool tool--hide" aria-label="Account">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+        </a>
+        <a href="#" class="cart-btn" aria-label="Cart">
+          <span>Cart</span><span class="count" id="cartCount">0</span>
+        </a>
+        <button class="tool burger" id="burger" aria-label="Menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="hero__text">
+          <div class="label eyebrow"><span class="it" style="font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink)">Signature aesthetic care</span><span>Devices · Programs</span></div>
+
+          <h1>Private<br>aesthetic,<br><em>at home.</em></h1>
+
+          <p class="hero__lead">Aesthetic devices and step-by-step programs designed around your skin’s renewal cycle. For anyone working on a better me — anytime, anywhere.</p>
+
+          <div class="hero__cta">
+            <a href="#bestsellers" class="btn btn--dark">
+              <span>Shop devices</span>
+              <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a href="#programs" class="btn btn--ghost">
+              <span>Find your routine</span>
+            </a>
+          </div>
+
+          <div class="hero__trust">
+            <div><b>70k<sup>+</sup></b><span class="label">Reviews</span></div>
+            <div><b>No.1</b><span class="label">Olive Young device</span></div>
+            <div><b>−72<sup>%</sup></b><span class="label">Black Friday</span></div>
+          </div>
+        </div>
+
+        <div class="hero__media">
+          <img src="img/des1.png" alt="Model holding the THOMe Glow device to her cheek" fetchpriority="high">
+          <div class="hero__chips">
+            <span class="chip">The Glow</span>
+            <span class="chip">Dermatology clinic pick</span>
+          </div>
+
+          <div class="frame-card">
+            <div class="frame-card__img">
+              <img src="img/imgi_13_3ced7c1a5ec3fb35c949aeef78b25025.png" alt="" style="object-position:8% 55%">
+            </div>
+            <div class="frame-card__body">
+              <span class="label">In this frame</span>
+              <span class="frame-card__name">The Glow Pro</span>
+              <div class="frame-card__row">
+                <div class="price"><span class="now">₩890,000</span><span class="off">31%</span></div>
+                <button class="add-mini" data-add data-name="The Glow Pro" data-img="img/imgi_13_3ced7c1a5ec3fb35c949aeef78b25025.png" aria-label="Add The Glow Pro to cart">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>Pharmacy exclusive</span><span>70,000+ customer reviews</span><span>Free shipping over ₩50,000</span><span>Refill-first packaging</span><span>Designed around the skin’s renewal cycle</span><span>Olive Young No.1 device</span>
+          <span>Pharmacy exclusive</span><span>70,000+ customer reviews</span><span>Free shipping over ₩50,000</span><span>Refill-first packaging</span><span>Designed around the skin’s renewal cycle</span><span>Olive Young No.1 device</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Best sellers (devices) ===== -->
+    <section class="section" id="bestsellers">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <div>
+            <div class="label eyebrow"><span class="num">01</span><span>Best sellers</span></div>
+            <h2>The devices,<br>at their <em>best price.</em></h2>
+          </div>
+          <p>Clinic-inspired care for everyday use. Black Friday prices on our signature devices — while the edit lasts.</p>
+        </div>
+
+        <div class="products">
+          <article class="card reveal">
+            <div class="card__media">
+              <div class="card__tags"><span class="tag tag--sale">−53%</span><span class="tag">Online exclusive</span></div>
+              <img src="img/imgi_14_79fd64bb40ce6b875a6daf07f75a17c5.png" alt="The Glow Signature Beige devices" style="object-position:0% 50%">
+              <img class="alt" src="img/imgi_24_e32397b5ab3c6499c8d2bc3e0c6f1aa9.png" alt="" style="object-position:50% 30%">
+              <button class="card__add" data-add data-name="The Glow Signature Beige" data-img="img/imgi_19_67f6ea82eaa6e51724cf7ef0d6b52cdf.png">Add to cart — ₩398,000</button>
+            </div>
+            <div class="card__info">
+              <div>
+                <h3 class="card__name">The Glow Signature Beige</h3>
+                <p class="card__desc">Device + booster set</p>
+              </div>
+              <div class="price"><span class="now">₩398,000</span><span class="was">₩836,000</span></div>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__media">
+              <div class="card__tags"><span class="tag tag--sale">−31%</span><span class="tag tag--blue">In clinics</span></div>
+              <img src="img/imgi_13_3ced7c1a5ec3fb35c949aeef78b25025.png" alt="The Glow Pro devices" style="object-position:0% 50%">
+              <img class="alt" src="img/des1.png" alt="" style="object-position:50% 22%">
+              <button class="card__add" data-add data-name="The Glow Pro" data-img="img/imgi_13_3ced7c1a5ec3fb35c949aeef78b25025.png">Add to cart — ₩890,000</button>
+            </div>
+            <div class="card__info">
+              <div>
+                <h3 class="card__name">The Glow Pro</h3>
+                <p class="card__desc">Available in dermatology clinics</p>
+              </div>
+              <div class="price"><span class="now">₩890,000</span><span class="was">₩1,290,000</span></div>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__media">
+              <div class="card__tags"><span class="tag tag--sale">−17%</span><span class="tag">Olive Young No.1</span></div>
+              <img src="img/imgi_7_b208b7d564c86e10c9f93753305c23fd.png" alt="Two&amp;Tiup devices in pastel colours" style="object-position:0% 50%">
+              <img class="alt" src="img/imgi_20_e469be55c34a8b72c93f7a8a773aeff8.png" alt="" style="object-position:50% 25%">
+              <button class="card__add" data-add data-name="Two&amp;Tiup" data-img="img/imgi_7_b208b7d564c86e10c9f93753305c23fd.png">Add to cart — ₩249,000</button>
+            </div>
+            <div class="card__info">
+              <div>
+                <h3 class="card__name">Two&amp;Tiup</h3>
+                <p class="card__desc">Kazuha’s pick · trouble-care device</p>
+              </div>
+              <div class="price"><span class="now">₩249,000</span><span class="was">₩299,000</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Video ===== -->
+    <section class="wrap reveal" aria-label="Brand film">
+      <div class="video">
+        <!-- VIDEO PLACEHOLDER: drop a <video> tag here, e.g.
+             <video src="video/glow-signature.mp4" autoplay muted loop playsinline></video> -->
+        <div class="video__grid"></div>
+        <div class="video__corner">
+          <span class="label">Brand film · 16:9</span>
+          <span class="label">00:00 / 01:30</span>
+        </div>
+        <button class="play" aria-label="Play video">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+        </button>
+        <div class="video__meta">
+          <div>
+            <span class="label">The Glow Signature</span>
+            <p class="title" style="margin-top:8px">Device × booster. <em>Synergy</em> in motion.</p>
+          </div>
+          <a href="#feature" class="btn btn--light">
+            <span>Shop the set</span>
+            <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Feature: The Glow Signature ===== -->
+    <section class="section" id="feature">
+      <div class="wrap feature">
+        <div class="feature__media reveal">
+          <img src="img/imgi_19_67f6ea82eaa6e51724cf7ef0d6b52cdf.png" alt="The Glow Signature device in beige" style="object-position:50% 58%">
+          <span class="label">The Glow Signature · Beige</span>
+        </div>
+
+        <div class="feature__panel reveal">
+          <div class="label eyebrow"><span class="num">02</span><span>Synergy</span></div>
+          <h2>Device and booster,<br><em>made for each other.</em></h2>
+          <p>A precise synergy between device and booster. Used daily, the effect builds up inside your routine — for a clearer, more certain change.</p>
+
+          <ul class="specs">
+            <li><span class="n">01</span><b>Booster</b><span>Preps and delivers</span></li>
+            <li><span class="n">02</span><b>Device</b><span>Minutes a day</span></li>
+            <li><span class="n">03</span><b>Routine</b><span>Results that accumulate</span></li>
+          </ul>
+
+          <div class="feature__buy">
+            <div>
+              <span class="label">Black Friday set</span>
+              <div class="price" style="margin-top:6px"><span class="now">₩398,000</span><span class="off">53%</span><span class="was">₩836,000</span></div>
+            </div>
+            <button class="btn btn--dark" data-add data-name="The Glow Signature Beige" data-img="img/imgi_19_67f6ea82eaa6e51724cf7ef0d6b52cdf.png">
+              <span>Add to cart</span>
+              <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Programs ===== -->
+    <section class="section" id="programs" style="padding-top:0">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <div>
+            <div class="label eyebrow"><span class="num">03</span><span>Discover your routine</span></div>
+            <h2>Two programs.<br><em>One</em> ritual.</h2>
+          </div>
+          <p>Our signature care ritual is rooted in a meticulous exploration of aesthetic programs — time, ingredients and calibrated steps.</p>
+        </div>
+
+        <div class="programs">
+          <a href="#shop" class="program reveal">
+            <img src="img/imgi_50_8443f7a495273782b8aa351dcc40b079.png" alt="Glowing skin after the G-Peel program">
+            <div class="program__top"><span class="label">Glow program</span><span class="label">From ₩109,000</span></div>
+            <h3>G-<em>Peel</em></h3>
+            <p>Smooth, clear texture and radiance. Protects skin from stress and pollution for a brighter glow.</p>
+            <div class="program__steps"><span>Prep</span><span>Peel</span><span>Glow</span><span>Seal</span></div>
+            <span class="btn btn--light" style="align-self:flex-start">
+              <span>Explore G-Peel</span>
+              <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </a>
+
+          <a href="#shop" class="program reveal">
+            <img src="img/imgi_44_7de07d401a961e1ee1b82565e829b45c.png" alt="Model wearing the cryo care mask" style="object-position:50% 30%">
+            <div class="program__top"><span class="label">Trouble clinic</span><span class="label">From ₩89,000</span></div>
+            <h3>T-<em>Peel</em></h3>
+            <p>A return to pure skin. Professional care for skin tired from excess sebum, oil and dehydration.</p>
+            <div class="program__steps"><span>Pores</span><span>Purify</span><span>Calm</span><span>Cool</span></div>
+            <span class="btn btn--light" style="align-self:flex-start">
+              <span>Explore T-Peel</span>
+              <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Shop ===== -->
+    <section class="section" id="shop" style="padding-top:0">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <div>
+            <div class="label eyebrow"><span class="num">04</span><span>Shop the routine</span></div>
+            <h2>Kits, refills<br>&amp; <em>finishing</em> care.</h2>
+          </div>
+          <div class="tabs" role="tablist" id="tabs">
+            <button class="is-active" data-filter="all">All<sup>8</sup></button>
+            <button data-filter="kit">Kits<sup>2</sup></button>
+            <button data-filter="refill">Refills<sup>1</sup></button>
+            <button data-filter="mask">Masks<sup>2</sup></button>
+            <button data-filter="serum">Serums<sup>3</sup></button>
+          </div>
+        </div>
+
+        <div class="shop-grid" id="shopGrid">
+          <article class="card" data-cat="kit">
+            <div class="card__media">
+              <div class="card__tags"><span class="tag tag--sale">−69%</span></div>
+              <img src="img/imgi_39_990c4fb3f760ac90b98fbb67a0610f72.png" alt="T-Peel Program bottles" loading="lazy">
+              <img class="alt" src="img/imgi_40_ca71a9b32fdef98533a56b74aebe36d4.png" alt="" loading="lazy">
+              <button class="card__add" data-add data-name="T-Peel Program" data-img="img/imgi_39_990c4fb3f760ac90b98fbb67a0610f72.png">Add to cart</button>
+            </div>
+            <div class="card__info">
+              <div><h3 class="card__name">T-Peel Program</h3><p class="card__desc">4-step routine, pores to calm</p></div>
+              <div class="price"><span class="now">₩109,000</span><span class="was">₩347,000</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="mask">
+            <div class="card__media">
+              <div class="card__tags"><span class="tag tag--blue">New</span></div>
+              <img src="img/imgi_43_ed12d760195014aa345512ae9d44a72a.png" alt="Cryo Care cooling mask pouch" loading="lazy">
+              <img class="alt" src="img/imgi_44_7de07d401a961e1ee1b82565e829b45c.png" alt="" loading="lazy">
+              <button class="card__add" data-add data-name="Cryo Care Cooling Mask" data-img="img/imgi_43_ed12d760195014aa345512ae9d44a72a.png">Add to cart</button>
+            </div>
+            <div class="card__info">
+              <div><h3 class="card__name">Cryo Care Cooling Mask</h3><p class="card__desc">12 sheets · premium trouble mask</p></div>
+              <div class="price"><span class="now">₩89,000</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="refill">
+            <div class="card__media">
+              <div class="card__tags"><span class="tag">Members price</span></div>
+              <img src="img/imgi_45_97ac4692910140df0aaaf1bcd2ab3c59.png" alt="T-Peel refill set of three" loading="lazy">
+              <img class="alt" src="img/imgi_46_898b3364fd5323e04ef9f62e91f2ea61.png" alt="" loading="lazy">
+              <button class="card__add" data-add data-name="T-Peel Refill Trio" data-img="img/imgi_45_97ac4692910140df0aaaf1bcd2ab3c59.png">Add to cart</button>
+            </div>
+            <div class="card__info">
+              <div><h3 class="card__name">T-Peel Refill Trio</h3><p class="card__desc">3 refills · online exclusive</p></div>
+              <div class="price"><span class="now">₩99,000</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="kit">
+            <div class="card__media">
+              <img src="img/imgi_35_c572ef31f93e219b61a1458eba08631f.png" alt="Glazed Smart pHeel program cubes" loading="lazy">
+              <img class="alt" src="img/imgi_8_7a527d1226347dc7d47e1abd79b7dc28.png" alt="" loading="lazy" style="object-position:0% 50%">
+              <button class="card__add" data-add data-name="Glazed Program" data-img="img/imgi_35_c572ef31f93e219b61a1458eba08631f.png">Add to cart</button>
+            </div>
+            <div class="card__info">
+              <div><h3 class="card__name">Glazed Program</h3><p class="card__desc">Smart pHeel™ · 2 min lift &amp; glow</p></div>
+              <div class="price"><span class="now">₩129,000</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="mask">
+            <div class="card__media">
+              <img src="img/imgi_37_47c839eb3ee59529df3774edafee8f64.png" alt="Smart Veil Glow Sealer sachet" loading="lazy">
+              <img class="alt" src="img/imgi_38_ec3b011e31b64d7b01518111d9f82603.png" alt="" loading="lazy">
+              <button class="card__add" data-add data-name="Smart Veil Glow Sealer" data-img="img/imgi_37_47c839eb3ee59529df3774edafee8f64.png">Add to cart</button>
+            </div>
+            <div class="card__info">
+              <div><h3 class="card__name">Smart Veil™ Glow Sealer</h3><p class="card__desc">Invisible membrane mask</p></div>
+              <div class="price"><span class="now">₩32,000</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="serum">
+            <div class="card__media">
+              <div class="card__tags"><span class="tag tag--blue">Best seller</span></div>
+              <img src="img/imgi_26_f21f1aa93058b4f24c0d95d42834132c.png" alt="Hyaluron Boost Ampoule cube jar" loading="lazy">
+              <img class="alt" src="img/imgi_48_097def1e289a8eedcd42601fc94b4208.png" alt="" loading="lazy">
+              <button class="card__add" data-add data-name="Hyaluron Boost Ampoule" data-img="img/imgi_26_f21f1aa93058b4f24c0d95d42834132c.png">Add to cart</button>
+            </div>
+            <div class="card__info">
+              <div><h3 class="card__name">Hyaluron Boost Ampoule</h3><p class="card__desc">With micro spicules</p></div>
+              <div class="price"><span class="now">₩58,000</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="serum">
+            <div class="card__media">
+              <img src="img/imgi_22_a806c082b0e917b659c39771190e89fa.png" alt="Glow Layering Ampoule Mist bottle" loading="lazy" style="object-position:50% 40%">
+              <img class="alt" src="img/imgi_9_d24ae1603e53f2f01bb267209e23a83b.png" alt="" loading="lazy" style="object-position:100% 40%">
+              <button class="card__add" data-add data-name="Glow Layering Ampoule Mist" data-img="img/imgi_22_a806c082b0e917b659c39771190e89fa.png">Add to cart</button>
+            </div>
+            <div class="card__info">
+              <div><h3 class="card__name">Glow Layering Ampoule Mist</h3><p class="card__desc">Facial polish water</p></div>
+              <div class="price"><span class="now">₩38,000</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-cat="serum">
+            <div class="card__media">
+              <img src="img/imgi_28_358696ecedac32744ab9f3d05908903a.png" alt="CPR triple-synergy serum" loading="lazy">
+              <img class="alt" src="img/imgi_31_bd8d932a6633a085395d8818bce166fd.png" alt="" loading="lazy">
+              <button class="card__add" data-add data-name="CPR Triple-Synergy Serum" data-img="img/imgi_28_358696ecedac32744ab9f3d05908903a.png">Add to cart</button>
+            </div>
+            <div class="card__info">
+              <div><h3 class="card__name">Triple-Synergy Serum</h3><p class="card__desc">CPR · PPM · ABC</p></div>
+              <div class="price"><span class="now">₩45,000</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Packaging ===== -->
+    <section class="section pack" id="packaging">
+      <div class="wrap pack__grid">
+        <div class="pack__intro reveal">
+          <div class="label eyebrow"><span class="num">05</span><span>Packaging</span></div>
+          <h2>Designed as<br>an <em>object.</em></h2>
+          <p>Pure white surfaces, restrained silhouettes and subtle embossing. From the first glance to the touch of the fingertips, every moment is part of a private aesthetic kit.</p>
+
+          <ul class="pack__list">
+            <li><span class="n">01</span><b>Built around the routine</b><p>Compact forms that follow how you open, apply and put away — step by step.</p></li>
+            <li><span class="n">02</span><b>An object on your vanity</b><p>A cube silhouette, with tray, brush and gua sha designed as one system.</p></li>
+            <li><span class="n">03</span><b>Sense &amp; sustainability</b><p>Easy-to-recycle mono materials and a refill-first design.</p></li>
+          </ul>
+        </div>
+
+        <div class="pack__img reveal">
+          <img src="img/des4.png" alt="THOMe cube packaging and sachets" loading="lazy">
+          <span class="label">Glazed · Smart pHeel™</span>
+        </div>
+
+        <div class="pack__stack">
+          <div class="pack__img reveal" style="min-height:280px">
+            <img src="img/des2.png" alt="Model resting her face on THOMe cube jars" loading="lazy" style="object-position:50% 40%">
+          </div>
+          <div class="cube-note reveal">
+            <span class="label">Form</span>
+            <div>
+              <b>1<sup>cube</sup></b>
+              <p style="color:var(--ink-2);margin-top:10px;font-size:14px">The most basic shape, turned into an icon.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Manifesto ===== -->
+    <section class="section manifesto">
+      <div class="wrap">
+        <span class="label reveal">Private aesthetic</span>
+        <blockquote class="reveal">Beauty is not static; it is <em>continuously unfolding.</em> The way we see ourselves defines our beauty.</blockquote>
+        <p class="label sig reveal">— THOMe</p>
+
+        <div class="principles reveal">
+          <div><span class="label">01</span><b>Care as attitude</b><p>More than skincare — an accumulation of how you see yourself, in your own private aesthetic time.</p></div>
+          <div><span class="label">02</span><b>Efficacy is trust</b><p>Results you can feel, proven by more than 70,000 customer reviews in their own words.</p></div>
+          <div><span class="label">03</span><b>Safe for everyone</b><p>Strict control from sourcing to formulation, so every skin type can care without irritation.</p></div>
+          <div><span class="label">04</span><b>Lasting change</b><p>Skin doesn’t change overnight. We restore its balance gradually, at your own pace.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Stats + pharmacy ===== -->
+    <section class="wrap" id="pharmacy">
+      <div class="stats">
+        <div class="stat reveal">
+          <div class="stat__top"><span class="label">Reviews</span><span class="label">Customers</span></div>
+          <b>70k<sup>+</sup></b>
+          <p>customers describing their change in their own words.</p>
+        </div>
+        <div class="stat reveal">
+          <div class="stat__top"><span class="label">Olive Young</span><span class="label">Two&amp;Tiup</span></div>
+          <b>No.1</b>
+          <p>beauty device ranking on Olive Young.</p>
+        </div>
+        <div class="stat reveal">
+          <div class="stat__top"><span class="label">Black Friday</span><span class="label">Until Nov 30</span></div>
+          <b>72<sup>%</sup></b>
+          <p>off selected devices and programs, for a limited time.</p>
+        </div>
+      </div>
+
+      <div class="pharmacy reveal" style="margin-top:clamp(14px,1.6vw,24px)">
+        <img src="img/imgi_27_icon_pharmacy.svg" alt="">
+        <div>
+          <span class="label">Pharmacy exclusive</span>
+          <h3>Find THOMe programs<br>at selected <em>pharmacies.</em></h3>
+        </div>
+        <a href="#" class="btn btn--dark">
+          <span>Find a pharmacy</span>
+          <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="news">
+        <div>
+          <span class="label" style="color:rgba(255,255,255,.5)">The private list</span>
+          <h2 style="margin-top:20px">10% off your<br><em>first ritual.</em></h2>
+        </div>
+        <div>
+          <form onsubmit="event.preventDefault(); this.querySelector('input').value=''; this.querySelector('input').placeholder='Thank you — check your inbox';">
+            <input type="email" placeholder="Your email" aria-label="Email" required>
+            <button class="btn btn--light" type="submit">
+              <span>Subscribe</span>
+              <span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </button>
+          </form>
+          <small>New programs, restocks and members-only prices. No spam.</small>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="foot__brand">
+          <a href="#" class="logo">THOM<span>e</span></a>
+          <p>A moment of dialogue with yourself. Aesthetic devices and programs for a self-driven refinement.</p>
+        </div>
+        <div><h4>Shop</h4><ul><li><a href="#bestsellers">Devices</a></li><li><a href="#programs">Programs</a></li><li><a href="#shop">Refills</a></li><li><a href="#shop">Masks</a></li></ul></div>
+        <div><h4>Brand</h4><ul><li><a href="#packaging">Our design</a></li><li><a href="#pharmacy">Pharmacy</a></li><li><a href="#">Reviews</a></li><li><a href="#">Journal</a></li></ul></div>
+        <div><h4>Help</h4><ul><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">Device care</a></li><li><a href="#">Contact</a></li></ul></div>
+      </div>
+
+      <div class="wordmark" aria-hidden="true">THOM<span>e</span></div>
+
+      <div class="legal">
+        <span>© 2026 THOMe. All rights reserved.</span>
+        <span>Privacy · Terms</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Cart toast ===== -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <img src="" alt="" id="toastImg">
+    <span id="toastText">Added to cart</span>
+    <a href="#">View cart</a>
+  </div>
+
+  <script>
+    // Header background on scroll
+    const header = document.getElementById('header');
+    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile menu
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
+    burger.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', open);
+    });
+    nav.addEventListener('click', e => { if (e.target.tagName === 'A') nav.classList.remove('is-open'); });
+
+    // Shop filters
+    const tabs = document.getElementById('tabs');
+    const cards = document.querySelectorAll('#shopGrid .card');
+    tabs.addEventListener('click', e => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      tabs.querySelectorAll('button').forEach(b => b.classList.toggle('is-active', b === btn));
+      const f = btn.dataset.filter;
+      cards.forEach(c => {
+        const show = f === 'all' || c.dataset.cat === f;
+        c.classList.toggle('is-hidden', !show);
+        c.classList.remove('is-in');
+        if (show) { void c.offsetWidth; c.classList.add('is-in'); }
+      });
+    });
+
+    // Add to cart
+    let count = 0;
+    const countEl = document.getElementById('cartCount');
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('[data-add]');
+      if (!btn) return;
+      e.preventDefault();
+      count++;
+      countEl.textContent = count;
+      countEl.classList.add('bump');
+      setTimeout(() => countEl.classList.remove('bump'), 300);
+
+      document.getElementById('toastImg').src = btn.dataset.img;
+      document.getElementById('toastText').textContent = btn.dataset.name + ' — added';
+      toast.classList.add('is-on');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('is-on'), 2600);
+
+      if (btn.classList.contains('card__add')) {
+        const label = btn.textContent;
+        btn.classList.add('is-added');
+        btn.textContent = 'Added ✓';
+        setTimeout(() => { btn.classList.remove('is-added'); btn.textContent = label; }, 1600);
+      }
+    });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

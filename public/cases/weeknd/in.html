@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weeknd</title>
+    <link rel="stylesheet" href="./week.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Pixelify+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="night">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+    <header>
+        <h1><img src="./img/logo.png" alt=""></h1>
+    </header>
+        <span class="mainVisual">
+            <!-- <img src="./img/week.png" alt=""> -->
+        </span>
+    <main>
+        <div class="front_main">
+            <video src="./img/videoplayback (1).mp4" autoplay muted loop></video>
+        </div>
+        <div class="btn">
+            <a href="#" class="benefits btn-15">Tickets</a>
+            <a href="#" class="attraction  btn-15">Information</a>
+        </div>
+    </main>
+    <div class="stage1">
+        <div class="wrapper">
+            <span class="top"></span>
+            <span class="right"></span>
+            <span class="bottom"></span>
+            <span class="left"></span>
+            <a href="#" class="close"><img src="./img/white.png" alt=""></a>
+            <img src="img/weektickets.jpg" alt="" class="bg">
+        </div>
+    </div>
+    <div class="stage2">
+        <div class="wrapper">
+            <a href="#" class="close"><img src="./img/white.png" alt=""></a>
+            <img src="img/poster2.webp" alt="" class="bg">
+        </div>
+       
+        
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  
+    <script>
+        
+
+        function mainHide(){
+            $('.front_main').animate({'top':'-300px', 'opacity':'0'});
+            $('.btn').delay(200).animate({'bottom':'-140px', 'opacity':'0'});
+            $('.mainVisual').delay(400).animate({'right':'-100px', 'opacity':'1'});
+        }
+        function mainShow(){
+            $('.front_main').animate({'top':'0', 'opacity':'1'});
+            $('.btn').delay(200).animate({'bottom':'0', 'opacity':'1'});
+            $('.mainVisual').delay(400).animate({'right':'0', 'opacity':'1'});
+        }
+
+        $('a.benefits').click(function(){
+            $('.stage1').fadeIn(1000);
+            $('video').fadeOut()
+            mainHide()
+        })
+        $('a.attraction').click(function(){
+            $('.stage2').fadeIn(1000);
+            mainHide()
+        })
+      
+        
+        $('.stage1 a.close').click(function(){
+            $('.stage1').fadeOut(500);
+            $('video').fadeIn();
+            mainShow()
+          
+        });
+        $('.stage2').click(function(){
+            $('.stage2').fadeOut(500);
+            mainShow()
+        })
+
+
+
+        $('.top').animate({'width':'100%'},1500, function(){
+
+     
+        $('.right').animate({'height':'100%'},1500, function(){
+
+
+        $('.bottom').animate({'width':'100%'},1500, function(){
+
+
+        $('.left').animate({'height':'100%'},1500, function(){
+
+        })
+    })
+    })
+})
+
+    </script>
+</body>
+
+</html>

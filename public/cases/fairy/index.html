@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fairy Tales — Illustrated Stories</title>
+  <meta name="description" content="An illustrated scroll story: four little fairy tales with GSAP animation.">
+  <meta name="theme-color" content="#0c0a1d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="./img/opt/3c.jpg">
+  <link rel="stylesheet" href="./css/fairy.css">
+</head>
+<body class="is-loading">
+
+  <!-- Loader -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__moon"><span class="loader__shadow"></span></div>
+    <p class="loader__text">Once upon a time… <span class="loader__count">0</span>%</p>
+  </div>
+
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <a href="#top" class="nav__logo" data-scroll>✦ Fairy Tales</a>
+    <nav class="nav__links" aria-label="Chapters">
+      <a href="#ch1" data-scroll><span>I</span><em>Witch</em></a>
+      <a href="#ch2" data-scroll><span>II</span><em>Sky</em></a>
+      <a href="#ch3" data-scroll><span>III</span><em>House</em></a>
+      <a href="#ch4" data-scroll><span>IV</span><em>Kitty</em></a>
+    </nav>
+    <span class="nav__progress" aria-hidden="true"></span>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero" data-bg="#0c0a1d" data-ink="#efe8ff" data-accent="#c9a7ff" data-stars="1">
+      <p class="hero__eyebrow">An illustrated collection<br>of four little stories</p>
+      <p class="hero__year">Vol. I<br>Scroll story</p>
+
+      <div class="hero__arches">
+        <figure class="arch hero__arch hero__arch--l" data-depth="30"><img src="./img/opt/1a.jpg" alt="A girl in a yellow cape facing a violet cave full of birds"></figure>
+        <figure class="arch hero__arch hero__arch--c" data-depth="14"><img src="./img/opt/3c.jpg" alt="Two star-children peeking out of a starry tent"></figure>
+        <figure class="arch hero__arch hero__arch--r" data-depth="44"><img src="./img/opt/1d.jpg" alt="A black kitten with a tiny crown raising its paw"></figure>
+      </div>
+
+      <h1 class="hero__title split" aria-label="Fairy Tales">Fairy <em>Tales</em></h1>
+
+      <div class="hero__scroll" aria-hidden="true"><span></span>Scroll to begin</div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__inner">
+        <span>Once upon a time ✦ The Witch's Secret ✦ Keepers of the Sky ✦ Asterskin House ✦ The Strange Kitty ✦&nbsp;</span>
+        <span>Once upon a time ✦ The Witch's Secret ✦ Keepers of the Sky ✦ Asterskin House ✦ The Strange Kitty ✦&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- Contents -->
+    <section class="contents" data-bg="#0c0a1d" data-ink="#efe8ff" data-accent="#c9a7ff" data-stars="1">
+      <div class="contents__head">
+        <span class="label">Contents</span>
+        <p class="contents__intro reveal">Read slowly. Every page is a small window into a world where birds turn into girls, stars move to the forest and kittens wear crowns.</p>
+      </div>
+      <ol class="toc">
+        <li><a href="#ch1" data-scroll data-img="./img/opt/3a.jpg"><span class="toc__num">I</span><span class="toc__name">The Witch's Secret</span><span class="toc__meta">3 pages</span></a></li>
+        <li><a href="#ch2" data-scroll data-img="./img/opt/1b.jpg"><span class="toc__num">II</span><span class="toc__name">Keepers of the Sky</span><span class="toc__meta">4 pages</span></a></li>
+        <li><a href="#ch3" data-scroll data-img="./img/opt/2c.jpg"><span class="toc__num">III</span><span class="toc__name">Asterskin House</span><span class="toc__meta">3 pages</span></a></li>
+        <li><a href="#ch4" data-scroll data-img="./img/opt/1d.jpg"><span class="toc__num">IV</span><span class="toc__name">The Strange Kitty</span><span class="toc__meta">3 pages</span></a></li>
+      </ol>
+      <div class="toc__preview arch" aria-hidden="true"><img src="./img/opt/3a.jpg" alt=""></div>
+    </section>
+
+    <!-- Chapter I — sticky story -->
+    <section class="chapter ch-witch" id="ch1" data-bg="#1e0b2c" data-ink="#fbe7f5" data-accent="#f4b93a" data-stars="0.7">
+      <header class="chapter__head">
+        <span class="label">Chapter I</span>
+        <h2 class="chapter__title split">The Witch's <em>Secret</em></h2>
+      </header>
+
+      <div class="story">
+        <div class="story__media">
+          <figure class="story__frame arch">
+            <img src="./img/opt/1a.jpg" alt="A girl in a yellow cape standing at the mouth of a violet cave" loading="lazy">
+            <img src="./img/opt/2a.jpg" alt="A black bird with a branch of pink berries in its beak" loading="lazy">
+            <img src="./img/opt/3a.jpg" alt="A witch with black hair stirring a pink potion in a cauldron" loading="lazy">
+          </figure>
+          <p class="story__counter"><span class="story__current">01</span> / 03</p>
+        </div>
+
+        <div class="story__steps">
+          <article class="step">
+            <div class="step__card">
+              <span class="step__n">i.</span>
+              <p class="reveal">Somewhere beyond the violet hills there is a cave where the birds draw strange signs in the air.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step__card">
+              <span class="step__n">ii.</span>
+              <p class="reveal">On a full moon you may meet a black bird carrying a branch of pink berries in its beak.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step__card">
+              <span class="step__n">iii.</span>
+              <p class="reveal">Only once a year can it take on its true appearance with these berries. There are so many enchanted birds, but not every one is able to become human.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter II — horizontal scroll -->
+    <section class="chapter ch-night" id="ch2" data-bg="#0a1530" data-ink="#e6efff" data-accent="#8fd6ea" data-stars="1">
+      <header class="chapter__head">
+        <span class="label">Chapter II</span>
+        <h2 class="chapter__title split">Keepers of <em>the Sky</em></h2>
+      </header>
+
+      <div class="hscroll">
+        <div class="hscroll__track">
+          <article class="panel">
+            <figure class="panel__img"><img src="./img/opt/1b.jpg" alt="The crescent moon blowing a scarf of stars over a pale forest" loading="lazy"></figure>
+            <p class="panel__cap"><span>01</span>Every night the Moon breathes out the sky like a long scarf full of stars.</p>
+          </article>
+          <article class="panel">
+            <figure class="panel__img"><img src="./img/opt/2b.jpg" alt="Two white antlered spirits holding tiny lights" loading="lazy"></figure>
+            <p class="panel__cap"><span>02</span>Two antlered keepers walk behind it and carry the lost lights home.</p>
+          </article>
+          <article class="panel">
+            <figure class="panel__img"><img src="./img/opt/3b.jpg" alt="A sleepy sun rising above a white rock with a little deer on top" loading="lazy"></figure>
+            <p class="panel__cap"><span>03</span>At dawn the smallest keeper climbs the highest rock to wake up the Sun.</p>
+          </article>
+          <article class="panel panel--wide">
+            <figure class="panel__img"><img src="./img/opt/4b.jpg" alt="Panorama: the sun, the keepers and the moon across one sky" loading="lazy"></figure>
+            <p class="panel__cap"><span>04</span>And so the whole sky turns, from the Sun to the Moon, in one long breath.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter III — parallax collage -->
+    <section class="chapter ch-aster" id="ch3" data-bg="#e8edf3" data-ink="#1b2638" data-accent="#d9776a" data-stars="0">
+      <header class="chapter__head">
+        <span class="label">Chapter III</span>
+        <h2 class="chapter__title split">Asterskin <em>House</em></h2>
+      </header>
+
+      <div class="collage">
+        <figure class="collage__img c1" data-speed="1"><img src="./img/opt/3c.jpg" alt="Two star-children hugging inside a starry tent" loading="lazy"></figure>
+        <p class="collage__text t1 reveal">Everyone has a choice — and so many stars choose life on earth.</p>
+
+        <figure class="collage__img c2" data-speed="-1"><img src="./img/opt/1c.jpg" alt="A star-child riding on the back of a large dark bird through clouds" loading="lazy"></figure>
+        <p class="collage__text t2 reveal">They fall softly, holding on to the wings of the wild birds.</p>
+
+        <figure class="collage__img c3" data-speed="0.6"><img src="./img/opt/2c.jpg" alt="A bird delivering a letter to a tiny red door in a stone by the lake" loading="lazy"></figure>
+        <p class="collage__text t3 reveal">They build small houses in dense forests and tame little wild birds, so that at any moment they can return to where their heart is.</p>
+
+        <span class="sparkle s1" aria-hidden="true">✦</span>
+        <span class="sparkle s2" aria-hidden="true">✧</span>
+        <span class="sparkle s3" aria-hidden="true">✦</span>
+      </div>
+    </section>
+
+    <!-- Chapter IV — portal -->
+    <section class="chapter ch-kitty" id="ch4" data-bg="#f3e3da" data-ink="#1a1422" data-accent="#3f6fd1" data-stars="0">
+      <header class="chapter__head">
+        <span class="label">Chapter IV</span>
+        <h2 class="chapter__title split">The Strange <em>Kitty</em></h2>
+      </header>
+
+      <div class="duo">
+        <figure class="arch duo__img" data-speed="0.5"><img src="./img/opt/1d.jpg" alt="A black kitten with blue eyes and a tiny black crown" loading="lazy"></figure>
+        <p class="duo__text reveal">At first glance it's just a regular little black kitten. But if you look closely, you can see a tiny black crown on its head.</p>
+      </div>
+    </section>
+
+    <section class="portal" data-bg="#0b0912" data-ink="#f2f0ff" data-accent="#7fb0ff" data-stars="1" aria-label="Cat magic">
+      <div class="portal__mask"><img src="./img/opt/2d.jpg" alt="A black cat curled into a circle, surrounded by magic symbols" loading="lazy"></div>
+      <svg class="portal__ring" viewBox="0 0 400 400" aria-hidden="true">
+        <defs><path id="ringPath" d="M200,200 m-170,0 a170,170 0 1,1 340,0 a170,170 0 1,1 -340,0"/></defs>
+        <text><textPath href="#ringPath" textLength="1060" lengthAdjust="spacing">look closely ✦ look closely ✦ look closely ✦ look closely ✦ </textPath></text>
+      </svg>
+      <p class="portal__text split">…and a little bit of <em>cat magic.</em></p>
+    </section>
+
+    <section class="chapter ch-kitty-end" data-bg="#f3e3da" data-ink="#1a1422" data-accent="#3f6fd1" data-stars="0">
+      <div class="duo duo--rev">
+        <figure class="arch duo__img" data-speed="0.5"><img src="./img/opt/3d.jpg" alt="A girl in a black dress sitting among tulips with a black kitten at her feet" loading="lazy"></figure>
+        <p class="duo__text reveal">The kitten has no master, but it has a very close friend — and they share every secret of the garden.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Finale -->
+  <footer class="finale" data-bg="#0c0a1d" data-ink="#efe8ff" data-accent="#c9a7ff" data-stars="1">
+    <div class="finale__seal">
+      <svg viewBox="0 0 300 300" aria-hidden="true">
+        <defs><path id="sealPath" d="M150,150 m-120,0 a120,120 0 1,1 240,0 a120,120 0 1,1 -240,0"/></defs>
+        <text><textPath href="#sealPath" textLength="748" lengthAdjust="spacing">happily ever after ✦ happily ever after ✦ </textPath></text>
+      </svg>
+      <img src="./img/opt/1d-sm.jpg" alt="" loading="lazy">
+    </div>
+    <h2 class="finale__title split">The <em>End</em></h2>
+
+    <dl class="case">
+      <div><dt>Role</dt><dd>Web design, publishing, front-end</dd></div>
+      <div><dt>Stack</dt><dd>HTML, CSS Grid, GSAP ScrollTrigger, Lenis, Canvas</dd></div>
+      <div><dt>Motion</dt><dd>Sticky story, horizontal scroll, parallax, clip-path portal</dd></div>
+      <div><dt>Layout</dt><dd>Responsive — desktop, tablet, phone</dd></div>
+    </dl>
+
+    <div class="finale__bottom">
+      <a href="https://www.behance.net/kittykeks" target="_blank" rel="noopener">Illustrations by kittykeks ↗</a>
+      <a href="#top" data-scroll class="finale__top">Back to the first page ↑</a>
+    </div>
+  </footer>
+
+  <div class="cursor" aria-hidden="true"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="./js/fairy.js"></script>
+</body>
+</html>

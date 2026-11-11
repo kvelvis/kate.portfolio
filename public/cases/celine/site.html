@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Celine — Winter Campaign</title>
+  <meta name="description" content="Celine brand renewal concept: responsive editorial site for PC, tablet and mobile.">
+  <meta name="theme-color" content="#0d0d0d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./site.css">
+</head>
+<body>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="hd" data-hd>
+    <div class="hd__in">
+      <button class="hd__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu" data-burger>
+        <span></span><span></span>
+      </button>
+
+      <nav class="hd__nav" aria-label="Main">
+        <a href="#collection">Collection</a>
+        <a href="#campaign">Campaign</a>
+        <a href="#stories">Magazine</a>
+        <a href="#maison">Maison</a>
+      </nav>
+
+      <a class="hd__logo" href="#top" aria-label="Celine — home">CELINE</a>
+
+      <div class="hd__tools">
+        <button type="button" class="hd__tool hd__tool--txt">Search</button>
+        <button type="button" class="hd__tool" aria-label="Search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+        </button>
+        <button type="button" class="hd__tool" aria-label="Bag, 0 items">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="hd__count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile / tablet menu -->
+  <div class="menu" id="menu" data-menu aria-hidden="true">
+    <nav class="menu__nav" aria-label="Mobile">
+      <a href="#collection"><i>01</i>Collection</a>
+      <a href="#campaign"><i>02</i>Campaign</a>
+      <a href="#stories"><i>03</i>Magazine</a>
+      <a href="#maison"><i>04</i>Maison</a>
+    </nav>
+    <div class="menu__foot">
+      <a href="#">Client Service</a>
+      <a href="#">Store Locator</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top" data-hero aria-roledescription="carousel" aria-label="Celine Winter campaign">
+      <div class="hero__slides">
+        <figure class="hero__slide is-active" data-slide>
+          <video class="hero__media" src="./img/LES%20GRANDS%20CLASSIQUES%20CELINE%20SESSION%2005.mp4"
+                 poster="./img/slide12.jpeg" muted playsinline loop autoplay preload="auto"></video>
+        </figure>
+        <figure class="hero__slide" data-slide>
+          <img class="hero__media" src="./img/slide11.jpeg" alt="Model in a black double-breasted coat and aviator sunglasses" style="--pos: 60% 30%">
+        </figure>
+        <figure class="hero__slide" data-slide>
+          <img class="hero__media" src="./img/slide13.png" alt="Model in a leopard fur coat against a white wall" loading="lazy" style="--pos: 50% 30%">
+        </figure>
+        <figure class="hero__slide" data-slide>
+          <img class="hero__media" src="./img/slider7.jpg" alt="Model in a printed dress on a vintage daybed" loading="lazy" style="--pos: 55% 40%">
+        </figure>
+      </div>
+
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <div class="hero__content wrap">
+        <p class="eyebrow eyebrow--light">Winter 2025 · Paris</p>
+        <h1 class="hero__title">
+          <span class="line"><span>Celine</span></span>
+          <span class="line"><span><em>by</em> Hedi Slimane</span></span>
+        </h1>
+        <p class="hero__lead">Signature black and white with a little colour — the story of the winter collection and its relaxed French bourgeois feel.</p>
+        <a class="btn btn--light" href="#collection">Discover the collection</a>
+      </div>
+
+      <div class="hero__ui wrap">
+        <div class="hero__count" aria-live="polite"><b data-cur>01</b><span>/</span><span data-total>04</span></div>
+        <div class="hero__bars" data-bars></div>
+        <div class="hero__arrows">
+          <button type="button" class="arrow arrow--light" aria-label="Previous slide" data-prev>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+          </button>
+          <button type="button" class="arrow arrow--light" aria-label="Next slide" data-next>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <a class="hero__scroll" href="#intro" aria-label="Scroll down"><span></span></a>
+    </section>
+
+    <!-- ============ INTRO ============ -->
+    <section class="intro wrap" id="intro">
+      <p class="eyebrow reveal">(01) — Fall Campaign</p>
+      <div class="intro__grid">
+        <h2 class="h2 reveal">Meet the up-and-coming models in Céline’s <em>fall campaign</em></h2>
+        <div class="intro__body reveal">
+          <p class="dropcap">Cool as it’s always been, Céline set a very high bar for itself when, in January, it released a single portrait of Joan Didion wearing dark sunglasses and a black sweater as part of its spring campaign. How are you supposed to follow that? The French fashion house’s answer, it seems, is: don’t try.</p>
+          <p>Rather than wrestling even greater celebrity talent, Céline has tapped a handful of relatively unknown models to go under Juergen Teller’s lens — a major label playing fairy godmother to a new generation.</p>
+        </div>
+      </div>
+
+      <ol class="cast reveal" aria-label="Cast">
+        <li><span>01</span>Karly Loyce</li>
+        <li><span>02</span>Agnes Nieske</li>
+        <li><span>03</span>Irina Djuranovic</li>
+        <li><span>04</span>Lisa Helene Kramer</li>
+        <li><span>05</span>Federikke Sofie Fable-Hansen</li>
+      </ol>
+      <p class="credit reveal">Photographed by Juergen Teller</p>
+    </section>
+
+    <!-- ============ COLLECTION ============ -->
+    <section class="collection" id="collection">
+      <div class="wrap sec-head">
+        <div>
+          <p class="eyebrow reveal">(02) — The Edit</p>
+          <h2 class="h2 reveal">Collection</h2>
+        </div>
+        <a class="link reveal" href="#">View all</a>
+      </div>
+
+      <ul class="tiles wrap">
+        <li class="tile reveal">
+          <a href="#">
+            <div class="tile__img"><img src="./img/slider3.webp" alt="Ivory tailored jacket with striped shirt" loading="lazy" style="--pos: 55% 30%"></div>
+            <div class="tile__txt"><h3>Women</h3><span>Ready-to-wear</span></div>
+          </a>
+        </li>
+        <li class="tile reveal">
+          <a href="#">
+            <div class="tile__img"><img src="./img/celine1.jpg" alt="Model in a black leather biker jacket" loading="lazy" style="--pos: 50% 25%"></div>
+            <div class="tile__txt"><h3>Men</h3><span>Ready-to-wear</span></div>
+          </a>
+        </li>
+        <li class="tile reveal">
+          <a href="#">
+            <div class="tile__img"><img src="./img/slider2.avif" alt="Model holding a black quilted chain bag" loading="lazy" style="--pos: 38% 50%"></div>
+            <div class="tile__txt"><h3>Leather Goods</h3><span>Triomphe · 16</span></div>
+          </a>
+        </li>
+        <li class="tile reveal">
+          <a href="#">
+            <div class="tile__img"><img src="./img/slider.jpg" alt="Model in sunglasses and a black coat" loading="lazy" style="--pos: 50% 40%"></div>
+            <div class="tile__txt"><h3>Eyewear</h3><span>Sunglasses</span></div>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ CAMPAIGN GALLERY ============ -->
+    <section class="campaign" id="campaign" data-gallery>
+      <div class="wrap sec-head">
+        <div>
+          <p class="eyebrow eyebrow--light reveal">(03) — Riviera</p>
+          <h2 class="h2 reveal">Campaign</h2>
+        </div>
+        <p class="campaign__lead reveal">Portraits from the French Riviera, shot in black and white. Drag or use the arrows to browse.</p>
+      </div>
+
+      <div class="track" data-track tabindex="0" aria-label="Campaign images, scrollable">
+        <figure class="card"><img src="./img/swipe1.jpg" alt="Celine campaign page 1" loading="lazy"></figure>
+        <figure class="card"><img src="./img/swipe2.jpg" alt="Celine campaign page 2" loading="lazy"></figure>
+        <figure class="card"><img src="./img/swipe3.jpg" alt="Celine campaign page 3" loading="lazy"></figure>
+        <figure class="card"><img src="./img/swipe4.jpg" alt="Celine campaign page 4" loading="lazy"></figure>
+        <figure class="card"><img src="./img/swipe5.jpg" alt="Celine campaign page 5" loading="lazy"></figure>
+        <figure class="card"><img src="./img/swipe6.jpg" alt="Celine campaign page 6" loading="lazy"></figure>
+        <figure class="card"><img src="./img/swipe7.webp" alt="Celine campaign page 7" loading="lazy"></figure>
+        <figure class="card"><img src="./img/swipe11.jpeg" alt="Celine campaign page 8" loading="lazy"></figure>
+        <figure class="card"><img src="./img/mini2.jpg" alt="Celine campaign page 9" loading="lazy"></figure>
+        <figure class="card"><img src="./img/Celine-ad-campaign-Winter-2023-The-Impression-001.jpg" alt="Celine winter campaign page 10" loading="lazy"></figure>
+        <figure class="card"><img src="./img/Celine-ad-campaign-Winter-2023-The-Impression-002.jpg" alt="Celine winter campaign page 11" loading="lazy"></figure>
+      </div>
+
+      <div class="wrap campaign__ui">
+        <div class="progress" aria-hidden="true"><span data-progress></span></div>
+        <div class="hero__arrows">
+          <button type="button" class="arrow arrow--light" aria-label="Previous images" data-gprev>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+          </button>
+          <button type="button" class="arrow arrow--light" aria-label="Next images" data-gnext>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STORIES ============ -->
+    <section class="stories wrap" id="stories">
+      <div class="sec-head sec-head--center">
+        <p class="eyebrow reveal">(04) — Magazine</p>
+        <h2 class="h2 reveal">Experience the <em>exclusive event</em></h2>
+        <p class="sec-lead reveal">The highly anticipated Celine Spring / Summer campaign has made its dazzling debut.</p>
+      </div>
+
+      <article class="story">
+        <div class="story__img reveal"><img src="./img/celine2.jpeg" alt="Model in a red cap and denim vest on a beach" loading="lazy" style="--pos: 50% 35%"></div>
+        <div class="story__txt reveal">
+          <span class="story__no">01</span>
+          <h3>A breathtaking coastal campaign</h3>
+          <p>Set against the backdrop of the French Riviera, the campaign showcases an exclusive collaboration with the iconic British automaker BMC, breathing new life into the classic “MOKE” car from the 1960s.</p>
+          <a class="link" href="#">Read the story</a>
+        </div>
+      </article>
+
+      <article class="story story--rev">
+        <div class="story__img reveal"><img src="./img/celine5.jpeg" alt="Model crouching on a skateboard under palm trees" loading="lazy" style="--pos: 50% 60%"></div>
+        <div class="story__txt reveal">
+          <span class="story__no">02</span>
+          <h3>The MOKE: a symbol of freedom and joy</h3>
+          <p>Launched in 1964, the MOKE quickly gained fame as a stylish beach buggy. It even earned a place in pop culture history when Brigitte Bardot was seen driving one through Saint-Tropez.</p>
+          <a class="link" href="#">Read the story</a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="story__img reveal"><img src="./img/celine3.jpeg" alt="Model on a skateboard with a seaside view" loading="lazy" style="--pos: 50% 40%"></div>
+        <div class="story__txt reveal">
+          <span class="story__no">03</span>
+          <h3>Celine’s luxurious customization</h3>
+          <p>For Spring / Summer, Celine customized the MOKE with luxurious touches that embody the brand’s sophisticated coastal aesthetic.</p>
+          <a class="link" href="#">Read the story</a>
+        </div>
+      </article>
+
+      <article class="story story--wide">
+        <div class="story__img reveal"><img src="./img/slide12.jpeg" alt="Model in a black blazer and bow blouse in a Parisian salon" loading="lazy" style="--pos: 50% 35%"></div>
+        <div class="story__txt reveal">
+          <span class="story__no">04</span>
+          <h3>Experience the exclusive event</h3>
+          <p>An inside look at the complete event and the exceptional custom MOKE — a rare fusion of fashion and automotive history.</p>
+          <a class="btn" href="#">Watch the film</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ BANNER ============ -->
+    <section class="banner" id="maison">
+      <img class="banner__img" src="./img/slider5.jpg" alt="Model in sunglasses beside a vintage reel-to-reel tape recorder" loading="lazy">
+      <div class="banner__shade" aria-hidden="true"></div>
+      <div class="banner__txt wrap reveal">
+        <p class="eyebrow eyebrow--light">Winter / Spring 2025</p>
+        <h2 class="h2">Learn more about the new campaign</h2>
+        <a class="btn btn--light" href="#">Learn more</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="ft">
+    <div class="wrap">
+      <div class="ft__top">
+        <form class="ft__news" data-news novalidate>
+          <h2>Newsletter</h2>
+          <p>Receive news on collections, campaigns and events.</p>
+          <label class="field">
+            <span class="sr">Email address</span>
+            <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit" aria-label="Subscribe">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+            </button>
+          </label>
+          <p class="ft__msg" data-msg role="status"></p>
+        </form>
+
+        <div class="ft__cols">
+          <div>
+            <h3>Client Service</h3>
+            <a href="#">Contact us</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Care guide</a>
+          </div>
+          <div>
+            <h3>Maison</h3>
+            <a href="#">Store locator</a><a href="#">Careers</a><a href="#">Sustainability</a>
+          </div>
+          <div>
+            <h3>Follow</h3>
+            <a href="#">Instagram</a><a href="#">YouTube</a><a href="#">TikTok</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="ft__mark" aria-hidden="true">CELINE</p>
+
+      <div class="ft__bottom">
+        <span>© 2025 Celine — concept redesign for portfolio</span>
+        <span>Legal · Privacy · Cookies</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./site.js" defer></script>
+</body>
+</html>

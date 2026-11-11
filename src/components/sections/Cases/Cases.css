@@ -1,0 +1,169 @@
+/* ---------- grid ---------- */
+.cases__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem) clamp(1.25rem, 3vw, 3rem);
+}
+
+.case-card__link {
+  display: grid;
+  gap: 1rem;
+}
+
+.case-card__window {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1.5px solid var(--c-ink);
+  box-shadow: 6px 6px 0 var(--c-ink);
+  transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
+}
+:root[data-theme="dark"] .case-card__window {
+  border-color: var(--line);
+  box-shadow: 6px 6px 0 var(--c-acid);
+}
+
+.case-card__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1.5px solid var(--line);
+}
+.case-card__dots { display: flex; gap: 6px; }
+.case-card__dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.case-card__dots i:nth-child(1) { background: #ff5f57; }
+.case-card__dots i:nth-child(2) { background: #febc2e; }
+.case-card__dots i:nth-child(3) { background: #28c840; }
+.case-card__url {
+  flex: 1;
+  padding: 0.25em 0.75em;
+  border-radius: 999px;
+  background: var(--bg-2);
+  text-transform: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.case-card__media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+.case-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.9s var(--ease-out);
+}
+
+.case-card__info {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+}
+.case-card__title {
+  font-size: var(--fs-xl);
+  line-height: 1;
+}
+.case-card__type { grid-column: 2; color: var(--fg-muted); }
+.case-card__arrow {
+  grid-row: 1 / 3;
+  grid-column: 3;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid var(--fg);
+  font-size: 1.25rem;
+  transition: background-color 0.4s, color 0.4s, transform 0.5s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .case-card__link:hover .case-card__window {
+    transform: translate(-4px, -4px) rotate(-1deg);
+    box-shadow: 12px 12px 0 var(--accent);
+  }
+  .case-card__link:hover .case-card__media img { transform: scale(1.06); }
+  .case-card__link:hover .case-card__arrow {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+    transform: rotate(45deg);
+  }
+}
+
+/* ---------- marquee ---------- */
+.cases__marquee {
+  margin-block: clamp(4rem, 10vw, 9rem) clamp(2rem, 5vw, 4rem);
+}
+
+/* ---------- list ---------- */
+.cases__list {
+  border-bottom: 1.5px solid var(--fg);
+}
+.case-row { border-top: 1.5px solid var(--fg); }
+.case-row__link {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3rem 1fr auto auto;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(0.9rem, 2vw, 1.4rem) 0.75rem;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.4s var(--ease-out), padding 0.5s var(--ease-out);
+}
+.case-row__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s var(--ease-out);
+}
+.case-row__title {
+  font-size: clamp(1.6rem, 1rem + 2.6vw, 3.4rem);
+  line-height: 1;
+}
+.case-row__arrow {
+  font-size: 1.5rem;
+  transition: transform 0.5s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .case-row__link:hover { color: var(--on-accent); padding-left: 1.5rem; }
+  .case-row__link:hover::before { transform: scaleY(1); }
+  .case-row__link:hover .case-row__arrow { transform: translateX(-8px) rotate(-45deg); }
+}
+
+/* ---------- tablet ---------- */
+@media (max-width: 1023px) {
+  .cases__grid { gap: 2.5rem 1.25rem; }
+}
+
+/* ---------- phone ---------- */
+@media (max-width: 639px) {
+  .cases__grid { grid-template-columns: 1fr; }
+  .case-row__link { grid-template-columns: 2.2rem 1fr auto; }
+  .case-row__type { display: none; }
+  .case-card__arrow { width: 44px; height: 44px; }
+}
+
+/* нечётное количество — последняя карточка на всю ширину */
+@media (min-width: 640px) {
+  .case-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .case-card:last-child:nth-child(odd) .case-card__media { aspect-ratio: 21 / 9; }
+}

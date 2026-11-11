@@ -1,0 +1,317 @@
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-size: 62.5%;
+    background-color: rgb(236, 236, 236);
+}
+a{
+    text-decoration: none;
+    color:inherit
+}
+li{
+    list-style: none;
+}
+.flex{display: flex;}
+.spaceb{justify-content: space-between;
+align-items: center;}
+header{
+    position: relative;
+    width: 100%;
+    height: 8rem;
+    background-color: white;
+    border-bottom: 2px solid #000;
+}
+header .inner{
+    margin: 0 auto;
+    width: 120rem;
+    background-color: white;
+}
+header .inner h1 img{
+    max-width: 20rem;
+}
+header nav ul li.main-menu>a{
+    display: block;
+    font-size: 1.6rem;
+    padding: 3rem 3rem 3rem 0;
+}
+header nav ul li.main-menu>a:hover{
+    font-weight: bold;
+}
+header nav ul.flex{
+    gap:10rem;
+}
+header nav ul.sub-menu{
+    position: absolute;
+    top:8rem;
+    display: none;
+    z-index: 99;
+}
+header nav ul.sub-menu li a{
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    margin: 3rem 0;
+    background-color: white;
+    font-size: 1.6rem;
+}
+header nav ul.sub-menu li a:hover{
+    background-color: black;
+    color: white;
+}
+header .slide{
+    display: none;
+    position: absolute;
+    left:0;
+    width: 100%;
+    height: 22rem;
+    background-color: white;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    z-index: 9;
+}
+section{
+    margin: 5rem auto;
+    width: 120rem;
+    display: flex;
+    gap:2rem;
+}
+section main{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+section main>div{
+    width: calc(33% - 1rem);
+    height: 24.6rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top;
+    transition: 0.35s;
+}
+section main .goods{
+    background-image: url(./img2/by3.png);
+}
+section main .pay{
+    background-image: url(./img2/tam33.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+section main .game{
+    background-image: url(./img2/tam53.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+section main .event{
+    background-image: url(./img2/tam23.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+section main .notice{
+    width: 66%;
+    height: 24.6rem;
+    position: relative;
+    background: white;
+}
+section main .notice .title{
+    position: absolute;
+    left:2rem;
+    top:2rem;
+}
+section main .notice .more{
+    position: absolute;
+    top:2rem;
+    right:2rem;
+}
+section main .notice ul{
+    padding: 7rem 2rem;
+}
+section main .notice ul li{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+section main .notice ul li a{
+    font-size: 1.6rem;
+}
+section main .ip{
+    background-image: url(./img2/tam43.png)
+}
+section main .refund{
+    background-image: url(./img2/tam63.png)
+}
+section main .tax{
+    background-image: url(./img2/tam73.png)
+}
+section main .cs{
+    width: 66%;
+    background-image:url(./img2/tamswipe4.png)
+}
+section main .remote{ 
+    background-image: url(./img2/tam83.png)
+}
+section main div:not(:nth-child(5)):hover {background-position-y: bottom;}
+section aside{
+    width: 30%;
+    background: none;
+}
+section aside .login_ip {
+    position: relative;
+    width: 100%;
+}
+.hidden {
+    text-indent: -9999px;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    height: 0;
+}
+section aside .login_ip input {
+    width: 76%;
+    margin-bottom: 0.5rem;
+    padding: 1.2rem 2rem;
+    font-family: inherit;
+    font-size: 1.5rem;
+    border: 0.1rem solid black;
+}
+section aside .login_ip input:focus{
+    outline: none;
+}
+section aside .login_ip .btn_login {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+section aside .login_ip .btn_login img{
+    width: 8rem;
+}
+section aside .login_ip .util{
+    margin: 1rem 0;
+    display: flex;
+    justify-content: flex-end;
+}
+section aside .login_ip .util ul{
+    display: flex;
+}
+section aside .login_ip .util ul li a{
+    font-size: 1.4rem;
+}
+section aside .login_ip .util ul li a em{
+    font-size: 1.4rem;
+    font-weight: 900;
+    font-style: normal;
+}
+section aside .login_ip .util ul li:not(:last-child)::after{
+    position: absolute;
+    width:0.1rem;
+    height: 1.3rem;
+    background-color: gray;
+    content: "";
+    top:0px;
+    right: -1rem;
+}
+.login_ip .util ul li{
+    position: relative;
+    margin-right: 2rem;
+}
+.login_ip .ip_address {
+    float: right;
+    background-color: black;
+    width: 100%;
+    margin-bottom: 1.8rem;
+    padding: 1rem 0 1.2rem 1rem;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    color: white;
+}
+div.jp-title{
+    position:relative;
+    height:2.4rem;
+    width:100%;
+    display:block;
+    overflow:hidden;
+    border:none;
+}
+.scrollingtext{
+    position:absolute;
+    white-space:nowrap;
+    font-family:'Trebuchet MS',Arial;
+    font-size:18px;
+    color:white;
+    padding-top: 5px;
+}
+section aside .mySwiper {
+    width: 100%;
+    height: 87%;
+    position: relative;
+    color:white;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.swiper-slide:nth-child(2){
+    background-image: url(img2/swiptam1.png);
+
+}
+.swiper-slide:nth-child(3){
+    background-image: url(img2/jslide3.avif);
+}
+.swiper-slide:nth-child(4){
+    background-image: url(img2/switam2.png);
+}
+.swiper-slide:nth-child(5){
+    background-image: url(img2/swiptam4.png);
+}
+.swiper-slide:nth-child(6){
+    background-image: url(img2/swiptam6.png);
+}
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+}
+.swiper-pagination{
+    font-size: 3rem;  
+}
+.swiper-pagination span.swiper-pagination-current{
+    color:#ffffff;
+    font-weight: 500;
+}
+.swiper-pagination span.swiper-pagination-total{
+    color:rgb(255, 255, 255);
+    font-weight: 500;
+}
+.swiper-pagination-fraction {
+    color: white;
+}
+footer{
+    margin-top: 10rem;
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+footer .ft_wrap{
+    padding: 5rem 0;
+    margin: 0 auto;
+    width: 120rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 2rem;
+}
+footer .ft_wrap h1{
+    font-size: 2rem;
+}
+footer .ft_wrap .ft-flex{
+    font-size: 1.6rem;
+}

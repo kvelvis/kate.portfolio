@@ -1,0 +1,21 @@
+.navbar{
+    border-radius: 10px;
+    background-color: rgba(190, 184, 184, 0.1);
+    backdrop-filter: blur(12px) saturate(150%);
+}
+.theme-dark .navbar{
+    background:white !important;
+}
+
+
+.theme-light .navbar{
+  /* background:none !important; */
+  border: 3px solid black;
+}
+.theme-light .nav-link{
+    color:black !important;
+}
+
+.theme-dark .intro{
+    color: white !important;
+}
