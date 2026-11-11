@@ -32,7 +32,6 @@
   --f-mono: "JetBrains Mono", ui-monospace, monospace;
   --f-kr: "Noto Sans KR", sans-serif;
   --f-deco: "Afronaut", "Anton", sans-serif;
-  --f-script: "Reginy", serif;
 
   --fs-xs: clamp(0.72rem, 0.68rem + 0.15vw, 0.8rem);
   --fs-sm: clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem);

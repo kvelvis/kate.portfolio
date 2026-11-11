@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import Modal from "../components/ui/Modal/Modal";
 import { profile } from "../data/profile";
 import sticker from "../assets/img/contact-sticker.webp";
@@ -12,12 +12,15 @@ export function ContactProvider({ children }) {
   const openContact = useCallback(() => setOpen(true), []);
   const close = useCallback(() => setOpen(false), []);
   const [copied, setCopied] = useState(null);
+  const timer = useRef(0);
+  useEffect(() => () => clearTimeout(timer.current), []);
 
   const copy = async (value) => {
     try {
       await navigator.clipboard.writeText(value);
       setCopied(value);
-      setTimeout(() => setCopied(null), 1400);
+      clearTimeout(timer.current);
+      timer.current = setTimeout(() => setCopied(null), 1400);
     } catch {
       /* clipboard unavailable — the link still works */
     }

@@ -4,10 +4,3 @@
   src: url("../assets/fonts/AfronautTest-Regular.ttf") format("truetype");
   font-display: swap;
 }
-
-/* файл называется Raginy.ttf — в старой версии путь был неверный */
-@font-face {
-  font-family: "Reginy";
-  src: url("../assets/fonts/Raginy.ttf") format("truetype");
-  font-display: swap;
-}

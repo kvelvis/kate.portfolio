@@ -122,6 +122,11 @@ ol {
   white-space: nowrap;
 }
 
+/* status dots (hero role ticker, ID card) */
+@keyframes pulse {
+  50% { box-shadow: 0 0 0 6px transparent; opacity: 0.4; }
+}
+
 /* ---------- type helpers ---------- */
 .t-display {
   font-family: var(--f-display);

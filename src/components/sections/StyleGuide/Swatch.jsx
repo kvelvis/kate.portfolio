@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Swatch({ name, hex, fg }) {
   const [copied, setCopied] = useState(false);
+  const timer = useRef(0);
+  useEffect(() => () => clearTimeout(timer.current), []);
 
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(hex);
       setCopied(true);
-      setTimeout(() => setCopied(false), 1200);
+      clearTimeout(timer.current);
+      timer.current = setTimeout(() => setCopied(false), 1200);
     } catch {
       /* ignore */
     }
