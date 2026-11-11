@@ -4,8 +4,8 @@ const YEAR = 2026;
 const IN_KOREA_SINCE = 2012;
 export const yearsInKorea = YEAR - IN_KOREA_SINCE;
 
-// Empty values are hidden on the site until filled in.
-const links = {
+// Empty values are hidden on the site until filled in. Also used for SEO structured data (vite.config.js).
+export const links = {
   email: "", // TODO: Kate — email address, e.g. "name@mail.com"
   github: "", // TODO: Kate — full URL, e.g. "https://github.com/username"
   linkedin: "", // TODO: Kate — full URL
