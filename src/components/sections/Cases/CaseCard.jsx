@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { prefersReducedMotion } from "../../../lib/gsap";
+import CaseStudyButton from "../CaseStudy/CaseStudy";
 
 /** Looping preview video: loads and plays only while on screen; reduced motion shows the poster only */
 function CaseCover({ cover }) {
@@ -51,6 +52,7 @@ export default function CaseCard({ item, index }) {
           <span className="case-card__arrow" aria-hidden="true">↗</span>
         </div>
       </a>
+      {item.caseStudy && <CaseStudyButton id={item.caseStudy} className="case-card__study" />}
     </li>
   );
 }

@@ -4,6 +4,7 @@ import { featured } from "../../../data/featured";
 import RevealText from "../../ui/RevealText/RevealText";
 import Sticker from "../../ui/Sticker/Sticker";
 import Button from "../../ui/Button/Button";
+import CaseStudyButton from "../CaseStudy/CaseStudy";
 import FeatureItem from "./FeatureItem";
 import "./Featured.css";
 
@@ -115,6 +116,7 @@ export default function Featured() {
               </div>
             </dl>
 
+            <CaseStudyButton id="dano" variant="acid" className="featured__cta" />
             {featured.figmaUrl && (
               <Button href={featured.figmaUrl} variant="acid" icon="↗" className="featured__cta">
                 View in Figma

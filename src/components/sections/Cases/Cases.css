@@ -9,6 +9,7 @@
   display: grid;
   gap: 1rem;
 }
+.case-card__study { margin-top: 0.75rem; }
 
 .case-card__window {
   border-radius: var(--radius);

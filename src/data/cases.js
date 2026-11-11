@@ -24,12 +24,12 @@ const video = (mp4, webm, poster) => ({ mp4, webm, poster });
 
 // Links point to pages in public/cases
 export const featuredCases = [
-  { title: "Celine", type: "Brand renewal", href: "/cases/celine/celine.html", cover: video(celineMp4, celineWebm, celinePoster) },
+  { title: "Celine", type: "Brand renewal", href: "/cases/celine/celine.html", caseStudy: "celine", cover: video(celineMp4, celineWebm, celinePoster) },
   { title: "The Weeknd", type: "Artist landing", href: "/cases/weeknd/weeknd.html", cover: video(weekndMp4, weekndWebm, weekndPoster) },
   { title: "Vestiaire Collective", type: "E-commerce", href: "/cases/fashion/fashion.html", cover: video(fashionMp4, fashionWebm, fashionPoster) },
   { title: "Tamburins", type: "Brand site", href: "/cases/tamburins/index2.html", cover: video(tamburinsMp4, tamburinsWebm, tamburinsPoster) },
   { title: "Sanrio", type: "Character site", href: "/cases/sanrio/sanrio.html", cover: video(sanrioMp4, sanrioWebm, sanrioPoster) },
-  { title: "Gatto", type: "Cafe website redesign", href: "/cases/cat cafe/cat.html", cover: video(catMp4, catWebm, catPoster) }, // TODO: Kate — switch href to "/cases/cat cafe/renew/index.html" once confirmed
+  { title: "Gatto", type: "Cafe website redesign", href: "/cases/cat cafe/cat.html", caseStudy: "gatto", cover: video(catMp4, catWebm, catPoster) }, // TODO: Kate — switch href to "/cases/cat cafe/renew/index.html" once confirmed
   { title: "Fairy Tales", type: "Illustrated stories", href: "/cases/fairy/index.html", cover: video(fairyMp4, fairyWebm, fairyPoster) },
 ];
 
