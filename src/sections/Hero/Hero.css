@@ -38,7 +38,8 @@
   justify-content: safe center;
   padding-top: 96px; /* clears the fixed header */
   padding-bottom: 96px; /* clears .hero__foot */
-  padding-right: 42%;
+  /* room for the badge; % is of the full window, so cap it for screens wider than the container */
+  padding-right: min(42%, 640px);
   pointer-events: none;
 }
 .hero__copy > * {
@@ -54,6 +55,7 @@
   font-size: clamp(48px, min(7.4vw, 13vh), 124px);
   line-height: 1.1;
   letter-spacing: -0.025em;
+  word-break: keep-all; /* never split a Korean word across lines */
 }
 .hero__lead {
   margin-top: clamp(20px, 3vh, 36px);
