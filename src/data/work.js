@@ -15,6 +15,9 @@ import feevGif from "../assets/work/feev.gif";
 import danoGif from "../assets/work/danoapp.gif";
 import cubeGif from "../assets/work/cubehos.gif";
 
+// files in public/ (the site may live in a sub-folder, e.g. GitHub Pages)
+const pub = (path) => import.meta.env.BASE_URL + path;
+
 export const work = [
   {
     id: "celine27",
@@ -62,7 +65,7 @@ export const work = [
     title: "FEEV",
     category: { ko: "리디자인 · 캠페인", en: "Redesign · Campaign" },
     year: "2026",
-    image: "/cases/feev/img/web/main-girl-1376.webp",
+    image: pub("cases/feev/img/web/main-girl-1376.webp"),
     gif: feevGif,
     href: "/cases/feev/index.html",
     caseStudy: "feev",
@@ -104,7 +107,7 @@ export const work = [
     category: { ko: "메디컬", en: "Medical" },
     year: "2026",
     gif: cubeGif,
-    image: "/cases/cubehospital/img/photos/welcome-bg-1600.jpg",
+    image: pub("cases/cubehospital/img/photos/welcome-bg-1600.jpg"),
     href: "/cases/cubehospital/index.html",
     caseStudy: "cube",
     desc: {

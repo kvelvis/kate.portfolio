@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
   <title>Preview — Kate</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..600&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet" />
@@ -176,6 +176,10 @@
       document.documentElement.lang = lang;
       document.querySelectorAll("[data-t]").forEach(function (el) { el.textContent = T[lang][el.dataset.t]; });
 
+      // the site may live in a sub-folder (GitHub Pages: /kate.portfolio/); "url" is relative to it
+      var BASE = location.pathname.replace(/[^/]*$/, "");
+      var full = function (p) { return BASE + p.replace(/^\//, ""); };
+
       // only the portfolio's own project pages
       var src = params.get("url") || "";
       var ok = /^\/cases\/[^?#]*$/.test(src.split(/[?#]/)[0]) && src.indexOf("..") === -1;
@@ -185,7 +189,7 @@
       var newtab = document.getElementById("newtab");
 
       if (!ok) {
-        frame.outerHTML = '<p class="error">' + T[lang].bad + '<br><a href="/#work">' + T[lang].home + "</a></p>";
+        frame.outerHTML = '<p class="error">' + T[lang].bad + '<br><a href="' + BASE + '#work">' + T[lang].home + "</a></p>";
         document.querySelector(".devices").style.display = "none";
         newtab.style.display = "none";
         return;
@@ -193,9 +197,9 @@
 
       var iframe = document.createElement("iframe");
       iframe.title = "Project preview";
-      iframe.src = src;
+      iframe.src = full(src);
       frame.appendChild(iframe);
-      newtab.href = src;
+      newtab.href = full(src);
 
       // ----- device switch -----
       var SIZES = { mobile: [390, 844], tablet: [820, 1180] };
@@ -230,7 +234,7 @@
       function current() {
         try {
           var l = iframe.contentWindow.location;
-          if (l.origin === location.origin && l.pathname.indexOf("/cases/") === 0) return l.pathname + l.search + l.hash;
+          if (l.origin === location.origin && l.pathname.indexOf(BASE + "cases/") === 0) return "/" + l.pathname.slice(BASE.length) + l.search + l.hash;
         } catch (e) {}
         return null;
       }
@@ -240,7 +244,7 @@
         q.set("url", decodeURI(path));
         q.set("view", view);
         history.replaceState(null, "", location.pathname + "?" + q.toString());
-        newtab.href = path;
+        newtab.href = full(path);
       }
       iframe.addEventListener("load", function () {
         var t = "";

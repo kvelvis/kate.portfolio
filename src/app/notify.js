@@ -11,7 +11,7 @@
 
 const KEY = "notify-off";
 const SENT = "notify-sent";
-const ENDPOINT = "/notify.php";
+const ENDPOINT = import.meta.env.BASE_URL + "notify.php";
 const DELAY = 4000;
 
 const ref = new URLSearchParams(location.search).get("r") || "";

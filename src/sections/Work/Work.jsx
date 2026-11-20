@@ -8,7 +8,7 @@ import { notifyProject } from "../../app/notify";
 import "./Work.css";
 
 // project sites open in the device viewer (public/preview.html)
-const previewUrl = (href, lang) => (href ? `/preview.html?url=${encodeURIComponent(href)}&lang=${lang}` : undefined);
+const previewUrl = (href, lang) => (href ? `${import.meta.env.BASE_URL}preview.html?url=${encodeURIComponent(href)}&lang=${lang}` : undefined);
 
 /*
  * Holds the page on the sphere while its intro plays, so it can't be scrolled past.
