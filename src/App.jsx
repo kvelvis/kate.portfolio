@@ -1,53 +1,42 @@
-import { useCallback, useEffect, useState } from "react";
-import { ScrollTrigger } from "./lib/gsap";
-import { marqueeWords } from "./data/profile";
+import { useEffect } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLang } from "./app/I18n";
+import Header from "./components/Header/Header";
+import Hero from "./sections/Hero/Hero";
+import Profile from "./sections/Profile/Profile";
+import Work from "./sections/Work/Work";
+import About from "./sections/About/About";
+import Contact from "./sections/Contact/Contact";
+import { notifyVisit } from "./app/notify";
+import Like from "./components/Like/Like";
 
-import Preloader from "./components/layout/Preloader/Preloader";
-import Header from "./components/layout/Header/Header";
-import Cursor from "./components/layout/Cursor/Cursor";
-import Footer from "./components/layout/Footer/Footer";
-
-import Hero from "./components/sections/Hero/Hero";
-import About from "./components/sections/About/About";
-import Featured from "./components/sections/Featured/Featured";
-import Cases from "./components/sections/Cases/Cases";
-import StyleGuide from "./components/sections/StyleGuide/StyleGuide";
-import Contact from "./components/sections/Contact/Contact";
-
-import Marquee from "./components/ui/Marquee/Marquee";
-
+/** One scrolling page: badge + intro → numbers & skills → sphere of work → about → contact. */
 export default function App() {
-  const [ready, setReady] = useState(false);
-  const onLoaded = useCallback(() => setReady(true), []);
   const { t } = useLang();
 
-  // recalculate all ScrollTriggers once fonts and images have loaded
+  useEffect(() => notifyVisit(), []);
+
   useEffect(() => {
     const refresh = () => ScrollTrigger.refresh();
-    window.addEventListener("load", refresh);
     document.fonts?.ready.then(refresh);
-    return () => window.removeEventListener("load", refresh);
+    addEventListener("load", refresh);
+    return () => removeEventListener("load", refresh);
   }, []);
 
   return (
     <>
-      <a href="#main" className="skip-link">{t({ ko: "본문 바로가기", en: "Skip to content" })}</a>
+      <a href="#profile" className="skip-link">
+        {t({ ko: "본문 바로가기", en: "Skip to content" })}
+      </a>
       <Header />
-      <Preloader onDone={onLoaded} />
-      <Cursor />
-
-      <main id="main" tabIndex={-1}>
-        <Hero ready={ready} />
-        <Marquee items={marqueeWords} tilt={-3} className="app__marquee" />
+      <main>
+        <Hero />
+        <Profile />
+        <Work />
         <About />
-        <Featured />
-        <Cases />
-        <StyleGuide />
         <Contact />
       </main>
-
-      <Footer />
+      <Like />
     </>
   );
 }

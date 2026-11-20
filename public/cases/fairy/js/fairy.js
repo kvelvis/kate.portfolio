@@ -50,11 +50,41 @@ $$('.split, .reveal').forEach((el) => splits.set(el, splitText(el)));
 /* ---------- smooth scroll ---------- */
 let lenis = null;
 if (!reduce && typeof Lenis !== 'undefined') {
-  lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+  // Speed limit: the scroll target may never run more than MAX_AHEAD px ahead of
+  // what is actually on screen, so a hard flick can't skip past the animations.
+  const MAX_AHEAD = () => Math.min(innerHeight * 0.4, 360);
+  lenis = new Lenis({
+    lerp: 0.07,
+    wheelMultiplier: 0.8,
+    smoothWheel: true,
+    virtualScroll: (d) => {
+      if (!lenis || d.event.ctrlKey) return true;
+      const ahead = lenis.targetScroll - lenis.animatedScroll;
+      const max = MAX_AHEAD();
+      let dy = d.deltaY;
+      if (dy > 0) dy = Math.min(dy, Math.max(0, max - ahead));
+      else if (dy < 0) dy = Math.max(dy, Math.min(0, -max - ahead));
+      if (dy === 0 && d.deltaY !== 0) {
+        d.event.cancelable && d.event.preventDefault(); // swallow, don't let native scroll take over
+        return false;
+      }
+      d.deltaY = dy;
+      return true;
+    },
+  });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((t) => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
   lenis.stop();
+
+  // Lenis must not move the page while ScrollTrigger measures pinned sections
+  // (e.g. a resize mid-glide), otherwise a pin is measured from the wrong spot.
+  let lenisWasRunning = false;
+  ScrollTrigger.addEventListener('refreshInit', () => {
+    lenisWasRunning = !lenis.isStopped;
+    lenis.stop();
+  });
+  ScrollTrigger.addEventListener('refresh', () => { if (lenisWasRunning) lenis.start(); });
 }
 
 $$('[data-scroll]').forEach((a) => {
@@ -131,21 +161,32 @@ $$('[data-scroll]').forEach((a) => {
   requestAnimationFrame(frame);
 })();
 
-/* ---------- loader ---------- */
+/* ---------- loader: the story begins ---------- */
+/* No numbers, no bar: a page turns and "옛날 옛적에…" is written letter by letter. */
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 function loadImages(imgs) {
   return Promise.all(imgs.map((img) => (img.complete ? Promise.resolve() : new Promise((r) => { img.onload = img.onerror = r; }))));
 }
 
-const counter = { v: 0 };
-const loaderTl = gsap.timeline();
-loaderTl
-  .to(counter, {
-    v: 100, duration: reduce ? 0.2 : 1.6, ease: 'power2.inOut',
-    onUpdate: () => { $('.loader__count').textContent = Math.round(counter.v); },
-  })
-  .to('.loader__shadow', { xPercent: 110, duration: reduce ? 0.2 : 1.6, ease: 'power2.inOut' }, 0);
+const loaderChars = splitText($('.loader__text')).chars;
+gsap.set(loaderChars, { opacity: 0, y: 6, filter: 'blur(4px)' });
 
-Promise.all([loadImages($$('.hero img')), loaderTl.then(), document.fonts ? document.fonts.ready : null]).then(() => {
+// wait (briefly) for the title face so the letters don't swap font mid-fade
+const titleFont = document.fonts
+  ? Promise.race([document.fonts.load('26px "Song Myung"', '옛날'), wait(900)])
+  : Promise.resolve();
+
+const loaderWritten = titleFont.then(() => gsap.to(loaderChars, {
+  opacity: 1, y: 0, filter: 'blur(0px)',
+  duration: reduce ? 0 : 1.1, ease: 'sine.inOut', stagger: reduce ? 0 : 0.16,
+}).then());
+
+Promise.all([
+  loadImages($$('.hero img')),
+  loaderWritten,
+  wait(reduce ? 0 : 2800), // let at least one page turn
+  document.fonts ? document.fonts.ready : null,
+]).then(() => {
   const out = gsap.timeline({
     onComplete: () => {
       document.body.classList.remove('is-loading');
@@ -155,10 +196,10 @@ Promise.all([loadImages($$('.hero img')), loaderTl.then(), document.fonts ? docu
     },
   });
   out
-    .to('.loader__moon', { scale: 30, opacity: 0, duration: 1.1, ease: 'power3.in' })
-    .to('.loader__text', { opacity: 0, y: -20, duration: 0.4 }, 0)
-    .to('.loader', { opacity: 0, duration: 0.5 }, '-=0.3')
-    .add(heroIntro(), '-=0.5');
+    .to('.book', { opacity: 0, y: -12, duration: reduce ? 0 : 1, ease: 'sine.inOut' })
+    .to('.loader__text', { opacity: 0, y: -8, duration: reduce ? 0 : 1, ease: 'sine.inOut' }, 0.15)
+    .to('.loader', { opacity: 0, duration: reduce ? 0 : 1.2, ease: 'power1.inOut' }, '-=0.5')
+    .add(heroIntro(), '-=0.8');
 });
 
 /* ---------- hero ---------- */
@@ -167,14 +208,14 @@ function heroIntro() {
   const tl = gsap.timeline();
   if (reduce) return tl;
   tl.from('.hero__arch', {
-      yPercent: 40, opacity: 0, duration: 1.6, ease: 'expo.out', stagger: 0.12,
+      yPercent: 18, opacity: 0, duration: 1.2, ease: 'power2.inOut', stagger: 0.15,
     })
-    .from('.hero__arch img', { scale: 1.5, duration: 2, ease: 'expo.out', stagger: 0.12 }, 0)
+    .from('.hero__arch img', { scale: 1.3, duration: 1.2, ease: 'power2.inOut', stagger: 0.15 }, 0)
     .from(chars, {
-      yPercent: 70, opacity: 0, rotate: () => gsap.utils.random(-25, 25), filter: 'blur(10px)',
-      duration: 1.4, ease: 'expo.out', stagger: { each: 0.06, from: 'random' },
-    }, 0.25)
-    .from('.hero__eyebrow, .hero__year, .hero__scroll, .nav', { opacity: 0, y: 16, duration: 1, stagger: 0.08 }, 0.8);
+      yPercent: 25, opacity: 0, rotate: () => gsap.utils.random(-4, 4), filter: 'blur(8px)',
+      duration: 1.2, ease: 'sine.inOut', stagger: 0.14,
+    }, 0.3)
+    .from('.hero__eyebrow, .hero__year, .hero__scroll, .nav', { opacity: 0, y: 10, duration: 1, ease: 'sine.inOut', stagger: 0.1 }, 0.9);
   return tl;
 }
 
@@ -209,8 +250,8 @@ function setTheme(sec) {
     '--ink': sec.dataset.ink,
     '--accent': sec.dataset.accent,
     '--stars': sec.dataset.stars ?? 1,
-    duration: reduce ? 0 : 1.1,
-    ease: 'power2.out',
+    duration: reduce ? 0 : 1.2,
+    ease: 'power2.inOut',
     overwrite: 'auto',
   });
   const meta = $('meta[name="theme-color"]');
@@ -244,61 +285,23 @@ gsap.to('.nav__progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, 
 /* ---------- text reveals ---------- */
 if (!reduce) {
   $$('.chapter__title, .finale__title').forEach((el) => {
+    // hangul is written in reading order, like ink settling on paper
     gsap.from(splits.get(el).chars, {
-      yPercent: 60, opacity: 0, rotate: () => gsap.utils.random(-20, 20), filter: 'blur(8px)',
-      duration: 1.3, ease: 'expo.out', stagger: { each: 0.035, from: 'random' },
+      yPercent: 20, opacity: 0, rotate: () => gsap.utils.random(-3, 3), filter: 'blur(6px)',
+      duration: 1.1, ease: 'sine.inOut', stagger: 0.09,
       scrollTrigger: { trigger: el, start: 'top 85%' },
     });
   });
   $$('.chapter__head .label').forEach((el) => {
-    gsap.from(el, { opacity: 0, letterSpacing: '1em', duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+    gsap.from(el, { opacity: 0, y: 8, duration: 1, ease: 'sine.inOut', scrollTrigger: { trigger: el, start: 'top 88%' } });
   });
   $$('.reveal').forEach((el) => {
     gsap.from(splits.get(el).words, {
-      opacity: 0, y: 18, filter: 'blur(6px)',
-      duration: 0.9, ease: 'power3.out', stagger: 0.035,
+      opacity: 0, y: 10, filter: 'blur(4px)',
+      duration: 1, ease: 'sine.inOut', stagger: 0.05,
       scrollTrigger: { trigger: el, start: 'top 82%' },
     });
   });
-}
-
-/* ---------- marquee ---------- */
-if (!reduce) {
-  const mq = gsap.to('.marquee__inner', { xPercent: -50, duration: 32, ease: 'none', repeat: -1 });
-  let dir = 1;
-  ScrollTrigger.create({
-    start: 0, end: 'max',
-    onUpdate: (self) => {
-      dir = self.direction;
-      const boost = 1 + Math.min(Math.abs(self.getVelocity()) / 300, 5);
-      gsap.timeline({ overwrite: true })
-        .to(mq, { timeScale: dir * boost, duration: 0.2 })
-        .to(mq, { timeScale: dir, duration: 1.2, ease: 'power2.out' });
-    },
-  });
-}
-
-/* ---------- contents: floating preview ---------- */
-if (finePointer && !reduce) {
-  const pv = $('.toc__preview');
-  const pvImg = $('img', pv);
-  const px = gsap.quickTo(pv, 'x', { duration: 0.6, ease: 'power3' });
-  const py = gsap.quickTo(pv, 'y', { duration: 0.6, ease: 'power3' });
-  const pr = gsap.quickTo(pv, 'rotate', { duration: 0.8, ease: 'power3' });
-  let lastX = 0;
-  $('.toc').addEventListener('mousemove', (e) => {
-    px(e.clientX); py(e.clientY);
-    pr(gsap.utils.clamp(-12, 12, (e.clientX - lastX) * 0.6));
-    lastX = e.clientX;
-  });
-  $$('.toc a').forEach((a) => {
-    a.addEventListener('mouseenter', () => {
-      pvImg.src = a.dataset.img;
-      gsap.to(pv, { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' });
-      gsap.fromTo(pvImg, { scale: 1.3 }, { scale: 1, duration: 0.8, ease: 'power3.out' });
-    });
-  });
-  $('.toc').addEventListener('mouseleave', () => gsap.to(pv, { opacity: 0, scale: 0.6, duration: 0.4 }));
 }
 
 /* ---------- Chapter I: sticky story ---------- */
@@ -314,11 +317,11 @@ if (finePointer && !reduce) {
       const on = j <= i;
       gsap.to(img, {
         clipPath: on ? 'circle(150% at 50% 75%)' : 'circle(0% at 50% 75%)',
-        duration: reduce ? 0 : 1.3,
-        ease: 'power3.inOut',
+        duration: reduce ? 0 : 1.2,
+        ease: 'power2.inOut',
         overwrite: 'auto',
       });
-      if (on && j === i && !reduce) gsap.fromTo(img, { scale: 1.25 }, { scale: 1, duration: 1.6, ease: 'power3.out' });
+      if (on && j === i && !reduce) gsap.fromTo(img, { scale: 1.15 }, { scale: 1, duration: 1.2, ease: 'power2.inOut' });
     });
   }
   $$('.step').forEach((step, i) => {
@@ -351,6 +354,9 @@ mm.add('(min-width: 861px) and (prefers-reduced-motion: no-preference)', () => {
       pin: true,
       scrub: 1,
       invalidateOnRefresh: true,
+      // pins must be measured top-to-bottom: this one first, so the portal below
+      // includes its pin spacing (otherwise the portal opens ~1 screen too early)
+      refreshPriority: 2,
     },
   });
 
@@ -386,14 +392,14 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     }
   });
 
-  // sparkles float + twinkle
-  $$('.sparkle').forEach((sp, i) => {
-    gsap.to(sp, { y: -24, rotate: 90, opacity: 0.35, duration: 2.4 + i * 0.6, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+  // ink doodles drift slowly, like they were drawn on a breathing page
+  $$('.doodle').forEach((sp, i) => {
+    gsap.to(sp, { y: -14, rotate: i % 2 ? -8 : 8, opacity: 0.5, duration: 3.2 + i * 0.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
   });
 
   // Portal: tiny circle opens into the whole screen
   const ptl = gsap.timeline({
-    scrollTrigger: { trigger: '.portal', start: 'top top', end: '+=160%', pin: true, scrub: 1 },
+    scrollTrigger: { trigger: '.portal', start: 'top top', end: '+=160%', pin: true, scrub: 1, refreshPriority: 1 },
   });
   ptl
     .fromTo('.portal__mask', { clipPath: 'circle(16% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', ease: 'power1.inOut', duration: 1 })
@@ -408,29 +414,38 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
   gsap.to('.finale__seal svg', { rotation: 360, duration: 24, repeat: -1, ease: 'none', transformOrigin: '50% 50%' });
 });
 
-/* ---------- cursor + sparkle trail ---------- */
+/* ---------- cursor + star dust ---------- */
 if (finePointer && !reduce) {
   const cur = $('.cursor');
-  const cx = gsap.quickTo(cur, 'x', { duration: 0.25, ease: 'power3' });
-  const cy = gsap.quickTo(cur, 'y', { duration: 0.25, ease: 'power3' });
+  const cx = gsap.quickTo(cur, 'x', { duration: 0.35, ease: 'power2' });
+  const cy = gsap.quickTo(cur, 'y', { duration: 0.35, ease: 'power2' });
   let last = 0;
-  const glyphs = ['✦', '✧', '·', '⋆'];
+  const kinds = ['spark', 'spark', 'spark spark--star', 'spark spark--big'];
+  function spawn(x, y) {
+    const sp = document.createElement('span');
+    sp.className = kinds[(Math.random() * kinds.length) | 0];
+    document.body.append(sp);
+    gsap.set(sp, { x, y, scale: gsap.utils.random(0.6, 1.4), rotate: gsap.utils.random(0, 90), opacity: 1 });
+    gsap.timeline({ onComplete: () => sp.remove() })
+      .to(sp, {
+        x: `+=${gsap.utils.random(-26, 26)}`, y: `+=${gsap.utils.random(14, 46)}`,
+        rotate: `+=${gsap.utils.random(-120, 120)}`,
+        duration: gsap.utils.random(1, 1.5), ease: 'sine.out',
+      }, 0)
+      .to(sp, { scale: 0, opacity: 0, duration: 0.6, ease: 'sine.in' }, '-=0.6');
+  }
   addEventListener('mousemove', (e) => {
     gsap.set(cur, { opacity: 1 });
     cx(e.clientX); cy(e.clientY);
     const now = performance.now();
-    if (now - last < 45) return;
+    if (now - last < 35) return;
     last = now;
-    const sp = document.createElement('span');
-    sp.className = 'spark';
-    sp.textContent = glyphs[(Math.random() * glyphs.length) | 0];
-    document.body.append(sp);
-    gsap.set(sp, { x: e.clientX, y: e.clientY, scale: gsap.utils.random(0.6, 1.4) });
-    gsap.to(sp, {
-      x: `+=${gsap.utils.random(-30, 30)}`, y: `+=${gsap.utils.random(10, 50)}`,
-      rotate: gsap.utils.random(-180, 180), opacity: 0, duration: gsap.utils.random(0.8, 1.4),
-      ease: 'power2.out', onComplete: () => sp.remove(),
-    });
+    spawn(e.clientX, e.clientY);
+    if (Math.random() < 0.5) spawn(e.clientX + gsap.utils.random(-8, 8), e.clientY + gsap.utils.random(-8, 8));
+  });
+  // a small burst of dust on click
+  addEventListener('click', (e) => {
+    for (let i = 0; i < 10; i++) spawn(e.clientX + gsap.utils.random(-14, 14), e.clientY + gsap.utils.random(-14, 14));
   });
   $$('a, .hero__arch, .duo__img, .collage__img').forEach((el) => {
     el.addEventListener('mouseenter', () => cur.classList.add('is-hover'));

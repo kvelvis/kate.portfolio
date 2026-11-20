@@ -1,0 +1,258 @@
+.prof {
+  border-top: 1px solid var(--line);
+}
+
+
+.prof__skills {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(24px, 3vw, 48px);
+}
+.prof__group-name {
+  margin-bottom: 8px;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 22px;
+  color: var(--ink);
+}
+.prof__group li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--soft);
+}
+.prof__lvl {
+  display: inline-flex;
+  flex: none;
+  gap: 3px;
+}
+.prof__lvl i,
+.prof__legend i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.prof__lvl i.on,
+.prof__legend i.on {
+  background: var(--blue-ink);
+}
+.prof__legend {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--mute);
+}
+.prof__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.prof__legend span i:last-of-type {
+  margin-right: 5px;
+}
+
+/* skills (4 groups) + certificates as their own column on the right */
+.prof__layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 0.32fr);
+  gap: clamp(24px, 3vw, 48px);
+  align-items: start;
+}
+.prof__certs {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(143, 149, 255, 0.07), transparent 70%);
+}
+.prof__certs ul {
+  display: grid;
+  gap: 12px;
+}
+.prof__cert {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  column-gap: 12px;
+  row-gap: 3px;
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--pill);
+}
+.prof__cert > :not(.prof__cert-mark) {
+  grid-column: 2;
+}
+.prof__cert-mark {
+  grid-row: 1 / span 4;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(143, 149, 255, 0.14);
+  color: var(--blue-ink);
+}
+.prof__cert-mark svg {
+  width: 20px;
+  height: 20px;
+}
+.prof__cert b {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--ink);
+  word-break: keep-all;
+}
+.prof__cert-issuer {
+  font-size: 13px;
+  color: var(--mute);
+}
+.prof__cert-covers {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--soft);
+}
+.prof__cert-date {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  color: var(--mute);
+}
+
+@media (max-width: 1280px) {
+  .prof__skills {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 900px) {
+  .prof__layout {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 700px) {
+  .prof__skills {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* horizontal timeline under the skills */
+.prof__path {
+  margin-top: clamp(56px, 7vw, 96px);
+}
+.prof__path h3 {
+  margin-bottom: 20px;
+}
+.tl {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr)) minmax(300px, 1.7fr);
+  gap: 20px;
+  position: relative;
+  padding: 26px 4px 28px 0; /* room for the "now" card's glow inside the scroll box */
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+/* the line the dots sit on: one segment per item, so it also scrolls with the items on narrow screens */
+.tl__item::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: -20px;
+  height: 1px;
+  background: var(--line);
+}
+.tl__item:last-child::before {
+  right: 0;
+}
+.tl__item {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  scroll-snap-align: start;
+}
+.tl__dot {
+  position: absolute;
+  top: -26px;
+  left: 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--mute);
+  background: var(--bg);
+}
+.tl__item--work .tl__dot,
+.tl__item--free .tl__dot {
+  border-color: var(--soft);
+}
+.tl__item--next .tl__dot {
+  border-color: var(--blue-ink);
+  background: var(--blue-ink);
+  box-shadow: 0 0 0 5px rgba(143, 149, 255, 0.18);
+}
+.tl__when {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  color: var(--mute);
+}
+.tl__title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink);
+  word-break: keep-all;
+}
+.tl__note {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--mute);
+  word-break: keep-all;
+}
+/* "now": the point of the whole timeline, so it gets its own card */
+.tl__item--next {
+  margin-top: -14px;
+  padding: 18px 20px 20px;
+  border: 1px solid rgba(143, 149, 255, 0.55);
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(22, 33, 255, 0.22), rgba(143, 149, 255, 0.08));
+  box-shadow: 0 0 0 4px rgba(143, 149, 255, 0.08), 0 20px 50px -24px rgba(22, 33, 255, 0.6);
+}
+.tl__item--next .tl__dot {
+  top: -12px;
+  left: 20px;
+}
+.tl__item--next::before {
+  top: -6px;
+  right: auto;
+  left: -20px;
+  width: 40px;
+}
+.tl__item--next .tl__when {
+  color: var(--blue-ink);
+  font-weight: 500;
+}
+.tl__item--next .tl__title {
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: #fff;
+}
+.tl__item--next .tl__note {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--soft);
+}
+@media (max-width: 1100px) {
+  .tl {
+    grid-template-columns: repeat(5, 200px) 320px;
+    padding-bottom: 12px;
+  }
+}

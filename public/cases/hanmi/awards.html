@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>대외수상내역 — 한미반도체</title>
+<meta name="description" content="기술력과 신뢰로 인정받은 한미반도체의 주요 수상 및 인증 내역.">
+<meta name="theme-color" content="#05070c">
+<meta property="og:title" content="대외수상내역 — 한미반도체">
+<meta property="og:description" content="기술력과 신뢰로 인정받은 한미반도체의 주요 수상 및 인증 내역.">
+<meta property="og:image" content="img/news-ir.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230062d6'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='800' font-size='16' text-anchor='middle' fill='white'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/hanmi.css">
+<link rel="stylesheet" href="css/pages.css">
+<script src="js/layout.js" defer></script>
+</head>
+<body data-section="ir" data-page="awards">
+
+<main id="main">
+  <section class="sec sec--pb140">
+    <div class="wrap">
+      <div class="head-l rv head-l--48">
+        <p class="eyebrow eyebrow--primary">AWARDS</p>
+        <h2 class="t-h2">대외수상내역</h2>
+        <p class="t-body-l c-sub">기술력과 신뢰로 인정받은 한미반도체의 주요 수상 및 인증 내역입니다.</p>
+      </div>
+      <div class="pills pills--year rv" role="tablist" aria-label="연도 선택" data-filter="awards">
+        <button type="button" role="tab" aria-selected="true" data-year="all"><span>전체</span></button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1" data-year="2026"><span class="en">2026</span></button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1" data-year="2025"><span class="en">2025</span></button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1" data-year="2024"><span class="en">2024</span></button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1" data-year="2023"><span class="en">2023</span></button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1" data-year="2022"><span class="en">2022</span></button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1" data-year="2021"><span class="en">2021</span></button>
+      </div>
+      <ul class="grid-4 awards" id="award-list">
+        <li class="award rv" data-year="2026"><img src="img/icon-award.svg" width="40" height="40" alt=""><h3 class="t-h3">2026 최우수 서플라이어 어워즈</h3><p class="award__meta"><span>마이크론</span><time datetime="2026-10-20">2026.10.20</time></p></li>
+        <li class="award rv" data-year="2025"><img src="img/icon-award.svg" width="40" height="40" alt=""><h3 class="t-h3">재무공시 우수법인 감사장</h3><p class="award__meta"><span>금융감독원</span><time datetime="2025-11-20">2025.11.20</time></p></li>
+        <li class="award rv" data-year="2025"><img src="img/icon-award.svg" width="40" height="40" alt=""><h3 class="t-h3">TC 본더 세계일류상품 인증</h3><p class="award__meta"><span>산업통상부</span><time datetime="2025-11-18">2025.11.18</time></p></li>
+        <li class="award rv" data-year="2025"><img src="img/icon-award.svg" width="40" height="40" alt=""><h3 class="t-h3">2025 탑 서플라이어 어워즈</h3><p class="award__meta"><span>마이크론</span><time datetime="2025-11-13">2025.11.13</time></p></li>
+        <li class="award rv" data-year="2024"><img src="img/icon-award.svg" width="40" height="40" alt=""><h3 class="t-h3">직무발명보상 우수기업 인증</h3><p class="award__meta"><span>특허청</span><time datetime="2024-11-25">2024.11.25</time></p></li>
+        <li class="award rv" data-year="2023"><img src="img/icon-award.svg" width="40" height="40" alt=""><h3 class="t-h3">직무발명보상 우수기업 인증</h3><p class="award__meta"><span>특허청</span><time datetime="2023-03-20">2023.03.20</time></p></li>
+        <li class="award rv" data-year="2022"><img src="img/icon-award.svg" width="40" height="40" alt=""><h3 class="t-h3">IR52 장영실상</h3><p class="award__meta"><span>한국산업기술진흥협회</span><time datetime="2022-04-07">2022.04.07</time></p></li>
+        <li class="award rv" data-year="2021"><img src="img/icon-award.svg" width="40" height="40" alt=""><h3 class="t-h3">2억불 수출의 탑</h3><p class="award__meta"><span>대통령 문재인</span><time datetime="2021-12-06">2021.12.06</time></p></li>
+      </ul>
+      <p class="awards-empty t-body c-sub" hidden>해당 연도의 수상 내역이 없습니다.</p>
+    </div>
+  </section>
+  <script>
+    (function () {
+      const tabs = [...document.querySelectorAll('[data-filter="awards"] [role="tab"]')];
+      const items = document.querySelectorAll('#award-list .award');
+      const empty = document.querySelector('.awards-empty');
+      tabs.forEach(t => t.addEventListener('click', () => {
+        tabs.forEach(o => { o.setAttribute('aria-selected', o === t); o.tabIndex = o === t ? 0 : -1; });
+        let n = 0;
+        items.forEach(it => { const show = t.dataset.year === 'all' || it.dataset.year === t.dataset.year; it.hidden = !show; it.classList.add('is-in'); n += show; });
+        empty.hidden = n > 0;
+      }));
+    })();
+  </script>
+</main>
+</body>
+</html>

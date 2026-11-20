@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Telegram bot token for public/notify.php (put it on the hosting only)
+public/notify-config.php

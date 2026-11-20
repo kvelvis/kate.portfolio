@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gato Pingado — Cat Café</title>
-  <meta name="description" content="커피, 디저트, 그리고 입양까지. 상파울루의 고양이 카페 Gato Pingado 리디자인 컨셉.">
+  <title>묘한 커피 — 고양이 카페 컨셉 사이트</title>
+  <meta name="description" content="커피 한 잔, 고양이 한 마리, 그리고 평생 가족까지. 연남동 가상의 고양이 카페 '묘한 커피' 포트폴리오 사이트.">
+  <meta property="og:title" content="묘한 커피 — 고양이 카페 컨셉 사이트">
+  <meta property="og:description" content="커피 한 잔, 고양이 한 마리, 그리고 평생 가족까지.">
+  <meta property="og:type" content="website">
   <link rel="icon" href="./img/catface.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,21 +17,18 @@
 </head>
 <body>
 
-  <!-- PRELOADER -->
-  <div class="loader" aria-hidden="true">
-    <img class="loader__cat" src="./img/catface.png" alt="">
-    <p class="loader__num"><span>0</span>%</p>
-    <p class="loader__txt">brewing coffee &amp; waking up cats…</p>
-  </div>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
 
   <!-- CURSOR -->
-  <div class="cursor" aria-hidden="true"><span class="cursor__label">meow</span></div>
+  <div class="cursor" aria-hidden="true">
+    <svg class="cursor__paw" viewBox="0 0 32 32" width="28" height="28"><ellipse cx="16" cy="21.5" rx="7.5" ry="6.5"/><ellipse cx="6.5" cy="13" rx="3" ry="3.8" transform="rotate(-20 6.5 13)"/><ellipse cx="12.3" cy="7.2" rx="3" ry="4"/><ellipse cx="19.7" cy="7.2" rx="3" ry="4"/><ellipse cx="25.5" cy="13" rx="3" ry="3.8" transform="rotate(20 25.5 13)"/></svg>
+    <span class="cursor__label">meow</span>
+  </div>
 
   <!-- HEADER -->
   <header class="header">
-    <a href="#hero" class="header__logo" aria-label="Gato Pingado 홈">
-      <img src="./img/catface.png" alt="">
-      <span>gato pingado</span>
+    <a href="#hero" class="header__logo">
+      <img src="./img/logo-eng.png" alt="묘한 커피 로고" width="64" height="64" loading="lazy" decoding="async">
     </a>
     <nav class="header__nav" aria-label="메인 메뉴">
       <a href="#about">카페</a>
@@ -37,12 +37,12 @@
       <a href="#goods">굿즈</a>
       <a href="#adopt">입양</a>
     </nav>
-    <a href="#visit" class="btn btn--sm btn--red header__cta">방문하기</a>
-    <button class="burger" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
+    <a href="#visit" class="btn btn--sm btn--green header__cta">방문하기</a>
+    <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mnav"><span></span><span></span></button>
   </header>
 
-  <div class="mnav" aria-hidden="true">
-    <nav>
+  <div class="mnav" id="mnav" inert>
+    <nav aria-label="모바일 메뉴">
       <a href="#about">카페</a>
       <a href="#cats">냥이들</a>
       <a href="#menu">메뉴</a>
@@ -50,22 +50,48 @@
       <a href="#adopt">입양</a>
       <a href="#visit">방문하기</a>
     </nav>
-    <img src="./img/kitty.gif" alt="" class="mnav__gif">
+    <img src="./img/kitty.gif" alt="" class="mnav__gif" width="1920" height="963" loading="lazy" decoding="async">
   </div>
 
-  <main>
+  <main id="main">
 
     <!-- HERO -->
     <section id="hero" class="hero">
       <div class="hero__grid" aria-hidden="true"></div>
 
       <h1 class="hero__title">
-        <span class="line"><span class="word" data-split>GATO</span>
-          <span class="hero__video" data-cursor="play">
-            <video src="./img/videoplayback.mp4" autoplay muted loop playsinline></video>
+        <span class="line line--top" aria-hidden="true">
+          <span class="word" data-split>myuo</span>
+          <span class="hero__media">
+            <span class="hero__video" data-cursor="play">
+              <video src="./img/moving_head.mp4" autoplay muted loop playsinline preload="auto"></video>
+            </span>
+            <!-- stickers pinned to the video corner -->
+            <span class="sticker sticker--kitty" data-depth="0.6"><img src="./img/kitty.gif" alt="" width="1920" height="963"></span>
+            <span class="sticker sticker--star" data-depth="0.8">
+              <svg viewBox="0 0 100 100"><path d="M50 0 61 35 98 32 68 55 80 92 50 70 20 92 32 55 2 32 39 35Z"/></svg>
+            </span>
           </span>
         </span>
-        <span class="line"><span class="word word--outline" data-split>PIN</span><span class="word" data-split>GADO</span></span>
+        <span class="line line--bottom" aria-hidden="true">
+          <span class="hero__deco">
+            <span class="sticker sticker--ok" data-depth="1"><img src="./img/card.png" alt="" width="729" height="993"></span>
+          </span>
+          <span class="hero__words">
+            <span class="word word--outline" data-split>han</span>
+            <span class="word" data-split>coffee</span>
+          </span>
+          <span class="hero__deco hero__deco--right">
+            <span class="badge">
+              <svg viewBox="0 0 200 200">
+                <defs><path id="circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+                <text><textPath href="#circle">ADOPT, DON'T SHOP ✦ 사지 말고 입양하세요 ✦ </textPath></text>
+              </svg>
+              <span class="badge__paw">🐾</span>
+            </span>
+          </span>
+        </span>
+        <span class="sr-only">묘한 커피 (myuohan coffee)</span>
       </h1>
 
       <div class="hero__bottom">
@@ -74,40 +100,24 @@
           그리고 <mark>평생 가족</mark>까지 만나는 곳.
         </p>
         <div class="hero__btns">
-          <a href="#cats" class="btn btn--red magnetic">냥이 만나러 가기 <i>→</i></a>
+          <a href="#cats" class="btn btn--green magnetic">냥이 만나러 가기 <i aria-hidden="true">→</i></a>
           <a href="#menu" class="btn btn--line magnetic">메뉴 보기</a>
         </div>
       </div>
 
-      <!-- stickers -->
-      <div class="sticker sticker--kitty" data-depth="0.6"><img src="./img/kitty.gif" alt="춤추는 고양이 캐릭터"></div>
-      <div class="sticker sticker--ok" data-depth="1"><img src="./img/okhuman.gif" alt="ok, humano 말풍선"></div>
-      <div class="sticker sticker--face" data-depth="1.4"><img src="./img/catface.png" alt=""></div>
-      <div class="sticker sticker--star" data-depth="0.8" aria-hidden="true">
-        <svg viewBox="0 0 100 100"><path d="M50 0 61 35 98 32 68 55 80 92 50 70 20 92 32 55 2 32 39 35Z"/></svg>
-      </div>
-
-      <div class="badge" aria-hidden="true">
-        <svg viewBox="0 0 200 200">
-          <defs><path id="circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
-          <text><textPath href="#circle">ADOTE NÃO COMPRE ✦ 사지 말고 입양하세요 ✦ </textPath></text>
-        </svg>
-        <span class="badge__paw">🐾</span>
-      </div>
-
-      <p class="hero__scroll"><span></span>scroll</p>
+      <p class="hero__scroll" aria-hidden="true"><span></span>scroll</p>
     </section>
 
     <!-- MARQUEE -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee__row marquee__row--red">
         <div class="marquee__track">
-          <span>SPECIALTY COFFEE</span><b>✦</b><span>GRANDMA CAKES</span><b>✦</b><span>고양이 상주중</span><b>✦</b><span>ADOPT A CAT</span><b>✦</b><span>SÃO PAULO</span><b>✦</b>
+          <span>SPECIALTY COFFEE</span><b>✦</b><span>GRANDMA CAKES</span><b>✦</b><span>고양이 상주 중</span><b>✦</b><span>ADOPT A CAT</span><b>✦</b><span>연남동</span><b>✦</b>
         </div>
       </div>
       <div class="marquee__row marquee__row--green">
         <div class="marquee__track marquee__track--rev">
-          <span>ok, humano</span><b>🐾</b><span>냥생은 짧다</span><b>🐾</b><span>DESDE 2022</span><b>🐾</b><span>골골송 무한재생</span><b>🐾</b><span>cats &amp; coffee</span><b>🐾</b>
+          <span>묘하게</span><b>🐾</b><span>냥생은 짧다</span><b>🐾</b><span>SINCE 2026</span><b>🐾</b><span>골골송 무한 재생</span><b>🐾</b><span>cats &amp; coffee</span><b>🐾</b>
         </div>
       </div>
     </div>
@@ -117,22 +127,42 @@
       <div class="container">
         <p class="label">(01) — about us</p>
         <h2 class="about__statement" data-words>
-          The cat's finally out of the bag. 상파울루의 오래된 2층 집에서 스페셜티 커피와 할머니표 케이크, 그리고 <em>입양을 기다리는 고양이들</em>이 당신을 기다려요.
+          연남동 골목의 하얀 벽돌집. 향긋한 커피와 콩이표 디저트, 그리고 가족을 기다리는 냥이들이 있어요.
         </h2>
 
         <div class="about__collage">
-          <figure class="ph ph--1" data-speed="-0.15" data-cursor="meow"><img src="./img/store.jpg" alt="빨간 문의 Gato Pingado 카페 외관"></figure>
-          <figure class="ph ph--2" data-speed="0.12" data-cursor="meow"><img src="./img/personcat.jpg" alt="고양이를 안고 있는 직원"></figure>
-          <figure class="ph ph--3" data-speed="-0.25" data-cursor="meow"><img src="./img/cups.jpg" alt="고양이 일러스트가 그려진 컵"></figure>
-          <img class="about__jump" src="./img/jump.jpg" alt="" aria-hidden="true">
+          <figure class="ph ph--1" data-speed="-0.15" data-cursor="meow"><img src="./img/cafeoutside.png" alt="노란 문과 테라스가 있는 묘한 커피 외관" width="1264" height="848" loading="lazy" decoding="async"></figure>
+          <figure class="ph ph--2" data-speed="0.12" data-cursor="meow"><img src="./img/woman_cat.png" alt="고양이를 안고 있는 직원" width="896" height="1200" loading="lazy" decoding="async"></figure>
         </div>
 
         <ul class="stats">
-          <li><strong data-count="2022">0</strong><span>오픈 연도</span></li>
-          <li><strong data-count="12">0</strong><span>상주 냥이</span></li>
-          <li><strong data-count="2">0</strong><span>층짜리 하우스</span></li>
+          <li><strong data-count="2026">2026</strong><span>오픈 연도</span></li>
+          <li><strong data-count="8">8</strong><span>상주 냥이</span></li>
+          <li><strong data-count="2">2</strong><span>층짜리 하우스</span></li>
           <li><strong>∞</strong><span>골골송</span></li>
         </ul>
+      </div>
+    </section>
+
+    <!-- NAME + MASCOT STORY (one compact card) -->
+    <section id="story" class="story" aria-label="이름과 마스코트 이야기">
+      <div class="container">
+        <p class="label">(02) — our story</p>
+        <div class="story__card">
+          <div class="story__half">
+            <h2 class="story__title">왜 묘한 커피?</h2>
+            <div class="story__hanja">
+              <figure><span>猫</span><figcaption>고양이 묘</figcaption></figure>
+              <figure><span>妙</span><figcaption>묘할 묘</figcaption></figure>
+            </div>
+            <p>고양이가 있는, 묘하게 끌리는 커피집. 그래서 묘한 커피예요.</p>
+          </div>
+          <div class="story__half">
+            <h2 class="story__title">왜 콩이?</h2>
+            <img class="story__sticker" src="./img/3d_cat.png" alt="콩이 얼굴 스티커" width="1024" height="1024" loading="lazy" decoding="async">
+            <p>커피는 작은 콩에서 시작되고, 우리 카페는 콩이에게서 시작됐어요. 카페 문 앞에서 만난 길고양이가 지금은 우리 사장님이에요.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -140,63 +170,75 @@
     <section id="cats" class="cats">
       <div class="cats__pin">
         <div class="cats__head container">
-          <p class="label label--light">(02) — meet the crew</p>
-          <h2 class="title">오늘의<br><span class="hl">냥이들</span></h2>
-          <p class="cats__hint">← drag / scroll →</p>
+          <p class="label label--light">(03) — meet the crew</p>
+          <div class="cats__intro">
+            <h2 class="title">오늘의 <span class="hl">냥이들</span></h2>
+            <div class="cats__meta">
+              <p class="real-badge">📷 실제 고양이 사진이에요</p>
+              <p class="cats__note">사진 속 냥이들은 모두 <strong>도그마루 입양케어센터</strong>에서 가족을 기다리고 있어요. 국내 최초 안락사 없는 입양케어센터로, 수의사·훈련사·전문 관리사가 함께 돌봄과 입양을 책임져요.</p>
+            </div>
+          </div>
+          <p class="cats__hint" aria-hidden="true">← drag / scroll →</p>
         </div>
         <div class="cats__track">
           <article class="cat-card" style="--c: var(--yellow)">
-            <figure data-cursor="pet me"><img src="./img/cat-siam.jpg" alt="샴 고양이 미소" loading="lazy"></figure>
+            <figure data-cursor="pet me"><img src="./img/kitten-garam-800.jpg" alt="입양을 기다리는 고양이 가람이" width="800" height="800" loading="lazy" decoding="async"></figure>
             <div class="cat-card__body">
-              <h3>미소 <small>Miso · 2y</small></h3>
+              <h3>가람이 <small>Garam · 4개월(추정)</small></h3>
               <ul class="chips"><li>#입양가능</li><li>#간식요정</li></ul>
+              <a href="https://dmanimal.co.kr/adoption/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&amp;bmode=view&amp;idx=12310025&amp;t=board&amp;category=7HAW5F61qw" class="btn btn--sm btn--offwhite cat-card__link" target="_blank" rel="noopener">프로필 보기 <i aria-hidden="true">↗</i><span class="sr-only">: 가람이 (새 창)</span></a>
             </div>
-            <button class="like" aria-label="좋아요">♥</button>
+            <button class="like" type="button" aria-label="가람이 좋아요" aria-pressed="false">♥</button>
           </article>
           <article class="cat-card" style="--c: var(--lilac)">
-            <figure data-cursor="pet me"><img src="./img/cat-tux.jpg" alt="턱시도 고양이 오레오" loading="lazy"></figure>
+            <figure data-cursor="pet me"><img src="./img/kitten-tori-800.jpg" alt="입양을 기다리는 고양이 토리" width="800" height="678" loading="lazy" decoding="async"></figure>
             <div class="cat-card__body">
-              <h3>오레오 <small>Oreo · 3y</small></h3>
+              <h3>토리 <small>Tori · 3개월</small></h3>
               <ul class="chips"><li>#깜짝놀람전문</li><li>#턱시도</li></ul>
+              <a href="https://dmanimal.co.kr/adoption/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&amp;bmode=view&amp;idx=15413967&amp;t=board" class="btn btn--sm btn--offwhite cat-card__link" target="_blank" rel="noopener">프로필 보기 <i aria-hidden="true">↗</i><span class="sr-only">: 토리 (새 창)</span></a>
             </div>
-            <button class="like" aria-label="좋아요">♥</button>
+            <button class="like" type="button" aria-label="토리 좋아요" aria-pressed="false">♥</button>
           </article>
           <article class="cat-card" style="--c: var(--cream)">
-            <figure data-cursor="pet me"><img src="./img/flatlay.jpg" alt="굿즈 사이의 고양이들 라떼" loading="lazy"></figure>
+            <figure data-cursor="pet me"><img src="./img/kitten-yeoreum-800.jpg" alt="입양을 기다리는 고양이 여름이" width="800" height="618" loading="lazy" decoding="async"></figure>
             <div class="cat-card__body">
-              <h3>라떼 <small>Latte · 1y</small></h3>
+              <h3>여름 <small>Yeoreum · 3개월</small></h3>
               <ul class="chips"><li>#입양가능</li><li>#수다쟁이</li></ul>
+              <a href="https://dmanimal.co.kr/adoption/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&amp;bmode=view&amp;idx=15398220&amp;t=board" class="btn btn--sm btn--offwhite cat-card__link" target="_blank" rel="noopener">프로필 보기 <i aria-hidden="true">↗</i><span class="sr-only">: 여름 (새 창)</span></a>
             </div>
-            <button class="like" aria-label="좋아요">♥</button>
+            <button class="like" type="button" aria-label="여름 좋아요" aria-pressed="false">♥</button>
           </article>
           <article class="cat-card" style="--c: var(--pink)">
-            <figure data-cursor="pet me"><img src="./img/bag-cat.jpg" alt="종이봉투에 들어간 고양이 두부" loading="lazy"></figure>
+            <figure data-cursor="pet me"><img src="./img/kitten-seori-800.jpg" alt="입양을 기다리는 고양이 서리" width="800" height="533" loading="lazy" decoding="async"></figure>
             <div class="cat-card__body">
-              <h3>두부 <small>Tofu · 4y</small></h3>
+              <h3>서리 <small>Seori · 5개월</small></h3>
               <ul class="chips"><li>#봉투러버</li><li>#집순이</li></ul>
+              <a href="https://dmanimal.co.kr/adoption/?bmode=view&amp;idx=4235318&amp;back_url=&amp;t=board&amp;page=1" class="btn btn--sm btn--offwhite cat-card__link" target="_blank" rel="noopener">프로필 보기 <i aria-hidden="true">↗</i><span class="sr-only">: 서리 (새 창)</span></a>
             </div>
-            <button class="like" aria-label="좋아요">♥</button>
+            <button class="like" type="button" aria-label="서리 좋아요" aria-pressed="false">♥</button>
           </article>
           <article class="cat-card" style="--c: var(--green-l)">
-            <figure data-cursor="pet me"><img src="./img/sock-cat.jpg" alt="양말을 노리는 고양이 양말이" loading="lazy"></figure>
+            <figure data-cursor="pet me"><img src="./img/kitten-kkoya-800.jpg" alt="입양을 기다리는 고양이 라떼" width="800" height="600" loading="lazy" decoding="async"></figure>
             <div class="cat-card__body">
-              <h3>양말이 <small>Socks · 2y</small></h3>
+              <h3>라떼 <small>Latte · 2개월</small></h3>
               <ul class="chips"><li>#입양가능</li><li>#사냥꾼</li></ul>
+              <a href="https://dmanimal.co.kr/adoption/?q=YToyOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjtzOjQ6InBhZ2UiO2k6Mzt9&amp;bmode=view&amp;idx=11337886&amp;t=board&amp;category=a72c762Z24" class="btn btn--sm btn--offwhite cat-card__link" target="_blank" rel="noopener">프로필 보기 <i aria-hidden="true">↗</i><span class="sr-only">: 라떼 (새 창)</span></a>
             </div>
-            <button class="like" aria-label="좋아요">♥</button>
+            <button class="like" type="button" aria-label="라떼 좋아요" aria-pressed="false">♥</button>
           </article>
           <article class="cat-card" style="--c: var(--yellow)">
-            <figure data-cursor="pet me"><img src="./img/cats-bowl.jpg" alt="밥그릇 앞의 두 고양이" loading="lazy"></figure>
+            <figure data-cursor="pet me"><img src="./img/kitten-meonji-800.jpg" alt="입양을 기다리는 고양이 먼지" width="800" height="600" loading="lazy" decoding="async"></figure>
             <div class="cat-card__body">
-              <h3>콩 &amp; 팥 <small>Duo · 1y</small></h3>
-              <ul class="chips"><li>#세트입양</li><li>#먹방</li></ul>
+              <h3>먼지 <small>Meonji · 2개월</small></h3>
+              <ul class="chips"><li>#낮잠전문</li><li>#먹방</li></ul>
+              <a href="https://dmanimal.co.kr/adoption/?q=YToyOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjtzOjQ6InBhZ2UiO2k6Mjt9&amp;bmode=view&amp;idx=15381799&amp;t=board" class="btn btn--sm btn--offwhite cat-card__link" target="_blank" rel="noopener">프로필 보기 <i aria-hidden="true">↗</i><span class="sr-only">: 먼지 (새 창)</span></a>
             </div>
-            <button class="like" aria-label="좋아요">♥</button>
+            <button class="like" type="button" aria-label="먼지 좋아요" aria-pressed="false">♥</button>
           </article>
           <article class="cat-card cat-card--cta">
-            <img src="./img/okhuman.gif" alt="">
-            <h3>너의 최애는?</h3>
-            <a href="#adopt" class="btn btn--cream">입양 절차 보기 →</a>
+            <img src="./img/card.png" alt="" width="729" height="993" loading="lazy" decoding="async">
+            <h3>더 많은 냥이 만나기</h3>
+            <a href="https://dmanimal.co.kr/main" class="btn btn--charcoal" target="_blank" rel="noopener">보호센터 바로가기 <i aria-hidden="true">↗</i><span class="sr-only"> (새 창)</span></a>
           </article>
         </div>
       </div>
@@ -206,38 +248,39 @@
     <section id="menu" class="menu">
       <div class="container">
         <div class="sec-head">
-          <p class="label">(03) — menu</p>
+          <p class="label">(04) — menu</p>
           <h2 class="title">마시고 먹고<br><span class="hl hl--red">냥냥</span></h2>
         </div>
 
         <div class="bento">
           <article class="tile tile--a" data-cursor="yum">
-            <img src="./img/mug-milk.jpg" alt="빨간 법랑 머그와 우유" loading="lazy">
-            <div class="tile__info"><span class="tag">SIGNATURE</span><h3>냥냥 라떼</h3><p class="price">R$ 14</p></div>
+            <img src="./img/mugs-black-1264.jpg" alt="묘한 라떼" width="1264" height="848" loading="lazy" decoding="async">
+            <div class="tile__info"><span class="tag">SIGNATURE</span><h3>묘한 라떼</h3><p class="price">5,500원</p></div>
           </article>
           <article class="tile tile--b" data-cursor="yum">
-            <img src="./img/toast.jpg" alt="고양이 모양 그릴 토스트" loading="lazy">
-            <div class="tile__info"><span class="tag">BEST</span><h3>냥발 토스트</h3><p class="price">R$ 22</p></div>
+            <img src="./img/toast.jpg" alt="고양이 모양으로 구운 콩이 치즈 토스트" width="1200" height="800" loading="lazy" decoding="async">
+            <div class="tile__info"><span class="tag">BEST</span><h3>콩이 치즈 토스트</h3><p class="price">7,500원</p></div>
           </article>
-          <article class="tile tile--c tile--green">
-            <img src="./img/kitty.gif" alt="" class="tile__gif">
-            <p class="tile__big">오늘의<br>추천 🍰</p>
+          <article class="tile tile--c">
+            <img src="./img/kitty.gif" alt="" class="tile__gif" width="1920" height="963" loading="lazy" decoding="async">
+            <p class="tile__big"> 추천 🍰</p>
           </article>
           <article class="tile tile--d" data-cursor="yum">
-            <img src="./img/favorito.jpg" alt="고양이 모양 푸딩 Favorito" loading="lazy">
-            <div class="tile__info"><span class="tag">NEW</span><h3>푸딩 파보리토</h3><p class="price">R$ 16</p></div>
+            <img src="./img/pudding.png" alt="고양이 모양 콩이 푸딩" width="768" height="1376" loading="lazy" decoding="async">
+            <div class="tile__info"><span class="tag">NEW</span><h3>콩이 푸딩</h3><p class="price">6,000원</p></div>
           </article>
           <article class="tile tile--e" data-cursor="yum">
-            <img src="./img/table.jpg" alt="친구들과 함께하는 디저트 테이블" loading="lazy">
-            <div class="tile__info"><span class="tag">SHARE</span><h3>할머니표 케이크</h3><p class="price">R$ 18</p></div>
+            <img src="./img/table2.png" alt="친구들과 함께 나눠 먹는 디저트 테이블" width="1264" height="848" loading="lazy" decoding="async">
+            <div class="tile__info"><span class="tag">SHARE</span><h3>까만 밤 초코 머핀</h3><p class="price">4,500원</p></div>
           </article>
           <article class="tile tile--f tile--red">
+            <h3 class="sr-only">커피 메뉴</h3>
             <ul class="menu-list">
-              <li><span>에스프레소</span><i></i><b>9</b></li>
-              <li><span>콜드브루</span><i></i><b>13</b></li>
-              <li><span>캐러멜 마끼아또</span><i></i><b>15</b></li>
-              <li><span>말차 라떼</span><i></i><b>15</b></li>
-              <li><span>치즈 토스트</span><i></i><b>20</b></li>
+              <li><span>에스프레소</span><i aria-hidden="true"></i><b>4,000원</b></li>
+              <li><span>아메리카노</span><i aria-hidden="true"></i><b>4,500원</b></li>
+              <li><span>카페 라떼</span><i aria-hidden="true"></i><b>5,000원</b></li>
+              <li><span>콜드브루</span><i aria-hidden="true"></i><b>5,000원</b></li>
+              <li><span>말차 라떼</span><i aria-hidden="true"></i><b>5,500원</b></li>
             </ul>
           </article>
         </div>
@@ -249,77 +292,83 @@
       <div class="container">
         <div class="sec-head sec-head--row">
           <div>
-            <p class="label">(04) — shop</p>
+            <p class="label">(05) — shop</p>
             <h2 class="title">ok, <span class="hl hl--lilac">humano</span><br>굿즈샵</h2>
           </div>
-          <p class="sec-head__desc">수익금 일부는 유기묘 보호에 쓰여요. 사람용 & 고양이용 라이프스타일 굿즈.</p>
+          <p class="sec-head__desc">판매 수익 일부는 유기묘 보호에 쓰여요. 사람도 냥이도 함께 쓰는 라이프스타일 굿즈예요.</p>
         </div>
 
         <div class="goods__grid">
           <article class="product" style="--bg: var(--cream-d)">
             <div class="product__img">
-              <img src="./img/tote.jpg" alt="ok humano 에코백" loading="lazy">
-              <img src="./img/tote-man.jpg" alt="" class="alt" loading="lazy">
+              <img src="./img/tote-1264.jpg" alt="묘하게 끌려 토트백" width="1264" height="848" loading="lazy" decoding="async">
             </div>
             <span class="product__badge">NEW</span>
-            <h3>ok, humano 토트</h3><p>₩ 32,000</p>
+            <h3>묘하게 끌려 토트백</h3><p>32,000원</p>
           </article>
           <article class="product" style="--bg: var(--pink)">
             <div class="product__img">
-              <img src="./img/can.jpg" alt="통조림 패키지 양말" loading="lazy">
-              <img src="./img/socks-play.jpg" alt="" class="alt" loading="lazy">
+              <img src="./img/socks-896.jpg" alt="패키지에 담긴 묘한 양말" width="896" height="1200" loading="lazy" decoding="async">
             </div>
             <span class="product__badge product__badge--red">HOT</span>
-            <h3>양말 통조림</h3><p>₩ 18,000</p>
+            <h3>묘한 양말</h3><p>10,000원</p>
           </article>
           <article class="product" style="--bg: var(--lilac-l)">
             <div class="product__img">
-              <img src="./img/tee.jpg" alt="Gato Pingado 티셔츠" loading="lazy">
-              <img src="./img/boys.jpg" alt="" class="alt" loading="lazy">
+              <img src="./img/hoddie.png" alt="묘한 후드티" width="896" height="1200" loading="lazy" decoding="async">
             </div>
-            <h3>Café &amp; Gatos 티</h3><p>₩ 39,000</p>
+            <h3>묘한 후드티</h3><p>39,000원</p>
           </article>
           <article class="product" style="--bg: var(--green-l)">
             <div class="product__img">
-              <img src="./img/mugs.jpg" alt="법랑 머그 세트" loading="lazy">
-              <img src="./img/boxes.jpg" alt="" class="alt" loading="lazy">
+              <img src="./img/mug-yellow-1264.jpg" alt="묘한 법랑 머그" width="1264" height="848" loading="lazy" decoding="async">
             </div>
-            <h3>법랑 머그</h3><p>₩ 24,000</p>
+            <h3>묘한 머그</h3><p>24,000원</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ADOPT (stacked cards) -->
+    <!-- ADOPT (4 steps) -->
     <section id="adopt" class="adopt">
       <div class="container">
-        <div class="sec-head">
-          <p class="label">(05) — adopt, don't shop</p>
-          <h2 class="title">입양은<br><span class="hl hl--red">이렇게</span> 🐾</h2>
+        <div class="sec-head adopt__head">
+          <div class="adopt__text">
+            <p class="label">(06) — adopt, don't shop</p>
+            <h2 class="title">입양은<br><span class="hl hl--red">이렇게</span> <span aria-hidden="true">🐾</span></h2>
+          </div>
+          <figure class="adopt__photo" data-cursor="pet me">
+            <img src="./img/adoptcat.jpg" alt="묘한 커피 후디를 입은 사람의 손 위에 앉은 회색 아기 고양이" width="1200" height="896" loading="lazy" decoding="async">
+            <figcaption class="adopt__sticker">new<br>family!</figcaption>
+          </figure>
         </div>
 
-        <div class="steps">
-          <article class="step" style="--bg: var(--red); --fg: var(--cream)">
-            <span class="step__num">01</span>
-            <div class="step__txt"><h3>놀러오기</h3><p>예약 없이 언제든. 커피 마시면서 냥이들과 먼저 친해져요.</p></div>
-            <img src="./img/store.jpg" alt="" loading="lazy">
-          </article>
-          <article class="step" style="--bg: var(--green); --fg: var(--cream)">
-            <span class="step__num">02</span>
-            <div class="step__txt"><h3>운명의 냥 찾기</h3><p>스태프가 성격, 나이, 건강 상태를 전부 알려드려요.</p></div>
-            <img src="./img/personcat.jpg" alt="" loading="lazy">
-          </article>
-          <article class="step" style="--bg: var(--lilac); --fg: var(--ink)">
-            <span class="step__num">03</span>
-            <div class="step__txt"><h3>신청 &amp; 인터뷰</h3><p>간단한 신청서 + 짧은 대화. 서로에게 꼭 맞는지 확인하는 시간.</p></div>
-            <img src="./img/adote.jpg" alt="" loading="lazy">
-          </article>
-          <article class="step" style="--bg: var(--yellow); --fg: var(--ink)">
-            <span class="step__num">04</span>
-            <div class="step__txt"><h3>집으로 GO!</h3><p>웰컴 키트와 함께 새 가족 탄생 🎉 이후에도 계속 연락해요.</p></div>
-            <img src="./img/paperbag.jpg" alt="" loading="lazy">
-          </article>
-        </div>
+        <ol class="steps">
+          <li class="step step--yellow">
+            <span class="step__num" aria-hidden="true">01</span>
+          
+            <h3>놀러오기</h3>
+            <p>예약 없이 커피 마시며 냥이들과 친해져요</p>
+          </li>
+          <li class="step step--lilac">
+            <span class="step__num" aria-hidden="true">02</span>
+           
+            <h3>운명의 냥 찾기</h3>
+            <p>성격, 나이, 건강 상태를 알려드려요</p>
+          </li>
+          <li class="step step--offwhite">
+            <span class="step__num" aria-hidden="true">03</span>
+            
+            <h3>신청 &amp; 상담</h3>
+            <p>간단한 신청서와 짧은 대화</p>
+          </li>
+          <li class="step step--charcoal">
+            <span class="step__num" aria-hidden="true">04</span>
+           
+            <h3>집으로 GO!</h3>
+            <p>웰컴 키트와 함께 새 가족 탄생 🎉</p>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -327,17 +376,17 @@
     <section id="visit" class="visit">
       <div class="container visit__inner">
         <figure class="visit__img" data-cursor="hi!">
-          <img src="./img/hero.jpg" alt="벽에 그려진 Gato Pingado 로고와 손님" loading="lazy">
+          <img src="./img/cafeopen.png" alt="하얀 벽돌 건물에 노란 문이 있는 묘한 커피 입구" width="1264" height="848" loading="lazy" decoding="async">
         </figure>
         <div class="visit__info">
-          <p class="label label--light">(06) — visit</p>
-          <h2 class="title">놀러와<br><span class="hl hl--yellow">냥!</span></h2>
+          <p class="label label--light">(07) — visit</p>
+          <h2 class="title">놀러와<br><span class="hl">냥!</span></h2>
           <dl class="visit__list">
-            <div><dt>where</dt><dd>São Paulo, Brasil<br>빨간 문 2층 집</dd></div>
-            <div><dt>when</dt><dd>화–일 10:00 – 20:00<br>월요일은 냥이도 쉬어요</dd></div>
+            <div><dt>where</dt><dd>서울특별시 마포구 연남로 00, 1층</dd></div>
+            <div><dt>when</dt><dd>화–일 10:00–20:00<br>월요일은 냥이도 쉬어요</dd></div>
             <div><dt>rule</dt><dd>자는 냥이는 깨우지 않기 💤</dd></div>
           </dl>
-          <a href="#hero" class="btn btn--yellow btn--xl magnetic">길찾기 <i>↗</i></a>
+          <a href="https://map.naver.com/p/search/%EC%97%B0%EB%82%A8%EB%8F%99" class="btn btn--yellow btn--xl magnetic" target="_blank" rel="noopener">길찾기 <i aria-hidden="true">↗</i><span class="sr-only"> (네이버 지도, 새 창)</span></a>
         </div>
       </div>
     </section>
@@ -348,19 +397,39 @@
   <footer class="footer">
     <div class="footer__top container">
       <p class="footer__q">고양이가<br>기다리고 있어요.</p>
-      <ul class="footer__links">
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">TikTok</a></li>
-        <li><a href="#">Pinterest</a></li>
+      <!-- fictional cafe: no real social accounts, so these are labels, not dead links -->
+      <ul class="footer__links" aria-label="SNS (가상 카페라 준비 중)">
+        <li><span>Instagram</span></li>
+        <li><span>KakaoTalk</span></li>
+        <li><span>Naver</span></li>
       </ul>
     </div>
-    <img class="footer__logo" src="./img/logowhite.png" alt="gato pingado">
+    <div class="footer__info container">
+      <p>서울특별시 마포구 연남로 00, 1층</p>
+      <p>협력 보호센터: <a href="https://dmanimal.co.kr/main" target="_blank" rel="noopener">도그마루 입양케어센터 <span aria-hidden="true">↗</span><span class="sr-only"> (새 창)</span></a></p>
+    </div>
     <div class="footer__bottom container">
-      <span>© 2026 Gato Pingado — concept redesign</span>
+      <span>© 2026 묘한 커피 — concept site</span>
       <span>Portfolio · Web design &amp; publishing</span>
       <a href="#hero" class="to-top">TOP ↑</a>
     </div>
   </footer>
+
+  <!-- NOTICE POPUP -->
+  <dialog class="notice" id="notice" aria-labelledby="notice-title" aria-describedby="notice-desc">
+    <button class="notice__close" type="button" data-notice-close aria-label="알림 닫기">✕</button>
+    <img class="notice__face" src="./img/3d_cat.png" alt="" width="1024" height="1024" decoding="async">
+    <h2 class="notice__title" id="notice-title">⚠️ 잠깐, 알려드려요!</h2>
+    <div class="notice__body" id="notice-desc">
+      <p>이 사이트는 포트폴리오용으로 만든 가상의 카페 '묘한 커피'예요.</p>
+      <p>카페, 메뉴, 굿즈 사진은 모두 AI로 만든 이미지예요.</p>
+      <p><mark>단, 고양이 사진은 진짜예요! 사진 속 냥이들은 도그마루 입양케어센터에서 지금도 가족을 기다리고 있어요.</mark></p>
+    </div>
+    <div class="notice__actions">
+      <button type="button" class="btn btn--yellow" data-notice-close autofocus>확인했어요</button>
+      <a href="https://dmanimal.co.kr/main" class="btn btn--charcoal" target="_blank" rel="noopener">도그마루에서 냥이 만나기 ↗<span class="sr-only"> (새 창)</span></a>
+    </div>
+  </dialog>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

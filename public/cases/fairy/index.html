@@ -1,23 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fairy Tales — Illustrated Stories</title>
-  <meta name="description" content="An illustrated scroll story: four little fairy tales with GSAP animation.">
+  <title>별빛 동화 — 그림으로 읽는 네 편의 이야기</title>
+  <meta name="description" content="보랏빛 동굴의 마녀, 하늘을 지키는 사슴, 숲으로 내려온 별아이들, 작은 왕관을 쓴 아기 고양이. 스크롤을 내리면 한 장씩 넘어가는 그림 동화예요.">
+  <link rel="icon" type="image/svg+xml" href="./img/favicon.svg">
+  <link rel="apple-touch-icon" href="./img/opt/1d-sm.jpg">
   <meta name="theme-color" content="#0c0a1d">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Song+Myung&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="./img/opt/3c.jpg">
   <link rel="stylesheet" href="./css/fairy.css">
 </head>
 <body class="is-loading">
 
-  <!-- Loader -->
+  <!-- Loader: a book that slowly turns its page -->
   <div class="loader" aria-hidden="true">
-    <div class="loader__moon"><span class="loader__shadow"></span></div>
-    <p class="loader__text">Once upon a time… <span class="loader__count">0</span>%</p>
+    <div class="book">
+      <span class="book__page book__page--l"></span>
+      <span class="book__page book__page--r"></span>
+      <span class="book__page book__page--turn"></span>
+      <span class="dust" style="--x:-34px; --y:-26px; --d:0s"></span>
+      <span class="dust" style="--x:12px;  --y:-44px; --d:.9s"></span>
+      <span class="dust" style="--x:58px;  --y:-30px; --d:1.7s"></span>
+      <span class="dust" style="--x:96px;  --y:-14px; --d:.4s"></span>
+      <span class="dust" style="--x:150px; --y:-34px; --d:2.3s"></span>
+      <span class="dust" style="--x:-12px; --y:-58px; --d:2.9s"></span>
+      <span class="dust" style="--x:120px; --y:-62px; --d:1.3s"></span>
+    </div>
+    <p class="loader__text">옛날 옛적에…</p>
   </div>
 
   <canvas id="stars" aria-hidden="true"></canvas>
@@ -25,12 +38,12 @@
 
   <!-- Navigation -->
   <header class="nav">
-    <a href="#top" class="nav__logo" data-scroll>✦ Fairy Tales</a>
-    <nav class="nav__links" aria-label="Chapters">
-      <a href="#ch1" data-scroll><span>I</span><em>Witch</em></a>
-      <a href="#ch2" data-scroll><span>II</span><em>Sky</em></a>
-      <a href="#ch3" data-scroll><span>III</span><em>House</em></a>
-      <a href="#ch4" data-scroll><span>IV</span><em>Kitty</em></a>
+    <a href="#top" class="nav__logo" data-scroll>별빛 동화</a>
+    <nav class="nav__links" aria-label="차례">
+      <a href="#ch1" data-scroll><span>I</span><em>마녀</em></a>
+      <a href="#ch2" data-scroll><span>II</span><em>하늘</em></a>
+      <a href="#ch3" data-scroll><span>III</span><em>별의 집</em></a>
+      <a href="#ch4" data-scroll><span>IV</span><em>고양이</em></a>
     </nav>
     <span class="nav__progress" aria-hidden="true"></span>
   </header>
@@ -39,56 +52,33 @@
 
     <!-- Hero -->
     <section class="hero" data-bg="#0c0a1d" data-ink="#efe8ff" data-accent="#c9a7ff" data-stars="1">
-      <p class="hero__eyebrow">An illustrated collection<br>of four little stories</p>
-      <p class="hero__year">Vol. I<br>Scroll story</p>
+      <p class="hero__eyebrow">그림과 함께 읽는<br>네 편의 작은 이야기</p>
+      <p class="hero__year">첫 번째 책<br>천천히 넘겨 보세요</p>
 
       <div class="hero__arches">
-        <figure class="arch hero__arch hero__arch--l" data-depth="30"><img src="./img/opt/1a.jpg" alt="A girl in a yellow cape facing a violet cave full of birds"></figure>
-        <figure class="arch hero__arch hero__arch--c" data-depth="14"><img src="./img/opt/3c.jpg" alt="Two star-children peeking out of a starry tent"></figure>
-        <figure class="arch hero__arch hero__arch--r" data-depth="44"><img src="./img/opt/1d.jpg" alt="A black kitten with a tiny crown raising its paw"></figure>
+        <figure class="arch hero__arch hero__arch--l" data-depth="30"><img src="./img/opt/1a.jpg" alt="노란 망토를 두른 소녀가 새들이 가득한 보랏빛 동굴을 바라보고 있어요"></figure>
+        <figure class="arch hero__arch hero__arch--c" data-depth="14"><img src="./img/opt/3c.jpg" alt="별무늬 천막 밖으로 빼꼼 얼굴을 내민 두 별아이"></figure>
+        <figure class="arch hero__arch hero__arch--r" data-depth="44"><img src="./img/opt/1d.jpg" alt="작은 왕관을 쓰고 앞발을 든 까만 아기 고양이"></figure>
       </div>
 
-      <h1 class="hero__title split" aria-label="Fairy Tales">Fairy <em>Tales</em></h1>
+      <h1 class="hero__title split" aria-label="별빛 동화">별빛 <em>동화</em></h1>
 
-      <div class="hero__scroll" aria-hidden="true"><span></span>Scroll to begin</div>
-    </section>
-
-    <!-- Marquee -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__inner">
-        <span>Once upon a time ✦ The Witch's Secret ✦ Keepers of the Sky ✦ Asterskin House ✦ The Strange Kitty ✦&nbsp;</span>
-        <span>Once upon a time ✦ The Witch's Secret ✦ Keepers of the Sky ✦ Asterskin House ✦ The Strange Kitty ✦&nbsp;</span>
-      </div>
-    </div>
-
-    <!-- Contents -->
-    <section class="contents" data-bg="#0c0a1d" data-ink="#efe8ff" data-accent="#c9a7ff" data-stars="1">
-      <div class="contents__head">
-        <span class="label">Contents</span>
-        <p class="contents__intro reveal">Read slowly. Every page is a small window into a world where birds turn into girls, stars move to the forest and kittens wear crowns.</p>
-      </div>
-      <ol class="toc">
-        <li><a href="#ch1" data-scroll data-img="./img/opt/3a.jpg"><span class="toc__num">I</span><span class="toc__name">The Witch's Secret</span><span class="toc__meta">3 pages</span></a></li>
-        <li><a href="#ch2" data-scroll data-img="./img/opt/1b.jpg"><span class="toc__num">II</span><span class="toc__name">Keepers of the Sky</span><span class="toc__meta">4 pages</span></a></li>
-        <li><a href="#ch3" data-scroll data-img="./img/opt/2c.jpg"><span class="toc__num">III</span><span class="toc__name">Asterskin House</span><span class="toc__meta">3 pages</span></a></li>
-        <li><a href="#ch4" data-scroll data-img="./img/opt/1d.jpg"><span class="toc__num">IV</span><span class="toc__name">The Strange Kitty</span><span class="toc__meta">3 pages</span></a></li>
-      </ol>
-      <div class="toc__preview arch" aria-hidden="true"><img src="./img/opt/3a.jpg" alt=""></div>
+      <a href="#contents" class="hero__scroll" data-scroll><span aria-hidden="true"></span>이야기 시작하기</a>
     </section>
 
     <!-- Chapter I — sticky story -->
     <section class="chapter ch-witch" id="ch1" data-bg="#1e0b2c" data-ink="#fbe7f5" data-accent="#f4b93a" data-stars="0.7">
       <header class="chapter__head">
-        <span class="label">Chapter I</span>
-        <h2 class="chapter__title split">The Witch's <em>Secret</em></h2>
+        <span class="label">첫 번째 이야기</span>
+        <h2 class="chapter__title split">마녀의 <em>비밀</em></h2>
       </header>
 
       <div class="story">
         <div class="story__media">
           <figure class="story__frame arch">
-            <img src="./img/opt/1a.jpg" alt="A girl in a yellow cape standing at the mouth of a violet cave" loading="lazy">
-            <img src="./img/opt/2a.jpg" alt="A black bird with a branch of pink berries in its beak" loading="lazy">
-            <img src="./img/opt/3a.jpg" alt="A witch with black hair stirring a pink potion in a cauldron" loading="lazy">
+            <img src="./img/opt/1a.jpg" alt="보랏빛 동굴 입구에 선 노란 망토의 소녀" loading="lazy">
+            <img src="./img/opt/2a.jpg" alt="분홍 열매가 달린 가지를 부리에 문 검은 새" loading="lazy">
+            <img src="./img/opt/3a.jpg" alt="가마솥에 담긴 분홍 물약을 젓는 검은 머리의 마녀" loading="lazy">
           </figure>
           <p class="story__counter"><span class="story__current">01</span> / 03</p>
         </div>
@@ -96,20 +86,20 @@
         <div class="story__steps">
           <article class="step">
             <div class="step__card">
-              <span class="step__n">i.</span>
-              <p class="reveal">Somewhere beyond the violet hills there is a cave where the birds draw strange signs in the air.</p>
+              <span class="step__n">하나</span>
+              <p class="reveal">보랏빛 언덕 너머 어딘가에 동굴이 하나 있었어요. 그곳의 새들은 허공에 알 수 없는 무늬를 그리곤 했답니다.</p>
             </div>
           </article>
           <article class="step">
             <div class="step__card">
-              <span class="step__n">ii.</span>
-              <p class="reveal">On a full moon you may meet a black bird carrying a branch of pink berries in its beak.</p>
+              <span class="step__n">둘</span>
+              <p class="reveal">보름달이 뜨는 밤이면, 분홍 열매 가지를 부리에 문 검은 새를 만날 수도 있었지요.</p>
             </div>
           </article>
           <article class="step">
             <div class="step__card">
-              <span class="step__n">iii.</span>
-              <p class="reveal">Only once a year can it take on its true appearance with these berries. There are so many enchanted birds, but not every one is able to become human.</p>
+              <span class="step__n">셋</span>
+              <p class="reveal">그 열매가 있어야만 새는 일 년에 단 한 번, 본래의 모습으로 돌아갈 수 있었어요. 마법에 걸린 새는 아주 많았지만, 모두가 사람이 될 수 있는 건 아니었답니다.</p>
             </div>
           </article>
         </div>
@@ -119,27 +109,27 @@
     <!-- Chapter II — horizontal scroll -->
     <section class="chapter ch-night" id="ch2" data-bg="#0a1530" data-ink="#e6efff" data-accent="#8fd6ea" data-stars="1">
       <header class="chapter__head">
-        <span class="label">Chapter II</span>
-        <h2 class="chapter__title split">Keepers of <em>the Sky</em></h2>
+        <span class="label">두 번째 이야기</span>
+        <h2 class="chapter__title split">하늘을 <em>지키는 이들</em></h2>
       </header>
 
       <div class="hscroll">
         <div class="hscroll__track">
           <article class="panel">
-            <figure class="panel__img"><img src="./img/opt/1b.jpg" alt="The crescent moon blowing a scarf of stars over a pale forest" loading="lazy"></figure>
-            <p class="panel__cap"><span>01</span>Every night the Moon breathes out the sky like a long scarf full of stars.</p>
+            <figure class="panel__img"><img src="./img/opt/1b.jpg" alt="창백한 숲 위로 별이 가득한 목도리를 불어 내는 초승달" loading="lazy"></figure>
+            <p class="panel__cap"><span>01</span>밤마다 달님은 하늘을 길게 내쉬었어요. 별이 주렁주렁 달린 긴 목도리처럼요.</p>
           </article>
           <article class="panel">
-            <figure class="panel__img"><img src="./img/opt/2b.jpg" alt="Two white antlered spirits holding tiny lights" loading="lazy"></figure>
-            <p class="panel__cap"><span>02</span>Two antlered keepers walk behind it and carry the lost lights home.</p>
+            <figure class="panel__img"><img src="./img/opt/2b.jpg" alt="작은 빛을 하나씩 들고 있는 뿔 달린 하얀 정령 둘" loading="lazy"></figure>
+            <p class="panel__cap"><span>02</span>뿔 달린 두 하늘지기가 그 뒤를 따라 걸으며, 길 잃은 빛들을 집으로 데려다주었답니다.</p>
           </article>
           <article class="panel">
-            <figure class="panel__img"><img src="./img/opt/3b.jpg" alt="A sleepy sun rising above a white rock with a little deer on top" loading="lazy"></figure>
-            <p class="panel__cap"><span>03</span>At dawn the smallest keeper climbs the highest rock to wake up the Sun.</p>
+            <figure class="panel__img"><img src="./img/opt/3b.jpg" alt="작은 사슴이 올라선 하얀 바위 위로 졸린 해님이 떠오르는 모습" loading="lazy"></figure>
+            <p class="panel__cap"><span>03</span>새벽이 오면 가장 작은 하늘지기가 제일 높은 바위에 올라 해님을 깨웠어요.</p>
           </article>
           <article class="panel panel--wide">
-            <figure class="panel__img"><img src="./img/opt/4b.jpg" alt="Panorama: the sun, the keepers and the moon across one sky" loading="lazy"></figure>
-            <p class="panel__cap"><span>04</span>And so the whole sky turns, from the Sun to the Moon, in one long breath.</p>
+            <figure class="panel__img"><img src="./img/opt/4b.jpg" alt="해님과 하늘지기들, 달님이 한 하늘에 나란히 펼쳐진 풍경" loading="lazy"></figure>
+            <p class="panel__cap"><span>04</span>그렇게 하늘은 해님에서 달님까지, 긴 숨 한 번에 천천히 한 바퀴를 돌았답니다.</p>
           </article>
         </div>
       </div>
@@ -148,52 +138,53 @@
     <!-- Chapter III — parallax collage -->
     <section class="chapter ch-aster" id="ch3" data-bg="#e8edf3" data-ink="#1b2638" data-accent="#d9776a" data-stars="0">
       <header class="chapter__head">
-        <span class="label">Chapter III</span>
-        <h2 class="chapter__title split">Asterskin <em>House</em></h2>
+        <span class="label">세 번째 이야기</span>
+        <h2 class="chapter__title split">아스터스킨의 <em>집</em></h2>
       </header>
 
       <div class="collage">
-        <figure class="collage__img c1" data-speed="1"><img src="./img/opt/3c.jpg" alt="Two star-children hugging inside a starry tent" loading="lazy"></figure>
-        <p class="collage__text t1 reveal">Everyone has a choice — and so many stars choose life on earth.</p>
+        <figure class="collage__img c1" data-speed="1"><img src="./img/opt/3c.jpg" alt="별무늬 천막 안에서 서로 꼭 껴안은 두 별아이" loading="lazy"></figure>
+        <p class="collage__text t1 reveal">누구에게나 고를 수 있는 길이 있었어요. 그리고 많은 별들이 땅 위의 삶을 골랐답니다.</p>
 
-        <figure class="collage__img c2" data-speed="-1"><img src="./img/opt/1c.jpg" alt="A star-child riding on the back of a large dark bird through clouds" loading="lazy"></figure>
-        <p class="collage__text t2 reveal">They fall softly, holding on to the wings of the wild birds.</p>
+        <figure class="collage__img c2" data-speed="-1"><img src="./img/opt/1c.jpg" alt="커다란 검은 새의 등에 올라 구름 사이를 나는 별아이" loading="lazy"></figure>
+        <p class="collage__text t2 reveal">별들은 들새의 날개를 꼭 붙잡고, 사뿐사뿐 내려왔어요.</p>
 
-        <figure class="collage__img c3" data-speed="0.6"><img src="./img/opt/2c.jpg" alt="A bird delivering a letter to a tiny red door in a stone by the lake" loading="lazy"></figure>
-        <p class="collage__text t3 reveal">They build small houses in dense forests and tame little wild birds, so that at any moment they can return to where their heart is.</p>
+        <figure class="collage__img c3" data-speed="0.6"><img src="./img/opt/2c.jpg" alt="호숫가 돌에 난 작은 빨간 문 앞으로 편지를 물어다 주는 새" loading="lazy"></figure>
+        <p class="collage__text t3 reveal">울창한 숲속에 작은 집을 짓고 어린 들새들을 길들였지요. 언제든 마음이 머무는 곳으로 돌아갈 수 있도록요.</p>
 
-        <span class="sparkle s1" aria-hidden="true">✦</span>
-        <span class="sparkle s2" aria-hidden="true">✧</span>
-        <span class="sparkle s3" aria-hidden="true">✦</span>
+        <!-- hand-drawn ink doodles -->
+        <svg class="doodle s1" viewBox="0 0 40 40" aria-hidden="true"><path d="M20.5 4.5c-.8 9.6.6 21.4-.4 31.2M6 13.4c9.2 3.8 19.4 9.6 28.6 13.4M6.8 28.2c8.4-5.2 18-11.4 27-16.6"/></svg>
+        <svg class="doodle s2" viewBox="0 0 48 48" aria-hidden="true"><path d="M30.6 6.2C19 6.8 10.4 15.8 11 27.4c.6 9.6 8.8 16 18.6 15.2-6.8-3.6-10.6-10-10.2-17.4.4-8 4.8-14.6 11.2-19z"/></svg>
+        <svg class="doodle s3" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 22c3.4-1 6.8.4 7.6 3.8M24.4 9.2c.4 2.6-.6 5.2-2.8 6.4M28 26.6c2.8.2 4.6 2.4 4.2 5"/></svg>
       </div>
     </section>
 
     <!-- Chapter IV — portal -->
     <section class="chapter ch-kitty" id="ch4" data-bg="#f3e3da" data-ink="#1a1422" data-accent="#3f6fd1" data-stars="0">
       <header class="chapter__head">
-        <span class="label">Chapter IV</span>
-        <h2 class="chapter__title split">The Strange <em>Kitty</em></h2>
+        <span class="label">네 번째 이야기</span>
+        <h2 class="chapter__title split">이상한 <em>아기 고양이</em></h2>
       </header>
 
       <div class="duo">
-        <figure class="arch duo__img" data-speed="0.5"><img src="./img/opt/1d.jpg" alt="A black kitten with blue eyes and a tiny black crown" loading="lazy"></figure>
-        <p class="duo__text reveal">At first glance it's just a regular little black kitten. But if you look closely, you can see a tiny black crown on its head.</p>
+        <figure class="arch duo__img" data-speed="0.5"><img src="./img/opt/1d.jpg" alt="파란 눈에 작은 까만 왕관을 쓴 까만 아기 고양이" loading="lazy"></figure>
+        <p class="duo__text reveal">언뜻 보면 그저 평범한 까만 아기 고양이였어요. 하지만 가까이 들여다보면, 머리 위에 아주 작은 까만 왕관이 얹혀 있었답니다.</p>
       </div>
     </section>
 
-    <section class="portal" data-bg="#0b0912" data-ink="#f2f0ff" data-accent="#7fb0ff" data-stars="1" aria-label="Cat magic">
-      <div class="portal__mask"><img src="./img/opt/2d.jpg" alt="A black cat curled into a circle, surrounded by magic symbols" loading="lazy"></div>
+    <section class="portal" data-bg="#0b0912" data-ink="#f2f0ff" data-accent="#7fb0ff" data-stars="1" aria-label="고양이 마법">
+      <div class="portal__mask"><img src="./img/opt/2d.jpg" alt="마법 문양에 둘러싸여 동그랗게 몸을 만 까만 고양이" loading="lazy"></div>
       <svg class="portal__ring" viewBox="0 0 400 400" aria-hidden="true">
         <defs><path id="ringPath" d="M200,200 m-170,0 a170,170 0 1,1 340,0 a170,170 0 1,1 -340,0"/></defs>
-        <text><textPath href="#ringPath" textLength="1060" lengthAdjust="spacing">look closely ✦ look closely ✦ look closely ✦ look closely ✦ </textPath></text>
+        <text><textPath href="#ringPath" textLength="1060" lengthAdjust="spacing">가만히 들여다보면 · 가만히 들여다보면 · 가만히 들여다보면 · 가만히 들여다보면 · 가만히 들여다보면 · 가만히 들여다보면 · </textPath></text>
       </svg>
-      <p class="portal__text split">…and a little bit of <em>cat magic.</em></p>
+      <p class="portal__text split">…그리고 <em>고양이 마법</em>도 조금.</p>
     </section>
 
     <section class="chapter ch-kitty-end" data-bg="#f3e3da" data-ink="#1a1422" data-accent="#3f6fd1" data-stars="0">
       <div class="duo duo--rev">
-        <figure class="arch duo__img" data-speed="0.5"><img src="./img/opt/3d.jpg" alt="A girl in a black dress sitting among tulips with a black kitten at her feet" loading="lazy"></figure>
-        <p class="duo__text reveal">The kitten has no master, but it has a very close friend — and they share every secret of the garden.</p>
+        <figure class="arch duo__img" data-speed="0.5"><img src="./img/opt/3d.jpg" alt="튤립 사이에 앉은 검은 옷의 소녀와 그 발치의 까만 아기 고양이" loading="lazy"></figure>
+        <p class="duo__text reveal">아기 고양이에게는 주인이 없었어요. 대신 아주 가까운 친구가 하나 있었고, 둘은 정원의 비밀을 모두 나누어 가졌답니다.</p>
       </div>
     </section>
 
@@ -204,22 +195,22 @@
     <div class="finale__seal">
       <svg viewBox="0 0 300 300" aria-hidden="true">
         <defs><path id="sealPath" d="M150,150 m-120,0 a120,120 0 1,1 240,0 a120,120 0 1,1 -240,0"/></defs>
-        <text><textPath href="#sealPath" textLength="748" lengthAdjust="spacing">happily ever after ✦ happily ever after ✦ </textPath></text>
+        <text><textPath href="#sealPath" textLength="748" lengthAdjust="spacing">그 뒤로 오래오래 행복하게 살았답니다 · 그 뒤로 오래오래 행복하게 살았답니다 · </textPath></text>
       </svg>
       <img src="./img/opt/1d-sm.jpg" alt="" loading="lazy">
     </div>
-    <h2 class="finale__title split">The <em>End</em></h2>
+    <h2 class="finale__title split">그리고, <em>끝</em></h2>
 
     <dl class="case">
-      <div><dt>Role</dt><dd>Web design, publishing, front-end</dd></div>
-      <div><dt>Stack</dt><dd>HTML, CSS Grid, GSAP ScrollTrigger, Lenis, Canvas</dd></div>
-      <div><dt>Motion</dt><dd>Sticky story, horizontal scroll, parallax, clip-path portal</dd></div>
-      <div><dt>Layout</dt><dd>Responsive — desktop, tablet, phone</dd></div>
+      <div><dt>맡은 일</dt><dd>웹 디자인, 편집, 프런트엔드</dd></div>
+      <div><dt>만든 도구</dt><dd>HTML, CSS Grid, GSAP ScrollTrigger, Lenis, Canvas</dd></div>
+      <div><dt>움직임</dt><dd>머무는 장면, 가로로 넘기는 장, 패럴랙스, 동그란 창</dd></div>
+      <div><dt>화면</dt><dd>데스크톱, 태블릿, 휴대폰 모두에서 읽을 수 있어요</dd></div>
     </dl>
 
     <div class="finale__bottom">
-      <a href="https://www.behance.net/kittykeks" target="_blank" rel="noopener">Illustrations by kittykeks ↗</a>
-      <a href="#top" data-scroll class="finale__top">Back to the first page ↑</a>
+      <span class="finale__note">포트폴리오용 비상업 프로젝트 · 그림 <a href="https://www.behance.net/kittykeks" target="_blank" rel="noopener">kittykeks ↗</a></span>
+      <a href="#top" data-scroll class="finale__top">처음으로 ↑</a>
     </div>
   </footer>
 

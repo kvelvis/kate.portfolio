@@ -3,9 +3,9 @@
 
 export const SITE_URL_PLACEHOLDER = "https://your-domain.com";
 
-export const SITE_URL = SITE_URL_PLACEHOLDER; // TODO: Kate — real domain, e.g. "https://kate-portfolio.com" (no trailing slash)
-export const DEPLOY_TARGET = ""; // TODO: Kate — "github-pages" | "vercel" | "netlify"
+export const SITE_URL = SITE_URL_PLACEHOLDER; // ПРОВЕРЬ ЗДЕСЬ: real domain, e.g. "https://kate-portfolio.com" (no trailing slash)
+export const DEPLOY_TARGET = ""; // ПРОВЕРЬ ЗДЕСЬ: "github-pages" | "vercel" | "netlify"
 
-export const OG_IMAGE = ""; // TODO: Kate — 1200×630 share image in public/, e.g. "/og-image.png"
-export const NAVER_SITE_VERIFICATION = ""; // TODO: Kate — code from Naver Search Advisor (searchadvisor.naver.com)
-export const GOOGLE_SITE_VERIFICATION = ""; // TODO: Kate — code from Google Search Console (optional)
+export const OG_IMAGE = ""; // ПРОВЕРЬ ЗДЕСЬ: 1200×630 share image in public/, e.g. "/og-image.png"
+export const NAVER_SITE_VERIFICATION = ""; // optional: code from Naver Search Advisor (searchadvisor.naver.com)
+export const GOOGLE_SITE_VERIFICATION = ""; // optional: code from Google Search Console (optional)

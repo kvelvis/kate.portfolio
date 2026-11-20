@@ -1,0 +1,166 @@
+/* floating like pill, bottom right */
+.like {
+  position: fixed;
+  right: clamp(16px, 2.4vw, 32px);
+  bottom: clamp(16px, 2.4vw, 32px);
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 18px 0 12px;
+  border: 1px solid var(--mint);
+  border-radius: 999px;
+  background: var(--mint);
+  box-shadow:
+    0 0 0 0 var(--mint-glow),
+    0 10px 30px var(--mint-glow),
+    0 12px 32px rgba(0, 0, 0, 0.4);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition:
+    opacity 0.5s var(--ease),
+    transform 0.5s var(--ease),
+    background 0.3s var(--ease),
+    color 0.3s var(--ease),
+    border-color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+.like.is-shown {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.like.is-shown:not(.is-liked):hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 0 var(--mint-glow),
+    0 14px 40px rgba(109, 242, 193, 0.5),
+    0 12px 32px rgba(0, 0, 0, 0.4);
+}
+.like:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+/* soft pulsing ring until it's pressed */
+.like.is-shown:not(.is-liked) {
+  animation: like-ring 2.4s var(--ease) 1s infinite;
+}
+@keyframes like-ring {
+  0% { box-shadow: 0 0 0 0 rgba(109, 242, 193, 0.55), 0 10px 30px var(--mint-glow), 0 12px 32px rgba(0, 0, 0, 0.4); }
+  70%, 100% { box-shadow: 0 0 0 14px rgba(109, 242, 193, 0), 0 10px 30px var(--mint-glow), 0 12px 32px rgba(0, 0, 0, 0.4); }
+}
+/* after the like: dark glass pill, mint heart */
+.like.is-liked {
+  cursor: default;
+  background: rgba(20, 20, 22, 0.86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: var(--mint);
+  color: var(--mint);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+/* out of the way while a project panel is open */
+body:has(.work.is-zoomed) .like {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.like__heart {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+}
+.like__heart svg {
+  width: 22px;
+  height: 22px;
+  fill: transparent;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  transition:
+    fill 0.3s var(--ease),
+    stroke 0.3s var(--ease),
+    transform 0.4s var(--ease);
+}
+.like:not(.is-liked):hover .like__heart svg {
+  transform: scale(1.12);
+  fill: currentColor;
+}
+.like.is-liked .like__heart svg {
+  fill: var(--mint);
+  stroke: var(--mint);
+}
+.like.is-pop .like__heart svg {
+  animation: like-pop 0.6s var(--ease);
+}
+@keyframes like-pop {
+  0% { transform: scale(0.6); }
+  45% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+/* little burst of dots */
+.like__heart i {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--mint);
+  opacity: 0;
+}
+.like__heart i:nth-of-type(even) {
+  background: var(--blue-ink);
+}
+.like.is-pop .like__heart i {
+  animation: like-dot 0.6s var(--ease) forwards;
+}
+.like__heart i:nth-of-type(1) { --a: 0deg; }
+.like__heart i:nth-of-type(2) { --a: 60deg; }
+.like__heart i:nth-of-type(3) { --a: 120deg; }
+.like__heart i:nth-of-type(4) { --a: 180deg; }
+.like__heart i:nth-of-type(5) { --a: 240deg; }
+.like__heart i:nth-of-type(6) { --a: 300deg; }
+@keyframes like-dot {
+  0% { opacity: 1; transform: rotate(var(--a)) translateY(0) scale(1); }
+  100% { opacity: 0; transform: rotate(var(--a)) translateY(-22px) scale(0.4); }
+}
+
+/* phones: just the heart until it's liked */
+@media (max-width: 640px) {
+  .like {
+    height: 48px;
+    padding: 0 10px;
+  }
+  .like:not(.is-liked) .like__text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .like.is-liked {
+    padding-right: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .like,
+  .like__heart svg {
+    transition: none;
+  }
+  .like.is-shown:not(.is-liked) {
+    animation: none;
+  }
+  .like.is-pop .like__heart svg,
+  .like.is-pop .like__heart i {
+    animation: none;
+  }
+}

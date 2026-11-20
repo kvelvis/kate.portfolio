@@ -1,20 +1,23 @@
-/* Gato Pingado — renewal interactions (GSAP + ScrollTrigger + Lenis) */
+/* 묘한 커피 — interactions (GSAP + ScrollTrigger + Lenis) */
 (() => {
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const hasGsap = typeof window.gsap !== 'undefined';
+  const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
 
   document.documentElement.classList.add('js');
-  document.body.classList.add('is-loading');
+
+  /* ---------- reduced motion: no autoplaying video ---------- */
+  if (reduce) {
+    $$('video[autoplay]').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
+  }
 
   /* ---------- text splitting ---------- */
   $$('[data-split]').forEach(el => {
     el.innerHTML = [...el.textContent].map(c => `<span class="char">${c}</span>`).join('');
   });
   $$('[data-words]').forEach(el => {
-    // keep inline tags (em) but wrap every word
     const wrap = node => {
       [...node.childNodes].forEach(n => {
         if (n.nodeType === 3) {
@@ -31,26 +34,81 @@
     wrap(el);
   });
 
-  /* ---------- small UI (works without GSAP) ---------- */
+  /* ---------- mobile menu (works without GSAP) ---------- */
   const header = $('.header');
   const burger = $('.burger');
   const mnav = $('.mnav');
   const toggleMenu = open => {
+    if (mnav.classList.contains('is-open') === open) return;
     burger.classList.toggle('is-open', open);
     mnav.classList.toggle('is-open', open);
-    burger.setAttribute('aria-expanded', open);
-    mnav.setAttribute('aria-hidden', !open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    mnav.inert = !open;                       // closed menu is not focusable / not read out
+    if (open) mnav.querySelector('a').focus();
   };
   burger.addEventListener('click', () => toggleMenu(!mnav.classList.contains('is-open')));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mnav.classList.contains('is-open')) { toggleMenu(false); burger.focus(); }
+  });
 
-  $$('.like').forEach(b => b.addEventListener('click', () => b.classList.toggle('is-on')));
+  /* ---------- like buttons ---------- */
+  $$('.like').forEach(b => b.addEventListener('click', () => {
+    b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+  }));
 
-  const endLoading = () => {
-    document.body.classList.remove('is-loading');
-    const l = $('.loader'); if (l) l.remove();
+  /* ---------- notice popup ---------- */
+  const notice = $('#notice');
+  let lastFocus = null;
+
+  const openNotice = () => {
+    if (!notice || typeof notice.showModal !== 'function' || notice.open) return;
+    lastFocus = document.activeElement;
+    document.documentElement.classList.add('is-modal');
+    window.__lenis && window.__lenis.stop();
+    notice.showModal();                        // native modal: rest of the page becomes inert
+    ($('[autofocus]', notice) || notice).focus();
   };
 
-  if (!hasGsap) { endLoading(); return; }
+  // one idempotent clean-up, called directly and from the native events,
+  // so it never depends on a single event firing
+  const finishNotice = () => {
+    if (!document.documentElement.classList.contains('is-modal')) return;
+    document.documentElement.classList.remove('is-modal');
+    window.__lenis && window.__lenis.start();
+    if (lastFocus && lastFocus !== document.body && document.contains(lastFocus)) lastFocus.focus();
+    else document.activeElement && document.activeElement.blur(); // next Tab starts at the top of the page
+  };
+  const closeNotice = () => { if (notice.open) notice.close(); finishNotice(); };
+
+  if (notice) {
+    $$('[data-notice-close]', notice).forEach(b => b.addEventListener('click', closeNotice));
+
+    // click on the dimmed backdrop (outside the card) closes it
+    notice.addEventListener('click', e => {
+      if (e.target !== notice) return;
+      const r = notice.getBoundingClientRect();
+      const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+      if (!inside) closeNotice();
+    });
+
+    // Esc → native "cancel", then "close"
+    notice.addEventListener('cancel', e => { e.preventDefault(); closeNotice(); });
+    notice.addEventListener('close', finishNotice);
+
+    // keep Tab / Shift+Tab inside the card (Esc is handled natively via "cancel")
+    notice.addEventListener('keydown', e => {
+      if (e.key !== 'Tab') return;
+      const items = $$('a[href], button:not([disabled])', notice);
+      const first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+  }
+
+  /* ---------- everything below needs GSAP ---------- */
+  if (!hasGsap) { openNotice(); return; }
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -61,8 +119,10 @@
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(t => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
-    lenis.stop();
+    window.__lenis = lenis;
   }
+
+  openNotice();                                 // shown on every page load
 
   $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
     const id = a.getAttribute('href');
@@ -70,35 +130,22 @@
     if (!target) return;
     e.preventDefault();
     toggleMenu(false);
-    lenis ? lenis.scrollTo(target, { duration: 1.4 }) : target.scrollIntoView({ behavior: 'smooth' });
+    if (lenis) lenis.scrollTo(target, { duration: 1.4 });
+    else target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    // move keyboard focus to the section too
+    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
   }));
 
-  /* ---------- loader + hero intro ---------- */
-  const num = $('.loader__num span');
-  const counter = { v: 0 };
-  const intro = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
+  if (reduce) return; // reduced motion: no intro, parallax, pinning or scroll animations
 
-  intro
-    .to('.loader', { yPercent: -100, duration: 1, ease: 'expo.inOut' })
-    .add(endLoading)
-    .from('.hero__title .char', { yPercent: 120, rotate: 12, opacity: 0, duration: 1.2, stagger: 0.05 }, '-=.45')
+  /* ---------- hero intro ---------- */
+  gsap.timeline({ defaults: { ease: 'expo.out' } })
+    .from('.hero__title .char', { yPercent: 120, rotate: 12, opacity: 0, duration: 1.2, stagger: 0.05 })
     .from('.hero__video', { scaleX: 0, duration: 1.2 }, '<.2')
     .from(header, { yPercent: -200, duration: 1 }, '<.1')
     .from('.hero__lead, .hero__btns .btn', { y: 40, opacity: 0, duration: 1, stagger: 0.1 }, '<.2')
-    .from('.sticker, .badge', { scale: 0, rotate: -30, duration: 1, ease: 'back.out(2)', stagger: 0.08 }, '<')
-    .add(() => lenis && lenis.start());
-
-  if (reduce) {
-    endLoading(); lenis && lenis.start();
-  } else {
-    gsap.to(counter, {
-      v: 100, duration: 1.4, ease: 'power2.inOut',
-      onUpdate: () => (num.textContent = Math.round(counter.v)),
-      onComplete: () => intro.play()
-    });
-  }
-
-  if (reduce) return; // no scroll animations for reduced-motion users
+    .from('.sticker, .badge', { scale: 0, rotate: -30, duration: 1, ease: 'back.out(2)', stagger: 0.08 }, '<');
 
   /* ---------- hero: mouse parallax + scroll out ---------- */
   if (finePointer) {
@@ -136,11 +183,12 @@
     gsap.fromTo(el.querySelector('img'), { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
 
-  gsap.from('.about__jump', { rotate: -40, scale: .4, opacity: 0, ease: 'back.out(2)', duration: 1, scrollTrigger: { trigger: '.about__collage', start: 'center 70%' } });
-
+  // numbers are real in the HTML (so they are right without JS / with reduced motion);
+  // here they count up from a lower start value
   $$('[data-count]').forEach(el => {
     const end = +el.dataset.count;
     const o = { v: end > 1000 ? end - 40 : 0 };
+    el.textContent = Math.round(o.v);
     gsap.to(o, {
       v: end, duration: 1.6, ease: 'power3.out',
       scrollTrigger: { trigger: el, start: 'top 85%', once: true },
@@ -157,14 +205,29 @@
   const mm = gsap.matchMedia();
   mm.add('(min-width: 641px)', () => {
     const track = $('.cats__track');
-    const dist = () => track.scrollWidth - innerWidth;
-    gsap.to(track, {
+    track.classList.add('is-pinned');
+    const dist = () => Math.max(0, track.scrollWidth - innerWidth);
+    const tween = gsap.to(track, {
       x: () => -dist(), ease: 'none',
       scrollTrigger: {
         trigger: '.cats', start: 'top top', end: () => '+=' + dist(),
         pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1
       }
     });
+
+    // keyboard: when a link/button inside an off-screen card gets focus,
+    // scroll the page to the point where that card is in view
+    const onFocus = e => {
+      const card = e.target.closest('.cat-card');
+      const st = tween.scrollTrigger;
+      if (!card || !st || dist() === 0) return;
+      const x = gsap.utils.clamp(0, dist(), card.offsetLeft - (innerWidth - card.offsetWidth) / 2);
+      const y = st.start + (x / dist()) * (st.end - st.start);
+      lenis ? lenis.scrollTo(y, { immediate: true }) : window.scrollTo(0, y);
+    };
+    track.addEventListener('focusin', onFocus);
+
+    return () => { track.classList.remove('is-pinned'); track.removeEventListener('focusin', onFocus); };
   });
 
   gsap.from('.cat-card', {
@@ -197,15 +260,10 @@
     });
   }
 
-  /* ---------- adopt: stacked cards shrink ---------- */
-  const steps = $$('.step');
-  steps.forEach((step, i) => {
-    const next = steps[i + 1];
-    if (!next) return;
-    gsap.to(step, {
-      scale: .92, ease: 'none',
-      scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 110px', scrub: true }
-    });
+  /* ---------- adopt: steps pop in ---------- */
+  gsap.from('.step', {
+    y: 40, opacity: 0, duration: .8, ease: 'expo.out', stagger: 0.1, clearProps: 'all',
+    scrollTrigger: { trigger: '.steps', start: 'top 85%' }
   });
 
   /* ---------- visit ---------- */
@@ -222,24 +280,21 @@
     scrollTrigger: { trigger: '.visit__list', start: 'top 85%' }
   });
 
-  /* ---------- footer ---------- */
-  gsap.from('.footer__logo', {
-    yPercent: 60, opacity: 0, duration: 1.4, ease: 'expo.out',
-    scrollTrigger: { trigger: '.footer', start: 'top 70%' }
-  });
-
-  /* ---------- header: hide on scroll down + active link ---------- */
-    let headerHidden = false;
+  /* ---------- header: hide on scroll down, show on focus + active link ---------- */
+  let headerHidden = false;
+  const showHeader = () => { headerHidden = false; gsap.to(header, { yPercent: 0, duration: .5, overwrite: true }); };
   ScrollTrigger.create({
     start: 200, end: 'max',
     onUpdate: self => {
-      const hide = self.direction === 1 && !mnav.classList.contains('is-open');
+      const hide = self.direction === 1 && !mnav.classList.contains('is-open') && !header.contains(document.activeElement);
       if (hide === headerHidden) return;
       headerHidden = hide;
       gsap.to(header, { yPercent: hide ? -170 : 0, duration: .5, ease: 'power3.out', overwrite: true });
     },
-    onLeaveBack: () => { headerHidden = false; gsap.to(header, { yPercent: 0, duration: .5, overwrite: true }); }
+    onLeaveBack: showHeader
   });
+  header.addEventListener('focusin', showHeader);   // keyboard users never tab into a hidden header
+
   $$('.header__nav a').forEach(a => {
     const sec = $(a.getAttribute('href'));
     if (!sec) return;

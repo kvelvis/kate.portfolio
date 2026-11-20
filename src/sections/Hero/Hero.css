@@ -1,0 +1,180 @@
+.hero {
+  position: relative;
+  /* at least one screen; grows if the intro text needs more room, so nothing is cut off */
+  min-height: max(100svh, 620px);
+  overflow: hidden;
+}
+.hero.is-grabbing {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.hero__gl {
+  z-index: 2;
+  pointer-events: none;
+}
+.hero__hit {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  touch-action: none;
+  cursor: default;
+}
+.hero__hit.is-over {
+  cursor: grab;
+}
+.hero.is-grabbing .hero__hit {
+  cursor: grabbing;
+}
+
+/* intro copy: left half (bottom on phones). The badge never pushes it. */
+.hero__copy {
+  position: relative;
+  z-index: 1;
+  min-height: max(100svh, 620px);
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  padding-top: 96px; /* clears the fixed header */
+  padding-bottom: 96px; /* clears .hero__foot */
+  padding-right: 42%;
+  pointer-events: none;
+}
+.hero__copy > * {
+  pointer-events: auto;
+}
+.hero__meta {
+  margin-bottom: 28px;
+}
+.hero__hello {
+  font-family: var(--f-serif);
+  font-weight: 300;
+  /* follows width AND height, so a short window doesn't push it off screen */
+  font-size: clamp(48px, min(7.4vw, 13vh), 124px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+.hero__lead {
+  margin-top: clamp(20px, 3vh, 36px);
+  max-width: 26em;
+  font-family: var(--f-serif);
+  font-weight: 300;
+  font-size: clamp(18px, min(2.05vw, 3.6vh), 32px);
+  line-height: 1.38;
+  letter-spacing: -0.005em;
+  color: var(--soft);
+  word-break: keep-all;
+  text-wrap: pretty;
+}
+/* each word rises inside its own window; the extra room top and bottom keeps
+   tall Hangul glyphs and descenders from being clipped */
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  height: 46px;
+  margin-top: clamp(24px, 4vh, 40px);
+  padding: 0 22px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.3s var(--ease);
+}
+.hero__cta:hover {
+  background: #fff;
+}
+.hero__cta:focus-visible {
+  outline: 2px solid var(--blue-ink);
+  outline-offset: 3px;
+}
+.hero__copy .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.14em 0.02em 0.1em;
+  margin: -0.14em -0.02em -0.1em;
+}
+.hero__copy .w > span {
+  display: inline-block;
+}
+/* highlighter stroke over Kate's name: lower ~60% of the line, drawn left → right */
+.hero__name {
+  color: var(--ink);
+  background: linear-gradient(transparent 38%, var(--blue) 38%, var(--blue) 92%, transparent 92%) no-repeat left / 100% 100%;
+  padding: 0 0.12em;
+  margin: 0 -0.04em;
+  border-radius: 0.12em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+@media (max-width: 720px) {
+  .hero__copy {
+    justify-content: flex-end;
+    padding: 96px 16px 92px;
+  }
+  .hero__meta {
+    margin-bottom: 14px;
+  }
+  .hero__hello {
+    font-size: 44px;
+  }
+  .hero__lead {
+    margin-top: 12px;
+    font-size: 18px;
+    line-height: 1.42;
+  }
+}
+
+
+.hero__foot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 16px;
+  padding: 0 clamp(16px, 4vw, 48px) 28px;
+  font-size: 13px;
+}
+.hero__foot p span {
+  display: block;
+  color: var(--mute);
+}
+.hero__foot a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.4s var(--ease);
+}
+.hero__foot a:hover {
+  opacity: 0.6;
+}
+.hero__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.15);
+}
+.hero__how {
+  justify-self: end;
+  width: 48%;
+  text-align: center;
+  color: var(--mute);
+}
+@media (max-width: 720px) {
+  .hero__foot {
+    grid-template-columns: 1fr;
+    padding-bottom: 22px;
+  }
+  .hero__how {
+    display: none;
+  }
+}

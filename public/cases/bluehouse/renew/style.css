@@ -133,6 +133,8 @@ h2 { font-size: clamp(28px, 4.2vw, 52px); line-height: 1.25; letter-spacing: -.0
 .masthead p { display: flex; align-items: center; gap: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .masthead a { color: var(--blue-700); font-weight: 600; white-space: nowrap; }
 .masthead a:hover { text-decoration: underline; }
+.masthead__note { color: var(--gray-500); }
+@media (max-width: 767px) { .masthead__note { display: none; } }
 .masthead__flag {
   width: 20px; height: 14px; border: 1px solid var(--gray-300); border-radius: 2px; flex: none;
   background: radial-gradient(circle at 50% 50%, transparent 0 2px, transparent 0) #fff;
@@ -151,7 +153,7 @@ h2 { font-size: clamp(28px, 4.2vw, 52px); line-height: 1.25; letter-spacing: -.0
   transition: top .3s var(--ease), background .3s, color .3s, box-shadow .3s;
 }
 .header__bar { height: var(--hh); display: flex; align-items: center; gap: 32px; position: relative; z-index: 2; }
-.header__logo a { display: block; position: relative; width: 190px; }
+.header__logo a { display: block; position: relative; width: 90px; }
 .header__logo img { width: 100%; transition: opacity .3s; }
 .header__logo .logo--color { position: absolute; inset: 0; opacity: 0; }
 

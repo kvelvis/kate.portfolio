@@ -1,66 +1,25 @@
 /* ==========================================================
-   DESIGN TOKENS
-   Брейкпоинты: phone < 640 · tablet 640–1023 · desktop ≥ 1024
+   DESIGN TOKENS — dark, editorial, one electric accent
+   Breakpoints: phone ≤ 640 · tablet 641–1024 · desktop > 1024
    ========================================================== */
 
 :root {
-  /* brand */
-  --c-blue: #1400ff;
-  --c-blue-2: #4d3bff;
-  --c-acid: #d4ff3a;
-  --c-pink: #ff8ad8;
-  --c-cream: #ece5da;
-  --c-beige: #e2dacf;
-  --c-ink: #0d0d10;
-  --c-white: #ffffff;
+  --bg: #0c0c0d;          /* page + every WebGL clear colour */
+  --ink: #ededeb;         /* primary text */
+  --mute: #8a8a88;        /* secondary text (5.6:1 on --bg) */
+  --soft: #cfcfcc;        /* body copy in panels */
+  --pill: #1c1c1e;
+  --pill-h: #262628;
+  --line: #232325;
+  --blue: #1621ff;        /* Kate's lanyard blue — glows, rings, never body text */
+  --blue-ink: #8f95ff;    /* accent text that passes contrast on --bg */
+  --ok: #4ade80;
+  --mint: #6df2c1;        /* like button — dark text on it is 14:1 */
+  --mint-glow: rgba(109, 242, 193, 0.35);
 
-  /* theme (light) */
-  --bg: var(--c-cream);
-  --bg-2: #f6f2ec;
-  --fg: var(--c-ink);
-  --fg-muted: rgb(13 13 16 / 0.62); /* ≥ 4.5:1 on cream */
-  --line: rgb(13 13 16 / 0.14);
-  --surface: var(--c-white);
-  --accent: var(--c-blue);
-  --on-accent: var(--c-white);
-  --sticker-shadow: 4px 4px 0 var(--c-ink);
+  --f-sans: "Geist", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+  --f-serif: "Newsreader", "Noto Serif KR", ui-serif, Georgia, serif;
+  --f-mono: "Geist Mono", ui-monospace, monospace;
 
-  /* type */
-  --f-display: "Anton", "Impact", sans-serif;
-  --f-blob: "Bagel Fat One", "Noto Sans KR", sans-serif;
-  --f-body: "Space Grotesk", "Noto Sans KR", system-ui, sans-serif;
-  --f-mono: "JetBrains Mono", ui-monospace, monospace;
-  --f-kr: "Noto Sans KR", sans-serif;
-  --f-deco: "Afronaut", "Anton", sans-serif;
-
-  --fs-xs: clamp(0.72rem, 0.68rem + 0.15vw, 0.8rem);
-  --fs-sm: clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem);
-  --fs-md: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  --fs-lg: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
-  --fs-xl: clamp(1.75rem, 1.2rem + 2.2vw, 3.25rem);
-  --fs-2xl: clamp(2.75rem, 1.5rem + 5.5vw, 7rem);
-  --fs-mega: clamp(4rem, 1rem + 13vw, 15rem);
-
-  /* layout */
-  --gutter: clamp(16px, 4vw, 48px);
-  --max: 1440px;
-  --radius-sm: 10px;
-  --radius: 20px;
-  --radius-lg: 32px;
-  --header-h: 72px;
-  --section-gap: clamp(96px, 14vw, 200px);
-
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-:root[data-theme="dark"] {
-  --bg: #0b0b0f;
-  --bg-2: #141419;
-  --fg: #f1ece4;
-  --fg-muted: rgb(241 236 228 / 0.58);
-  --line: rgb(241 236 228 / 0.14);
-  --surface: #18181f;
-  --accent: var(--c-acid);
-  --on-accent: var(--c-ink);
-  --sticker-shadow: 4px 4px 0 var(--c-acid);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }

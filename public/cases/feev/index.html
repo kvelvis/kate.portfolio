@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>FEEV — POP that Bubble!</title>
+  <meta name="description" content="FEEV 버블 글로스 출시. 버블 글로스, 하이퍼 핏 컬러 웨어, 플러피 치크 블러쉬. 포트폴리오용 프로모 랜딩 컨셉.">
+  <meta property="og:title" content="FEEV — POP that Bubble!">
+  <meta property="og:description" content="FEEV 버블 글로스 출시. 버블 글로스, 하이퍼 핏 컬러 웨어, 플러피 치크 블러쉬. 포트폴리오용 프로모 랜딩 컨셉.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./img/web/og-1200.jpg">
+  <meta name="theme-color" content="#EFEDF8">
+  <meta name="color-scheme" content="light">
+  <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Instrument+Serif:ital@0;1&family=Jua&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <link rel="preload" as="image" href="./img/web/main-girl-1376.webp">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js"}}</script>
+</head>
+<body class="page-home">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <div class="pearl" aria-hidden="true"></div>
+  <!-- ============ HEADER (same on every page) ============ -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="logo" href="./index.html" aria-label="FEEV 홈">FEEV</a>
+      <nav class="nav" aria-label="메인">
+        <a href="./index.html#gloss" data-nav="gloss">Gloss</a>
+        <a href="./index.html#tint" data-nav="tint">Tint</a>
+        <a href="./index.html#blush" data-nav="blush">Blush</a>
+        <a href="./products.html" data-nav="shop">Shop</a>
+      </nav>
+      <button class="cart-btn js-cart-open" type="button" aria-label="장바구니">
+        <span class="cart-btn__bubble" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        <span class="cart-btn__count js-cart-count" hidden>0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ 1. HERO — WebGL bubble blown from the lips, driven by scroll ============ -->
+    <section class="hero bh" id="top" aria-labelledby="hero-title">
+      <div class="bh__stage" id="bhStage">
+        <!-- static fallback: shown until WebGL is ready, and kept if WebGL is unavailable -->
+        <img class="bh__fallback" src="./img/web/main-girl-1376.webp" width="1376" height="768" fetchpriority="high"
+             alt="핑크 버블 글로스를 바른 모델이 입술을 동그랗게 모으고 있다">
+        <canvas class="bh__gl" id="bhGl" aria-hidden="true"></canvas>
+
+        <h1 class="bh__title" id="hero-title"><img src="./img/web/word-popthatbubble.webp" srcset="./img/web/word-popthatbubble-sm.webp 623w, ./img/web/word-popthatbubble.webp 1246w" sizes="(max-aspect-ratio: 9/10) 92vw, 60vw" width="1246" height="192" alt="POP that Bubble!" fetchpriority="high"></h1>
+
+        <div class="bh__msgs" id="bhMsgs">
+          <p class="bh__pill bh__pill--pink" id="bhPill1">입술 위로 톡, 볼륨이 팝!</p>
+          <p class="bh__pill bh__pill--white" id="bhPill2">맑고 탱글한 버블 글로시 텐션</p>
+          <p class="bh__tag" id="bhTag">#버블 글로스</p>
+        </div>
+
+        <div class="bh__hint" id="bhHint">
+          <span class="bh__hint-cue" aria-hidden="true"><i></i><i></i><i></i></span>
+          <p class="bh__hint-text">
+           
+            <span>스크롤하세요</span>
+          </p>
+        </div>
+
+        <!-- launch poster: appears when the big bubble bursts and stays pinned for a while -->
+        <div class="bh__reveal" id="bhReveal" aria-hidden="true">
+          <div class="bh__posters">
+            <div class="bh__poster bh__poster--a">
+              <p class="badge" lang="en">NEW LAUNCH</p>
+              <p class="bh__pop"><img src="./img/web/word-pop.webp" srcset="./img/web/word-pop-sm.webp 587w, ./img/web/word-pop.webp 1174w" sizes="340px" width="1174" height="472" alt="POP!" loading="lazy" decoding="async"></p>
+              <p class="bh__headline">새로운 <b>버블 글로스</b><br>출시</p>
+              <p class="bh__copy">입술 위로 톡, 볼륨이 팝!<br>맑고 탱글한 버블 글로시 텐션</p>
+              <a class="btn btn--gloss bh__cta" href="./products.html#gloss" tabindex="-1">지금 만나기</a>
+            </div>
+          </div>
+          <ul class="bh__phrases" lang="en">
+            <li class="phrase" style="--x:80%;--y:24%;--s:200px;--m:104px;--mx:20%;--my:17%;--d:.25s">Enjoy your<br>Lively Moment</li>
+            <li class="phrase" style="--x:91%;--y:52%;--s:160px;--m:92px;--mx:81%;--my:15%;--d:.4s">Healthy<br>Vegan Life</li>
+            <li class="phrase" style="--x:79%;--y:76%;--s:170px;--m:92px;--mx:13%;--my:41%;--d:.55s">Make Up<br>Key Point</li>
+            <li class="phrase" style="--x:62%;--y:12%;--s:120px;--m:84px;--mx:87%;--my:39%;--d:.7s">Vegan<br>Certified</li>
+          </ul>
+        </div>
+
+        <a class="bh__skip" href="#texture">애니메이션 건너뛰기</a>
+      </div>
+    </section>
+
+    <!-- ============ LAUNCH — Bubble Gloss 출시 ============ -->
+    <section class="launch" id="launch" aria-labelledby="launch-title">
+      <div class="container launch__grid">
+        <div class="launch__copy reveal">
+          <p class="badge" lang="en">NEW LAUNCH</p>
+          <h2 class="launch__title" id="launch-title"><img class="launch__word" src="./img/web/word-bubblegloss.webp" srcset="./img/web/word-bubblegloss-sm.webp 573w, ./img/web/word-bubblegloss.webp 1147w" sizes="(min-width: 960px) 520px, 86vw" width="1147" height="544" alt="Bubble Gloss" loading="lazy" decoding="async"><span class="launch__ko">버블 글로스 출시</span></h2>
+          <p class="launch__lead">맑고 투명하게 반짝이는 버블 광택과<br>톡 터지는 청량한 쿨링감을 담은 버블 플럼핑.</p>
+          <ul class="launch__points">
+            <li><span>01</span>즉각적으로 차오르는 반사 버블 글로우</li>
+            <li><span>02</span>바를수록 차오르는 버블 코팅 볼륨</li>
+            <li><span>03</span>촉촉 립 트리트먼트 스킨케어링 텍스처</li>
+          </ul>
+          <div class="launch__dots" aria-label="6가지 컬러">
+            <span style="--c:#C98474"></span><span style="--c:#E58E7E"></span><span style="--c:#CF6C7E"></span><span style="--c:#E3121F"></span><span style="--c:#F6A3BD"></span><span style="--c:#8A2445"></span>
+            <em>6 colors</em>
+          </div>
+          <div class="launch__cta">
+            <a class="btn btn--gloss" href="./products.html#gloss">지금 만나기</a>
+            <a class="link" href="#gloss">컬러 보기</a>
+          </div>
+        </div>
+        <figure class="launch__media reveal">
+          <div class="launch__frame">
+            <img src="./img/web/launch-940.webp" srcset="./img/web/launch-600.webp 600w, ./img/web/launch-940.webp 940w"
+                 sizes="(min-width: 960px) 44vw, 92vw" width="940" height="1230" loading="lazy" decoding="async"
+                 alt="핑크 버블 사이에 놓인 버블 글로스 05 발레 스커트 튜브">
+          </div>
+          <span class="float-bubble float-bubble--a" aria-hidden="true"></span>
+          <span class="float-bubble float-bubble--b" aria-hidden="true"></span>
+          <span class="float-bubble float-bubble--c" aria-hidden="true"></span>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ PRODUCTS (rendered from shop-data.js by main.js) ============ -->
+    <div class="products" id="products">
+      <noscript><p class="container">제품은 <a href="./products.html">Shop</a>에서 볼 수 있어요.</p></noscript>
+    </div>
+
+    <!-- ============ CAMPAIGN — ad visuals ============ -->
+    <section class="campaign" id="campaign" aria-labelledby="campaign-title">
+      <div class="container campaign__head reveal">
+        <p class="eyebrow" lang="en">Campaign</p>
+        <h2 class="section-title" id="campaign-title" lang="en">Pop the <em>moment.</em></h2>
+      </div>
+      <ul class="campaign__rail" tabindex="0" aria-label="캠페인 이미지, 좌우로 스크롤">
+        <li><figure><img src="./img/web/ad-pop.webp" width="654" height="1100" loading="lazy" decoding="async" alt="POP that Bubble! 버블 글로스 캠페인 포스터"><figcaption>Bubble Gloss</figcaption></figure></li>
+        <li><figure><img src="./img/web/ad-bubbles.webp" width="564" height="1100" loading="lazy" decoding="async" alt="핑크 버블과 버블 글로스 튜브 광고 비주얼"><figcaption>Bubble Gloss</figcaption></figure></li>
+        <li><figure><img src="./img/web/ad-misty.webp" width="470" height="1100" loading="lazy" decoding="async" alt="Misty Whisper, 플러피 치크 블러쉬 캠페인 포스터"><figcaption>Fluffy Cheek Blush</figcaption></figure></li>
+        <li><figure><img src="./img/web/ad-tint.webp" width="733" height="1100" loading="lazy" decoding="async" alt="모델이 하이퍼 핏 컬러 웨어를 바르는 캠페인 컷"><figcaption>Hyper-Fit Color Wear</figcaption></figure></li>
+        <li><figure><img src="./img/web/ad-lineup.webp" width="529" height="1100" loading="lazy" decoding="async" alt="버블 글로스 6가지 컬러 튜브"><figcaption>Bubble Gloss</figcaption></figure></li>
+        <li><figure><img src="./img/web/ad-fig.webp" width="960" height="1080" loading="lazy" decoding="async" alt="무화과 사이에 놓인 핑크 튜브 광고 비주얼"><figcaption>FEEV</figcaption></figure></li>
+        <li><figure><img src="./img/web/ad-apply.webp" width="1100" height="733" loading="lazy" decoding="async" alt="모델이 립 글로스를 바르는 캠페인 컷"><figcaption>FEEV</figcaption></figure></li>
+        <li><figure><img src="./img/web/ad-cherry.webp" width="690" height="840" loading="lazy" decoding="async" alt="체리와 FEEV 제품, Healthy Formula 광고 비주얼"><figcaption>Healthy Formula</figcaption></figure></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__logo" aria-hidden="true">FEEV</p>
+      <ul class="site-footer__links">
+        <li><a href="./products.html">Shop</a></li>
+        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram<span class="sr-only"> (새 창)</span></a></li>
+        <li><a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube<span class="sr-only"> (새 창)</span></a></li>
+      </ul>
+      <p class="site-footer__legal">포트폴리오용 컨셉 페이지입니다. 실제 판매 사이트가 아니며, 가격은 예시이고 이미지 저작권은 FEEV에 있습니다.</p>
+    </div>
+  </footer>
+
+  <script src="./shop-data.js"></script>
+  <script src="./cart.js"></script>
+  <script src="./main.js"></script>
+  <script type="module" src="./hero.js"></script>
+</body>
+</html>
