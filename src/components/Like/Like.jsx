@@ -12,10 +12,7 @@ const read = () => {
   }
 };
 
-/**
- * Floating "like this portfolio" pill, bottom right.
- * Shows up after the first screen; one like per visitor; Kate gets a Telegram message.
- */
+/** Floating like button: appears after the first screen, one like per visitor. */
 export default function Like() {
   const { t } = useLang();
   const [liked, setLiked] = useState(read);

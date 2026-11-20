@@ -10,7 +10,6 @@ import Contact from "./sections/Contact/Contact";
 import { notifyVisit } from "./app/notify";
 import Like from "./components/Like/Like";
 
-/** One scrolling page: badge + intro → numbers & skills → sphere of work → about → contact. */
 export default function App() {
   const { t } = useLang();
 

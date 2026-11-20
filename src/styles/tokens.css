@@ -1,21 +1,17 @@
-/* ==========================================================
-   DESIGN TOKENS — dark, editorial, one electric accent
-   Breakpoints: phone ≤ 640 · tablet 641–1024 · desktop > 1024
-   ========================================================== */
+/* design tokens */
 
 :root {
-  --bg: #0c0c0d;          /* page + every WebGL clear colour */
-  --ink: #ededeb;         /* primary text */
+  --bg: #0c0c0d;
+  --ink: #ededeb;         /* text */
   --mute: #8a8a88;        /* secondary text (5.6:1 on --bg) */
   --soft: #cfcfcc;        /* body copy in panels */
   --pill: #1c1c1e;
   --pill-h: #262628;
   --line: #232325;
-  --blue: #1621ff;        /* Kate's lanyard blue — glows, rings, never body text */
-  --blue-ink: #8f95ff;    /* accent text that passes contrast on --bg */
+  --blue: #1621ff;        /* lanyard blue: fills and glows, not for text */
+  --blue-ink: #4f57eb;    /* accent text on --bg */
   --ok: #4ade80;
-  --mint: #6df2c1;        /* like button — dark text on it is 14:1 */
-  --mint-glow: rgba(109, 242, 193, 0.35);
+  --blue-glow: rgba(22, 33, 255, 0.45);
 
   --f-sans: "Geist", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
   --f-serif: "Newsreader", "Noto Serif KR", ui-serif, Georgia, serif;

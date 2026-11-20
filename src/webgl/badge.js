@@ -3,18 +3,15 @@ import { gsap } from "gsap";
 import { isTouch, reducedMotion, dpr, clamp } from "./media";
 
 /*
-  Kate's ID badge on a lanyard.
+  ID badge on a lanyard.
   - The lanyard is a verlet rope (fixed above the screen) drawn as a woven ribbon that twists with the card.
   - The card hangs from the rope's last point as a pendulum, reacting to the pivot's acceleration.
   - Drag to swing it, fling sideways to spin it (it always settles front side up).
   - World units = CSS px, origin at the screen centre, y up.
+  Card art: badge_card.png (880×1984, clip included, transparent around the card).
 */
 
-/*
- * The card art (badge_card.png, 880×1984) is Kate's badge_new.png with her metal_clip.png
- * laid on top, cropped to the card and halved in size. Transparent around the card.
- */
-const CROP = { x: 0, y: 0, w: 880, h: 1984, W: 880, H: 1984 };
+const ASPECT = 880 / 1984;
 const CLIP = 0.157; // top share of the image taken by the metal clip (card body starts below it)
 
 /** Card art → texture. */
@@ -40,22 +37,17 @@ const MAX_TWIST = Math.PI * 4; // two full turns of the lanyard
 const cardFrag = /* glsl */ `
 precision highp float;
 varying vec2 vUv;
-uniform sampler2D uMap, uBack;
-uniform vec2 uRep, uOff, uHit;
-uniform float uGlare, uHover, uAspect, uIsBack, uHasBack, uReveal, uTime;
+uniform sampler2D uMap;
+uniform float uGlare, uIsBack, uReveal, uTime;
 void main(){
-  vec2 fu = uIsBack > 0.5 ? vec2(1.0 - vUv.x, vUv.y) : vUv;     // the back mirrors the silhouette
-  vec4 front = texture2D(uMap, fu * uRep + uOff);
+  vec2 fu = uIsBack > 0.5 ? vec2(1.0 - vUv.x, vUv.y) : vUv;     // the back mirrors the front
+  vec4 front = texture2D(uMap, fu);
   float a = front.a;
   // liquid reveal: a wavy front line rises from the bottom
   float wave = sin(vUv.x * 9.0 + uTime * 2.2) * 0.02 + sin(vUv.x * 23.0 - uTime * 3.1) * 0.008;
   float line = uReveal * 1.25 - 0.1 + wave * (1.0 - uReveal);
   if (vUv.y > line || a < 0.02) discard;
   vec3 col = front.rgb;
-  if (uIsBack > 0.5 && uHasBack > 0.5 && vUv.y < 0.86) {
-    vec4 b = texture2D(uBack, vec2(vUv.x, vUv.y / 0.86));
-    col = mix(col, b.rgb, b.a);
-  }
   // meniscus just under the liquid front
   float men = smoothstep(0.06, 0.0, line - vUv.y) * (1.0 - uReveal);
   col = mix(col, vec3(0.56, 0.63, 1.0), men * 0.5) + vec3(0.09, 0.13, 1.0) * pow(men, 3.0) * 1.4;
@@ -64,7 +56,6 @@ void main(){
   float g = exp(-d * d * 30.0) * 0.26;
   vec3 iri = 0.5 + 0.5 * cos(6.2831 * (vUv.y * 0.7 + uGlare * 1.3 + vec3(0.0, 0.33, 0.67)));
   col += g * mix(vec3(1.0), iri, 0.25);
-  // blue glow around the cursor
   gl_FragColor = vec4(col, a);
 }`;
 
@@ -116,53 +107,11 @@ function ribbonTexture() {
   return t;
 }
 
-/** Back of the card, drawn in the site's type. */
-function backTexture(lines) {
-  const W = 730;
-  const H = Math.round(((CROP.h * (1 - CLIP)) / CROP.w) * W);
-  const c = document.createElement("canvas");
-  c.width = W;
-  c.height = H;
-  const x = c.getContext("2d");
-  x.fillStyle = "#e9e7e1";
-  x.fillRect(0, 0, W, H);
-  const pad = 56;
-  x.fillStyle = "#6d6d6a";
-  x.font = '500 22px "Geist Mono", monospace';
-  x.textBaseline = "top";
-  x.fillText(lines.top, pad, 64);
-  x.textAlign = "right";
-  x.fillText("↺", W - pad, 64);
-  x.textAlign = "left";
-  x.fillStyle = "#0c0c0d";
-  x.font = 'italic 300 88px "Newsreader", "Noto Serif KR", serif';
-  lines.big.forEach((l, i) => x.fillText(l, pad - 4, 170 + i * 92));
-  x.fillStyle = "#1621ff";
-  x.fillRect(pad, 170 + lines.big.length * 92 + 30, 80, 6);
-  x.fillStyle = "#3a3a38";
-  x.font = '400 30px "Geist", "Noto Sans KR", sans-serif';
-  lines.facts.forEach((l, i) => x.fillText(l, pad, 170 + lines.big.length * 92 + 80 + i * 48));
-  // blue foot band
-  x.fillStyle = "#1621ff";
-  x.fillRect(0, H - 150, W, 150);
-  x.fillStyle = "#ffffff";
-  x.font = '600 34px "Geist", "Noto Sans KR", sans-serif';
-  x.fillText(lines.foot, pad, H - 98);
-  x.font = '500 22px "Geist Mono", monospace';
-  x.textAlign = "right";
-  x.fillText(lines.handle, W - pad, H - 90);
-  const t = new THREE.CanvasTexture(c);
-  t.colorSpace = THREE.NoColorSpace;
-  t.anisotropy = 4;
-  return t;
-}
-
 export class Badge {
-  constructor({ host, image, back, onClick }) {
+  constructor({ host, image }) {
     this.host = host;
     this.reduced = reducedMotion();
     this.touch = isTouch();
-    this.onClick = onClick;
 
     const r = (this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }));
     r.outputColorSpace = THREE.LinearSRGBColorSpace;
@@ -175,15 +124,8 @@ export class Badge {
     // card
     this.cardU = {
       uMap: { value: null },
-      uBack: { value: null },
-      uRep: { value: new THREE.Vector2(CROP.w / CROP.W, CROP.h / CROP.H) },
-      uOff: { value: new THREE.Vector2(CROP.x / CROP.W, 1 - (CROP.y + CROP.h) / CROP.H) },
-      uHit: { value: new THREE.Vector2(0.5, 0.5) },
       uGlare: { value: 0 },
-      uHover: { value: 0 },
-      uAspect: { value: CROP.w / CROP.h },
       uIsBack: { value: 0 },
-      uHasBack: { value: 0 }, // no back text: both sides show the front design
       uReveal: { value: this.reduced ? 1 : 0 },
       uTime: { value: 0 },
     };
@@ -237,7 +179,6 @@ export class Badge {
     this.mouse = { x: 0, y: 0, moved: false };
     this.ray = new THREE.Raycaster();
     this.ndc = new THREE.Vector2();
-    this.hoverT = 0;
 
     this.resize(true);
     this.bind();
@@ -245,17 +186,10 @@ export class Badge {
     loadCard(image).then((tex) => {
       if (!tex || this.destroyed) return;
       this.cardU.uMap.value = tex;
-      this.setBack(back);
       this.front.visible = this.back.visible = true;
       this.ready = true;
       this.drop();
     });
-  }
-
-  setBack(lines) {
-    this.cardU.uBack.value?.dispose();
-    this.cardU.uBack.value = lines ? backTexture(lines) : null;
-    this.cardU.uHasBack.value = lines ? 1 : 0;
   }
 
   /* ---------------- layout ---------------- */
@@ -271,9 +205,8 @@ export class Badge {
     // phones: badge hangs in the upper part, the text sits below it.
     // wider screens: badge hangs in the right half, the text takes the left half.
     const phone = (this.phone = W <= 720);
-    const aspect = CROP.w / CROP.h;
-    this.cardH = phone ? clamp(H * 0.36, 230, 360) : clamp(Math.min(H * 0.6, (W * 0.34) / aspect), 300, 640);
-    this.cardW = this.cardH * aspect;
+    this.cardH = phone ? clamp(H * 0.36, 230, 360) : clamp(Math.min(H * 0.6, (W * 0.34) / ASPECT), 300, 640);
+    this.cardW = this.cardH * ASPECT;
     this.front.scale.set(this.cardW, this.cardH, 1);
     this.back.scale.set(this.cardW, this.cardH, 1);
     this.front.position.y = this.back.position.y = -this.cardH / 2;
@@ -333,7 +266,7 @@ export class Badge {
         if (!h) return false;
         const w = this.toWorld(e.clientX, e.clientY);
         const P = this.pts[N - 1];
-        this.drag = { ox: P.x - w.x, oy: P.y - w.y, sx: e.clientX, sy: e.clientY, path: 0, lx: e.clientX, ly: e.clientY };
+        this.drag = { ox: P.x - w.x, oy: P.y - w.y, lx: e.clientX };
         return true;
       },
       move: (e) => {
@@ -342,23 +275,17 @@ export class Badge {
         this.mouse.moved = true;
         const d = this.drag;
         if (!d) return;
-        d.path += Math.hypot(e.clientX - d.lx, e.clientY - d.ly);
         // horizontal flicks spin the card
         this.phiV += (e.clientX - d.lx) * 0.0016;
         d.lx = e.clientX;
-        d.ly = e.clientY;
       },
-      up: (e) => {
-        const d = this.drag;
-        if (!d) return;
+      up: () => {
         this.drag = null;
-        if (Math.hypot(e.clientX - d.sx, e.clientY - d.sy) < 6 && d.path < 12) this.onClick?.(this.screenCenter());
       },
     };
     this.onResize = () => this.resize(false);
     addEventListener("resize", this.onResize);
   }
-
 
   /* ---------------- physics ---------------- */
   step(dt) {
@@ -429,15 +356,13 @@ export class Badge {
     this.theta = clamp(this.theta, -1.4, 1.4);
 
     // spin around the vertical axis: always settles front side up (back = unstable)
-    if (!this.flipping) {
-      this.phiV += -9 * Math.sin(this.phi) * dt;
-      this.phiV *= Math.pow(0.12, dt);
-      this.phi += this.phiV * dt * 60 * 0.06;
-      // the lanyard winds up at most two full turns either way, then bounces back
-      if (Math.abs(this.phi) > MAX_TWIST) {
-        this.phi = Math.sign(this.phi) * MAX_TWIST;
-        if (Math.sign(this.phiV) === Math.sign(this.phi)) this.phiV *= -0.35;
-      }
+    this.phiV += -9 * Math.sin(this.phi) * dt;
+    this.phiV *= Math.pow(0.12, dt);
+    this.phi += this.phiV * dt * 60 * 0.06;
+    // the lanyard winds up at most two full turns either way, then bounces back
+    if (Math.abs(this.phi) > MAX_TWIST) {
+      this.phi = Math.sign(this.phi) * MAX_TWIST;
+      if (Math.sign(this.phiV) === Math.sign(this.phi)) this.phiV *= -0.35;
     }
   }
 
@@ -470,16 +395,8 @@ export class Badge {
     this.spin.rotation.set(this.tilt.x, this.phi + this.tilt.y, 0);
     this.cardU.uGlare.value = this.theta * 0.6 + this.tilt.y * 0.8 + Math.sin(this.phi) * 0.4;
 
-    // hover glow
-    let hit = null;
-    if (!this.touch && this.mouse.moved) hit = this.hit(this.mouse.x, this.mouse.y);
-    if (hit) {
-      const back = hit.object === this.back;
-      this.cardU.uHit.value.set(back ? 1 - hit.uv.x : hit.uv.x, hit.uv.y);
-    }
-    this.hoverT += ((hit ? 1 : 0) - this.hoverT) * (hit ? 0.1 : 0.05);
-    this.cardU.uHover.value = this.hoverT;
-    this.hovering = !!hit;
+    // hover (Hero switches the cursor to "grab")
+    this.hovering = !this.touch && this.mouse.moved && !!this.hit(this.mouse.x, this.mouse.y);
 
     this.updateRibbon();
     this.renderer.render(this.scene, this.camera);
@@ -543,19 +460,13 @@ export class Badge {
       y: -cy, // DOM y grows downwards; both relative to the screen centre
       hw: c * hw + s * hh,
       hh: s * hw + c * hh,
-      visible: this.ready && this.cardU.uReveal.value > 0.15,
     };
-  }
-
-  screenCenter() {
-    const b = this.bounds();
-    return { x: this.W / 2 + b.x, y: this.H / 2 + b.y };
   }
 
   destroy() {
     this.destroyed = true;
     removeEventListener("resize", this.onResize);
-    gsap.killTweensOf(this);
+    gsap.killTweensOf(this.cardU.uReveal);
     this.renderer.dispose();
     this.renderer.domElement.remove();
   }

@@ -2,8 +2,6 @@ import { useRef } from "react";
 import { profile, experience, education, languages, licenses } from "../../data/profile";
 import { useLang } from "../../app/I18n";
 import { useReveal } from "../../hooks/useInView";
-import { orCheck } from "../../app/orCheck";
-import { Check } from "../../app/Check";
 import "./About.css";
 
 /** About: experience, education, languages, licenses. */
@@ -18,7 +16,7 @@ export default function About() {
         <div className="section-head">
           <p className="kicker rv">{t({ ko: "소개", en: "About" })}</p>
           <h2 id="about-title" className="rv" style={{ "--i": 1 }}>
-            {t({ ko: "경력", en: "Experience" })}
+            {t({ ko: "경력과 학력", en: "Experience & education" })}
           </h2>
           <p className="rv" style={{ "--i": 2 }}>
             {profile.route.join(" → ")}
@@ -31,11 +29,11 @@ export default function About() {
             {experience.map((x, i) => (
               <li key={i} className="about__job rv" style={{ "--i": i }}>
                 <p className="about__co">
-                  {t(x.company) || <Check hint={x.companyCheck} />}
+                  {t(x.company)}
                   {x.role && <span className="about__role">{t(x.role)}</span>}
                 </p>
                 <p className="about__period">
-                  <span className="about__dates">{orCheck(t(x.dates), "근무 기간 YYYY.MM–YYYY.MM")}</span>
+                  <span className="about__dates">{t(x.dates)}</span>
                   {t(x.period)}
                   {!x.noStatus && (
                     <span className={`about__status${x.current ? " is-current" : ""}`}>
@@ -47,14 +45,14 @@ export default function About() {
                     </span>
                   )}
                 </p>
-                <p className="about__duty">
-                  {t(x.duty)} {x.dutyCheck && <Check hint={x.dutyCheck} />}
-                </p>
-                <ul className="about__tools">
-                  {x.tools.map((tool) => (
-                    <li key={tool}>{tool}</li>
-                  ))}
-                </ul>
+                <p className="about__duty">{t(x.duty)}</p>
+                {x.tools.length > 0 && (
+                  <ul className="about__tools">
+                    {x.tools.map((tool) => (
+                      <li key={tool}>{tool}</li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ol>
@@ -91,7 +89,7 @@ export default function About() {
               {licenses.map((l) => (
                 <li key={t(l.name)}>
                   {t(l.name)}
-                  <span>{orCheck(l.date, "취득일 YYYY.MM")}</span>
+                  <span>{l.date}</span>
                 </li>
               ))}
             </ul>

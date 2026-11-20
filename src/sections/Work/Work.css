@@ -18,6 +18,7 @@
   display: grid;
   gap: 10px;
   pointer-events: none;
+  transition: opacity 0.5s var(--ease);
 }
 .work__head h2 {
   font-family: var(--f-serif);
@@ -48,7 +49,7 @@
   top: 50%;
   overflow: hidden;
   transform: translateY(-50%);
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.3;
   pointer-events: none;
 }
@@ -112,25 +113,11 @@
   color: var(--mute);
 }
 
-.work__hint {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 36px;
-  margin: auto;
-  width: max-content;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.work__head {
-  transition: opacity 0.5s var(--ease);
-}
 .work.is-zoomed .work__head {
   opacity: 0;
 }
 
-/* project panel: text on the left, the zoomed plane (video) sits in the right half */
+/* project panel: text on the left, the zoomed plane sits in the right half */
 .overview {
   position: absolute;
   top: 0;
@@ -280,64 +267,6 @@
   color: var(--ink);
 }
 
-/* callout, e.g. "the original site has closed" */
-.overview__note {
-  margin-top: 20px;
-  padding: 12px 14px 12px 16px;
-  border-left: 2px solid var(--blue-ink);
-  border-radius: 0 8px 8px 0;
-  background: var(--pill);
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--soft);
-  word-break: keep-all;
-}
-
-/* brand card: mascot + logo on the brand's own cream */
-.overview__brand {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(16px, 2.4vw, 32px);
-  margin-top: 24px;
-  padding: clamp(18px, 2vw, 28px);
-  border-radius: 14px;
-}
-.overview__mascot {
-  width: clamp(96px, 9vw, 140px);
-  height: auto;
-}
-.overview__logo {
-  width: clamp(150px, 15vw, 230px);
-  height: auto;
-}
-.overview__brand.is-column {
-  flex-direction: column;
-  gap: 16px;
-  text-align: center;
-  padding-block: clamp(24px, 2.6vw, 36px);
-}
-.overview__logo.is-wide {
-  width: min(100%, 420px);
-}
-
-/* images inside a story section (e.g. a character and where it's used) */
-.overview__imgs {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin: 14px 0 16px;
-}
-.overview__imgs img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  background: #fff;
-}
-.overview__imgs img.is-framed {
-  box-shadow: inset 0 0 0 1px var(--line);
-}
-
 .overview__credit {
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -367,9 +296,6 @@
 }
 .overview__swatches .is-main {
   grid-column: span 2;
-}
-.overview__swatches .is-main i {
-  height: 56px;
 }
 .overview__swatches b {
   font-weight: 500;
@@ -424,9 +350,27 @@
 }
 
 @media (max-width: 900px) {
+  /* phones: the whole panel scrolls (so the description is never cut), buttons stay at the bottom */
   .overview__in.has-story {
     max-height: calc(min(48svh, 400px) + 40px);
     max-width: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+  .overview__in.has-story .overview__body {
+    flex: none;
+    overflow: visible;
+    -webkit-mask: none;
+    mask: none;
+  }
+  .overview__in.has-story .overview__actions {
+    position: sticky;
+    bottom: 0;
+    margin-top: 0;
+    padding: 12px 0 2px;
+    background: linear-gradient(transparent, var(--bg) 14px);
   }
   .overview__in.has-story .overview__title {
     font-size: 30px;
@@ -448,11 +392,8 @@
     font-size: 34px;
   }
   .overview__desc {
+    flex: none;
     font-size: 15px;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   }
   .overview__facts {
     display: none;
@@ -527,16 +468,8 @@
   }
 }
 
-/* plain list of every project under the sphere */
-.work-list {
-  padding-block: clamp(40px, 6vw, 80px);
-}
 /* "About AI" note, right before the sphere */
 .work-ai {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(20px, 3vw, 40px);
   max-width: 920px;
   margin: clamp(56px, 7vw, 104px) auto;
   padding: clamp(24px, 3vw, 36px) clamp(22px, 3.4vw, 44px);
@@ -545,16 +478,6 @@
   background:
     radial-gradient(80% 120% at 0% 50%, rgba(22, 33, 255, 0.14), transparent 70%),
     #141416;
-}
-.work-ai__img {
-  width: clamp(104px, 11vw, 148px);
-  height: auto;
-  border-radius: 50%;
-  background: #f3f2ef;
-  box-shadow:
-    0 0 0 6px #141416,
-    0 0 0 7px #2a2a2d,
-    0 16px 40px rgba(22, 33, 255, 0.25);
 }
 .work-ai__title {
   font-family: var(--f-serif);
@@ -572,23 +495,14 @@
   color: var(--soft);
   word-break: keep-all;
 }
-.work-ai__accent {
-  justify-self: start;
-  padding: 4px 14px;
-  border-radius: 999px;
-  background: rgba(143, 149, 255, 0.12);
-  color: var(--blue-ink);
-  font-weight: 500;
-}
 @media (max-width: 640px) {
   .work-ai {
-    grid-template-columns: 1fr;
-    justify-items: center;
     text-align: center;
   }
-  .work-ai__accent {
-    justify-self: center;
-  }
+}
+/* plain list of every project under the sphere */
+.work-list {
+  padding-block: clamp(40px, 6vw, 80px);
 }
 .work-list h3 {
   margin-bottom: 14px;

@@ -1,11 +1,9 @@
-// Site-wide settings used at build time (SEO tags, sitemap, robots.txt).
-// While SITE_URL is the placeholder, URL-based tags (canonical, og:url, og:image, sitemap) are skipped.
+// Build-time SEO settings (vite.config.js). While SITE_URL is the placeholder,
+// canonical, og:url, og:image and sitemap.xml are skipped.
 
 export const SITE_URL_PLACEHOLDER = "https://your-domain.com";
 
-export const SITE_URL = SITE_URL_PLACEHOLDER; // ПРОВЕРЬ ЗДЕСЬ: real domain, e.g. "https://kate-portfolio.com" (no trailing slash)
-export const DEPLOY_TARGET = ""; // ПРОВЕРЬ ЗДЕСЬ: "github-pages" | "vercel" | "netlify"
-
-export const OG_IMAGE = ""; // ПРОВЕРЬ ЗДЕСЬ: 1200×630 share image in public/, e.g. "/og-image.png"
-export const NAVER_SITE_VERIFICATION = ""; // optional: code from Naver Search Advisor (searchadvisor.naver.com)
-export const GOOGLE_SITE_VERIFICATION = ""; // optional: code from Google Search Console (optional)
+export const SITE_URL = SITE_URL_PLACEHOLDER; // real domain, no trailing slash
+export const OG_IMAGE = ""; // 1200×630 image in public/, e.g. "/og-image.png"
+export const NAVER_SITE_VERIFICATION = ""; // Naver Search Advisor code
+export const GOOGLE_SITE_VERIFICATION = ""; // Google Search Console code

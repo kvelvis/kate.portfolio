@@ -58,7 +58,7 @@ export default function Contact() {
         <span>
           © {profile.year} {profile.firstName} {profile.lastName}
         </span>
-        <span className="foot__mid">{t({ ko: "React · GSAP · Three.js로 직접 만들었어요", en: "Designed and built with React, GSAP and Three.js" })}</span>
+        <span className="foot__mid"></span>
         <a href="#top">{t({ ko: "맨 위로 ↑", en: "Back to top ↑" })}</a>
         <small className="foot__privacy">
           {t({

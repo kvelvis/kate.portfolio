@@ -1,10 +1,10 @@
 import * as THREE from "three";
 import { gsap } from "gsap";
-import { isTouch, reducedMotion, dpr, makeVideo, videoReady, videoTexture, loadImage, lerp, clamp } from "./media";
+import { isTouch, reducedMotion, dpr, loadImage, lerp, clamp } from "./media";
 import { loadGif } from "./gif";
 
 /*
-  Sphere gallery — the home view.
+  Project sphere.
   Planes sit on a Fibonacci sphere and always face the camera. Drag / wheel spin it with inertia,
   click opens a project: its plane slides to the right half, the text panel fades in on the left.
   First visit plays an intro: counter → circle of ten → collapse → explode into the sphere.
@@ -20,12 +20,10 @@ const smooth = (a, b, x) => {
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export class SphereGallery {
-  constructor({ host, items, ui, onZoom, onOverview, onBurst }) {
+  constructor({ host, items, ui, onZoom }) {
     this.host = host;
     this.ui = ui;
     this.onZoom = onZoom;
-    this.onOverview = onOverview;
-    this.onBurst = onBurst;
     this.reduced = reducedMotion();
     this.touch = isTouch();
 
@@ -112,8 +110,7 @@ export class SphereGallery {
     this.cursorX = gsap.quickTo(ui.cursor, "x", { duration: 0.5, ease: "power3.out" });
     this.cursorY = gsap.quickTo(ui.cursor, "y", { duration: 0.5, ease: "power3.out" });
     this.videoTimer = setInterval(() => this.manageVideos(), 300);
-    // stills start loading as soon as the sphere is built (a screen before it shows),
-    // heavy GIFs only once the intro plays
+    // stills load as soon as the sphere is built (a screen before it shows), GIFs once the intro plays
     this.whenPlayed = new Promise((r) => (this._playedResolve = r));
     this.loadMedia();
   }
@@ -268,7 +265,7 @@ export class SphereGallery {
     gsap.to(this, { ex: 1, duration: 0.8, ease: "power4.out", overwrite: true });
     this.onZoom?.(p.item);
     this.caption(null);
-    gsap.to([this.ui.hint, ...this.ui.sides], { opacity: 0, duration: 0.3, overwrite: "auto" });
+    gsap.to(this.ui.sides, { opacity: 0, duration: 0.3, overwrite: "auto" });
     this.manageVideos();
   }
 
@@ -278,7 +275,7 @@ export class SphereGallery {
     const p = this.zoomed;
     this.onZoom?.(null);
     this.label(null);
-    gsap.to([this.ui.hint, ...this.ui.sides], { opacity: 1, duration: 0.6, delay: 0.3, overwrite: "auto" });
+    gsap.to(this.ui.sides, { opacity: 1, duration: 0.6, delay: 0.3, overwrite: "auto" });
     gsap.to(this, {
       ex: 0,
       duration: 0.8,
@@ -298,14 +295,12 @@ export class SphereGallery {
     this.overview = true;
     gsap.to(this, { ovf: 1, duration: 0.8, ease: "power4.out" });
     gsap.fromTo(this.ui.overview, { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: "expo.out", delay: 0.2 });
-    this.onOverview?.(true);
   }
 
   closeOverview() {
     this.overview = false;
     gsap.to(this, { ovf: 0, duration: 0.8, ease: "power4.out" });
     gsap.to(this.ui.overview, { y: 16, autoAlpha: 0, duration: 0.35, ease: "power2.in" });
-    this.onOverview?.(false);
   }
 
   /* ---------------- caption + cursor label ---------------- */
@@ -373,49 +368,30 @@ export class SphereGallery {
           if (!t) this.ensureVideo(p, done);
           else if (!this.touch) this.whenPlayed.then(() => this.ensureVideo(p));
         });
-      } else if (p.item.video && !this.touch) {
-        const v = (p.video = makeVideo(p.item.video));
-        videoReady(v).then(() => {
-          done(v.videoWidth ? videoTexture(v) : null, v.videoWidth, v.videoHeight);
-          this.manageVideos();
-        });
-        v.load();
       } else {
-        // phones: stills only, the zoomed plane gets its video on demand
         loadImage(p.item.image).then((t) => done(t, t?.image?.width, t?.image?.height));
       }
     });
   }
 
+  /** Loads the plane's GIF player (p.video: same play/pause shape as a <video>). */
   ensureVideo(p, done) {
-    if (p.video || p._gifLoading) return;
-    if (p.item.gif) {
-      p._gifLoading = true;
-      loadGif(p.item.gif).then((g) => {
-        if (this.destroyed) return g?.destroy();
-        if (!g) return done?.(null);
-        p.video = g;
-        if (done) done(g.texture, g.videoWidth, g.videoHeight);
-        else {
-          p.mesh.material.map?.dispose();
-          p.mesh.material.map = g.texture;
-          p.mesh.material.color = raw(0xffffff);
-          p.mesh.material.needsUpdate = true;
-          p.aspect = g.videoWidth / g.videoHeight;
-        }
-        this.manageVideos();
-      });
-      return;
-    }
-    if (!p.item.video) return;
-    const v = (p.video = makeVideo(p.item.video, "auto"));
-    videoReady(v).then(() => {
-      if (!v.videoWidth) return;
-      p.mesh.material.map = videoTexture(v);
-      p.mesh.material.needsUpdate = true;
+    if (p.video || p._gifLoading || !p.item.gif) return;
+    p._gifLoading = true;
+    loadGif(p.item.gif).then((g) => {
+      if (this.destroyed) return g?.destroy();
+      if (!g) return done?.(null);
+      p.video = g;
+      if (done) done(g.texture, g.videoWidth, g.videoHeight);
+      else {
+        p.mesh.material.map?.dispose();
+        p.mesh.material.map = g.texture;
+        p.mesh.material.color = raw(0xffffff);
+        p.mesh.material.needsUpdate = true;
+        p.aspect = g.videoWidth / g.videoHeight;
+      }
       this.manageVideos();
     });
-    v.load();
   }
 
   manageVideos() {
@@ -490,8 +466,6 @@ export class SphereGallery {
       p.mesh.visible = true;
     });
     gsap.set(this.ui.sides, { yPercent: 0 });
-    gsap.set(this.ui.hint, { opacity: 1 });
-    this.onBurst?.();
     this.onIntroDone?.();
   }
 
@@ -512,8 +486,6 @@ export class SphereGallery {
       gsap.to(p, { e: 1, duration: 1, ease: "power3.out", delay: i < 10 ? 0 : 0.04 * (i - 10) });
     });
     gsap.fromTo(this.ui.sides, { yPercent: 100 }, { yPercent: 0, duration: 0.9, ease: "expo.out", stagger: 0.07, delay: 0.3 });
-    gsap.fromTo(this.ui.hint, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.9, ease: "expo.out", delay: 0.6 });
-    this.onBurst?.();
     gsap.delayedCall(1 + 0.04 * Math.max(0, this.planes.length - 10), () => {
       this.onIntroDone?.();
       if (this._pendingOpen != null) {
@@ -680,9 +652,7 @@ export class SphereGallery {
     removeEventListener("keydown", this.h.key);
     removeEventListener("resize", this.h.resize);
     this.planes.forEach((p) => {
-      p.video?.pause();
-      if (p.video?.destroy) p.video.destroy();
-      else p.video?.removeAttribute("src");
+      p.video?.destroy();
       p.mesh.material.map?.dispose();
       p.mesh.material.dispose();
       p.mesh.geometry.dispose();

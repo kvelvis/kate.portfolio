@@ -5,13 +5,11 @@ import { reducedMotion } from "../../webgl/media";
 import { profile, links } from "../../data/profile";
 import { useLang } from "../../app/I18n";
 import { useInView } from "../../hooks/useInView";
-import badgeImg from "../../assets/img/badge_card.png"; // badge_new.png + metal_clip.png, cropped and halved (see webgl/badge.js)
+import badgeImg from "../../assets/img/badge_card.png";
 import "./Hero.css";
 
 const mail = links.email && `mailto:${links.email}`;
-// one status everywhere (the header shows the short form). ПРОВЕРЬ ЗДЕСЬ: is this how you want to say it?
 const STATUS = { ko: "구직 중 · 프리랜서 가능", en: "Open to work · available for freelance" };
-
 
 /** split "Greeting. Rest of the text" → [greeting, rest] */
 const splitIntro = (s) => {
@@ -19,7 +17,7 @@ const splitIntro = (s) => {
   return i < 0 ? ["", s] : [s.slice(0, i + 1), s.slice(i + 2)];
 };
 
-/** First screen: Kate's intro on the left, her ID badge on a lanyard on the right. */
+/** First screen: intro text and the draggable badge. */
 export default function Hero() {
   const { t, lang } = useLang();
   const root = useRef(null);
@@ -30,7 +28,6 @@ export default function Hero() {
   const [hello, rest] = splitIntro(t(profile.intro));
 
   useEffect(() => {
-    // front side only, no click effect: you can only pull and swing it
     const badge = new Badge({ host: gl.current, image: badgeImg });
     const s = { badge, running: false, raf: 0 };
     sys.current = s;

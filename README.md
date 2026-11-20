@@ -1,12 +1,23 @@
-# React + Vite
+# Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site: React + Vite, GSAP, Three.js.
 
-Currently, two official plugins are available:
+```bash
+npm install
+npm run dev      # local server
+npm run build    # production build → dist/
+npm run lint
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Structure
 
-## Expanding the ESLint configuration
+- `src/data/` — all content: profile, projects (`work.js`), project panels (`caseStudies.js`)
+- `src/sections/` — page sections (Hero, Profile, Work, About, Contact)
+- `src/webgl/` — badge on the lanyard (`badge.js`), project sphere (`sphere.js`), GIF decoder (`gif.js`)
+- `public/cases/` — the project sites themselves, opened through `public/preview.html`
+- `site.config.js` — domain and SEO settings used at build time
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Visit notifications
+
+`public/notify.php` sends visits and likes to Telegram. On the hosting, put a filled-in copy of
+`deploy/notify-config.example.php` next to `notify.php` as `notify-config.php`. Never commit the real one.

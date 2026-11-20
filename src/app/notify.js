@@ -1,5 +1,5 @@
 /*
-  Visit notifications → Kate's Telegram (through /notify.php on the hosting).
+  Visit notifications to Telegram, through /notify.php on the hosting.
 
   - Fires once per visit, only after the page has been visible for a few seconds,
     so link-preview robots (KakaoTalk, 사람인 …) don't count.

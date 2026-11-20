@@ -2,7 +2,6 @@
   border-top: 1px solid var(--line);
 }
 
-
 .prof__skills {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -96,8 +95,8 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(143, 149, 255, 0.14);
-  color: var(--blue-ink);
+  background:var(--blue-ink);
+  color: white;
 }
 .prof__cert-mark svg {
   width: 20px;
@@ -141,7 +140,8 @@
   }
 }
 
-/* horizontal timeline under the skills */
+/* timeline under the skills: one line, labels alternate above and below it.
+   Each item spans two columns, so neighbours overlap and get twice the width (columns set in Profile.jsx). */
 .prof__path {
   margin-top: clamp(56px, 7vw, 96px);
 }
@@ -149,45 +149,65 @@
   margin-bottom: 20px;
 }
 .tl {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(150px, 1fr)) minmax(300px, 1.7fr);
-  gap: 20px;
+  --stem: 28px;
   position: relative;
-  padding: 26px 4px 28px 0; /* room for the "now" card's glow inside the scroll box */
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line) transparent;
+  display: grid;
+  grid-template-rows: auto 1px auto;
+  row-gap: var(--stem);
+  column-gap: 0;
+  padding-block: 8px;
 }
-/* the line the dots sit on: one segment per item, so it also scrolls with the items on narrow screens */
-.tl__item::before {
+.tl::before {
   content: "";
-  position: absolute;
-  top: -20px;
-  left: 0;
-  right: -20px;
-  height: 1px;
+  grid-row: 2;
+  grid-column: 1 / -1;
   background: var(--line);
-}
-.tl__item:last-child::before {
-  right: 0;
 }
 .tl__item {
   position: relative;
   display: grid;
   align-content: start;
   gap: 6px;
-  scroll-snap-align: start;
+  padding-right: 24px;
+}
+.tl__item--up {
+  grid-row: 1;
+  align-self: end;
+}
+.tl__item--down {
+  grid-row: 3;
+  align-self: start;
+}
+/* stem from the line to the text */
+.tl__item::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  width: 1px;
+  height: var(--stem);
+  background: var(--line);
+}
+.tl__item--up::after {
+  top: 100%;
+}
+.tl__item--down::after {
+  bottom: 100%;
 }
 .tl__dot {
   position: absolute;
-  top: -26px;
+  z-index: 1;
   left: 0;
   width: 13px;
   height: 13px;
   border-radius: 50%;
   border: 2px solid var(--mute);
   background: var(--bg);
+}
+.tl__item--up .tl__dot {
+  bottom: calc(-1 * var(--stem) - 6.5px);
+}
+.tl__item--down .tl__dot {
+  top: calc(-1 * var(--stem) - 6.5px);
 }
 .tl__item--work .tl__dot,
 .tl__item--free .tl__dot {
@@ -218,25 +238,17 @@
 }
 /* "now": the point of the whole timeline, so it gets its own card */
 .tl__item--next {
-  margin-top: -14px;
   padding: 18px 20px 20px;
-  border: 1px solid rgba(143, 149, 255, 0.55);
+  border: 1px solid rgba(72, 81, 253, 0.55);
   border-radius: 14px;
   background: linear-gradient(160deg, rgba(22, 33, 255, 0.22), rgba(143, 149, 255, 0.08));
-  box-shadow: 0 0 0 4px rgba(143, 149, 255, 0.08), 0 20px 50px -24px rgba(22, 33, 255, 0.6);
 }
-.tl__item--next .tl__dot {
-  top: -12px;
-  left: 20px;
-}
-.tl__item--next::before {
-  top: -6px;
-  right: auto;
-  left: -20px;
-  width: 40px;
+.tl__item--next .tl__dot,
+.tl__item--next::after {
+  margin-left: 20px;
 }
 .tl__item--next .tl__when {
-  color: var(--blue-ink);
+  color: white;
   font-weight: 500;
 }
 .tl__item--next .tl__title {
@@ -250,9 +262,40 @@
   line-height: 1.6;
   color: var(--soft);
 }
-@media (max-width: 1100px) {
+
+/* phones: vertical, line on the left */
+@media (max-width: 760px) {
   .tl {
-    grid-template-columns: repeat(5, 200px) 320px;
-    padding-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 4px 0 4px 30px;
+  }
+  .tl::before {
+    position: absolute;
+    left: 6px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+  }
+  .tl__item,
+  .tl__item--up,
+  .tl__item--down {
+    align-self: stretch;
+    padding-right: 0;
+  }
+  .tl__item::after {
+    display: none;
+  }
+  .tl__item--up .tl__dot,
+  .tl__item--down .tl__dot {
+    top: 2px;
+    bottom: auto;
+    left: -30px;
+  }
+  .tl__item--next .tl__dot {
+    top: 20px;
+    left: -31px;
+    margin-left: 0;
   }
 }

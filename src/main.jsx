@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import "./styles/tokens.css";
-import "./styles/fonts.css";
 import "./styles/base.css";
 
 import { LangProvider } from "./app/I18n";

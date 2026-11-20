@@ -1,14 +1,12 @@
-// Every project shown in the Sphere (home) and the Index grid.
-// media: `gif` or `video` (mp4 + webm) loops, `image` is the still (screenshot / poster).
-// Text can be a string or { ko, en }. Empty `year` is hidden.
-// All projects: 2026 (finished in Nov 2026).
+// Projects on the sphere and in the project list.
+// `image` is the still, `gif` the animated preview (decoded by webgl/gif.js).
+// Text: a string or { ko, en }.
 
 import catPoster from "../assets/video/cat-poster.webp";
 import fairyPoster from "../assets/video/fairy-poster.webp";
 import celine27Img from "../assets/work/celine.jpg";
 import hanmiImg from "../assets/work/hanmi.jpg";
 import siyazuImg from "../assets/work/siyazu.jpg";
-// animated previews (decoded in the browser by webgl/gif.js)
 import celineGif from "../assets/work/celine.gif";
 import catGif from "../assets/work/cat.gif";
 import fairyGif from "../assets/work/fairytail.gif";
@@ -16,6 +14,7 @@ import siyazuGif from "../assets/work/siyazu.gif";
 import feevGif from "../assets/work/feev.gif";
 import danoGif from "../assets/work/danoapp.gif";
 import cubeGif from "../assets/work/cubehos.gif";
+
 export const work = [
   {
     id: "celine27",
@@ -85,7 +84,6 @@ export const work = [
       en: "A redesign of a B2B semiconductor equipment maker’s site: 15 key pages and an A/S engineer character.",
     },
   },
-
   {
     id: "fairy",
     title: "별빛 동화",
@@ -100,14 +98,13 @@ export const work = [
       en: "A GSAP scroll-storytelling site: four stories told in pictures.",
     },
   },
-  
   {
     id: "cube",
     title: "Cube Clinic",
     category: { ko: "메디컬", en: "Medical" },
     year: "2026",
     gif: cubeGif,
-    image: "/cases/cubehospital/img/photos/welcome-bg-1600.jpg", // ПРОВЕРЬ ЗДЕСЬ: the old GIF showed the 3D cube — record a new one
+    image: "/cases/cubehospital/img/photos/welcome-bg-1600.jpg",
     href: "/cases/cubehospital/index.html",
     caseStudy: "cube",
     desc: {
@@ -129,11 +126,4 @@ export const work = [
       en: "A website redesign for a minimal womenswear label, built as editorial commerce.",
     },
   },
- 
-  
- 
-  
- 
- 
- 
 ];

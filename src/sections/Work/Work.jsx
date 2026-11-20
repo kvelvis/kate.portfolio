@@ -4,12 +4,10 @@ import { work } from "../../data/work";
 import { caseStudies } from "../../data/caseStudies";
 import { useLang } from "../../app/I18n";
 import { useInView } from "../../hooks/useInView";
-import { Check } from "../../app/Check";
-import aiSticker from "../../assets/img/sticker_computer.webp";
 import { notifyProject } from "../../app/notify";
 import "./Work.css";
 
-// project sites open inside the device viewer (public/preview.html: Mobile / Tablet / PC bar on top)
+// project sites open in the device viewer (public/preview.html)
 const previewUrl = (href, lang) => (href ? `/preview.html?url=${encodeURIComponent(href)}&lang=${lang}` : undefined);
 
 /*
@@ -17,7 +15,7 @@ const previewUrl = (href, lang) => (href ? `/preview.html?url=${encodeURICompone
  * Guarded: first time only, only when arriving from above, never with reduced motion,
  * Esc releases it, and it always lets go after MAX_LOCK ms.
  */
-const MAX_LOCK = 4000; // short: a longer hold feels like the page is frozen
+const MAX_LOCK = 4000;
 const SCROLL_KEYS = new Set([" ", "PageDown", "PageUp", "ArrowDown", "ArrowUp", "Home", "End"]);
 function lockScroll() {
   const stop = (e) => e.preventDefault();
@@ -62,7 +60,7 @@ const countTitle = (n) => ({
   en: `${EN_NUM[n] || n} project${n === 1 ? "" : "s"},`,
 });
 
-/** Second screen: a sphere of Kate's projects. Plays its intro the first time it scrolls into view. */
+/** Project sphere. Plays its intro the first time it scrolls into view. */
 export default function Work() {
   const { t, lang } = useLang();
   const root = useRef(null);
@@ -79,7 +77,6 @@ export default function Work() {
     captionInner: useRef(null),
     captionTitle: useRef(null),
     captionCat: useRef(null),
-    hint: useRef(null),
     cursor: useRef(null),
     overview: useRef(null),
     go: useRef(null),
@@ -126,7 +123,6 @@ export default function Work() {
         counterInner: r.counterInner.current,
         counterNum: r.counterNum.current,
         captionInner: r.captionInner.current,
-        hint: r.hint.current,
         cursor: r.cursor.current,
         overview: r.overview.current,
         go: r.go.current,
@@ -177,28 +173,24 @@ export default function Work() {
 
   return (
     <>
-    {/* why AI was used: Kate's own words, right before the work */}
     <div className="container">
       <aside className="work-ai" aria-labelledby="work-ai-title">
-   
-        <div>
-          <h2 id="work-ai-title" className="work-ai__title">
-            {t({ ko: "AI 활용에 대해", en: "About AI" })}
-          </h2>
-          <div className="work-ai__text">
-            <p>
-              {t({
-                ko: "채용 공고와 최근 업계 트렌드를 참고해, 이번 포트폴리오에는 AI를 활용했습니다.",
-                en: "Guided by job postings and recent industry trends, I used AI in this portfolio.",
-              })}
-            </p>
-            <p>
-              {t({
-                ko: "이 포트폴리오의 사이트들은 대부분 제가 예전에 직접 기획하고 디자인하고 코딩한 작업물입니다. 이후 AI랑 같이 리디자인했습니다.",
-                en: "Most of the sites here I planned, designed and coded myself. Later I used AI redesigned some of them.",
-              })}
-            </p>
-          </div>
+        <h2 id="work-ai-title" className="work-ai__title">
+          {t({ ko: "AI 활용에 대해", en: "About AI" })}
+        </h2>
+        <div className="work-ai__text">
+          <p>
+            {t({
+              ko: "채용 공고와 최근 업계 트렌드를 참고해, 이번 포트폴리오에는 AI를 활용했습니다.",
+              en: "Following job postings and recent industry trends, I used AI in this portfolio.",
+            })}
+          </p>
+          <p>
+            {t({
+              ko: "이 포트폴리오의 사이트들은 대부분 제가 예전에 직접 기획하고 디자인하고 코딩한 작업물이며, 이후 AI와 함께 리디자인했습니다.",
+              en: "Most of the sites here I planned, designed and coded myself earlier, then redesigned with AI.",
+            })}
+          </p>
         </div>
       </aside>
     </div>
@@ -216,7 +208,7 @@ export default function Work() {
         work<span>.</span>
       </p>
       <p className="work__side work__side--l" aria-hidden="true">
-        <span ref={r.sideL}>{t({ ko: "웹 · 브랜드 · 인터랙티브", en: "Web, brand & interactive" })}</span>
+        <span ref={r.sideL}>{t({ ko: "웹 · 브랜드", en: "Web, brand & interactive" })}</span>
       </p>
       <p className="work__side work__side--r" aria-hidden="true">
         <span ref={r.sideR}>{t({ ko: "드래그로 돌리고, 클릭해서 열기", en: "Drag to spin, click to open" })}</span>
@@ -235,9 +227,7 @@ export default function Work() {
         </span>
       </div>
 
-      <p ref={r.hint} className="work__hint kicker">
-        {t({ ko: "드래그해서 둘러보기", en: "Drag to explore" })}
-      </p>
+   
 
       <div ref={r.cursor} className="cursor-label" aria-hidden="true" />
 
@@ -256,8 +246,7 @@ export default function Work() {
         {zoomed && (
           <div className={`overview__in${cs?.story?.length ? " has-story" : ""}`}>
             <p className="kicker">
-              {String(work.indexOf(zoomed) + 1).padStart(2, "0")} / {String(work.length).padStart(2, "0")} · {metaOf(zoomed, t)}{" "}
-              {!zoomed.year && <Check hint="연도" />}
+              {String(work.indexOf(zoomed) + 1).padStart(2, "0")} / {String(work.length).padStart(2, "0")} · {metaOf(zoomed, t)}
             </p>
             <h3 ref={panelTitle} tabIndex={-1} className="overview__title">
               {zoomed.title}
@@ -265,49 +254,31 @@ export default function Work() {
             </h3>
             <p className="overview__desc">{t(zoomed.desc)}</p>
             <div className="overview__body" tabIndex={cs?.story?.length ? 0 : undefined}>
-              {cs?.note && <p className="overview__note">{t(cs.note)}</p>}
-              {cs?.brand && (
-                <div className={`overview__brand${cs.brand.column ? " is-column" : ""}`} style={{ background: cs.brand.bg }}>
-                  {(cs.brand.texts || (cs.brand.text ? [cs.brand.text] : [])).map((bt) => (
-                    <span key={bt.value} className="overview__brand-text" style={bt.style}>
-                      {bt.value}
-                    </span>
-                  ))}
-                  {cs.brand.mascot && <img src={cs.brand.mascot.src} alt={t(cs.brand.mascot.alt)} className="overview__mascot" loading="lazy" />}
-                  {cs.brand.logo && <img src={cs.brand.logo.src} alt={t(cs.brand.logo.alt)} className={`overview__logo${cs.brand.logo.wide ? " is-wide" : ""}`} style={cs.brand.logo.w ? { width: cs.brand.logo.w } : undefined} loading="lazy" />}
-                </div>
-              )}
-              {cs && (t(cs.role) || cs.tools?.length > 0 || cs.credits?.length > 0) && (
+              {cs && (cs.period || cs.role || cs.tools?.length > 0 || cs.credits?.length > 0) && (
                 <dl className="overview__facts">
-                  <div>
-                    <dt>{t({ ko: "기간", en: "When" })}</dt>
-                    <dd>
-                      {cs.period || <Check hint="기간 YYYY.MM" />} {cs.period && cs.unsure?.period && <Check hint={cs.unsure.period} />}
-                    </dd>
-                  </div>
-                  {t(cs.role) && (
+                  {cs.period && (
+                    <div>
+                      <dt>{t({ ko: "기간", en: "When" })}</dt>
+                      <dd>{t(cs.period)}</dd>
+                    </div>
+                  )}
+                  {cs.role && (
                     <div>
                       <dt>{t({ ko: "역할", en: "Role" })}</dt>
-                      <dd>
-                        {t(cs.role)} {cs.unsure?.role && <Check hint={cs.unsure.role} />}
-                      </dd>
+                      <dd>{t(cs.role)}</dd>
                     </div>
                   )}
                   {cs.tools?.length > 0 && (
                     <div>
                       <dt>{t({ ko: "도구", en: "Tools" })}</dt>
-                      <dd>
-                        {cs.tools.join(" · ")} {cs.unsure?.tools && <Check hint={cs.unsure.tools} />}
-                      </dd>
+                      <dd>{cs.tools.join(" · ")}</dd>
                     </div>
                   )}
                   {cs.credits?.map((c) => (
                     <div key={t(c.label)}>
                       <dt>{t(c.label)}</dt>
                       <dd>
-                        {!c.value ? (
-                          <Check hint={c.check} />
-                        ) : c.href ? (
+                        {c.href ? (
                           <a href={c.href} target="_blank" rel="noopener noreferrer" className="overview__credit">
                             {c.value} ↗
                           </a>
@@ -322,15 +293,7 @@ export default function Work() {
               {cs?.story?.map((sec) => (
                 <section key={t(sec.title)} className="overview__sec">
                   <h4>{t(sec.title)}</h4>
-                  {sec.check && <Check hint={sec.check} />}
-                  {sec.text && t(sec.text) && <p>{t(sec.text)}</p>}
-                  {sec.images && (
-                    <div className="overview__imgs">
-                      {sec.images.map((im) => (
-                        <img key={im.src} src={im.src} alt={t(im.alt)} className={im.frame ? "is-framed" : ""} loading="lazy" />
-                      ))}
-                    </div>
-                  )}
+                  {sec.text && <p>{t(sec.text)}</p>}
                   {sec.colors && (
                     <ul className="overview__swatches">
                       {sec.colors.map((c) => (
@@ -370,7 +333,6 @@ export default function Work() {
                         <li key={t(it.text)}>
                           {it.term && <b>{t(it.term)}</b>}
                           {t(it.text)}
-                          {it.check && <Check hint={it.check} />}
                           {it.why && (
                             <span className="overview__why">
                               <i>{t({ ko: "왜", en: "Why" })}</i>
@@ -395,7 +357,6 @@ export default function Work() {
                   Figma ↗
                 </a>
               )}
-              {cs?.links && "figma" in cs.links && !cs.links.figma && <Check hint="Figma 공개 링크" />}
               <button className="pill-btn" onClick={() => sphere.current.collapse()}>
                 {labels.close}
               </button>
@@ -405,7 +366,7 @@ export default function Work() {
       </div>
     </section>
 
-    {/* every project as plain HTML: reachable by keyboard / screen reader and readable by search engines */}
+    {/* every project as plain HTML, for keyboard, screen reader and search engines */}
     <section className="work-list container" aria-labelledby="work-list-title">
       <h3 id="work-list-title" className="kicker">
         {t({ ko: "전체 목록", en: "All projects" })}
@@ -416,7 +377,7 @@ export default function Work() {
             <span className="work-list__no">{String(i + 1).padStart(2, "0")}</span>
             <span className="work-list__title">{item.title}</span>
             <span className="work-list__cat">{t(item.category)}</span>
-            <span className="work-list__year">{item.year || <Check hint="연도" />}</span>
+            <span className="work-list__year">{item.year}</span>
             <span className="work-list__actions">
               <button type="button" className="pill-btn" onClick={(e) => openFromList(i, e)}>
                 {t({ ko: "설명", en: "Details" })}

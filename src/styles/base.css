@@ -150,7 +150,7 @@ ol {
   }
 }
 
-/* scroll reveal (see hooks/useReveal) */
+/* scroll reveal (hooks/useInView.js → useReveal) */
 .rv {
   opacity: 0;
   transform: translateY(28px);
@@ -223,26 +223,4 @@ ol {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-/* "ПРОВЕРЬ ЗДЕСЬ": something Kate still has to fill in or confirm (see src/app/Check.jsx) */
-.check-here {
-  display: inline-flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0;
-  width: max-content;
-  max-width: 100%;
-  padding: 3px 7px;
-  border-radius: 4px;
-  background: #ffe600;
-  color: #111;
-  font: 700 11px/1.3 var(--f-sans);
-  letter-spacing: 0.03em;
-  white-space: normal;
-  vertical-align: middle;
-}
-.check-here__hint {
-  font-weight: 500;
-  letter-spacing: 0;
 }

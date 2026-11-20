@@ -1,18 +1,15 @@
-// All portfolio text content lives here — components read from this file.
-// Text that differs by language is { ko, en }; components pick one with t() from useLang().
-// EN versions are translations of Kate's Korean text. ПРОВЕРЬ ЗДЕСЬ: read the EN versions once.
+// Profile text. Text that differs by language is { ko, en }; components pick one with t().
 
 const YEAR = 2026;
 const IN_KOREA_SINCE = 2012;
 export const yearsInKorea = YEAR - IN_KOREA_SINCE;
 
-// Empty values are hidden on the site until filled in. Also used for SEO structured data (vite.config.js).
+// Empty values are hidden. Also used for the SEO structured data in vite.config.js.
 export const links = {
-  // Contacts are optional: visitors come from the resume, which has them. Empty values stay hidden.
   email: "kvelvis74@gmail.com",
-  github: "", // optional, full URL
-  linkedin: "", // optional, full URL
-  telegram: "", // removed: email only
+  github: "", // full URL
+  linkedin: "", // full URL
+  telegram: "", // username without @
 };
 
 export const profile = {
@@ -25,7 +22,7 @@ export const profile = {
   route: ["Chelyabinsk", "Busan", "Seoul"],
   intro: {
     ko: `안녕하세요. 저는 러시아에서 왔고 한국에서 ${yearsInKorea}년째 살고 있어요. 부산대학교 경영학과를 졸업한 웹디자이너이자 웹퍼블리셔 케이트입니다.`,
-    en: `Hi, I'm Kate. I'm from Russia and have lived in Korea for ${yearsInKorea} years. I graduated in Business Administration from Pusan National University, and I'm a web designer and web publisher.`,
+    en: `Hi, I’m Kate. I’m from Russia and have lived in Korea for ${yearsInKorea} years. I graduated in Business Administration from Pusan National University, and I’m a web designer and web publisher.`,
   },
   contacts: [
     links.email && { label: "Email", value: links.email, href: `mailto:${links.email}`, external: false },
@@ -33,17 +30,14 @@ export const profile = {
     links.linkedin && { label: "LinkedIn", value: links.linkedin.replace(/^https?:\/\/(www\.)?/, ""), href: links.linkedin },
     links.telegram && { label: "Telegram", value: `@${links.telegram}`, href: `https://t.me/${links.telegram}` },
   ].filter(Boolean),
-  // Put the PDFs in public/resume/ and write the paths here, e.g. "/resume/kate-resume-ko.pdf"
+  // PDFs go in public/resume/, e.g. "/resume/kate-resume-ko.pdf"
   resume: [
-    { lang: "KO", label: "이력서 (KO)", href: "" }, // optional — Korean resume PDF
-    { lang: "EN", label: "Resume (EN)", href: "" }, // optional — English resume PDF
+    { lang: "KO", label: "이력서 (KO)", href: "" },
+    { lang: "EN", label: "Resume (EN)", href: "" },
   ].filter((r) => r.href),
 };
 
-
 // level: 3 = daily use, 2 = working knowledge, 1 = familiar
-// ПРОВЕРЬ ЗДЕСЬ — confirm the levels you didn't set yourself (you set Figma 3, React 2, Blender 2)
-export const skillLevels = { 3: "daily", 2: "working", 1: "familiar" };
 
 export const skillGroups = [
   {
@@ -72,7 +66,6 @@ export const skillGroups = [
       { name: "Figma · Design systems", level: 3 },
       { name: "Photoshop", level: 3 },
       { name: "Illustrator", level: 3 },
-     
     ],
   },
   {
@@ -84,32 +77,31 @@ export const skillGroups = [
   },
 ];
 
-// Work experience, most recent first (as Kate listed it).
-// current: true → "프리랜서 · 진행 중" tag; otherwise "퇴사".
-// dates: "2024.03–2024.07" — empty → the site shows "ПРОВЕРЬ ЗДЕСЬ". Also check the English company names.
+// Most recent first. Status tag: current → "재직 중" / "프리랜서 · 진행 중", closed → "회사 폐업",
+// otherwise "퇴사"; noStatus hides it.
 export const experience = [
   {
     company: { ko: "스포워즈 코리아", en: "스포워즈 코리아" },
-    role: { ko: "웹디자이너 웹퍼블리셔", en: "Web Designer Web Publisher" },
+    role: { ko: "웹디자이너 · 웹퍼블리셔", en: "Web Designer · Web Publisher" },
     period: { ko: "5개월", en: "5 months" },
     dates: "2024.02–2024.06",
     current: false,
     duty: {
       ko: "자사 홈페이지 웹디자인 (Figma → 퍼블리싱) 및 사내 타 사이트 디자인 지원. 회사 경영 악화로 프로젝트가 중단되었고, 이후 회사가 폐업했습니다.",
-      en: "Web design of the company website (Figma → publishing) and design support for the company's other sites. The projects were stopped as the company’s finances worsened, and it later closed.",
+      en: "Web design of the company website (Figma → publishing) and design support for the company’s other sites. The projects were stopped as the company’s finances worsened, and it later closed.",
     },
     closed: true,
     tools: ["Figma", "HTML", "CSS"],
   },
   {
     company: { ko: "얀소프트", en: "얀소프트" },
-    role: { ko: "웹디자이너 웹퍼블리셔", en: "Web Designer Web Publisher" },
+    role: { ko: "웹디자이너 · 웹퍼블리셔", en: "Web Designer · Web Publisher" },
     period: { ko: "8개월", en: "8 months" },
     dates: "2024.07–2025.02",
     current: false,
     duty: {
       ko: "Svelte 대시보드 디자인 및 퍼블리싱, 사내 연동 서비스 사이트 3건 웹디자인 진행. 회사 경영 악화로 프로젝트가 중단되었고, 이후 회사가 폐업했습니다.",
-      en: "Designed and published a Svelte dashboard, and web design for 3 connected in-house service sites. The projects were stopped as the company’s finances worsened, and it later closed.",
+      en: "Designed and published a Svelte dashboard, and designed 3 connected in-house service sites. The projects were stopped as the company’s finances worsened, and it later closed.",
     },
     closed: true,
     tools: ["Svelte", "Figma", "HTML", "CSS"],
@@ -118,7 +110,6 @@ export const experience = [
     company: { ko: "1S-Rarus", en: "1S-Rarus" },
     role: { ko: "콘텐츠 디자이너", en: "Content designer" },
     period: { ko: "1년 9개월~", en: "1 year 9 months+" },
-    // after 얀소프트, ongoing. ПРОВЕРЬ ЗДЕСЬ: your resume says 해외근무 1년 11개월 — make the two match
     dates: { ko: "2025.03–현재", en: "2025.03–present" },
     current: true,
     freelance: true,
@@ -129,7 +120,6 @@ export const experience = [
     tools: ["Figma", "Photoshop", "Illustrator"],
   },
   {
-    // freelance translation, found through the Soomgo and Kmong platforms
     company: { ko: "숨고 · 크몽", en: "Soomgo · Kmong" },
     role: { ko: "프리랜서 번역", en: "Freelance translator" },
     period: { ko: "1년 9개월~", en: "1 year 9 months+" },
@@ -140,7 +130,7 @@ export const experience = [
       en: "Freelance translation from Korean into Russian, with clients found through Soomgo and Kmong.",
     },
     tools: [],
-  }
+  },
 ];
 
 export const education = [
@@ -157,8 +147,7 @@ export const languages = [
   { name: "KO ↔ RU", note: "Localization" },
 ];
 
-// Empty dates are hidden on the site until filled in (format "YYYY.MM").
-// skill: true → also shown next to the skills (Profile section), as a certificate card.
+// skill: true → also shown as a card next to the skills (Profile section).
 export const licenses = [
   {
     date: "2022.04",
@@ -176,15 +165,10 @@ export const licenses = [
   },
 ];
 
-// Horizontal timeline under the skills (Profile section), oldest first.
-// when: "" → the site shows "ПРОВЕРЬ ЗДЕСЬ". The job dates come from `experience` above.
+// Timeline under the skills (Profile section), oldest first. Job dates come from `experience`.
 const jobDates = (name) => experience.find((x) => x.company.ko.startsWith(name))?.dates || "";
 export const timeline = [
-  {
-    when: "2016–2020",
-    kind: "edu",
-    title: { ko: "부산대학교 경영학과 졸업", en: "Pusan National University, B.A. Business Administration" },
-  },
+
   {
     when: "2023.05–11",
     kind: "edu",

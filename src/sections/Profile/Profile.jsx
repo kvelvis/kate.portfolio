@@ -1,20 +1,16 @@
 import { useRef } from "react";
-import { skillGroups, skillLevels, licenses, timeline } from "../../data/profile";
+import { skillGroups, licenses, timeline } from "../../data/profile";
 import { useLang } from "../../app/I18n";
 import { useReveal } from "../../hooks/useInView";
-import { orCheck } from "../../app/orCheck";
-import { Check } from "../../app/Check";
 import "./Profile.css";
 
 const LEVEL = { ko: { 3: "매일", 2: "실무", 1: "기초" }, en: { 3: "daily", 2: "working", 1: "familiar" } };
 
-/** Right after the first screen: the skills, grouped, with the certificates beside them. */
+/** Skills by group, certificates beside them, timeline below. */
 export default function Profile() {
   const { t, lang } = useLang();
   const root = useRef(null);
   useReveal(root, [lang]);
-
-
 
   return (
     <section ref={root} id="profile" className="section prof" aria-labelledby="prof-title">
@@ -35,7 +31,7 @@ export default function Profile() {
                   {g.items.map((it) => (
                     <li key={t(it.name)}>
                       <span>{t(it.name)}</span>
-                      <span className="prof__lvl" title={skillLevels[it.level]}>
+                      <span className="prof__lvl" title={LEVEL[lang][it.level]}>
                         {[1, 2, 3].map((d) => (
                           <i key={d} className={d <= it.level ? "on" : ""} />
                         ))}
@@ -65,7 +61,7 @@ export default function Profile() {
                     <b>{t(l.name)}</b>
                     {l.issuer && <span className="prof__cert-issuer">{t(l.issuer)}</span>}
                     {l.covers && <span className="prof__cert-covers">{t(l.covers)}</span>}
-                    <span className="prof__cert-date">{orCheck(l.date, "취득일 YYYY.MM")}</span>
+                    {l.date && <span className="prof__cert-date">{l.date}</span>}
                   </li>
                 ))}
             </ul>
@@ -82,14 +78,17 @@ export default function Profile() {
           ))}
         </p>
 
-        {/* horizontal timeline: education → course → jobs → freelance → now */}
         <div className="prof__path rv" aria-labelledby="prof-path">
           <h3 id="prof-path" className="prof__group-name">{t({ ko: "걸어온 길", en: "My path" })}</h3>
-          <ol className="tl">
+          <ol className="tl" style={{ gridTemplateColumns: `repeat(${timeline.length + 1}, minmax(0, 1fr))` }}>
             {timeline.map((n, i) => (
-              <li key={i} className={`tl__item tl__item--${n.kind}`}>
+              <li
+                key={i}
+                className={`tl__item tl__item--${n.kind} tl__item--${i % 2 ? "down" : "up"}`}
+                style={{ gridColumn: `${i + 1} / span 2` }}
+              >
                 <span className="tl__dot" aria-hidden="true" />
-                <span className="tl__when">{n.when ? t(n.when) : <Check hint="기간 YYYY.MM–YYYY.MM" />}</span>
+                <span className="tl__when">{t(n.when)}</span>
                 <b className="tl__title">{t(n.title)}</b>
                 {n.note && <span className="tl__note">{t(n.note)}</span>}
               </li>

@@ -1,19 +1,13 @@
-import { featured } from "./featured";
-
-// Case studies: problem → process → result.
-// Images: import them at the top and add to `images` as { src, alt, width, height }.
-// Any text can be a plain string or { ko, en }.
+// Project panel content, keyed by work.js → caseStudy. Text: a string or { ko, en }.
 
 export const caseStudies = {
   dano: {
     title: "Dano 단어",
     titleEn: { ko: "알림으로 배우는 한국어 단어 앱", en: "Learn Korean words from your notifications" },
-    type: { ko: "개인 프로젝트 · 모바일 앱", en: "Personal project · Mobile app" },
     period: "2026.11",
     role: { ko: "기획 · UX/UI 디자인 · 캐릭터", en: "Planning · UX/UI design · Character" },
-    tools: ["Figma", "Weavy"], 
+    tools: ["Figma", "Weavy"],
     fontCss: ["https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700;800&display=swap"],
-    lead: featured.summary,
     story: [
       {
         title: { ko: "컨셉", en: "Concept" },
@@ -90,7 +84,7 @@ export const caseStudies = {
       },
       {
         title: { ko: "컬러", en: "Colour" },
-        // from the Figma file (collection "Dano v3"): red yarn and the black cat lead, lilac supports
+        // values from the Figma file (collection "Dano v3")
         colors: [
           { hex: "#F1582D", name: { ko: "털실 레드 · 메인 액션, 진행률, 번역", en: "Yarn · main action, progress, translation" }, main: true },
           { hex: "#1E1B1C", name: { ko: "고양이 블랙 · 텍스트, 선택 칩", en: "Cat · text, selected chips" } },
@@ -164,24 +158,14 @@ export const caseStudies = {
         },
       },
     ],
-    problem: "", // ПРОВЕРЬ ЗДЕСЬ — what problem did you see? (who struggles with what, and why existing apps don't solve it)
-    process: featured.features.map((f) => ({ title: f.title, text: f.text })),
-    result: "", // ПРОВЕРЬ ЗДЕСЬ — outcome: screens finished, prototype, test feedback, what you learned
-    next: featured.next,
-    images: [], // ПРОВЕРЬ ЗДЕСЬ — key screens, design-system page, mascot
-    links: { figma: featured.figmaUrl, live: "" },
+    links: { figma: "https://www.figma.com/design/ziA3DZKe7lxjrnYEWaA6Yj/Dano_App_project?node-id=0-1" },
   },
-
   gatto: {
     title: "묘한 커피",
     titleEn: "Myohan Coffee",
-    type: { ko: "고양이 입양 카페 브랜딩 & 웹사이트 컨셉", en: "Branding & website concept for a cat-adoption café" },
     period: "2026.11",
-    role: { ko: "컨셉 기획 · 브랜딩 · 마스코트 · 웹디자인", en: "Concept · Branding · Mascot · Web design" }, // ПРОВЕРЬ ЗДЕСЬ — confirm
-    tools: ["Figma", "Illustrator", "Weavy", "Kling", "HTML · CSS · JS", "GSAP", "Lenis"], // ПРОВЕРЬ ЗДЕСЬ — confirm
-    // shown with a yellow "ПРОВЕРЬ ЗДЕСЬ" marker until confirmed — delete a key once it is right
-    lead: "",
-    // Shown in the sphere's project panel, in this order. Each section: text and/or items ({ term?, text }).
+    role: { ko: "컨셉 기획 · 브랜딩 · 마스코트 · 웹디자인", en: "Concept · Branding · Mascot · Web design" },
+    tools: ["Figma", "Illustrator", "Weavy", "Kling", "HTML · CSS · JS", "GSAP", "Lenis"],
     story: [
       {
         title: { ko: "컨셉", en: "Concept" },
@@ -274,7 +258,6 @@ export const caseStudies = {
         ],
       },
       {
-        check: "반응형 범위 맞는지",
         title: { ko: "웹사이트", en: "Website" },
         items: [
           { text: { ko: "메인 비주얼에서 콩이를 주인공으로 소개", en: "The main visual introduces Kongi as the hero" } },
@@ -291,22 +274,13 @@ export const caseStudies = {
         ],
       },
     ],
-    problem: "", // ПРОВЕРЬ ЗДЕСЬ
-    process: [], // ПРОВЕРЬ ЗДЕСЬ
-    result: "", // ПРОВЕРЬ ЗДЕСЬ
-    next: [],
-    images: [], // ПРОВЕРЬ ЗДЕСЬ — PC / tablet / mobile screenshots
-    links: { live: "/cases/cat cafe/renew/index.html" },
   },
   feev: {
     title: "FEEV",
     titleEn: "",
-    type: { ko: "K-뷰티 브랜드 FEEV 웹사이트 리디자인 · 캠페인 컨셉", en: "Website redesign for K-beauty brand FEEV · campaign concept" },
     period: "2026.11",
     role: { ko: "컨셉 기획 · 웹디자인 · 아트 디렉션", en: "Concept · Web design · Art direction" },
-    tools: ["Figma", "Three.js", "Weavy", "Claude (AI)"], // ПРОВЕРЬ ЗДЕСЬ — confirm Figma (it was in [brackets])
-    // shown with a yellow "ПРОВЕРЬ ЗДЕСЬ" marker until confirmed — delete a key once it is right
-    lead: "",
+    tools: ["Figma", "Three.js", "Weavy", "Claude (AI)"],
     story: [
       {
         title: { ko: "컨셉", en: "Concept" },
@@ -395,28 +369,19 @@ export const caseStudies = {
             term: { ko: "3D 레터링", en: "3D lettering" },
             text: {
               ko: "타이틀 글자를 Weavy로 생성: 핑크 풍선이나 젤리처럼 통통하고 반짝이는 질감",
-              en: "Title lettering generated with AI: puffy, glossy, like pink balloons or jelly",
+              en: "Title lettering generated with Weavy: puffy, glossy, like pink balloons or jelly",
             },
           },
         ],
       },
     ],
-    problem: "",
-    process: [],
-    result: "",
-    next: [],
-    images: [],
-    links: { live: "/cases/feev/index.html" },
   },
   celine27: {
     title: "CELINE",
     titleEn: "Printemps 2027",
-    type: { ko: "컬렉션 캠페인 웹사이트", en: "Collection campaign website" },
     period: "2026.11",
-    role: { ko: "컨셉 기획 · 웹디자인 · 퍼블리싱", en: "Concept · Web design · Publishing" }, // ПРОВЕРЬ ЗДЕСЬ — confirm (was in [brackets])
-    tools: ["Figma", "HTML", "CSS", "Bootstrap 5", "JavaScript"], // from the site's code; ПРОВЕРЬ ЗДЕСЬ: add design tools
-    // shown with a yellow "ПРОВЕРЬ ЗДЕСЬ" marker until confirmed — delete a key once it is right
-    lead: "",
+    role: { ko: "컨셉 기획 · 웹디자인 · 퍼블리싱", en: "Concept · Web design · Publishing" },
+    tools: ["Figma", "HTML", "CSS", "Bootstrap 5", "JavaScript"],
     story: [
       {
         title: { ko: "컨셉", en: "Concept" },
@@ -490,24 +455,14 @@ export const caseStudies = {
         ],
       },
     ],
-    problem: "",
-    process: [],
-    result: "",
-    next: [],
-    images: [],
-    links: { live: "/cases/celine/renew/index.html" },
   },
   siyazu: {
     title: "SIYAZU",
     titleEn: { ko: "웹사이트 리디자인", en: "Website redesign" },
-    type: { ko: "미니멀 여성복 브랜드 · 에디토리얼 커머스", en: "Minimal womenswear label · editorial commerce" },
     period: "2026.11",
-    role: { ko: "UX/UI 디자인 · 퍼블리싱", en: "UX/UI design · Publishing" }, // ПРОВЕРЬ ЗДЕСЬ — confirm (was in [brackets])
-    tools: ["Figma", "HTML", "CSS", "JavaScript", "Bootstrap 5"], // from the site's code; ПРОВЕРЬ ЗДЕСЬ: confirm
-    // shown with a yellow "ПРОВЕРЬ ЗДЕСЬ" marker until confirmed — delete a key once it is right
+    role: { ko: "UX/UI 디자인 · 퍼블리싱", en: "UX/UI design · Publishing" },
+    tools: ["Figma", "HTML", "CSS", "JavaScript", "Bootstrap 5"],
     credits: [{ label: { ko: "원본 사이트", en: "Original site" }, value: "siyazu.co.kr", href: "https://m.siyazu.co.kr/" }],
-
-    lead: "",
     story: [
       {
         title: { ko: "컨셉", en: "Concept" },
@@ -603,21 +558,13 @@ export const caseStudies = {
         },
       },
     ],
-    problem: "",
-    process: [],
-    result: "",
-    next: [],
-    images: [],
-    links: { live: "/cases/siyazu/index.html" },
   },
   hanmi: {
     title: "한미반도체",
     titleEn: { ko: "웹사이트 리디자인", en: "Website redesign" },
-    type: { ko: "B2B 반도체 장비 기업 · 기업 사이트", en: "B2B semiconductor equipment maker · corporate site" },
     period: "2026.11",
     role: { ko: "UX/UI 디자인 · 캐릭터 기획 · 퍼블리싱", en: "UX/UI design · Character concept · Publishing" },
     tools: ["Figma", "Figma AI (이미지 생성)", "HTML", "CSS", "JavaScript"],
-    lead: "",
     story: [
       {
         title: { ko: "컨셉", en: "Concept" },
@@ -706,7 +653,6 @@ export const caseStudies = {
           ko: "한미반도체는 24시간 365일 상담과 기술 지원을 강조합니다. 딱딱하게 느껴질 수 있는 이 서비스를 친근하게 전달하기 위해, 기존의 로봇 캐릭터 대신 더 현대적인 A/S 엔지니어 캐릭터를 새로 기획했습니다.",
           en: "Hanmi stresses 24/7 consulting and technical support. To make that service feel friendlier, I replaced their old robot character with a more modern A/S engineer.",
         },
-       
       },
       {
         title: { ko: "가장 어려웠던 점", en: "The hardest part" },
@@ -715,24 +661,15 @@ export const caseStudies = {
           en: "Making content out of almost nothing. Apart from product photos there was no material, so I planned the pages and copy myself and kept meaningless AI generation to a minimum.",
         },
       },
-      
     ],
-    problem: "",
-    process: [],
-    result: "",
-    next: [],
-    images: [],
-    links: { live: "/cases/hanmi/index.html" },
   },
   fairy: {
     title: "별빛 동화",
     titleEn: "Fairy Tale",
-    type: { ko: "GSAP 스크롤 스토리텔링 웹사이트", en: "GSAP scroll-storytelling website" },
     period: "2026.11",
     role: { ko: "기획 · 웹디자인 · 퍼블리싱 · 인터랙션 개발", en: "Planning · Web design · Publishing · Interaction development" },
-    tools: ["HTML", "CSS", "JavaScript", "GSAP", "ScrollTrigger", "Lenis"], // from the site's code
+    tools: ["HTML", "CSS", "JavaScript", "GSAP", "ScrollTrigger", "Lenis"],
     credits: [{ label: { ko: "일러스트", en: "Illustrations" }, value: "kittykeks", href: "https://www.behance.net/kittykeks" }],
-    lead: "",
     story: [
       {
         title: { ko: "컨셉", en: "Concept" },
@@ -834,69 +771,14 @@ export const caseStudies = {
         ],
       },
     ],
-    problem: "",
-    process: [],
-    result: "",
-    next: [],
-    images: [],
-    links: { live: "/cases/fairy/index.html" },
-  },
-  bluehouse: {
-    title: "청와대",
-    titleEn: { ko: "‘청와대, 국민 품으로’ 관람 사이트 리디자인", en: "“Cheong Wa Dae, back to the people”: visitor site redesign" },
-    type: { ko: "공공 관람 사이트 · 퍼블리싱 연습 + 리뉴얼", en: "Public visitor site · publishing practice + refresh" },
-    period: "2026.11",
-    role: { ko: "UX/UI 디자인 · 퍼블리싱 · 인터랙션", en: "UX/UI design · Publishing · Interaction" }, // ПРОВЕРЬ ЗДЕСЬ — confirm
-    tools: ["Figma", "HTML", "CSS", "JavaScript", "GSAP", "ScrollTrigger"], // ПРОВЕРЬ ЗДЕСЬ — confirm Figma
-    // shown with a yellow "ПРОВЕРЬ ЗДЕСЬ" marker until confirmed — delete a key once it is right
-    unsure: { role: "역할 맞는지", tools: "Figma 썼는지" },
-    // shown as a callout at the top of the panel
-    note: {
-      ko: "원본 ‘청와대, 국민 품으로’ 관람 사이트는 현재 운영이 종료되어 접속할 수 없습니다. 이 프로젝트는 그 사이트를 다시 디자인한 포트폴리오용 컨셉입니다.",
-      en: "The original “Cheong Wa Dae, back to the people” visitor site has closed and is no longer online. This project is a portfolio concept that redesigns it.",
-    },
-    lead: "",
-    story: [
-      {
-        title: { ko: "프로젝트 소개", en: "About the project" },
-        text: {
-          ko: "국비 과정에서 퍼블리싱 연습용으로 만든 ‘청와대, 국민 품으로’ 관람 사이트입니다. 공공기관 사이트를 다뤄 보고 싶어서 골랐고, 원본의 구조와 콘텐츠를 그대로 옮기며 코드를 익혔습니다. 최근에는 디자인을 더 둥글고 현대적으로 다듬었습니다.",
-          en: "A practice project from my government-funded web course: the “Cheong Wa Dae, back to the people” visitor site. I chose it to work on a public-sector site, rebuilt the original structure and content to learn to code, and recently refreshed the design to feel rounder and more modern.",
-        },
-      },
-      {
-        title: { ko: "리뉴얼에서 바꾼 것", en: "What the refresh changed" },
-        items: [
-          {
-            term: { ko: "둥글고 현대적인 UI", en: "Rounder, more modern UI" },
-            text: { ko: "카드와 버튼에 둥근 모서리, 넉넉한 여백, 정돈된 그리드", en: "Rounded cards and buttons, more white space, a tidier grid" },
-            why: { ko: "원본은 각지고 빽빽해서 오래돼 보였기 때문에", en: "The original was boxy and crowded, so it looked dated" },
-          },
-          {
-            term: { ko: "관람 신청 영역", en: "Visit booking block" },
-            check: "원본에 없던 게 맞는지",
-            text: { ko: "첫 화면 바로 아래에서 날짜 · 회차 · 인원을 선택", en: "Pick a date, time slot and group size right under the hero" },
-            why: { ko: "방문자가 가장 많이 찾는 기능이라 바로 보이게", en: "It’s what visitors look for most, so it comes first" },
-          },
-        ],
-      },
-    ],
-    problem: "",
-    process: [],
-    result: "",
-    next: [],
-    images: [],
-    links: { live: "/cases/bluehouse/renew/index.html" },
   },
   cube: {
     title: "Cube Clinic",
     titleEn: { ko: "큐브성형외과 · 가상 브랜드 웹사이트", en: "Cube Plastic Surgery · fictional clinic website" },
-    type: { ko: "성형외과 웹사이트 컨셉 (가상 병원)", en: "Plastic surgery clinic website concept (fictional)" },
-    period: "3 days",
+    period: { ko: "3일", en: "3 days" },
     role: { ko: "웹디자인 · 퍼블리싱", en: "Web design · Publishing" },
     tools: ["HTML", "CSS", "JavaScript", "Weavy"],
-    credits: [{ label: { ko: "참고한 병원 사이트", en: "Reference clinic site" }, value: "https://www.cubeps.com/", href: "https://www.cubeps.com/", check: "병원 사이트 링크" }],
-    unsure: { tools: "디자인 툴 · AI 툴 이름" },
+    credits: [{ label: { ko: "참고한 병원 사이트", en: "Reference clinic site" }, value: "https://www.cubeps.com/", href: "https://www.cubeps.com/" }],
     story: [
       {
         title: { ko: "컨셉", en: "Concept" },
@@ -913,12 +795,5 @@ export const caseStudies = {
         },
       },
     ],
-    problem: "",
-    process: [],
-    result: "",
-    next: [],
-    images: [],
-    links: { live: "/cases/cubehospital/index.html" },
   },
 };
-

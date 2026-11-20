@@ -67,8 +67,6 @@
   word-break: keep-all;
   text-wrap: pretty;
 }
-/* each word rises inside its own window; the extra room top and bottom keeps
-   tall Hangul glyphs and descenders from being clipped */
 .hero__cta {
   display: inline-flex;
   align-items: center;
@@ -91,6 +89,8 @@
   outline: 2px solid var(--blue-ink);
   outline-offset: 3px;
 }
+/* each word rises inside its own window; the extra room top and bottom keeps
+   tall Hangul glyphs and descenders from being clipped */
 .hero__copy .w {
   display: inline-block;
   overflow: hidden;
@@ -101,7 +101,7 @@
 .hero__copy .w > span {
   display: inline-block;
 }
-/* highlighter stroke over Kate's name: lower ~60% of the line, drawn left → right */
+/* highlighter stroke over the name, drawn left → right */
 .hero__name {
   color: var(--ink);
   background: linear-gradient(transparent 38%, var(--blue) 38%, var(--blue) 92%, transparent 92%) no-repeat left / 100% 100%;
@@ -128,7 +128,6 @@
     line-height: 1.42;
   }
 }
-
 
 .hero__foot {
   position: absolute;
