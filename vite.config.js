@@ -67,5 +67,6 @@ function seo() {
 
 // https://vite.dev/config/
 export default defineConfig({
+   base: '/kate.portfolio/',
   plugins: [react(), seo()],
 })
