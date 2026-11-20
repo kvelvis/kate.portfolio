@@ -147,6 +147,10 @@ export class SphereGallery {
         const touch = e.pointerType !== "mouse";
         this.drag = { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY, path: 0, touch };
         this.touched = true;
+        // a tap has no pointermove before it, so the pointer position is set here too
+        this.mouse.x = e.clientX;
+        this.mouse.y = e.clientY;
+        this.mouse.in = true;
         // touch keeps vertical panning for the page (touch-action: pan-y), so no capture there
         if (!touch) c.setPointerCapture?.(e.pointerId);
         this.setCursor();
@@ -184,6 +188,7 @@ export class SphereGallery {
         if (moved < 6 && d.path < 10) {
           this.mouse.x = e.clientX;
           this.mouse.y = e.clientY;
+          this.mouse.in = true;
           this.click(this.pick());
         }
       },
