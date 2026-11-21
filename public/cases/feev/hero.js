@@ -229,22 +229,29 @@ if (renderer) {
     shared.uRes.value.set(W, H); shared.uImgSize.value.set(iw, ih); shared.uImgCenter.value.copy(imgC);
 
     const fs = Math.max(12, Math.min(19, 21 * S)) + 'px';
+    for (const el of [pill1, pill2, tag]) el.style.setProperty('--fs', fs);
+    titleEl.classList.toggle('is-tall', tall); // before measuring: it changes the title's width
+    // keep a caption fully on screen
+    const clampX = (el, x) => Math.min(Math.max(x, el.offsetWidth / 2 + 12), W - el.offsetWidth / 2 - 12);
     // Captions sit on the empty studio wall, never over the face:
     //  wide screens  -> left and right of the model (image coordinates)
-    //  tall screens  -> the gap between the title and the top of the head (screen coordinates)
-    let spots;
-    if (tall) {
-      const titleBottom = titleEl.offsetTop + titleEl.offsetHeight;   // unaffected by the inflate transform
-      const headTop = imgToScreen(0, 70)[1];
-      const gap = Math.max(90, headTop - titleBottom);
-      spots = [[pill1, W * 0.38, titleBottom + gap * 0.22], [pill2, W * 0.62, titleBottom + gap * 0.48], [tag, W * 0.5, titleBottom + gap * 0.76]];
-    } else {
-      spots = [[pill1, ...imgToScreen(205, 330)], [tag, ...imgToScreen(215, 430)], [pill2, ...imgToScreen(1185, 380)]];
+    //  tall screens  -> stacked under the title, each at its real height, so they never overlap
+    const fits = (el, x) => x - el.offsetWidth / 2 >= 12 && x + el.offsetWidth / 2 <= W - 12;
+    // wide screens: beside the model; if a caption would stick out of the screen there
+    // (near-square windows), fall back to the stack under the title
+    let spots = tall ? null : [[pill1, ...imgToScreen(205, 330)], [tag, ...imgToScreen(215, 430)], [pill2, ...imgToScreen(1185, 380)]];
+    if (!spots || !spots.every(([el, x]) => fits(el, x))) {
+      let y = titleEl.offsetTop + titleEl.offsetHeight + 10; // unaffected by the inflate transform
+      spots = [[pill1, W * 0.4], [pill2, W * 0.6], [tag, W * 0.5]].map(([el, x], i) => {
+        const h = el.offsetHeight;
+        const spot = [el, clampX(el, x), y + h / 2];
+        y += h + (i === 1 ? 4 : 8);
+        return spot;
+      });
     }
     for (const [el, sx, sy] of spots) {
-      el.style.left = sx + 'px'; el.style.top = sy + 'px'; el.style.setProperty('--fs', fs);
+      el.style.left = sx + 'px'; el.style.top = sy + 'px';
     }
-    titleEl.classList.toggle('is-tall', tall);
     smalls.forEach((b) => { if (Math.abs(b.bx) > W / 2) b.bx = (Math.random() - .5) * W; });
   }
 
@@ -268,6 +275,7 @@ if (renderer) {
   layout();
   smalls.forEach((b) => resetSmall(b, false));
   addEventListener('resize', layout);
+  document.fonts?.ready.then(layout); // captions are measured, so re-measure once the fonts are in
 
   /* ---------- scroll progress ----------
      The section is 460vh. The bubble animation uses the first ANIM_END of the

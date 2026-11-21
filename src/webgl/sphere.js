@@ -528,25 +528,38 @@ export class SphereGallery {
 
     // zoom geometry (px)
     // wide screens: media in the right half, text panel on the left.
-    // narrow screens: media on top, text panel below it.
+    // narrow screens: media at the top under the header, the text panel fills the rest (see --media-b).
     const split = this.W > 900;
-    const band = split ? 0 : Math.min(this.H * 0.48, 400) * this.ovf;
     const z = this.zoomed || this._collapsing;
     let zw = 0;
     let zh = 0;
     let zx = 0;
     let zy = 0;
-    if (z) {
-      zh = split ? 0.66 * this.H : 0.72 * (this.H - band - 70);
+    if (z && split) {
+      zh = 0.66 * this.H;
       zw = zh * z.aspect;
-      // wide screens: text panel takes the left ~56%, the media the right ~44%
-      const maxW = split ? this.W * 0.44 - 64 : this.W - (this.phone ? 32 : 48);
+      // text panel takes the left ~56%, the media the right ~44%
+      const maxW = this.W * 0.44 - 64;
       if (zw > maxW) {
         zw = maxW;
         zh = zw / z.aspect;
       }
-      zx = split ? (this.W * 0.28 - 16) * this.ovf : 0;
-      zy = split ? 0 : band / 2 + 10 * this.ovf;
+      zx = (this.W * 0.28 - 16) * this.ovf;
+    } else if (z) {
+      const top = 72; // under the fixed header
+      zw = this.W - (this.phone ? 32 : 48);
+      zh = zw / z.aspect;
+      const maxH = this.H * 0.36;
+      if (zh > maxH) {
+        zh = maxH;
+        zw = zh * z.aspect;
+      }
+      zy = (this.H / 2 - top - zh / 2) * this.ovf;
+      const b = Math.round(top + zh);
+      if (b !== this._mediaB) {
+        this._mediaB = b;
+        this.ui.overview?.style.setProperty("--media-b", b + "px");
+      }
     }
 
     // "visit the site" button pinned under the zoomed media, right-aligned (wide screens)
