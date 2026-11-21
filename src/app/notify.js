@@ -1,5 +1,6 @@
 /*
-  Visit notifications to Telegram, through /notify.php on the hosting.
+  Visit notifications to Telegram, through the Cloudflare Worker in worker/notify.js
+  (it holds the bot token; GitHub Pages can't run server code).
 
   - Fires once per visit, only after the page has been visible for a few seconds,
     so link-preview robots (KakaoTalk, 사람인 …) don't count.
@@ -11,7 +12,8 @@
 
 const KEY = "notify-off";
 const SENT = "notify-sent";
-const ENDPOINT = import.meta.env.BASE_URL + "notify.php";
+// the worker's address (dash.cloudflare.com → Workers); empty = notifications off
+const ENDPOINT = "https://kate-notify.kvelvis74.workers.dev";
 const DELAY = 4000;
 
 const ref = new URLSearchParams(location.search).get("r") || "";
@@ -24,7 +26,7 @@ const store = (s, k, v) => {
 };
 
 function off() {
-  if (import.meta.env.DEV) return true; // notify.php only runs on the hosting
+  if (!ENDPOINT || import.meta.env.DEV) return true;
   const me = new URLSearchParams(location.search).get("me");
   if (me === "1") store(localStorage, KEY, "1");
   if (me === "0") {
@@ -45,7 +47,7 @@ function send(data) {
     tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
     device: matchMedia("(pointer: coarse)").matches ? (innerWidth < 760 ? "phone" : "tablet") : "desktop",
   });
-  navigator.sendBeacon?.(ENDPOINT, new Blob([body], { type: "application/json" })) ||
+  navigator.sendBeacon?.(ENDPOINT, new Blob([body], { type: "text/plain" })) ||
     fetch(ENDPOINT, { method: "POST", body, keepalive: true }).catch(() => {});
 }
 

@@ -19,5 +19,6 @@ npm run lint
 
 ## Visit notifications
 
-`public/notify.php` sends visits and likes to Telegram. On the hosting, put a filled-in copy of
-`deploy/notify-config.example.php` next to `notify.php` as `notify-config.php`. Never commit the real one.
+Visits, opened projects and likes go to Telegram through a Cloudflare Worker (`worker/notify.js`),
+because GitHub Pages can't run server code. The bot token lives only in the worker's secrets
+(`TG_TOKEN`, `TG_CHAT`); its URL is `ENDPOINT` in `src/app/notify.js`.
