@@ -52,12 +52,26 @@
         <p class="label muted">${p.sku}${p.ships ? " · " + t("preorder", p.ships) : ""}</p>
         <h1 id="pdp-name" class="pdp__name">${L(p.name)}</h1>
         <p class="pdp__price">${SZ.priceHTML(p)}</p>
+        ${SZ.viewers(p) ? `<p class="pdp__live"><i aria-hidden="true"></i>${t("viewers", SZ.viewers(p))}</p>` : ""}
+        <ul class="pdp__perks">
+          <li>${t("freeShip", S.info.freeShip.toLocaleString("ko-KR") + "원")}</li>
+          <li>${t("reviewPoints", S.info.reviewPoints.toLocaleString("ko-KR"))}</li>
+        </ul>
         <p class="pdp__desc">${L(p.desc)}</p>
         ${SZ.buyForm(p, colorIdx, "pdp")}
         <div>
           <details class="acc"><summary class="label">${t("sizeGuide")}</summary><div class="acc__body">${sizeTable()}</div></details>
+          <details class="acc"><summary class="label">${t("modelInfo")}</summary><div class="acc__body">
+            <ul class="acc__list">${S.info.model.map((m) => `<li>${m}</li>`).join("")}</ul></div></details>
           <details class="acc"><summary class="label">${t("fabricCare")}</summary><div class="acc__body">
-            <p>${L(S.fabrics[p.fabric])}.</p><p>${t("care")}</p></div></details>
+            <p>${t("fabric")}: ${L(S.fabrics[p.fabric])}</p>
+            <ul class="acc__list">${S.info.care.map((c) => `<li>${c}</li>`).join("")}</ul>
+            ${p.fabric === "fur" ? `<div class="acc__note"><p class="acc__note-title">${S.info.furNotice.title}</p>${S.info.furNotice.text.map((x) => `<p>${x}</p>`).join("")}</div>` : ""}
+          </div></details>
+          <details class="acc"><summary class="label">${t("productInfo")}</summary><div class="acc__body">
+            <dl class="acc__dl">${S.info.maker.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl></div></details>
+          <details class="acc"><summary class="label">${t("refundTitle")}</summary><div class="acc__body">
+            <ul class="acc__list">${S.info.refund.map((r) => `<li>${r}</li>`).join("")}</ul></div></details>
         </div>
         <section class="sillage-card" aria-labelledby="sillage-h">
           <h2 id="sillage-h" class="label">${t("sillageLabel")}</h2>

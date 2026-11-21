@@ -73,49 +73,23 @@
       </div>
     </section>
 
-    <!-- ═════════ 2. NEW FORM: editorial wordmark + clips ═════════ -->
-    <section class="ed" id="about" aria-labelledby="ed-title">
-      <h2 id="ed-title" class="sr-only">시야주 소개</h2>
-      <p class="ed__label label">새로운 형태</p>
-      <p class="ed__word ed__word--a serif" aria-hidden="true">SIYA</p>
-
-      <figure class="ed__fig ed__fig--1" data-reveal>
-        <button class="ed__tile" type="button" data-clip="0" aria-label="전체 영상 보기: 울 코트">
-          <span class="film"><img class="film__poster" src="img/web/film-14.jpg" alt="" loading="lazy" decoding="async"><span class="film__frame"></span></span>
-        </button>
-        <figcaption class="caption"><span class="caption__n">(01)</span><span>울 코트</span></figcaption>
-      </figure>
-
-      <figure class="ed__fig ed__fig--2" data-reveal>
-        <img src="img/web/camel-coat-model.jpg" alt="카멜 컬러 롱 랩 코트를 입고 브라운 백을 든 모델" width="1000" height="1000" loading="lazy" decoding="async">
-        <figcaption class="caption"><span class="caption__n">(02)</span><span>캐시미어 블렌드 핸드메이드 코트</span></figcaption>
-      </figure>
-
-      <p class="ed__intro" data-reveal>2020년에 시작된 시야주는 깨끗한 선과 편안한 실루엣을 중심으로 모던하고 미니멀한 옷을 만듭니다.</p>
-
-      <figure class="ed__fig ed__fig--3" data-reveal>
-        <button class="ed__tile" type="button" data-clip="1" aria-label="전체 영상 보기: 시어링 & 니트">
-          <span class="film"><img class="film__poster" src="img/web/film-4.jpg" alt="" loading="lazy" decoding="async"><span class="film__frame"></span></span>
-        </button>
-        <figcaption class="caption"><span class="caption__n">(03)</span><span>시어링 &amp; 니트</span></figcaption>
-      </figure>
-
-      <figure class="ed__fig ed__fig--4" data-reveal>
-        <button class="ed__tile" type="button" data-clip="2" aria-label="전체 영상 보기: 덕다운 패딩">
-          <span class="film"><img class="film__poster" src="img/web/film-22.jpg" alt="" loading="lazy" decoding="async"><span class="film__frame"></span></span>
-        </button>
-        <figcaption class="caption"><span class="caption__n">(04)</span><span>덕다운 패딩</span></figcaption>
-      </figure>
-
-      <p class="ed__word ed__word--b serif" aria-hidden="true">ZU</p>
-      <p class="ed__credit label">비주얼 디렉션 · 시야주</p>
-    </section>
-
     <!-- ═════════ 4. CATALOG ═════════ -->
     <section class="shop" id="shop" aria-labelledby="shop-title">
       <div class="shop__head">
-        <p class="label">컬렉션</p>
-        <h2 id="shop-title" class="shop__title">26 윈터</h2>
+        <div class="shop__titles">
+          <p class="label">컬렉션</p>
+          <h2 id="shop-title" class="shop__title">26 윈터</h2>
+        </div>
+        <div class="shop__tools">
+          <div class="view-switch" role="group" aria-label="사진">
+            <button type="button" data-view="product" aria-pressed="true">상품</button>
+            <button type="button" data-view="model" aria-pressed="false">모델</button>
+          </div>
+          <div class="view-switch" role="group" aria-label="배열">
+            <button type="button" data-layout="rail" aria-pressed="true">슬라이드</button>
+            <button type="button" data-layout="grid" aria-pressed="false">그리드</button>
+          </div>
+        </div>
       </div>
 
       <div class="filters" role="region" aria-label="필터">
@@ -162,6 +136,44 @@
         </div>
         <noscript><p class="grid-empty">컬렉션을 보려면 JavaScript를 켜 주세요.</p></noscript>
       </div>
+    </section>
+
+    <!-- ═════════ 2. NEW FORM: editorial wordmark + clips ═════════ -->
+    <section class="ed" id="about" aria-labelledby="ed-title">
+      <h2 id="ed-title" class="sr-only">시야주 소개</h2>
+      <p class="ed__label label">새로운 형태</p>
+      <p class="ed__word ed__word--a serif" aria-hidden="true">SIYA</p>
+
+      <figure class="ed__fig ed__fig--1" data-reveal>
+        <button class="ed__tile" type="button" data-clip="0" aria-label="전체 영상 보기: 울 코트">
+          <span class="film"><img class="film__poster" src="img/web/film-14.jpg" alt="" loading="lazy" decoding="async"><span class="film__frame"></span></span>
+        </button>
+        <figcaption class="caption"><span class="caption__n">(01)</span><span>울 코트</span></figcaption>
+      </figure>
+
+      <figure class="ed__fig ed__fig--2" data-reveal>
+        <img src="img/web/camel-coat-model.jpg" alt="카멜 컬러 롱 랩 코트를 입고 브라운 백을 든 모델" width="1000" height="1000" loading="lazy" decoding="async">
+        <figcaption class="caption"><span class="caption__n">(02)</span><span>캐시미어 블렌드 핸드메이드 코트</span></figcaption>
+      </figure>
+
+      <p class="ed__intro" data-reveal>2020년에 시작된 시야주는 깨끗한 선과 편안한 실루엣을 중심으로 모던하고 미니멀한 옷을 만듭니다.</p>
+
+      <figure class="ed__fig ed__fig--3" data-reveal>
+        <button class="ed__tile" type="button" data-clip="1" aria-label="전체 영상 보기: 시어링 & 니트">
+          <span class="film"><img class="film__poster" src="img/web/film-4.jpg" alt="" loading="lazy" decoding="async"><span class="film__frame"></span></span>
+        </button>
+        <figcaption class="caption"><span class="caption__n">(03)</span><span>시어링 &amp; 니트</span></figcaption>
+      </figure>
+
+      <figure class="ed__fig ed__fig--4" data-reveal>
+        <button class="ed__tile" type="button" data-clip="2" aria-label="전체 영상 보기: 덕다운 패딩">
+          <span class="film"><img class="film__poster" src="img/web/film-22.jpg" alt="" loading="lazy" decoding="async"><span class="film__frame"></span></span>
+        </button>
+        <figcaption class="caption"><span class="caption__n">(04)</span><span>덕다운 패딩</span></figcaption>
+      </figure>
+
+      <p class="ed__word ed__word--b serif" aria-hidden="true">ZU</p>
+      <p class="ed__credit label">비주얼 디렉션 · 시야주</p>
     </section>
 
     <!-- ═════════ 3. SILLAGE STORY ═════════ -->
@@ -269,6 +281,21 @@
       <button class="drawer__close label link-btn" type="button" data-close>닫기</button>
     </div>
     <div class="drawer__body"></div>
+  </dialog>
+
+  <!-- sale popup: opens once when the collection scrolls into view (home.js) -->
+  <dialog id="promo" class="promo" aria-labelledby="promo-title">
+    <img class="promo__img" src="img/web/popup-900.jpg" alt="퍼 재킷을 입은 모델이 달마시안과 함께 테이블에 앉아 있다" width="900" height="1350" loading="lazy" decoding="async">
+    <div class="promo__body">
+      <p class="label muted">26 윈터 세일</p>
+      <h2 id="promo-title" class="promo__title">최대 <b>60%</b><br>할인</h2>
+      <p class="promo__text">26 윈터 컬렉션 일부 상품을 한정 기간 동안 할인된 가격으로 만나보세요.</p>
+      <button class="sz-btn sz-btn--solid promo__cta" type="button" data-close>세일 상품 보기</button>
+      <button class="link-btn label promo__skip" type="button" data-promo-skip>오늘 하루 보지 않기</button>
+    </div>
+    <button class="promo__close" type="button" data-close aria-label="닫기">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg>
+    </button>
   </dialog>
 
   <!-- ═════════ BOOTSTRAP: mini cart, toast, fullscreen film ═════════ -->

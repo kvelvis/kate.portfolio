@@ -43,6 +43,71 @@
     save() { store.set("siyazu-bag", this.items); document.dispatchEvent(new CustomEvent("bag:change")); },
   };
 
+  /* ── Wishlist (heart on cards, quick view and product page; list in its own offcanvas) ── */
+  const wish = {
+    ids: store.get("siyazu-wish", []).filter((id) => productById(id)),
+    has(id) { return this.ids.includes(id); },
+    toggle(id) {
+      this.ids = this.has(id) ? this.ids.filter((x) => x !== id) : [id, ...this.ids];
+      store.set("siyazu-wish", this.ids);
+      document.dispatchEvent(new CustomEvent("wish:change", { detail: id }));
+    },
+  };
+  const HEART = '<svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.6-4.6-9.2-9.4C1.7 7.6 3.9 4.5 7.2 4.5c2 0 3.6 1.1 4.8 2.8 1.2-1.7 2.8-2.8 4.8-2.8 3.3 0 5.5 3.1 4.4 6.4-1.6 4.8-9.2 9.4-9.2 9.4z"/></svg>';
+  const wishBtn = (p, cls = "") =>
+    `<button class="wish-btn ${cls}" type="button" data-wish="${p.id}" aria-pressed="${wish.has(p.id)}" aria-label="${t("wishAdd")}: ${L(p.name)}">${HEART}</button>`;
+  function syncWish() {
+    $$("[data-wish]").forEach((b) => b.setAttribute("aria-pressed", String(wish.has(b.dataset.wish))));
+    $$("[data-wish-count]").forEach((el) => { el.textContent = wish.ids.length; });
+    renderWish();
+  }
+  function renderWish() {
+    const list = $("#wish-list"); if (!list) return;
+    if (!wish.ids.length) { list.innerHTML = `<p class="drawer__empty">${t("wishEmpty")}</p>`; return; }
+    list.innerHTML = '<ul class="bag-items">' + wish.ids.map((id) => {
+      const p = productById(id), col = p.colors[0];
+      return `<li class="bag-item">
+        <a href="product.html?id=${p.id}"><img src="${col.images[0]}" alt="" width="96" height="128" loading="lazy"></a>
+        <div class="bag-item__info">
+          <a class="bag-item__name" href="product.html?id=${p.id}">${L(p.name)}</a>
+          <p>${price(p.price)}</p>
+        </div>
+        <button class="link-btn label" type="button" data-wish-remove="${p.id}">${t("remove")}</button>
+      </li>`;
+    }).join("") + "</ul>";
+  }
+  function initWish() {
+    // header button + offcanvas are added here so both pages get them from one place
+    const right = $(".site-header__right"), bagBtn = $(".bag-btn");
+    if (right && bagBtn && !$(".wish-head")) {
+      bagBtn.insertAdjacentHTML("beforebegin",
+        `<button class="label wish-head" type="button" data-bs-toggle="offcanvas" data-bs-target="#wish" aria-controls="wish">${HEART}<span class="wish-head__text">${t("wish")}</span><span>(<span data-wish-count>0</span>)</span></button>`);
+      document.body.insertAdjacentHTML("beforeend", `
+        <div class="offcanvas offcanvas-end sz-offcanvas" tabindex="-1" id="wish" aria-labelledby="wish-title">
+          <div class="offcanvas-header">
+            <h2 id="wish-title" class="label">${t("wish")}</h2>
+            <button class="label link-btn" type="button" data-bs-dismiss="offcanvas">${t("close")}</button>
+          </div>
+          <div class="offcanvas-body" id="wish-list"></div>
+        </div>`);
+    }
+    document.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-wish]");
+      if (b) { e.preventDefault(); e.stopPropagation(); wish.toggle(b.dataset.wish); return; }
+      const r = e.target.closest("[data-wish-remove]");
+      if (r) wish.toggle(r.dataset.wishRemove);
+    }, true);
+    document.addEventListener("wish:change", syncWish);
+    syncWish();
+  }
+
+  /* ── "N명이 보는 중": shown on about a third of the products, the number drifts every hour ── */
+  const hash = (str) => [...str].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 7);
+  const viewers = (p) => {
+    const h = hash(p.id);
+    return h % 3 ? 0 : 3 + ((h >> 4) + new Date().getHours()) % 9;
+  };
+
   function renderBagCount(bump) {
     $$("[data-bag-count]").forEach((el) => {
       el.textContent = bag.count();
@@ -70,7 +135,11 @@
         <button class="link-btn label" type="button" data-remove="${i}">${t("remove")}</button>
       </li>`;
     }).join("") + "</ul>";
-    $("#bag-subtotal").textContent = price(bag.items.reduce((s, it) => s + productById(it.id).price * it.qty, 0));
+    const total = bag.items.reduce((s, it) => s + productById(it.id).price * it.qty, 0);
+    $("#bag-subtotal").textContent = price(total);
+    let ship = $("#bag-ship");
+    if (!ship) { $("#bag-subtotal").closest(".drawer__total").insertAdjacentHTML("afterend", '<p class="bag-ship muted" id="bag-ship"></p>'); ship = $("#bag-ship"); }
+    ship.textContent = total >= S.info.freeShip ? t("shipFree") : t("shipLeft", price(S.info.freeShip - total));
   }
 
   /* Bag offcanvas + "closed quickly" toast */
@@ -259,6 +328,7 @@
       if (b.dataset.open === "search") setTimeout(() => $("#search input")?.focus(), 30);
     }));
     wireBag();
+    initWish();
     wireFilmModal();
     document.addEventListener("bag:change", () => renderBagCount(false));
     renderBagCount(false);
@@ -268,6 +338,6 @@
     reveal();
   }
 
-  window.SZ = { $, $$, S, t, L, price, productById, colorKo, sizeKo, bag, motion,
+  window.SZ = { $, $$, S, t, L, price, productById, colorKo, sizeKo, bag, wish, wishBtn, viewers, motion,
     Film, observeFilm, openFilm, openDialog, wireDialog, reveal, showBag, afterAdd, boot };
 })();

@@ -240,7 +240,7 @@
   /* Rail: drag to scroll with a mouse (touch/trackpad scroll natively) */
   let drag = null;
   scroller.addEventListener("pointerdown", (e) => {
-    if (e.pointerType !== "mouse" || e.button !== 0 || e.target.closest("button")) return;
+    if (e.pointerType !== "mouse" || e.button !== 0 || e.target.closest("button") || railWrap.classList.contains("is-grid")) return;
     drag = { x: e.clientX, left: scroller.scrollLeft, moved: false };
   });
   addEventListener("pointermove", (e) => {
@@ -329,6 +329,45 @@
   }));
 
   window.SIYAZU_HOME = { search(q) { applyFilter({ q }); scrollToShop(); } };
+
+  /* Photo view (product / model shots) and layout (rail / 3-column grid); both remembered */
+  const pref = (k, v) => { try { return v === undefined ? localStorage.getItem(k) : localStorage.setItem(k, v); } catch { return null; } };
+  function setView(v) {
+    railWrap.classList.toggle("is-model", v === "model");
+    $$("[data-view]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === v)));
+    pref("siyazu-view", v);
+  }
+  function setLayout(v) {
+    railWrap.classList.toggle("is-grid", v === "grid");
+    $$("[data-layout]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.layout === v)));
+    scroller.setAttribute("aria-label", v === "grid" ? "컬렉션" : "컬렉션 레일, 옆으로 스크롤");
+    scroller.scrollLeft = 0;
+    pref("siyazu-layout", v);
+  }
+  $$("[data-view]").forEach((b) => b.addEventListener("click", () => setView(b.dataset.view)));
+  $$("[data-layout]").forEach((b) => b.addEventListener("click", () => setLayout(b.dataset.layout)));
+  setView(pref("siyazu-view") || "product");
+  setLayout(pref("siyazu-layout") || "rail");
+
+  /* Sale popup: once per visit, when the collection comes into view; "오늘 하루 보지 않기" hides it until tomorrow */
+  function initPromo() {
+    const dlg = $("#promo"); if (!dlg) return;
+    const today = new Date().toDateString();
+    const seen = () => { try { return sessionStorage.getItem("siyazu-promo") || localStorage.getItem("siyazu-promo-skip") === today; } catch { return false; } };
+    if (seen()) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting || seen() || $$("dialog[open]").length) return;
+      io.disconnect();
+      try { sessionStorage.setItem("siyazu-promo", "1"); } catch { /* private mode */ }
+      SZ.openDialog(dlg, document.activeElement);
+    }, { threshold: 0.25 });
+    io.observe($("#shop"));
+    $("[data-promo-skip]", dlg).addEventListener("click", () => {
+      try { localStorage.setItem("siyazu-promo-skip", today); } catch { /* private mode */ }
+      dlg.close();
+    });
+  }
+  initPromo();
 
   syncFilters(); render(); initTrail();
   if (state.q) requestAnimationFrame(scrollToShop);

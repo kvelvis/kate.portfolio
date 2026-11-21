@@ -31,7 +31,10 @@
         </div>
         <p class="field-error" id="${uid}-size-err" hidden><span aria-hidden="true">!</span> ${t("chooseSize")}</p>
       </fieldset>
-      <button class="sz-btn sz-btn--add" type="submit">${t("addToBag")}</button>
+      <div class="buy__row">
+        <button class="sz-btn sz-btn--add" type="submit">${t("addToBag")}</button>
+        ${SZ.wishBtn(p, "wish-btn--box")}
+      </div>
       <p class="buy__status sr-only" role="status" aria-live="polite"></p>
     </form>`;
 
@@ -84,6 +87,8 @@
         </a>
         ${qv ? `<button class="pcard__qv label" type="button" data-qv="${p.id}" aria-label="${t("quickView")}: ${name}">${t("quickView")}</button>` : ""}
         ${p.ships ? `<p class="pcard__tag label">${t("preorder", p.ships)}</p>` : ""}
+        ${SZ.viewers(p) ? `<p class="pcard__live"><i aria-hidden="true"></i>${t("viewers", SZ.viewers(p))}</p>` : ""}
+        ${SZ.wishBtn(p, "pcard__wish")}
       </div>
       <div class="caption">
         <span class="caption__n">(${String(n).padStart(2, "0")})</span>

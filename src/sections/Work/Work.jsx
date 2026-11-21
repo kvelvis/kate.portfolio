@@ -242,7 +242,7 @@ export default function Work() {
         {t({ ko: "사이트 바로가기", en: "Visit the site" })} <span aria-hidden="true">↗</span>
       </a>
 
-      {/* narrow screens: close button in the top-right corner, over the media */}
+      {/* close button in the top-right corner */}
       <button type="button" className="work__x" hidden={!zoomed} aria-label={labels.close} onClick={() => sphere.current.collapse()}>
         <svg viewBox="0 0 16 16" aria-hidden="true">
           <path d="M3.5 3.5l9 9M12.5 3.5l-9 9" />
@@ -364,9 +364,6 @@ export default function Work() {
                   Figma ↗
                 </a>
               )}
-              <button className="pill-btn overview__close" onClick={() => sphere.current.collapse()}>
-                {labels.close}
-              </button>
             </div>
           </div>
         )}
