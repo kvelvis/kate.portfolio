@@ -28,10 +28,6 @@ export const work = [
     gif: celineGif,
     href: "/cases/celine/renew/index.html",
     caseStudy: "celine27",
-    desc: {
-      ko: "컬렉션 캠페인 웹사이트 “The Art of Being Elsewhere”",
-      en: "A collection campaign website: “The Art of Being Elsewhere”",
-    },
   },
   {
     id: "gatto",
@@ -69,10 +65,6 @@ export const work = [
     gif: feevGif,
     href: "/cases/feev/index.html",
     caseStudy: "feev",
-    desc: {
-      ko: "K-뷰티 브랜드 FEEV 웹사이트 리디자인. 버블 글로스 출시 캠페인 “POP that Bubble!”",
-      en: "A website redesign for K-beauty brand FEEV: the bubble gloss launch campaign “POP that Bubble!”",
-    },
   },
   {
     id: "hanmi",
@@ -124,9 +116,5 @@ export const work = [
     gif: siyazuGif,
     href: "/cases/siyazu/index.html",
     caseStudy: "siyazu",
-    desc: {
-      ko: "미니멀 여성복 브랜드 · 에디토리얼 커머스 웹사이트 리디자인.",
-      en: "A website redesign for a minimal womenswear label, built as editorial commerce.",
-    },
   },
 ];

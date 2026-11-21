@@ -259,7 +259,7 @@ export default function Work() {
               {zoomed.title}
               {cs?.titleEn && <small>{t(cs.titleEn)}</small>}
             </h3>
-            <p className="overview__desc">{t(zoomed.desc)}</p>
+            {zoomed.desc && <p className="overview__desc">{t(zoomed.desc)}</p>}
             <div className="overview__body" tabIndex={cs?.story?.length ? 0 : undefined}>
               {cs && (cs.period || cs.role || cs.tools?.length > 0 || cs.credits?.length > 0) && (
                 <dl className="overview__facts">

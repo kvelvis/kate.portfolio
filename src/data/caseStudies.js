@@ -5,7 +5,6 @@ export const caseStudies = {
     title: "Dano 단어",
     titleEn: { ko: "알림으로 배우는 한국어 단어 앱", en: "Learn Korean words from your notifications" },
     period: "2026.11",
-    role: { ko: "기획 · UX/UI 디자인 · 캐릭터", en: "Planning · UX/UI design · Character" },
     tools: ["Figma", "Weavy"],
     fontCss: ["https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700;800&display=swap"],
     story: [
@@ -68,86 +67,11 @@ export const caseStudies = {
               en: "Based on the “learned cat” from Russian fairy tales. I avoided an owl because it would look like other learning apps; the red yarn stands for unwinding a language word by word",
             },
           },
-          {
-            term: { ko: "컬러", en: "Colour" },
-            text: {
-              ko: "라벤더-피치 그라데이션 배경에 흰 카드, 포인트 컬러는 털실의 레드 오렌지",
-              en: "White cards on a lavender-to-peach gradient; the accent is the yarn’s red-orange",
-            },
-            why: { ko: "잘 어울리면서 눈에 부담이 없는 색이라, 매일 보는 학습 앱에 맞음", en: "The colours sit well together and are easy on the eyes, right for an app you look at every day" },
-          },
+        
           {
             term: { ko: "영문 UI", en: "English UI" },
             text: { ko: "한국어를 배우는 외국인 학습자를 위한 영어 인터페이스", en: "An English interface for foreigners learning Korean" },
           },
-        ],
-      },
-      {
-        title: { ko: "컬러", en: "Colour" },
-        // values from the Figma file (collection "Dano v3")
-        colors: [
-          { hex: "#F1582D", name: { ko: "털실 레드 · 메인 액션, 진행률, 번역", en: "Yarn · main action, progress, translation" }, main: true },
-          { hex: "#1E1B1C", name: { ko: "고양이 블랙 · 텍스트, 선택 칩", en: "Cat · text, selected chips" } },
-          { hex: "#8C7CFF", name: { ko: "라일락 · 차트, 일러스트", en: "Lilac · charts, illustrations" } },
-          {
-            hex: "#B7AEFF",
-            bg: "linear-gradient(135deg, #B7AEFF 0%, #FFC7D9 55%, #FFB27D 100%)",
-            name: { ko: "배경 그라데이션", en: "Background gradient" },
-            code: "#B7AEFF → #FFC7D9 → #FFB27D",
-          },
-          { hex: "#FFFFFF", bg: "rgba(255,255,255,0.3)", name: { ko: "글래스 패널 (흰색 30%)", en: "Glass panels (white 30%)" }, code: "#FFFFFF 30%" },
-          { hex: "#FFFFFF", bg: "rgba(255,255,255,0.62)", name: { ko: "글래스 스트롱 · 필, 안쪽 블록 (흰색 62%)", en: "Glass strong · pills, inner blocks (white 62%)" }, code: "#FFFFFF 62%" },
-        ],
-      },
-      {
-        title: { ko: "타이포그래피", en: "Typography" },
-        fonts: [
-          {
-            family: "'Gothic A1', sans-serif",
-            name: "Gothic A1",
-            role: { ko: "한국어 단어 · 본문", en: "Korean words · body" },
-            sample: "약국",
-            weight: 800,
-            note: { ko: "굵고 또렷한 한글로 단어가 한눈에", en: "Bold, clear hangul so a word reads at a glance" },
-          },
-          {
-            family: "ui-rounded, 'SF Pro Rounded', system-ui, sans-serif",
-            name: "SF Pro Rounded",
-            role: { ko: "영문 UI · 숫자", en: "English UI · numbers" },
-            sample: "Words come to you",
-            weight: 700,
-            note: { ko: "털실처럼 부드러운 둥근 형태", en: "Soft and round, like the ball of yarn" },
-          },
-        ],
-      },
-      {
-        title: { ko: "디자인 시스템", en: "Design system" },
-        items: [
-          {
-            text: {
-              ko: "단어 카드, 팩 카드, 칩, 버튼, 탭 바 등 재사용 가능한 컴포넌트로 구성",
-              en: "Built from reusable components: word cards, pack cards, chips, buttons, a tab bar",
-            },
-          },
-          {
-            text: {
-              ko: "오토레이아웃으로 다양한 휴대폰 화면 크기에 대응, 별도 스타일 가이드 제작",
-              en: "Auto Layout adapts to different phone sizes; a separate style guide",
-            },
-          },
-        ],
-      },
-      {
-        title: { ko: "주요 화면", en: "Key screens" },
-        tags: [
-          { ko: "로딩", en: "Loading" },
-          { ko: "웰컴", en: "Welcome" },
-          { ko: "오늘의 단어", en: "Word of the day" },
-          { ko: "단어 팩", en: "Word packs" },
-          { ko: "단어 상세", en: "Word detail" },
-          { ko: "알림 스케줄", en: "Notification schedule" },
-          { ko: "학습 진행률", en: "Progress" },
-          { ko: "잠금화면", en: "Lock screen" },
         ],
       },
       {
@@ -164,16 +88,8 @@ export const caseStudies = {
     title: "묘한 커피",
     titleEn: "Myohan Coffee",
     period: "2026.11",
-    role: { ko: "컨셉 기획 · 브랜딩 · 마스코트 · 웹디자인", en: "Concept · Branding · Mascot · Web design" },
     tools: ["Figma", "Illustrator", "Weavy", "Kling", "HTML · CSS · JS", "GSAP", "Lenis"],
     story: [
-      {
-        title: { ko: "컨셉", en: "Concept" },
-        text: {
-          ko: "커피를 마시고, 굿즈를 사고, 고양이를 입양할 수 있는 카페입니다. 브랜드의 중심에는 ‘길고양이에게 가족을 찾아주는 일’이 있습니다. 타깃은 고양이를 좋아하는 30대 직장인입니다.",
-          en: "A café where you can have a coffee, buy merch and adopt a cat. At the heart of the brand is one job: finding families for street cats. The audience: office workers in their thirties who love cats.",
-        },
-      },
       {
         title: { ko: "아이디어의 출발", en: "Where the idea came from" },
         text: {
@@ -212,66 +128,11 @@ export const caseStudies = {
         ],
       },
       {
-        title: { ko: "디자인 결정", en: "Design decisions" },
-        items: [
-          {
-            term: { ko: "메인 컬러는 레드", en: "Red as the main colour" },
-            text: { ko: "로고와 타이틀, 포인트는 레드, 그린과 옐로우를 함께 사용", en: "Red for the logo, titles and accents, with green and yellow alongside" },
-            why: {
-              ko: "눈에 띄고 기억에 남도록. 레드만 쓰면 너무 강해서 그린과 옐로우로 밝기의 균형을 맞춤",
-              en: "To stand out and be remembered. Red alone is too strong, so green and yellow balance its brightness",
-            },
-          },
-          {
-            term: { ko: "둥근 서체 Bagel Fat One", en: "Round typeface: Bagel Fat One" },
-            text: { ko: "로고와 큰 타이틀에 사용", en: "Used for the logo and big titles" },
-            why: { ko: "둥글고 통통한 글자가 고양이처럼 귀엽고 친근해서", en: "Round, chubby letters feel cute and friendly, like a cat" },
-          },
-          {
-            term: { ko: "이모지 · 스티커 장식", en: "Emoji and sticker details" },
-            text: { ko: "🐾, ✦ 같은 장식을 문구와 띠 배너에 사용", en: "Marks like 🐾 and ✦ in copy and the running banner" },
-            why: { ko: "밝고 장난스러운 분위기를 만들고, 스티커 굿즈와도 이어지도록", en: "To keep the mood bright and playful, and to tie in with the sticker merch" },
-          },
-          {
-            term: { ko: "입양과 굿즈를 강조", en: "Adoption and merch up front" },
-            text: { ko: "입양을 핵심 섹션으로 두고, 굿즈도 크게 보여줌", en: "Adoption is the core section, and the merch is shown big too" },
-            why: { ko: "굿즈 판매도 고양이를 돕는 일이라서, 두 가지를 함께 브랜드의 이야기로 연결", en: "Selling merch helps the cats too, so both are part of the brand’s story" },
-          },
-        ],
-      },
-      {
         title: { ko: "가장 어려웠던 점", en: "The hardest part" },
         text: {
           ko: "중요한 것에 집중시키는 것. 입양과 굿즈를 강조하면서도, 결국 이곳은 수익을 내야 하는 카페라서 메뉴와 방문 정보도 놓치지 않게 균형을 맞췄습니다.",
           en: "Keeping the focus on what matters. Adoption and merch come first, but this is still a café that has to make money, so the menu and visit info couldn’t get lost.",
         },
-      },
-      {
-        title: { ko: "적용", en: "Applications" },
-        items: [
-          {
-            text: {
-              ko: "콩이 자수 앞치마, 영문 로고 종이컵, 국문 로고 크라프트 쇼핑백",
-              en: "Apron with an embroidered Kongi, paper cup with the English logo, kraft shopping bag with the Korean logo",
-            },
-          },
-        ],
-      },
-      {
-        title: { ko: "웹사이트", en: "Website" },
-        items: [
-          { text: { ko: "메인 비주얼에서 콩이를 주인공으로 소개", en: "The main visual introduces Kongi as the hero" } },
-          { text: { ko: "고양이 입양을 핵심 섹션으로 배치", en: "Cat adoption is placed as the core section" } },
-          {
-            text: {
-              ko: "콩이 모양 샌드위치 등 스페셜 메뉴로 캐릭터를 실제 경험과 연결",
-              en: "Special menu items like a Kongi-shaped sandwich connect the character to the real visit",
-            },
-          },
-          {
-            text: { ko: "한국어 전용, 반응형 (PC · 태블릿 · 모바일)", en: "Korean only, responsive (PC · tablet · mobile)" },
-          },
-        ],
       },
     ],
   },
@@ -279,16 +140,8 @@ export const caseStudies = {
     title: "FEEV",
     titleEn: "",
     period: "2026.11",
-    role: { ko: "컨셉 기획 · 웹디자인 · 아트 디렉션", en: "Concept · Web design · Art direction" },
     tools: ["Figma", "Three.js", "Weavy", "Claude (AI)"],
     story: [
-      {
-        title: { ko: "컨셉", en: "Concept" },
-        text: {
-          ko: "실제 K-뷰티 브랜드 FEEV의 웹사이트를 버블 글로스 출시 캠페인으로 리디자인했습니다. 투명하고 촉촉한 립글로스의 광택을 ‘비눗방울’로 표현해, 첫 화면부터 가볍고 톡 터지는 즐거움을 느낄 수 있도록 했습니다. 타깃은 SNS에서 뷰티 제품을 찾는 20대 여성입니다.",
-          en: "A redesign of the real K-beauty brand FEEV’s website as a launch campaign for its bubble gloss. The clear, glossy shine of the gloss becomes a soap bubble, so the light, popping fun is there from the first screen. The audience: women in their twenties who discover beauty products on social media.",
-        },
-      },
       {
         title: { ko: "출발점: 사이트와 광고의 온도 차이", en: "Starting point: the site and the ads felt different" },
         text: {
@@ -310,30 +163,7 @@ export const caseStudies = {
               en: "To show the product name (bubble gloss) and how it feels (the popping, plumping effect) in one go. Popping it yourself sticks better than a photo",
             },
           },
-          {
-            term: { ko: "화려함은 타이틀에만", en: "The loud part stays in the titles" },
-            text: {
-              ko: "‘POP that Bubble!’ 같은 큰 타이틀은 광고처럼 통통한 3D 젤리 레터링 이미지로, 본문과 UI는 차분한 세리프와 고딕으로",
-              en: "Big titles like “POP that Bubble!” are puffy 3D jelly lettering like the ads; body text and UI stay in a calm serif and sans",
-            },
-            why: {
-              ko: "광고의 밝은 톤은 가져오되, 모든 요소가 화려하면 과해지고 제품이 안 보이기 때문",
-              en: "To keep the ads’ bright tone without everything shouting, which would bury the product",
-            },
-          },
-          {
-            term: { ko: "라벤더 배경 + 버블검 핑크", en: "Lavender background + bubblegum pink" },
-            text: { ko: "배경은 연한 라벤더, 포인트와 버튼은 핑크", en: "A soft lavender background, pink for accents and buttons" },
-            why: {
-              ko: "라벤더는 핑크와 잘 어울리면서 튀지 않아서, 글로스 컬러가 주인공이 됨",
-              en: "Lavender goes well with pink without drawing attention, so the gloss colours stay the hero",
-            },
-          },
-          {
-            term: { ko: "버블 모양 컬러 스와치", en: "Bubble-shaped shade swatches" },
-            text: { ko: "색을 고르면 제품 사진이 바로 바뀜", en: "Picking a shade swaps the product photo" },
-            why: { ko: "여러 색을 바로 비교할 수 있게, 그리고 스와치까지 버블 콘셉트를 이어가기 위해", en: "To compare shades at a glance, and to carry the bubble idea into the swatches" },
-          },
+          
           {
             term: { ko: "캠페인 → 제품 → 장바구니", en: "Campaign → product → cart" },
             text: { ko: "캠페인 페이지 안에서 바로 색을 고르고 담을 수 있음", en: "You can pick a shade and add it to the cart right on the campaign page" },
@@ -348,39 +178,13 @@ export const caseStudies = {
           en: "Not overdoing it. Each time I added a bubble, lettering or shine, I checked that it stayed fun like the ads but still easy to shop.",
         },
       },
-      {
-        title: { ko: "AI 활용", en: "Using AI" },
-        items: [
-          {
-            term: "Claude",
-            text: {
-              ko: "Three.js 3D 버블 애니메이션 코드 작성. 원하는 분위기가 나올 때까지 디자인 방향과 수정 사항을 직접 디렉팅",
-              en: "Wrote the Three.js bubble animation code; I directed the design and every revision until the mood was right",
-            },
-          },
-          {
-            term: "Weavy",
-            text: {
-              ko: "캠페인 사진에서 버블과 텍스트를 제거해 깨끗한 배경 이미지 제작",
-              en: "Removed the bubbles and text from the campaign photo to make a clean background",
-            },
-          },
-          {
-            term: { ko: "3D 레터링", en: "3D lettering" },
-            text: {
-              ko: "타이틀 글자를 Weavy로 생성: 핑크 풍선이나 젤리처럼 통통하고 반짝이는 질감",
-              en: "Title lettering generated with Weavy: puffy, glossy, like pink balloons or jelly",
-            },
-          },
-        ],
-      },
+      
     ],
   },
   celine27: {
     title: "CELINE",
     titleEn: "Printemps 2027",
     period: "2026.11",
-    role: { ko: "컨셉 기획 · 웹디자인 · 퍼블리싱", en: "Concept · Web design · Publishing" },
     tools: ["Figma", "HTML", "CSS", "Bootstrap 5", "JavaScript"],
     story: [
       {
@@ -390,56 +194,7 @@ export const caseStudies = {
           en: "A campaign landing page for CELINE’s new collection. Not a shop but a site that carries the mood and story of one season, aiming for the editorial feel of leafing through a fashion magazine.",
         },
       },
-      {
-        title: { ko: "디자인 포인트", en: "Design points" },
-        items: [
-          {
-            term: { ko: "에디토리얼 레이아웃", en: "Editorial layout" },
-            text: {
-              ko: "비대칭 그리드와 넓은 여백으로 룩북처럼 사진 한 장 한 장에 집중",
-              en: "An asymmetric grid and generous white space keep the focus on each photo, like a lookbook",
-            },
-          },
-          {
-            term: { ko: "타이포그래피", en: "Typography" },
-            text: {
-              ko: "세리프 헤드라인 + 이탤릭 포인트(“The Art of Being Elsewhere”)로 감성을 살리고, 모노스페이스 서체로 캡션과 내비게이션을 정리",
-              en: "Serif headlines with an italic accent (“The Art of Being Elsewhere”) set the mood; a monospace face keeps captions and navigation tidy",
-            },
-            why: { ko: "가느다란 세리프가 고급스러워 보여서, 럭셔리 브랜드의 톤과 맞음", en: "A fine serif looks expensive and matches a luxury brand’s tone" },
-          },
-          {
-            term: { ko: "컬러", en: "Colour" },
-            text: { ko: "순수 흰색 대신 아이보리 배경으로 따뜻하고 차분한 톤", en: "Ivory instead of pure white for a warm, calm tone" },
-            why: {
-              ko: "베이지 톤 배경이 흑백 사진은 따뜻하게, 컬러 사진은 더 선명하게 돋보이게 해서",
-              en: "A beige-toned background warms the black-and-white photos and makes the colour shots stand out",
-            },
-          },
-          {
-            term: { ko: "미니멀 헤더", en: "Minimal header" },
-            text: { ko: "시즌명 · 로고 · 메뉴만 남겨 콘텐츠에 시선 집중", en: "Only the season, the logo and the menu, so eyes stay on the content" },
-          },
-          {
-            term: { ko: "룩 캡션", en: "Look captions" },
-            text: {
-              ko: "“LOOK 07 — LAKESIDE”처럼 번호와 장소를 붙여 컬렉션 스토리를 이어감",
-              en: "Numbers and places, like “LOOK 07 — LAKESIDE”, carry the collection’s story from look to look",
-            },
-          },
-          {
-            term: { ko: "사진", en: "Photography" },
-            text: {
-              ko: "필름 그레인 흑백 사진에 컬러 컷을 섞어 리듬감 부여",
-              en: "Film-grain black-and-white photos mixed with colour shots for rhythm",
-            },
-            why: {
-              ko: "이번 컬렉션 캠페인 사진이 흑백 위주이면서 컬러 컷도 많아서, 그 대비를 그대로 살림",
-              en: "The collection’s campaign photos are mostly black and white with many colour shots, so I kept that contrast",
-            },
-          },
-        ],
-      },
+      
       {
         title: { ko: "집중한 점", en: "What I focused on" },
         text: {
@@ -447,30 +202,15 @@ export const caseStudies = {
           en: "The content (photos, films, copy) already existed, so the work was editing it beautifully. The key was building a magazine-like rhythm through the order and size of photos and the white space.",
         },
       },
-      {
-        title: { ko: "웹사이트", en: "Website" },
-        items: [
-          { text: { ko: "히어로 · 룩북 10룩 · 캠페인 필름 · 크레딧 구성", en: "Hero, a 10-look lookbook, campaign films and credits" } },
-          { text: { ko: "반응형 (PC · 태블릿 · 모바일)", en: "Responsive (PC · tablet · mobile)" } },
-        ],
-      },
     ],
   },
   siyazu: {
     title: "SIYAZU",
     titleEn: { ko: "웹사이트 리디자인", en: "Website redesign" },
     period: "2026.11",
-    role: { ko: "UX/UI 디자인 · 퍼블리싱", en: "UX/UI design · Publishing" },
     tools: ["Figma", "HTML", "CSS", "JavaScript", "Bootstrap 5"],
     credits: [{ label: { ko: "원본 사이트", en: "Original site" }, value: "siyazu.co.kr", href: "https://m.siyazu.co.kr/" }],
     story: [
-      {
-        title: { ko: "컨셉", en: "Concept" },
-        text: {
-          ko: "SIYAZU라는 이름은 프랑스어 ‘sillage(잔향)’에서 왔고, ‘옷이 지나간 뒤에도 남는 분위기’는 브랜드가 원래 가진 콘셉트입니다. 저는 이 콘셉트가 사이트에서도 느껴지도록, 영상과 여백 중심의 에디토리얼 쇼핑몰로 재구성했습니다.",
-          en: "The name SIYAZU comes from the French “sillage”, the trail a scent leaves behind, and “the mood that lingers after the clothes pass by” is the brand’s own concept. I rebuilt the store so the site carries that concept too: an editorial shop led by film and white space.",
-        },
-      },
       {
         title: { ko: "이 프로젝트를 고른 이유", en: "Why this project" },
         text: {
@@ -517,37 +257,17 @@ export const caseStudies = {
               en: "A text mask with the campaign film running inside the “SIYAZU” letters stamps the brand from the first screen",
             },
             why: {
-              ko: "글자 사이로 들여다보다가 스크롤하면 그 안으로 들어가, 브랜드의 세계에 들어서는 느낌을 주고 싶어서",
+              ko: "글자 사이로 들여다보다가 스크롤하면 그 안으로 들어가, 브랜드의 세계에 들어서는 느낌을 주고 싶었습니다",
               en: "You first peek through the letters, then scroll into them, like stepping into the brand’s world",
             },
           },
           {
-            term: { ko: "한국어 전용 내비게이션", en: "Korean-only navigation" },
+            term: { ko: "한국어 내비게이션", en: "Korean navigation" },
             text: { ko: "신상품 · 쇼핑 · 브랜드 · 저널로 단순화", en: "Simplified to New · Shop · Brand · Journal" },
             why: { ko: "영문 · 국문이 섞여 있던 메뉴를 한국어로 통일해 한눈에 들어오도록", en: "The mixed English/Korean menu, unified in Korean so it reads at a glance" },
           },
-          {
-            term: { ko: "컬렉션 페이지", en: "Collection page" },
-            text: {
-              ko: "‘26 윈터’ 같은 큰 타이틀, 카테고리·컬러·사이즈·소재 필터, 번호(01)와 컬러칩이 있는 정돈된 상품 카드",
-              en: "Big titles like “26 Winter”, category / colour / size / material filters, and tidy product cards with a number (01) and colour chips",
-            },
-          },
-          {
-            term: { ko: "에디토리얼 섹션", en: "Editorial section" },
-            text: {
-              ko: "비대칭 배치의 화보와 대형 세리프 타이포(‘ZU’)로 매거진 같은 리듬",
-              en: "Asymmetric photo layouts and oversized serif type (“ZU”) give it a magazine rhythm",
-            },
-          },
-          {
-            term: { ko: "컬러 & 타이포", en: "Colour & type" },
-            text: {
-              ko: "아이보리 배경, 세리프 로고 + 깔끔한 산세리프 본문으로 차분하고 고급스러운 톤",
-              en: "An ivory background, a serif logo and clean sans-serif body text for a calm, refined tone",
-            },
-            why: { ko: "팝업처럼 시선을 빼앗는 요소를 없애고, 브랜드의 미니멀한 무드를 살리기 위해", en: "To drop attention-grabbing elements like the pop-ups and keep the brand’s minimal mood" },
-          },
+        
+          
         ],
       },
       {
@@ -563,7 +283,6 @@ export const caseStudies = {
     title: "한미반도체",
     titleEn: { ko: "웹사이트 리디자인", en: "Website redesign" },
     period: "2026.11",
-    role: { ko: "UX/UI 디자인 · 캐릭터 기획 · 퍼블리싱", en: "UX/UI design · Character concept · Publishing" },
     tools: ["Figma", "Figma AI (이미지 생성)", "HTML", "CSS", "JavaScript"],
     story: [
       {
@@ -604,17 +323,6 @@ export const caseStudies = {
           {
             term: { ko: "딥 네이비 & 블루 톤", en: "Deep navy & blue" },
             text: { ko: "반도체·첨단 기술 이미지를 강조하고 브랜드 컬러와 연결", en: "Stresses the semiconductor, high-tech image and ties into the brand colour" },
-          },
-          {
-            term: { ko: "메뉴 단순화", en: "Simpler menu" },
-            text: {
-              ko: "브랜드소개 · 제품라인업 · 투자정보 · ESG · 인재채용 5개로 정리, KOR/ENG 전환",
-              en: "Cut to five (About · Products · IR · ESG · Careers), with a KOR/ENG switch",
-            },
-            why: {
-              ko: "8개 메뉴는 한눈에 들어오지 않았고, 고객 · 투자자 · 지원자가 가장 많이 찾는 정보에 집중하기 위해. 범위도 이 5개 섹션, 15페이지로 정함",
-              en: "Eight menus were hard to scan; I focused on what customers, investors and applicants look for most, and set the scope to these five sections, 15 pages",
-            },
           },
           {
             term: { ko: "풀스크린 메인 슬라이더", en: "Full-screen hero slider" },
@@ -667,17 +375,10 @@ export const caseStudies = {
     title: "별빛 동화",
     titleEn: "Fairy Tale",
     period: "2026.11",
-    role: { ko: "기획 · 웹디자인 · 퍼블리싱 · 인터랙션 개발", en: "Planning · Web design · Publishing · Interaction development" },
     tools: ["HTML", "CSS", "JavaScript", "GSAP", "ScrollTrigger", "Lenis"],
     credits: [{ label: { ko: "일러스트", en: "Illustrations" }, value: "kittykeks", href: "https://www.behance.net/kittykeks" }],
     story: [
-      {
-        title: { ko: "컨셉", en: "Concept" },
-        text: {
-          ko: "한 편의 동화책을 넘기듯, 스크롤을 내리며 이야기 속으로 들어가는 경험을 목표로 했습니다. 작가의 일러스트에 움직임을 더해 정적인 그림이 살아 있는 장면처럼 느껴지도록 구성했습니다.",
-          en: "Like turning the pages of a picture book, scrolling takes you into the story. Motion added to the illustrator’s artwork makes still pictures feel like living scenes.",
-        },
-      },
+      
       {
         title: { ko: "프로젝트의 시작", en: "How it started" },
         text: {
@@ -685,54 +386,7 @@ export const caseStudies = {
           en: "It started as practice for GSAP ScrollTrigger. I thought scroll animation would look most beautiful told as a story with illustrations, so I made it a fairy tale. It was my first GSAP project.",
         },
       },
-      {
-        title: { ko: "스토리텔링 & 인터랙션", en: "Storytelling & interaction" },
-        items: [
-          {
-            term: { ko: "스크롤 기반 연출", en: "Scroll-driven scenes" },
-            text: {
-              ko: "GSAP으로 스크롤 흐름에 맞춰 장면이 차례로 등장하며 이야기가 전개, 네 개의 챕터로 구성",
-              en: "With GSAP, scenes appear in turn as you scroll and the story unfolds across four chapters",
-            },
-          },
-          {
-            term: { ko: "챕터마다 바뀌는 색", en: "Colour changes per chapter" },
-            text: {
-              ko: "배경 · 글자 · 포인트 색과 별빛의 밝기가 챕터에 맞춰 천천히 바뀌며 분위기를 이어감",
-              en: "Background, text and accent colours, and even how bright the stars are, shift slowly with each chapter",
-            },
-            why: {
-              ko: "일러스트마다 분위기가 달라서 그 그림에 맞췄고, 이야기가 진행될수록 어두운 밤에서 밝은 색으로 바뀌도록",
-              en: "Each illustration has its own mood, so the colours follow the picture, moving from dark night to light as the story goes on",
-            },
-          },
-          {
-            term: { ko: "텍스트 모션", en: "Text motion" },
-            text: {
-              ko: "챕터 제목은 잉크가 번지듯 읽는 순서대로 한 글자씩, 본문은 단어 단위로 나타나며 읽는 리듬을 조절",
-              en: "Chapter titles appear letter by letter in reading order, like ink settling; body text appears word by word to pace the reading",
-            },
-          },
-          {
-            term: { ko: "장면 전환", en: "Scene transitions" },
-            text: {
-              ko: "원형으로 열리는 그림, 작은 원이 화면 전체로 열리는 ‘포털’, 가로 스크롤 챕터로 챕터 사이를 연결",
-              en: "Pictures that open in a circle, a “portal” where a tiny circle opens to the full screen, and a horizontally scrolling chapter",
-            },
-            why: {
-              ko: "2장은 그림이 옆으로 이어지는 장면이라 가로 스크롤로 넘기는 게 자연스러워서",
-              en: "Chapter II’s pictures run sideways as one scene, so turning them horizontally felt natural",
-            },
-          },
-          {
-            term: { ko: "패럴랙스", en: "Parallax" },
-            text: {
-              ko: "아치형 그림 프레임이 마우스를 따라 움직이고, 콜라주 이미지는 스크롤에 따라 깊이감 있게 이동",
-              en: "Arched picture frames follow the mouse; collage images move at different depths as you scroll",
-            },
-          },
-        ],
-      },
+      
       {
         title: { ko: "비주얼", en: "Visuals" },
         items: [
@@ -775,8 +429,7 @@ export const caseStudies = {
   cube: {
     title: "Cube Clinic",
     titleEn: { ko: "큐브성형외과 · 가상 브랜드 웹사이트", en: "Cube Plastic Surgery · fictional clinic website" },
-    period: { ko: "3일", en: "3 days" },
-    role: { ko: "웹디자인 · 퍼블리싱", en: "Web design · Publishing" },
+    period: { ko: "2026.11", en: "2026.11" },
     tools: ["HTML", "CSS", "JavaScript", "Weavy"],
     credits: [{ label: { ko: "참고한 병원 사이트", en: "Reference clinic site" }, value: "https://www.cubeps.com/", href: "https://www.cubeps.com/" }],
     story: [
