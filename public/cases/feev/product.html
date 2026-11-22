@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>FEEV</title>
+  <meta name="description" content="FEEV 제품 상세: 컬러 선택, 발색, 전성분, 사용 방법, 배송·교환 안내.">
+  <meta property="og:title" content="FEEV">
+  <meta property="og:type" content="product">
+  <meta property="og:image" content="./img/web/og-1200.jpg">
+  <meta name="theme-color" content="#EFEDF8">
+  <meta name="color-scheme" content="light">
+  <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Instrument+Serif:ital@0;1&family=Jua&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="page-pdp">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <div class="pearl" aria-hidden="true"></div>
+  <!-- ============ HEADER (same on every page) ============ -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="logo" href="./index.html" aria-label="FEEV 홈">FEEV</a>
+      <nav class="nav" aria-label="메인">
+        <a href="./products.html?cat=gloss" data-nav="gloss">Gloss</a>
+        <a href="./products.html?cat=tint" data-nav="tint">Tint</a>
+        <a href="./products.html?cat=blush" data-nav="blush">Blush</a>
+        <a href="./products.html" data-nav="shop">Shop</a>
+      </nav>
+      <a class="cart-btn wish-link" href="./products.html?cat=wish" aria-label="찜한 제품">
+        <span class="cart-btn__bubble" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="cart-btn__count js-wish-count" hidden>0</span>
+      </a>
+      <button class="cart-btn js-cart-open" type="button" aria-label="장바구니">
+        <span class="cart-btn__bubble" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        <span class="cart-btn__count js-cart-count" hidden>0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- filled by product.js from shop-data.js (?id=gloss&shade=03) -->
+  <main id="main" class="pdp">
+    <noscript><p class="container">제품 정보를 보려면 JavaScript를 켜 주세요. <a href="./products.html">Shop으로 돌아가기</a></p></noscript>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__logo" aria-hidden="true">FEEV</p>
+      <ul class="site-footer__links">
+        <li><a href="./products.html">Shop</a></li>
+        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram<span class="sr-only"> (새 창)</span></a></li>
+        <li><a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube<span class="sr-only"> (새 창)</span></a></li>
+      </ul>
+      <p class="site-footer__legal">포트폴리오용 컨셉 페이지입니다. 실제 판매 사이트가 아니며, 가격·전성분·제품 정보는 예시이고 이미지 저작권은 FEEV에 있습니다.</p>
+    </div>
+  </footer>
+
+  <script src="./shop-data.js"></script>
+  <script src="./cart.js"></script>
+  <script src="./product.js"></script>
+</body>
+</html>

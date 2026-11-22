@@ -51,7 +51,7 @@
 
           <div class="product__cta">
             <button class="btn btn--gloss js-add" type="button">장바구니 담기</button>
-            <a class="link" href="./products.html#${p.id}">전 컬러 보기</a>
+            <a class="link" href="${window.FEEV_URL(p.id)}">자세히 보기</a>
           </div>
         </div>
       </div>
@@ -146,7 +146,6 @@
         navLinks.forEach((a) => {
           const on = a.dataset.nav === en.target.id;
           a.classList.toggle('is-active', on);
-          if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
         });
       });
     }, { rootMargin: '-45% 0px -50% 0px' });

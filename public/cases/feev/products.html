@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Shop — FEEV</title>
-  <meta name="description" content="FEEV 버블 글로스, 하이퍼 핏 컬러 웨어, 플러피 치크 블러쉬 전 컬러.">
+  <meta name="description" content="FEEV 버블 글로스, 하이퍼 핏 컬러 웨어, 플러피 치크 블러쉬. 제품을 고르고 컬러를 선택하세요.">
   <meta property="og:title" content="Shop — FEEV">
-  <meta property="og:description" content="FEEV 버블 글로스, 하이퍼 핏 컬러 웨어, 플러피 치크 블러쉬 전 컬러.">
+  <meta property="og:description" content="FEEV 버블 글로스, 하이퍼 핏 컬러 웨어, 플러피 치크 블러쉬. 제품을 고르고 컬러를 선택하세요.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="./img/web/og-1200.jpg">
   <meta name="theme-color" content="#EFEDF8">
@@ -27,11 +27,17 @@
     <div class="site-header__inner">
       <a class="logo" href="./index.html" aria-label="FEEV 홈">FEEV</a>
       <nav class="nav" aria-label="메인">
-        <a href="./index.html#gloss" data-nav="gloss">Gloss</a>
-        <a href="./index.html#tint" data-nav="tint">Tint</a>
-        <a href="./index.html#blush" data-nav="blush">Blush</a>
+        <a href="./products.html?cat=gloss" data-nav="gloss">Gloss</a>
+        <a href="./products.html?cat=tint" data-nav="tint">Tint</a>
+        <a href="./products.html?cat=blush" data-nav="blush">Blush</a>
         <a href="./products.html" data-nav="shop">Shop</a>
       </nav>
+      <a class="cart-btn wish-link" href="./products.html?cat=wish" aria-label="찜한 제품">
+        <span class="cart-btn__bubble" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="cart-btn__count js-wish-count" hidden>0</span>
+      </a>
       <button class="cart-btn js-cart-open" type="button" aria-label="장바구니">
         <span class="cart-btn__bubble" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -44,16 +50,22 @@
   <main id="main" class="shop">
     <header class="shop__head container">
       <p class="eyebrow" lang="en">Shop</p>
-      <h1 class="section-title" lang="en">All <em>colors.</em></h1>
+      <h1 class="section-title" lang="en">Find your <em>shade.</em></h1>
       <p class="shop__sub">버블 글로스 · 하이퍼 핏 컬러 웨어 · 플러피 치크 블러쉬</p>
-      <div class="filters" role="group" aria-label="제품 필터">
+      <div class="filters" role="group" aria-label="제품 종류">
         <button class="filter" type="button" aria-pressed="true" data-filter="all">All</button>
-        <button class="filter" type="button" aria-pressed="false" data-filter="gloss">Bubble Gloss <span class="badge badge--mini">NEW</span></button>
-        <button class="filter" type="button" aria-pressed="false" data-filter="tint">Color Wear</button>
-        <button class="filter" type="button" aria-pressed="false" data-filter="blush">Cheek Blush</button>
+        <button class="filter" type="button" aria-pressed="false" data-filter="gloss">Gloss</button>
+        <button class="filter" type="button" aria-pressed="false" data-filter="tint">Tint</button>
+        <button class="filter" type="button" aria-pressed="false" data-filter="blush">Blush</button>
+        <button class="filter filter--wish" type="button" aria-pressed="false" data-filter="wish">♥ 찜</button>
       </div>
     </header>
-    <ul class="grid container" id="grid" aria-live="polite"></ul>
+    <ul class="pgrid container" id="grid"></ul>
+    <div class="shop__empty container" id="wish-empty" hidden>
+      <p>아직 찜한 제품이 없어요.</p>
+      <p class="shop__empty-sub">마음에 드는 제품의 ♡를 눌러 담아 두세요.</p>
+      <button class="btn btn--gloss js-show-all" type="button">전체 제품 보기</button>
+    </div>
   </main>
 
   <footer class="site-footer">

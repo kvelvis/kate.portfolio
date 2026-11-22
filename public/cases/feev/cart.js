@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FEEV — cart (shared by index.html and products.html).
+   FEEV — cart + wishlist (shared by index.html, products.html and product.html).
    Stored per browser in localStorage (demo shop, no checkout backend).
    API: FEEVCart.add(productId, shadeNo, qty = 1) · FEEVCart.open()
    Needs: shop-data.js loaded first; a .js-cart-open button and .js-cart-count
@@ -77,7 +77,7 @@
         <li class="cart-item">
           <img src="${p.img(s.no)}-600.webp" width="600" height="600" alt="" loading="lazy">
           <div class="cart-item__body">
-            <p class="cart-item__name">${p.en}</p>
+            <p class="cart-item__name"><a href="${window.FEEV_URL(p.id, s.no)}">${p.en}</a></p>
             <p class="cart-item__shade"><span class="dot dot--${p.texture}" style="--c:${s.hex}"></span>${label}</p>
             <div class="qty" role="group" aria-label="${p.ko} ${label} 수량">
               <button type="button" data-dec="${i}" aria-label="하나 빼기">−</button>
@@ -163,6 +163,45 @@
       el.classList.remove('is-pop'); void el.offsetWidth; el.classList.add('is-pop');
     });
   }
+
+  /* ---------- wishlist (찜): product ids, per browser ---------- */
+  const WKEY = 'feev-wish-v1';
+  let wish = [];
+  try { wish = JSON.parse(localStorage.getItem(WKEY)) || []; } catch (_) { wish = []; }
+  wish = wish.filter((id) => P.some((p) => p.id === id));
+  const saveWish = () => { try { localStorage.setItem(WKEY, JSON.stringify(wish)); } catch (_) {} };
+
+  /* reflect the list on every heart button (.js-wish[data-wish]) and the header count */
+  function syncWish() {
+    document.querySelectorAll('.js-wish').forEach((b) => {
+      const on = wish.includes(b.dataset.wish);
+      const p = P.find((x) => x.id === b.dataset.wish);
+      b.setAttribute('aria-pressed', String(on));
+      if (p) b.setAttribute('aria-label', `${p.ko} ${on ? '찜 해제' : '찜하기'}`);
+    });
+    document.querySelectorAll('.js-wish-count').forEach((el) => { el.textContent = wish.length; el.hidden = !wish.length; });
+    document.querySelectorAll('.wish-link').forEach((a) => a.setAttribute('aria-label', `찜한 제품, ${wish.length}개`));
+  }
+  function toggleWish(id) {
+    const p = P.find((x) => x.id === id);
+    if (!p) return;
+    const i = wish.indexOf(id);
+    if (i < 0) wish.push(id); else wish.splice(i, 1);
+    saveWish(); syncWish();
+    document.dispatchEvent(new CustomEvent('feev:wish'));
+    toast(i < 0
+      ? `<span class="toast__heart">${window.FEEV_HEART}</span>${p.en} 찜했어요 <a class="toast__link" href="./products.html?cat=wish">보기</a>`
+      : `${p.en} 찜을 해제했어요`);
+  }
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('.js-wish');
+    if (!b) return;
+    e.preventDefault();
+    toggleWish(b.dataset.wish);
+    b.classList.remove('is-pop'); void b.offsetWidth; b.classList.add('is-pop');
+  });
+  window.FEEVWish = { has: (id) => wish.includes(id), list: () => [...wish], toggle: toggleWish, sync: syncWish };
+  syncWish();
 
   window.FEEVCart = { add, open, close };
   render();

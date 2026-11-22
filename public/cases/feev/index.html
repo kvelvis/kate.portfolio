@@ -30,11 +30,17 @@
     <div class="site-header__inner">
       <a class="logo" href="./index.html" aria-label="FEEV 홈">FEEV</a>
       <nav class="nav" aria-label="메인">
-        <a href="./index.html#gloss" data-nav="gloss">Gloss</a>
-        <a href="./index.html#tint" data-nav="tint">Tint</a>
-        <a href="./index.html#blush" data-nav="blush">Blush</a>
+        <a href="./products.html?cat=gloss" data-nav="gloss">Gloss</a>
+        <a href="./products.html?cat=tint" data-nav="tint">Tint</a>
+        <a href="./products.html?cat=blush" data-nav="blush">Blush</a>
         <a href="./products.html" data-nav="shop">Shop</a>
       </nav>
+      <a class="cart-btn wish-link" href="./products.html?cat=wish" aria-label="찜한 제품">
+        <span class="cart-btn__bubble" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="cart-btn__count js-wish-count" hidden>0</span>
+      </a>
       <button class="cart-btn js-cart-open" type="button" aria-label="장바구니">
         <span class="cart-btn__bubble" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -78,7 +84,7 @@
               <p class="bh__pop"><img src="./img/web/word-pop.webp" srcset="./img/web/word-pop-sm.webp 587w, ./img/web/word-pop.webp 1174w" sizes="340px" width="1174" height="472" alt="POP!" loading="lazy" decoding="async"></p>
               <p class="bh__headline">새로운 <b>버블 글로스</b><br>출시</p>
               <p class="bh__copy">입술 위로 톡, 볼륨이 팝!<br>맑고 탱글한 버블 글로시 텐션</p>
-              <a class="btn btn--gloss bh__cta" href="./products.html#gloss" tabindex="-1">지금 만나기</a>
+              <a class="btn btn--gloss bh__cta" href="./product.html?id=gloss" tabindex="-1">지금 만나기</a>
             </div>
           </div>
           <ul class="bh__phrases" lang="en">
@@ -110,7 +116,7 @@
             <em>6 colors</em>
           </div>
           <div class="launch__cta">
-            <a class="btn btn--gloss" href="./products.html#gloss">지금 만나기</a>
+            <a class="btn btn--gloss" href="./product.html?id=gloss">지금 만나기</a>
             <a class="link" href="#gloss">컬러 보기</a>
           </div>
         </div>
