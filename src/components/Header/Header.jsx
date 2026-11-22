@@ -72,7 +72,7 @@ export default function Header() {
       <div className="hdr__right">
         <span className="hdr__status">
           <i aria-hidden="true" />
-          {t({ ko: "구직 중", en: "Open to work", ru: "Ищу работу" })}
+          {t({ ko: "구직 중", en: "Open to work", ru: "Открыта к предложениям" })}
         </span>
         <div className="hdr__lang" role="group" aria-label="Language">
           {LANG_LIST.map((l) => (

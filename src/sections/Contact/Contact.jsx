@@ -18,11 +18,11 @@ export default function Contact() {
         <h2 id="contact-title" className="contact__title rv" style={{ "--i": 1 }}>
           {main ? (
             <a href={main.href} target={main.external === false ? undefined : "_blank"} rel="noopener noreferrer">
-              <em>{t({ ko: "편하게 연락 주세요", en: "Let’s talk", ru: "Давайте поговорим" })}</em>
+              <em>{t({ ko: "편하게 연락 주세요", en: "Let’s talk", ru: "Напишите мне" })}</em>
               <span aria-hidden="true">↗</span>
             </a>
           ) : (
-            <em>{t({ ko: "편하게 연락 주세요", en: "Let’s talk", ru: "Давайте поговорим" })}</em>
+            <em>{t({ ko: "편하게 연락 주세요", en: "Let’s talk", ru: "Напишите мне" })}</em>
           )}
         </h2>
 
@@ -49,7 +49,7 @@ export default function Contact() {
             {t({
               ko: "웹디자인, 퍼블리싱 포지션을 찾고 있습니다.",
               en: "I’m looking for web design and publishing roles.",
-              ru: "Ищу работу веб-дизайнером и верстальщиком.",
+              ru: "Рассматриваю вакансии веб-дизайнера и верстальщика.",
             })}
           </p>
         </div>

@@ -9,7 +9,7 @@ import badgeImg from "../../assets/img/badge_card.png";
 import "./Hero.css";
 
 const mail = links.email && `mailto:${links.email}`;
-const STATUS = { ko: "구직 중 · 프리랜서 가능", en: "Open to work · available for freelance", ru: "Ищу работу · открыта для фриланса" };
+const STATUS = { ko: "구직 중 · 프리랜서 가능", en: "Open to work · available for freelance", ru: "Открыта к предложениям и фрилансу" };
 
 /** split "Greeting. Rest of the text" → [greeting, rest] */
 const splitIntro = (s) => {
@@ -108,8 +108,8 @@ export default function Hero() {
     return () => ctx.revert();
   }, [lang]);
 
-  // the name ("케이트" / "Kate") gets a highlighter stroke; the particle after it stays plain
-  const NAME = /(케이트|Kate)/;
+  // the name ("케이트" / "Kate" / "Катя") gets a highlighter stroke; the particle after it stays plain
+  const NAME = /(케이트|Kate|Катя)/;
   const mark = (w) =>
     w.split(NAME).map((part, j) =>
       NAME.test(part) ? (
@@ -145,7 +145,7 @@ export default function Hero() {
       </div>
 
       <div ref={gl} className="gl hero__gl" aria-hidden="true" />
-      <div ref={hit} className="hero__hit" aria-hidden="true" title={t({ ko: "드래그해서 흔들어 보세요", en: "Drag to swing", ru: "Потяните, чтобы раскачать" })} />
+      <div ref={hit} className="hero__hit" aria-hidden="true" title={t({ ko: "드래그해서 흔들어 보세요", en: "Drag to swing", ru: "Потяните и отпустите" })} />
 
       <div className="hero__foot">
         <p>

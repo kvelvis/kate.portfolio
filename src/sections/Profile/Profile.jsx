@@ -18,7 +18,7 @@ export default function Profile() {
         <div className="section-head">
           <p className="kicker rv">{t({ ko: "프로필", en: "Profile", ru: "Профиль" })}</p>
           <h2 id="prof-title" className="rv" style={{ "--i": 1 }}>
-            {t({ ko: "스킬과 자격증으로 보는", en: "Kate’s skills", ru: "Навыки и квалификации" })} <em>{t({ ko: "케이트", en: "& certificates", ru: "Кати" })}</em>
+            {t({ ko: "스킬과 자격증으로 보는", en: "Kate’s skills", ru: "Мои навыки" })} <em>{t({ ko: "케이트", en: "& certificates", ru: "и квалификации" })}</em>
           </h2>
         </div>
 

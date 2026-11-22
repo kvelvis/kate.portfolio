@@ -309,7 +309,7 @@ export const caseStudies = {
     title: "한미반도체",
     titleEn: { ko: "웹사이트 리디자인", en: "Website redesign", ru: "Редизайн сайта" },
     period: "2026.11",
-    tools: ["Figma", "Figma AI (이미지 생성)", "HTML", "CSS", "JavaScript"],
+    tools: ["Figma", { ko: "Figma AI (이미지 생성)", en: "Figma AI", ru: "Figma AI" }, "HTML", "CSS", "JavaScript"],
     story: [
       {
         title: { ko: "컨셉", en: "Concept", ru: "Концепция" },

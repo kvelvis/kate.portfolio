@@ -21,7 +21,7 @@ const pub = (path) => import.meta.env.BASE_URL + path;
 export const work = [
   {
     id: "celine27",
-    title: "Celine 2027",
+   title: { ko: "셀린", en: "Celine 2027", ru: "Celine 2027" },
     category: { ko: "캠페인 웹사이트", en: "Campaign website", ru: "Сайт кампании" },
     year: "2026",
     image: celine27Img,
@@ -31,7 +31,7 @@ export const work = [
   },
   {
     id: "gatto",
-    title: "묘한 커피",
+    title: { ko: "묘한 커피", en: "Myohan Coffee", ru: "Myohan Coffee" },
     category: { ko: "브랜딩 · 웹사이트", en: "Branding · Website", ru: "Брендинг · сайт" },
     year: "2026",
     image: catPoster,
@@ -46,7 +46,7 @@ export const work = [
   },
   {
     id: "dano",
-    title: "Dano 단어",
+    title: { ko: "단어", en: "Dano", ru: "Dano" },
     category: { ko: "앱 · Weavy, Kling", en: "App · Weavy, Kling", ru: "Приложение · Weavy, Kling" },
     year: "2026",
     gif: danoGif,
@@ -70,7 +70,7 @@ export const work = [
   },
   {
     id: "hanmi",
-    title: "Hanmi Semiconductor",
+    title: { ko: "한미반도체", en: "Hanmi Semiconductor", ru: "Hanmi Semiconductor" },
     category: { ko: "리디자인 · 기업 사이트", en: "Redesign · Corporate", ru: "Редизайн · корпоративный сайт" },
     year: "2026",
     image: hanmiImg,
@@ -84,7 +84,7 @@ export const work = [
   },
   {
     id: "fairy",
-    title: "별빛 동화",
+    title: { ko: "별빛 동화", en: "별빛 동화", ru: "Starlight Tales" },
     category: { ko: "인터랙티브 · 스토리텔링", en: "Interactive · Storytelling", ru: "Интерактив · сторителлинг" },
     year: "2026",
     image: fairyPoster,
@@ -99,7 +99,7 @@ export const work = [
   },
   {
     id: "cube",
-    title: "Cube Clinic",
+     title: { ko: "큐브성형외과의원", en: "Cube Clinic", ru: "Cube Clinic" },
     category: { ko: "메디컬", en: "Medical", ru: "Медицина" },
     year: "2026",
     gif: cubeGif,
@@ -109,12 +109,12 @@ export const work = [
     desc: {
       ko: "가상의 성형외과 웹사이트. 첫 화면에서 바로 상담 예약까지 이어지도록 설계.",
       en: "A website for a fictional plastic surgery clinic, built so visitors can book a consultation from the first screen.",
-      ru: "Сайт вымышленной клиники пластической хирургии: записаться на консультацию можно прямо с первого экрана.",
+      ru: "Сайт вымышленной клиники пластической хирургии.",
     },
   },
   {
     id: "siyazu",
-    title: "Siyazu",
+    title: { ko: "시야주", en: "Siyazu", ru: "Siyazu" },
     category: { ko: "리디자인 · 커머스", en: "Redesign · Commerce", ru: "Редизайн · e-commerce" },
     year: "2026",
     image: siyazuImg,

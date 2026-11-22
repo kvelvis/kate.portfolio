@@ -82,7 +82,7 @@ export const skillGroups = [
 // otherwise "퇴사"; noStatus hides it.
 export const experience = [
   {
-    company: { ko: "스포워즈 코리아", en: "스포워즈 코리아" },
+    company: { ko: "스포워즈", en: "Spowars" },
     role: { ko: "웹디자이너 · 웹퍼블리셔", en: "Web Designer · Web Publisher", ru: "Веб-дизайнер · верстальщик" },
     period: { ko: "5개월", en: "5 months", ru: "5 месяцев" },
     dates: "2024.02–2024.06",
@@ -96,7 +96,7 @@ export const experience = [
     tools: ["Figma", "HTML", "CSS"],
   },
   {
-    company: { ko: "얀소프트", en: "얀소프트" },
+    company: { ko: "얀소프트", en: "Yansoft", ru: "Yansoft" },
     role: { ko: "웹디자이너 · 웹퍼블리셔", en: "Web Designer · Web Publisher", ru: "Веб-дизайнер · верстальщик" },
     period: { ko: "8개월", en: "8 months", ru: "8 месяцев" },
     dates: "2024.07–2025.02",
@@ -110,7 +110,7 @@ export const experience = [
     tools: ["Svelte", "Figma", "HTML", "CSS"],
   },
   {
-    company: { ko: "1S-Rarus", en: "1S-Rarus" },
+    company: { ko: "1S-Rarus", en: "1S-Rarus", ru: "1С-Рарус" },
     role: { ko: "콘텐츠 디자이너", en: "Content designer", ru: "Контент-дизайнер" },
     period: { ko: "1년 9개월~", en: "1 year 9 months+", ru: "1 год 9 месяцев+" },
     dates: { ko: "2025.03–현재", en: "2025.03–present", ru: "2025.03–сейчас" },
@@ -142,11 +142,11 @@ export const education = [
   { year: "2012–2014", desc: { ko: "러시아 외교관 고등학교", en: "Diplomatic high school, Russia", ru: "Лицей при дипломатическом ведомстве, Россия" } },
   { year: "2014–2016", desc: { ko: "부산대학교 언어교육원", en: "Pusan National University, Language Education Institute", ru: "Пусанский национальный университет, языковой институт" } },
   { year: "2016–2020", desc: { ko: "부산대학교 경영학 졸업", en: "Pusan National University, B.A. Business Administration", ru: "Пусанский национальный университет, бакалавр менеджмента" } },
-  { year: "2023.05–11", desc: { ko: "이젠컴퓨터아카데미 (국비 6개월)", en: "EZEN Computer Academy (6-month government-funded course)", ru: "Компьютерная академия EZEN (6-месячный государственный курс)" } },
+  { year: "2023.05–11", desc: { ko: "이젠컴퓨터아카데미 (국비 6개월)", en: "EZEN Computer Academy (6-month government-funded course)", ru: "Компьютерная академия EZEN (полугодовой курс за счёт государства)" } },
 ];
 
 export const languages = [
-  { name: "한국어", note: { ko: "TOPIK 6급", en: "TOPIK Level 6", ru: "TOPIK, 6 уровень" } },
+  { name: { ko: "한국어", en: "한국어", ru: "Корейский" }, note: { ko: "TOPIK 6급", en: "TOPIK Level 6", ru: "TOPIK, 6 уровень" } },
   { name: "English", note: "TOEIC 875" },
   { name: { ko: "러시아어", en: "Russian", ru: "Русский" }, note: { ko: "Native", en: "Native", ru: "Родной" } },
   { name: "KO ↔ RU", note: { ko: "Localization", en: "Localization", ru: "Локализация" } },
@@ -156,14 +156,14 @@ export const languages = [
 export const licenses = [
   {
     date: "2022.04",
-    name: { ko: "컴퓨터그래픽스운용기능사", en: "Craftsman Computer Graphics Operation", ru: "Специалист по компьютерной графике (Craftsman)" },
+    name: { ko: "컴퓨터그래픽스운용기능사", en: "Computer Graphics Operation", ru: "Специалист по компьютерной графике" },
     skill: true,
     issuer: { ko: "국가기술자격 · 한국산업인력공단", en: "National technical qualification · HRD Korea", ru: "Государственная квалификация · HRD Korea" },
     covers: { ko: "Photoshop · Illustrator 그래픽 제작", en: "Graphics in Photoshop and Illustrator", ru: "Графика в Photoshop и Illustrator" },
   },
   {
     date: "2022.04",
-    name: { ko: "웹디자인기능사", en: "Craftsman Web Design", ru: "Специалист по веб-дизайну (Craftsman)" },
+    name: { ko: "웹디자인기능사", en: "Web Design", ru: "Специалист по веб-дизайну" },
     skill: true,
     issuer: { ko: "국가기술자격 · 한국산업인력공단", en: "National technical qualification · HRD Korea", ru: "Государственная квалификация · HRD Korea" },
     covers: { ko: "웹 디자인 · HTML/CSS 퍼블리싱", en: "Web design and HTML/CSS publishing", ru: "Веб-дизайн и вёрстка HTML/CSS" },
@@ -177,18 +177,18 @@ export const timeline = [
   {
     when: "2023.05–11",
     kind: "edu",
-    title: { ko: "이젠컴퓨터아카데미 (국비 6개월)", en: "EZEN Computer Academy (6-month government-funded course)", ru: "Компьютерная академия EZEN (6-месячный государственный курс)" },
+    title: { ko: "이젠컴퓨터아카데미 (국비 6개월)", en: "EZEN Computer Academy (6-month government-funded course)", ru: "Компьютерная академия EZEN (полугодовой курс за счёт государства)" },
   },
   {
     when: jobDates("스포워즈"),
     kind: "work",
-    title: { ko: "스포워즈 코리아 · 웹디자인 / 퍼블리싱", en: "스포워즈 코리아 · Web design / publishing", ru: "스포워즈 코리아 · веб-дизайн / вёрстка" },
+    title: { ko: "스포워즈 · 웹디자인 / 퍼블리싱", en: "Spowars · Web design / publishing", ru: "Spowars · веб-дизайн / вёрстка" },
     note: { ko: "회사 경영 악화로 프로젝트 중단, 이후 폐업", en: "Projects stopped as the company struggled; it later closed", ru: "Проекты остановили из-за трудностей компании, позже она закрылась" },
   },
   {
     when: jobDates("얀소프트"),
     kind: "work",
-    title: { ko: "얀소프트 · UI 디자인 / 퍼블리싱", en: "얀소프트 · UI design / publishing", ru: "얀소프트 · UI-дизайн / вёрстка" },
+    title: { ko: "얀소프트 · UI 디자인 / 퍼블리싱", en: "Yansoft · UI design / publishing", ru: "Yansoft · UI-дизайн / вёрстка" },
     note: { ko: "회사 경영 악화로 프로젝트 중단, 이후 폐업", en: "Projects stopped as the company struggled; it later closed", ru: "Проекты остановили из-за трудностей компании, позже она закрылась" },
   },
   {
@@ -200,7 +200,7 @@ export const timeline = [
   {
     when: { ko: "지금", en: "Now", ru: "Сейчас" },
     kind: "next",
-    title: { ko: "함께 성장할 회사를 찾고 있어요", en: "Looking for a team to grow with", ru: "Ищу команду, с которой буду расти" },
+    title: { ko: "함께 성장할 회사를 찾고 있어요", en: "Looking for a team to grow with", ru: "Ищу команду, в которой смогу расти" },
     note: {
       ko: "안정적인 환경에서 팀과 함께 일하며 새로운 것을 배우고, 더 흥미로운 프로젝트를 통해 성장하고 싶어서 회사를 찾고 있습니다.",
       en: "I want a stable place to work with a team, learn new things and grow through more interesting projects.",

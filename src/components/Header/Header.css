@@ -78,6 +78,13 @@
   gap: 7px;
   font-size: 13px;
   color: var(--soft);
+  white-space: nowrap;
+}
+/* the Russian status is long: drop it a bit earlier (the hero repeats it) */
+@media (max-width: 1000px) {
+  html[lang="ru"] .hdr__status {
+    display: none;
+  }
 }
 .hdr__status i {
   width: 6px;

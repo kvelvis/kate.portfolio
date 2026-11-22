@@ -50,6 +50,9 @@ const loadCss = (href) => {
   document.head.appendChild(l);
 };
 
+// project titles may differ by language (ru uses the English names); alerts always get the Korean one
+const titleKo = (item) => (typeof item.title === "string" ? item.title : item.title.ko);
+
 const metaOf = (item, t) => [t(item.category), item.year].filter(Boolean).join(", ");
 
 // "여덟 개의 프로젝트, 하나의 구" / "Eight projects, one sphere": the number follows data/work.js
@@ -105,7 +108,7 @@ export default function Work() {
     lastTrigger.current = null;
   }, [zoomed]);
 
-  useEffect(() => notifyProject(zoomed?.title), [zoomed]);
+  useEffect(() => notifyProject(zoomed && titleKo(zoomed)), [zoomed]);
 
   const openFromList = (i, e) => {
     lastTrigger.current = e.currentTarget;
@@ -130,7 +133,7 @@ export default function Work() {
         overview: r.overview.current,
         go: r.go.current,
         setCaption: (item) => {
-          r.captionTitle.current.textContent = item.title;
+          r.captionTitle.current.textContent = tRef.current(item.title);
           r.captionCat.current.textContent = metaOf(item, tRef.current);
         },
       },
@@ -179,21 +182,21 @@ export default function Work() {
     <div className="container">
       <aside className="work-ai" aria-labelledby="work-ai-title">
         <h2 id="work-ai-title" className="work-ai__title">
-          {t({ ko: "AI 활용에 대해", en: "About AI", ru: "Об использовании ИИ" })}
+          {t({ ko: "AI 활용에 대해", en: "About AI", ru: "Как я использую ИИ" })}
         </h2>
         <div className="work-ai__text">
           <p>
             {t({
               ko: "채용 공고와 최근 업계 트렌드를 참고해, 이번 포트폴리오에는 AI를 활용했습니다.",
               en: "Following job postings and recent industry trends, I used AI in this portfolio.",
-              ru: "Следуя требованиям вакансий и трендам индустрии, я использовала ИИ в этом портфолио.",
+              ru: "В этом портфолио я использую ИИ: сейчас этого ждут работодатели, и так уже работает вся индустрия.",
             })}
           </p>
           <p>
             {t({
               ko: "이 포트폴리오의 사이트들은 대부분 제가 예전에 직접 기획하고 디자인하고 코딩한 작업물이며, 이후 AI와 함께 리디자인했습니다.",
               en: "Most of the sites here I planned, designed and coded myself earlier, then redesigned with AI.",
-              ru: "Большинство сайтов здесь я раньше сама продумала, нарисовала и сверстала, а потом переделала с помощью ИИ.",
+              ru: "Большинство этих сайтов я когда-то сделала полностью сама, от идеи до вёрстки, а потом обновила с помощью ИИ.",
             })}
           </p>
         </div>
@@ -216,7 +219,7 @@ export default function Work() {
         <span ref={r.sideL}>{t({ ko: "웹 · 브랜드", en: "Web, brand & interactive", ru: "Веб, бренд и интерактив" })}</span>
       </p>
       <p className="work__side work__side--r" aria-hidden="true">
-        <span ref={r.sideR}>{t({ ko: "드래그로 돌리고, 클릭해서 열기", en: "Drag to spin, click to open", ru: "Тяните, чтобы вращать, кликните, чтобы открыть" })}</span>
+        <span ref={r.sideR}>{t({ ko: "드래그로 돌리고, 클릭해서 열기", en: "Drag to spin, click to open", ru: "Покрутите сферу и выберите проект" })}</span>
       </p>
 
       <div className="work__counter" aria-hidden="true">
@@ -254,15 +257,15 @@ export default function Work() {
         </svg>
       </button>
 
-      <div ref={r.overview} className="overview" role="dialog" aria-label={zoomed?.title} hidden={!zoomed}>
+      <div ref={r.overview} className="overview" role="dialog" aria-label={zoomed ? t(zoomed.title) : undefined} hidden={!zoomed}>
         {zoomed && (
           <div className={`overview__in${cs?.story?.length ? " has-story" : ""}`}>
             <p className="kicker">
               {String(work.indexOf(zoomed) + 1).padStart(2, "0")} / {String(work.length).padStart(2, "0")} · {metaOf(zoomed, t)}
             </p>
             <h3 ref={panelTitle} tabIndex={-1} className="overview__title">
-              {zoomed.title}
-              {cs?.titleEn && <small>{t(cs.titleEn)}</small>}
+              {t(zoomed.title)}
+              {cs?.titleEn && t(cs.titleEn) !== t(zoomed.title) && <small>{t(cs.titleEn)}</small>}
             </h3>
             {zoomed.desc && <p className="overview__desc">{t(zoomed.desc)}</p>}
             <div className="overview__body" tabIndex={cs?.story?.length ? 0 : undefined}>
@@ -283,7 +286,7 @@ export default function Work() {
                   {cs.tools?.length > 0 && (
                     <div>
                       <dt>{t({ ko: "도구", en: "Tools", ru: "Инструменты" })}</dt>
-                      <dd>{cs.tools.join(" · ")}</dd>
+                      <dd>{cs.tools.map(t).join(" · ")}</dd>
                     </div>
                   )}
                   {cs.credits?.map((c) => (
@@ -384,7 +387,7 @@ export default function Work() {
         {work.map((item, i) => (
           <li key={item.id} className="work-list__row">
             <span className="work-list__no">{String(i + 1).padStart(2, "0")}</span>
-            <span className="work-list__title">{item.title}</span>
+            <span className="work-list__title">{t(item.title)}</span>
             <span className="work-list__cat">{t(item.category)}</span>
             <span className="work-list__year">{item.year}</span>
             <span className="work-list__actions">
