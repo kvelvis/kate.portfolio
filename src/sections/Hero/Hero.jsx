@@ -9,7 +9,7 @@ import badgeImg from "../../assets/img/badge_card.png";
 import "./Hero.css";
 
 const mail = links.email && `mailto:${links.email}`;
-const STATUS = { ko: "구직 중 · 프리랜서 가능", en: "Open to work · available for freelance" };
+const STATUS = { ko: "구직 중 · 프리랜서 가능", en: "Open to work · available for freelance", ru: "Ищу работу · открыта для фриланса" };
 
 /** split "Greeting. Rest of the text" → [greeting, rest] */
 const splitIntro = (s) => {
@@ -133,19 +133,19 @@ export default function Hero() {
     <section ref={root} id="top" className="hero" aria-labelledby="hero-title">
       <div className="hero__copy container" key={lang}>
         <p className="hero__meta kicker">
-          {profile.firstName} {profile.lastName} · {t({ ko: "웹디자이너 · 웹퍼블리셔", en: "Web Designer & Web Publisher" })}
+          {profile.firstName} {profile.lastName} · {t({ ko: "웹디자이너 · 웹퍼블리셔", en: "Web Designer & Web Publisher", ru: "Веб-дизайнер и верстальщик" })}
         </p>
         <h1 id="hero-title" className="hero__hello">
           {words(hello)}
         </h1>
         <p className="hero__lead">{words(rest)}</p>
         <a className="hero__cta" href="#work">
-          {t({ ko: "작업 보기", en: "See my work" })} <span aria-hidden="true">↓</span>
+          {t({ ko: "작업 보기", en: "See my work", ru: "Смотреть работы" })} <span aria-hidden="true">↓</span>
         </a>
       </div>
 
       <div ref={gl} className="gl hero__gl" aria-hidden="true" />
-      <div ref={hit} className="hero__hit" aria-hidden="true" title={t({ ko: "드래그해서 흔들어 보세요", en: "Drag to swing" })} />
+      <div ref={hit} className="hero__hit" aria-hidden="true" title={t({ ko: "드래그해서 흔들어 보세요", en: "Drag to swing", ru: "Потяните, чтобы раскачать" })} />
 
       <div className="hero__foot">
         <p>
@@ -159,7 +159,7 @@ export default function Hero() {
           )}
           <span>{profile.route.join(" → ")}</span>
         </p>
-        <p className="hero__how">{t({ ko: "배지를 당겨 보세요", en: "Pull the badge" })}</p>
+        <p className="hero__how">{t({ ko: "배지를 당겨 보세요", en: "Pull the badge", ru: "Потяните бейдж" })}</p>
       </div>
     </section>
   );

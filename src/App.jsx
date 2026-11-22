@@ -25,7 +25,7 @@ export default function App() {
   return (
     <>
       <a href="#profile" className="skip-link">
-        {t({ ko: "본문 바로가기", en: "Skip to content" })}
+        {t({ ko: "본문 바로가기", en: "Skip to content", ru: "Перейти к содержимому" })}
       </a>
       <Header />
       <main>

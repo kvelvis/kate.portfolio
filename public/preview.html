@@ -168,11 +168,12 @@
       var T = {
         ko: { newtab: "새 탭", bad: "프로젝트를 찾을 수 없습니다.", home: "포트폴리오로 돌아가기" },
         en: { newtab: "New tab", bad: "This project could not be found.", home: "Back to the portfolio" },
+        ru: { newtab: "Новая вкладка", bad: "Проект не найден.", home: "Вернуться в портфолио" },
       };
       var params = new URLSearchParams(location.search);
       var lang = params.get("lang");
       try { lang = lang || localStorage.getItem("lang"); } catch (e) {}
-      if (lang !== "en") lang = "ko";
+      if (!T[lang]) lang = "ko";
       document.documentElement.lang = lang;
       document.querySelectorAll("[data-t]").forEach(function (el) { el.textContent = T[lang][el.dataset.t]; });
 

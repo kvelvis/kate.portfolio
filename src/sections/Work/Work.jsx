@@ -55,9 +55,12 @@ const metaOf = (item, t) => [t(item.category), item.year].filter(Boolean).join("
 // "여덟 개의 프로젝트, 하나의 구" / "Eight projects, one sphere": the number follows data/work.js
 const EN_NUM = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty"];
 const KO_NUM = ["", "한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열", "열한", "열두", "열세", "열네", "열다섯", "열여섯", "열일곱", "열여덟", "열아홉", "스무"];
+const RU_NUM = ["Ноль", "Один", "Два", "Три", "Четыре", "Пять", "Шесть", "Семь", "Восемь", "Девять", "Десять", "Одиннадцать", "Двенадцать", "Тринадцать", "Четырнадцать", "Пятнадцать", "Шестнадцать", "Семнадцать", "Восемнадцать", "Девятнадцать", "Двадцать"];
+const ruProjects = (n) => (n % 10 === 1 && n % 100 !== 11 ? "проект" : [2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? "проекта" : "проектов");
 const countTitle = (n) => ({
   ko: `${KO_NUM[n] || n} 개의 프로젝트,`,
   en: `${EN_NUM[n] || n} project${n === 1 ? "" : "s"},`,
+  ru: `${RU_NUM[n] || n} ${ruProjects(n)},`,
 });
 
 /** Project sphere. Plays its intro the first time it scrolls into view. */
@@ -109,7 +112,7 @@ export default function Work() {
     root.current.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     sphere.current?.open(i);
   };
-  const labels = { overview: t({ ko: "자세히", en: "Overview" }), close: t({ ko: "닫기", en: "Close" }) };
+  const labels = { overview: t({ ko: "자세히", en: "Overview", ru: "Подробнее" }), close: t({ ko: "닫기", en: "Close", ru: "Закрыть" }) };
 
   // built the first time the section comes close
   useEffect(() => {
@@ -176,19 +179,21 @@ export default function Work() {
     <div className="container">
       <aside className="work-ai" aria-labelledby="work-ai-title">
         <h2 id="work-ai-title" className="work-ai__title">
-          {t({ ko: "AI 활용에 대해", en: "About AI" })}
+          {t({ ko: "AI 활용에 대해", en: "About AI", ru: "Об использовании ИИ" })}
         </h2>
         <div className="work-ai__text">
           <p>
             {t({
               ko: "채용 공고와 최근 업계 트렌드를 참고해, 이번 포트폴리오에는 AI를 활용했습니다.",
               en: "Following job postings and recent industry trends, I used AI in this portfolio.",
+              ru: "Следуя требованиям вакансий и трендам индустрии, я использовала ИИ в этом портфолио.",
             })}
           </p>
           <p>
             {t({
               ko: "이 포트폴리오의 사이트들은 대부분 제가 예전에 직접 기획하고 디자인하고 코딩한 작업물이며, 이후 AI와 함께 리디자인했습니다.",
               en: "Most of the sites here I planned, designed and coded myself earlier, then redesigned with AI.",
+              ru: "Большинство сайтов здесь я раньше сама продумала, нарисовала и сверстала, а потом переделала с помощью ИИ.",
             })}
           </p>
         </div>
@@ -196,9 +201,9 @@ export default function Work() {
     </div>
     <section ref={root} id="work" className={`work${zoomed ? " is-zoomed" : ""}`} aria-labelledby="work-title">
       <div className="work__head container">
-        <p className="kicker">{t({ ko: "작업", en: "Selected work" })}</p>
+        <p className="kicker">{t({ ko: "작업", en: "Selected work", ru: "Работы" })}</p>
         <h2 id="work-title">
-          {t(countTitle(work.length))} <em>{t({ ko: "하나의 구", en: "one sphere" })}</em>
+          {t(countTitle(work.length))} <em>{t({ ko: "하나의 구", en: "one sphere", ru: "одна сфера" })}</em>
         </h2>
       </div>
 
@@ -208,10 +213,10 @@ export default function Work() {
         work<span>.</span>
       </p>
       <p className="work__side work__side--l" aria-hidden="true">
-        <span ref={r.sideL}>{t({ ko: "웹 · 브랜드", en: "Web, brand & interactive" })}</span>
+        <span ref={r.sideL}>{t({ ko: "웹 · 브랜드", en: "Web, brand & interactive", ru: "Веб, бренд и интерактив" })}</span>
       </p>
       <p className="work__side work__side--r" aria-hidden="true">
-        <span ref={r.sideR}>{t({ ko: "드래그로 돌리고, 클릭해서 열기", en: "Drag to spin, click to open" })}</span>
+        <span ref={r.sideR}>{t({ ko: "드래그로 돌리고, 클릭해서 열기", en: "Drag to spin, click to open", ru: "Тяните, чтобы вращать, кликните, чтобы открыть" })}</span>
       </p>
 
       <div className="work__counter" aria-hidden="true">
@@ -239,7 +244,7 @@ export default function Work() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        {t({ ko: "사이트 바로가기", en: "Visit the site" })} <span aria-hidden="true">↗</span>
+        {t({ ko: "사이트 바로가기", en: "Visit the site", ru: "Открыть сайт" })} <span aria-hidden="true">↗</span>
       </a>
 
       {/* close button in the top-right corner */}
@@ -265,19 +270,19 @@ export default function Work() {
                 <dl className="overview__facts">
                   {cs.period && (
                     <div>
-                      <dt>{t({ ko: "기간", en: "When" })}</dt>
+                      <dt>{t({ ko: "기간", en: "When", ru: "Когда" })}</dt>
                       <dd>{t(cs.period)}</dd>
                     </div>
                   )}
                   {cs.role && (
                     <div>
-                      <dt>{t({ ko: "역할", en: "Role" })}</dt>
+                      <dt>{t({ ko: "역할", en: "Role", ru: "Роль" })}</dt>
                       <dd>{t(cs.role)}</dd>
                     </div>
                   )}
                   {cs.tools?.length > 0 && (
                     <div>
-                      <dt>{t({ ko: "도구", en: "Tools" })}</dt>
+                      <dt>{t({ ko: "도구", en: "Tools", ru: "Инструменты" })}</dt>
                       <dd>{cs.tools.join(" · ")}</dd>
                     </div>
                   )}
@@ -342,7 +347,7 @@ export default function Work() {
                           {t(it.text)}
                           {it.why && (
                             <span className="overview__why">
-                              <i>{t({ ko: "왜", en: "Why" })}</i>
+                              <i>{t({ ko: "왜", en: "Why", ru: "Почему" })}</i>
                               {t(it.why)}
                             </span>
                           )}
@@ -356,7 +361,7 @@ export default function Work() {
             <div className="overview__actions">
               {zoomed.href && (
                 <a className="pill-btn pill-btn--light overview__go overview__go--inline" href={previewUrl(zoomed.href, lang)} target="_blank" rel="noopener noreferrer">
-                  {t({ ko: "사이트 바로가기", en: "Visit the site" })} <span aria-hidden="true">↗</span>
+                  {t({ ko: "사이트 바로가기", en: "Visit the site", ru: "Открыть сайт" })} <span aria-hidden="true">↗</span>
                 </a>
               )}
               {cs?.links?.figma && (
@@ -373,7 +378,7 @@ export default function Work() {
     {/* every project as plain HTML, for keyboard, screen reader and search engines */}
     <section className="work-list container" aria-labelledby="work-list-title">
       <h3 id="work-list-title" className="kicker">
-        {t({ ko: "전체 목록", en: "All projects" })}
+        {t({ ko: "전체 목록", en: "All projects", ru: "Все проекты" })}
       </h3>
       <ol>
         {work.map((item, i) => (
@@ -384,11 +389,11 @@ export default function Work() {
             <span className="work-list__year">{item.year}</span>
             <span className="work-list__actions">
               <button type="button" className="pill-btn" onClick={(e) => openFromList(i, e)}>
-                {t({ ko: "설명", en: "Details" })}
+                {t({ ko: "설명", en: "Details", ru: "Подробнее" })}
               </button>
               {item.href && (
                 <a className="pill-btn" href={previewUrl(item.href, lang)} target="_blank" rel="noopener noreferrer">
-                  {t({ ko: "사이트", en: "Site" })} <span aria-hidden="true">↗</span>
+                  {t({ ko: "사이트", en: "Site", ru: "Сайт" })} <span aria-hidden="true">↗</span>
                 </a>
               )}
               {!item.href && caseStudies[item.caseStudy]?.links?.figma && (

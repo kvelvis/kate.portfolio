@@ -14,7 +14,7 @@
   --blue-glow: rgba(22, 33, 255, 0.45);
 
   --f-sans: "Geist", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
-  --f-serif: "Newsreader", "Noto Serif KR", ui-serif, Georgia, serif;
+  --f-serif: "Newsreader", "Literata", "Noto Serif KR", ui-serif, Georgia, serif;
   --f-mono: "Geist Mono", ui-monospace, monospace;
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);

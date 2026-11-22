@@ -112,6 +112,65 @@
   color: var(--ink);
 }
 
+/* phones: one compact language button with a small menu */
+.hdr__lang-mini {
+  position: relative;
+  display: none;
+}
+.hdr__lang-mini > button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 0 8px 0 9px;
+  border-radius: 6px;
+  background: var(--pill);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.hdr__lang-mini svg {
+  width: 10px;
+  height: 10px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.3s var(--ease);
+}
+.hdr__lang-mini > button[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+.hdr__lang-mini ul {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 120px;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  border-radius: 10px;
+  background: rgba(28, 28, 30, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+.hdr__lang-mini li button {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 6px;
+  text-align: left;
+  font-size: 14px;
+  color: var(--soft);
+}
+.hdr__lang-mini li button:hover,
+.hdr__lang-mini li button[aria-checked="true"] {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+}
+
 @media (max-width: 900px) {
   .hdr__status {
     display: none;
@@ -120,7 +179,17 @@
 @media (max-width: 640px) {
   .hdr {
     grid-template-columns: auto 1fr auto;
+    gap: 8px;
     height: 54px;
+  }
+  .hdr__lang {
+    display: none;
+  }
+  .hdr__lang-mini {
+    display: block;
+  }
+  .hdr__nav a {
+    white-space: nowrap;
   }
   .hdr__nav {
     justify-self: center;
@@ -132,6 +201,11 @@
   }
   .hdr__nav sup {
     display: none;
+  }
+}
+@media (max-width: 420px) {
+  .hdr__nav a {
+    padding-inline: 5px;
   }
 }
 @media (max-width: 380px) {

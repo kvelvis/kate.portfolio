@@ -13,7 +13,20 @@
 */
 
 const ORIGINS = ["https://kvelvis.github.io", "http://localhost:5173"];
-const BOTS = /bot|crawl|spider|preview|facebookexternalhit|kakaotalk-scrap|headless|curl|wget|python/i;
+const BOTS = /bot|crawl|spider|preview|facebookexternalhit|kakaotalk-scrap|headless|curl|wget|python|lighthouse|pagespeed|scanner/i;
+// Networks of data centres and security scanners: people browse from home / mobile providers, robots from these.
+// (Akamai, Cloudflare and Fastly are left out on purpose: iCloud Private Relay users come through them.)
+const DATACENTER =
+  /amazon|aws|google(?! fiber)|microsoft|azure|digitalocean|ovh|hetzner|linode|akamai connected cloud|oracle|alibaba|tencent|huawei cloud|vultr|choopa|contabo|leaseweb|m247|datacamp|cdn77|scaleway|ionos|hostinger|colocrossing|zscaler|palo alto|fortinet|proofpoint|mimecast|barracuda|forcepoint|netskope|censys|shodan|internet measurement|psychz|quadranet|g-?core|stark industries|aeza|bytedance|facebook|meta platforms|linkedin|yandex cloud|selectel|timeweb|kamatera|hostroyale|tzulo|servers\.com/i;
+
+const flag = (cc) => (/^[A-Z]{2}$/.test(cc) ? String.fromCodePoint(...[...cc].map((c) => 127397 + c.charCodeAt(0))) : "");
+const countryName = (cc) => {
+  try {
+    return new Intl.DisplayNames(["ru"], { type: "region" }).of(cc) || cc;
+  } catch {
+    return cc;
+  }
+};
 
 const recent = new Map(); // visitor+kind → time
 let hour = { key: "", count: 0 };
@@ -54,6 +67,12 @@ export default {
     }
     if (!input || typeof input !== "object") return done(400);
 
+    // ---- people only ----
+    const net = clean(req.cf?.asOrganization || "", 50);
+    if (DATACENTER.test(net)) return done(204);
+    const type0 = typeof input.type === "string" ? input.type : "visit";
+    if (type0 === "visit" && !input.human) return done(204); // no scroll / mouse / touch → robot
+
     // ---- rate limits ----
     const now = Date.now();
     const type = typeof input.type === "string" ? input.type : "visit";
@@ -82,10 +101,14 @@ export default {
       .format(now)
       .replace(",", "");
 
+    const cc = req.cf?.country || "";
+    const city = clean(req.cf?.city || "", 40);
+    const where = cc ? `${flag(cc)} ${[city, countryName(cc)].filter(Boolean).join(", ")}${net ? ` · ${net}` : ""}` : "";
+
     let text;
     let silent = false;
     if (type === "like") {
-      text = `❤️ Портфолио лайкнули!${r ? `\nСсылка: ${r}` : ""}\n${device} · ${time} (KST)`;
+      text = `❤️ Портфолио лайкнули!${r ? `\nСсылка: ${r}` : ""}${where ? `\n${where}` : ""}\n${device} · ${time} (KST)`;
     } else if (type === "project") {
       text = `📂 Открыли проект: ${clean(input.title)}${r ? `  · ссылка ${r}` : ""}`;
       silent = true;
@@ -93,9 +116,12 @@ export default {
       text = [
         "👀 Портфолио открыли",
         r ? `Ссылка: ${r}` : "Ссылка: без метки",
+        where,
         [device, tz, lang].filter(Boolean).join(" · "),
         `${time} (KST)`,
-      ].join("\n");
+      ]
+        .filter(Boolean)
+        .join("\n");
     }
 
     await fetch(`https://api.telegram.org/bot${env.TG_TOKEN}/sendMessage`, {

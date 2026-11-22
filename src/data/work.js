@@ -22,7 +22,7 @@ export const work = [
   {
     id: "celine27",
     title: "Celine 2027",
-    category: { ko: "캠페인 웹사이트", en: "Campaign website" },
+    category: { ko: "캠페인 웹사이트", en: "Campaign website", ru: "Сайт кампании" },
     year: "2026",
     image: celine27Img,
     gif: celineGif,
@@ -32,7 +32,7 @@ export const work = [
   {
     id: "gatto",
     title: "묘한 커피",
-    category: { ko: "브랜딩 · 웹사이트", en: "Branding · Website" },
+    category: { ko: "브랜딩 · 웹사이트", en: "Branding · Website", ru: "Брендинг · сайт" },
     year: "2026",
     image: catPoster,
     gif: catGif,
@@ -41,12 +41,13 @@ export const work = [
     desc: {
       ko: "고양이 입양 카페 브랜딩 & 웹사이트 컨셉.",
       en: "Branding and a website concept for a cat-adoption café.",
+      ru: "Брендинг и концепт сайта для кафе, где можно взять кота из приюта.",
     },
   },
   {
     id: "dano",
     title: "Dano 단어",
-    category: { ko: "앱 · Weavy, Kling", en: "App · Weavy, Kling" },
+    category: { ko: "앱 · Weavy, Kling", en: "App · Weavy, Kling", ru: "Приложение · Weavy, Kling" },
     year: "2026",
     gif: danoGif,
     href: "",
@@ -54,12 +55,13 @@ export const work = [
     desc: {
       ko: "알림으로 배우는 한국어 단어 앱 · 개인 프로젝트.",
       en: "A Korean vocabulary app you learn from your notifications · personal project.",
+      ru: "Приложение для изучения корейских слов по уведомлениям · личный проект.",
     },
   },
   {
     id: "feev",
     title: "FEEV",
-    category: { ko: "리디자인 · 캠페인", en: "Redesign · Campaign" },
+    category: { ko: "리디자인 · 캠페인", en: "Redesign · Campaign", ru: "Редизайн · кампания" },
     year: "2026",
     image: pub("cases/feev/img/web/main-girl-1376.webp"),
     gif: feevGif,
@@ -69,7 +71,7 @@ export const work = [
   {
     id: "hanmi",
     title: "Hanmi Semiconductor",
-    category: { ko: "리디자인 · 기업 사이트", en: "Redesign · Corporate" },
+    category: { ko: "리디자인 · 기업 사이트", en: "Redesign · Corporate", ru: "Редизайн · корпоративный сайт" },
     year: "2026",
     image: hanmiImg,
     href: "/cases/hanmi/index.html",
@@ -77,12 +79,13 @@ export const work = [
     desc: {
       ko: "B2B 반도체 장비 기업 사이트 리디자인. 주요 페이지 15개와 A/S 엔지니어 캐릭터.",
       en: "A redesign of a B2B semiconductor equipment maker’s site: 15 key pages and an A/S engineer character.",
+      ru: "Редизайн сайта B2B-производителя оборудования для полупроводников: 15 ключевых страниц и персонаж — инженер сервисной службы.",
     },
   },
   {
     id: "fairy",
     title: "별빛 동화",
-    category: { ko: "인터랙티브 · 스토리텔링", en: "Interactive · Storytelling" },
+    category: { ko: "인터랙티브 · 스토리텔링", en: "Interactive · Storytelling", ru: "Интерактив · сторителлинг" },
     year: "2026",
     image: fairyPoster,
     gif: fairyGif,
@@ -91,12 +94,13 @@ export const work = [
     desc: {
       ko: "GSAP 스크롤 스토리텔링 웹사이트. 그림으로 읽는 네 편의 이야기.",
       en: "A GSAP scroll-storytelling site: four stories told in pictures.",
+      ru: "Сайт-история на GSAP: четыре сказки в картинках.",
     },
   },
   {
     id: "cube",
     title: "Cube Clinic",
-    category: { ko: "메디컬", en: "Medical" },
+    category: { ko: "메디컬", en: "Medical", ru: "Медицина" },
     year: "2026",
     gif: cubeGif,
     image: pub("cases/cubehospital/img/photos/welcome-bg-1600.jpg"),
@@ -105,12 +109,13 @@ export const work = [
     desc: {
       ko: "가상의 성형외과 웹사이트. 첫 화면에서 바로 상담 예약까지 이어지도록 설계.",
       en: "A website for a fictional plastic surgery clinic, built so visitors can book a consultation from the first screen.",
+      ru: "Сайт вымышленной клиники пластической хирургии: записаться на консультацию можно прямо с первого экрана.",
     },
   },
   {
     id: "siyazu",
     title: "Siyazu",
-    category: { ko: "리디자인 · 커머스", en: "Redesign · Commerce" },
+    category: { ko: "리디자인 · 커머스", en: "Redesign · Commerce", ru: "Редизайн · e-commerce" },
     year: "2026",
     image: siyazuImg,
     gif: siyazuGif,

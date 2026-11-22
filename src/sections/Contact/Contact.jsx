@@ -14,15 +14,15 @@ export default function Contact() {
   return (
     <section ref={root} id="contact" className="section contact" aria-labelledby="contact-title">
       <div className="container">
-        <p className="kicker rv">{t({ ko: "연락", en: "Contact" })}</p>
+        <p className="kicker rv">{t({ ko: "연락", en: "Contact", ru: "Контакты" })}</p>
         <h2 id="contact-title" className="contact__title rv" style={{ "--i": 1 }}>
           {main ? (
             <a href={main.href} target={main.external === false ? undefined : "_blank"} rel="noopener noreferrer">
-              <em>{t({ ko: "편하게 연락 주세요", en: "Let’s talk" })}</em>
+              <em>{t({ ko: "편하게 연락 주세요", en: "Let’s talk", ru: "Давайте поговорим" })}</em>
               <span aria-hidden="true">↗</span>
             </a>
           ) : (
-            <em>{t({ ko: "편하게 연락 주세요", en: "Let’s talk" })}</em>
+            <em>{t({ ko: "편하게 연락 주세요", en: "Let’s talk", ru: "Давайте поговорим" })}</em>
           )}
         </h2>
 
@@ -49,6 +49,7 @@ export default function Contact() {
             {t({
               ko: "웹디자인, 퍼블리싱 포지션을 찾고 있습니다.",
               en: "I’m looking for web design and publishing roles.",
+              ru: "Ищу работу веб-дизайнером и верстальщиком.",
             })}
           </p>
         </div>
@@ -59,11 +60,12 @@ export default function Contact() {
           © {profile.year} {profile.firstName} {profile.lastName}
         </span>
         <span className="foot__mid"></span>
-        <a href="#top">{t({ ko: "맨 위로 ↑", en: "Back to top ↑" })}</a>
+        <a href="#top">{t({ ko: "맨 위로 ↑", en: "Back to top ↑", ru: "Наверх ↑" })}</a>
         <small className="foot__privacy">
           {t({
             ko: "사이트 개선을 위해 익명 방문 통계를 수집합니다. 쿠키나 IP는 저장하지 않습니다.",
             en: "Anonymous visit stats are collected to improve the site. No cookies or IP addresses are stored.",
+            ru: "Для улучшения сайта собирается анонимная статистика посещений. Cookie и IP-адреса не сохраняются.",
           })}
         </small>
       </footer>

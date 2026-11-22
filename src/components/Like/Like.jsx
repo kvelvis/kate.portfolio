@@ -60,8 +60,8 @@ export default function Like() {
       </span>
       <span className="like__text" aria-live="polite">
         {liked
-          ? t({ ko: "감사합니다!", en: "Thank you!" })
-          : t({ ko: "포트폴리오가 마음에 드셨나요?", en: "Like this portfolio?" })}
+          ? t({ ko: "감사합니다!", en: "Thank you!", ru: "Спасибо!" })
+          : t({ ko: "포트폴리오가 마음에 드셨나요?", en: "Like this portfolio?", ru: "Понравилось портфолио?" })}
       </span>
     </button>
   );

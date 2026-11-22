@@ -4,7 +4,7 @@ import { useLang } from "../../app/I18n";
 import { useReveal } from "../../hooks/useInView";
 import "./Profile.css";
 
-const LEVEL = { ko: { 3: "매일", 2: "실무", 1: "기초" }, en: { 3: "daily", 2: "working", 1: "familiar" } };
+const LEVEL = { ko: { 3: "매일", 2: "실무", 1: "기초" }, en: { 3: "daily", 2: "working", 1: "familiar" }, ru: { 3: "каждый день", 2: "в работе", 1: "базово" } };
 
 /** Skills by group, certificates beside them, timeline below. */
 export default function Profile() {
@@ -16,9 +16,9 @@ export default function Profile() {
     <section ref={root} id="profile" className="section prof" aria-labelledby="prof-title">
       <div className="container">
         <div className="section-head">
-          <p className="kicker rv">{t({ ko: "프로필", en: "Profile" })}</p>
+          <p className="kicker rv">{t({ ko: "프로필", en: "Profile", ru: "Профиль" })}</p>
           <h2 id="prof-title" className="rv" style={{ "--i": 1 }}>
-            {t({ ko: "스킬과 자격증으로 보는", en: "Kate’s skills" })} <em>{t({ ko: "케이트", en: "& certificates" })}</em>
+            {t({ ko: "스킬과 자격증으로 보는", en: "Kate’s skills", ru: "Навыки и квалификации" })} <em>{t({ ko: "케이트", en: "& certificates", ru: "Кати" })}</em>
           </h2>
         </div>
 
@@ -45,7 +45,7 @@ export default function Profile() {
           </div>
 
           <aside className="prof__certs rv" style={{ "--i": 4 }} aria-labelledby="prof-certs">
-            <h3 id="prof-certs" className="prof__group-name">{t({ ko: "자격증", en: "Certificates" })}</h3>
+            <h3 id="prof-certs" className="prof__group-name">{t({ ko: "자격증", en: "Certificates", ru: "Квалификации" })}</h3>
             <ul>
               {licenses
                 .filter((l) => l.skill)
@@ -79,7 +79,7 @@ export default function Profile() {
         </p>
 
         <div className="prof__path rv" aria-labelledby="prof-path">
-          <h3 id="prof-path" className="prof__group-name">{t({ ko: "걸어온 길", en: "My path" })}</h3>
+          <h3 id="prof-path" className="prof__group-name">{t({ ko: "걸어온 길", en: "My path", ru: "Мой путь" })}</h3>
           <ol className="tl" style={{ gridTemplateColumns: `repeat(${timeline.length + 1}, minmax(0, 1fr))` }}>
             {timeline.map((n, i) => (
               <li
