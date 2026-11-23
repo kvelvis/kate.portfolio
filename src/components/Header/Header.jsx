@@ -3,8 +3,8 @@ import { useLang } from "../../app/I18n";
 import "./Header.css";
 
 const NAV = [
-  { id: "profile", label: { ko: "프로필", en: "Profile", ru: "Профиль" } },
   { id: "work", label: { ko: "작업", en: "Work", ru: "Работы" } },
+  { id: "profile", label: { ko: "프로필", en: "Profile", ru: "Профиль" } },
   { id: "about", label: { ko: "소개", en: "About", ru: "О себе" } },
   { id: "contact", label: { ko: "연락", en: "Contact", ru: "Контакты" } },
 ];

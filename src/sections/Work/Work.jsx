@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
 import { SphereGallery } from "../../webgl/sphere";
 import { work } from "../../data/work";
 import { caseStudies } from "../../data/caseStudies";
@@ -8,36 +9,19 @@ import { notifyProject } from "../../app/notify";
 import "./Work.css";
 
 // project sites open in the device viewer (public/preview.html)
-const previewUrl = (href, lang) => (href ? `${import.meta.env.BASE_URL}preview.html?url=${encodeURIComponent(href)}&lang=${lang}` : undefined);
+// Figma prototype → embeddable URL (embed.figma.com, minimal UI)
+const embedUrl = (url) => {
+  const u = new URL(url.replace("www.figma.com", "embed.figma.com"));
+  u.searchParams.set("embed-host", "kate-portfolio");
+  u.searchParams.set("hide-ui", "1");
+  u.searchParams.set("hotspot-hints", "0");
+  u.searchParams.set("scaling", "contain"); // whole screen fits, no panning
+  u.searchParams.set("content-scaling", "fixed");
+  return u.href;
+};
+const protoLabel = { ko: "프로토타입", en: "Prototype", ru: "Прототип" };
 
-/*
- * Holds the page on the sphere while its intro plays, so it can't be scrolled past.
- * Guarded: first time only, only when arriving from above, never with reduced motion,
- * Esc releases it, and it always lets go after MAX_LOCK ms.
- */
-const MAX_LOCK = 4000;
-const SCROLL_KEYS = new Set([" ", "PageDown", "PageUp", "ArrowDown", "ArrowUp", "Home", "End"]);
-function lockScroll() {
-  const stop = (e) => e.preventDefault();
-  const keys = (e) => {
-    if (e.key === "Escape") return release();
-    if (SCROLL_KEYS.has(e.key) && !/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) e.preventDefault();
-  };
-  addEventListener("wheel", stop, { passive: false });
-  addEventListener("touchmove", stop, { passive: false });
-  addEventListener("keydown", keys);
-  const timer = setTimeout(() => release(), MAX_LOCK);
-  let done = false;
-  function release() {
-    if (done) return;
-    done = true;
-    clearTimeout(timer);
-    removeEventListener("wheel", stop);
-    removeEventListener("touchmove", stop);
-    removeEventListener("keydown", keys);
-  }
-  return release;
-}
+const previewUrl = (href, lang) => (href ? `${import.meta.env.BASE_URL}preview.html?url=${encodeURIComponent(href)}&lang=${lang}` : undefined);
 
 // font specimens in a project story need that project's fonts — load each stylesheet once
 const loadedCss = new Set();
@@ -86,6 +70,7 @@ export default function Work() {
     cursor: useRef(null),
     overview: useRef(null),
     go: useRef(null),
+    phone: useRef(null),
   };
   const [zoomed, setZoomed] = useState(null);
   const panelTitle = useRef(null);
@@ -115,6 +100,27 @@ export default function Work() {
     root.current.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     sphere.current?.open(i);
   };
+  // list hover preview
+  const peek = useRef(null);
+  const peekImg = useRef(null);
+  const peekPos = useRef(null);
+  const movePeek = (e) => peekPos.current?.(e.clientX, e.clientY);
+  const showPeek = (item, e) => {
+    const el = peek.current;
+    const src = item.gif || item.image;
+    if (!el || !src) return;
+    if (!peekPos.current) {
+      const qx = gsap.quickTo(el, "x", { duration: 0.45, ease: "power3.out" });
+      const qy = gsap.quickTo(el, "y", { duration: 0.45, ease: "power3.out" });
+      peekPos.current = (x, y) => (qx(x + 24), qy(y - 90));
+      gsap.set(el, { x: e.clientX + 24, y: e.clientY - 90 });
+    }
+    if (peekImg.current.getAttribute("src") !== src) peekImg.current.src = src;
+    movePeek(e);
+    gsap.to(el, { autoAlpha: 1, scale: 1, duration: 0.35, ease: "power3.out", overwrite: "auto" });
+  };
+  const hidePeek = () => peek.current && gsap.to(peek.current, { autoAlpha: 0, scale: 0.92, duration: 0.25, ease: "power2.in", overwrite: "auto" });
+
   const labels = { overview: t({ ko: "자세히", en: "Overview", ru: "Подробнее" }), close: t({ ko: "닫기", en: "Close", ru: "Закрыть" }) };
 
   // built the first time the section comes close
@@ -132,9 +138,10 @@ export default function Work() {
         cursor: r.cursor.current,
         overview: r.overview.current,
         go: r.go.current,
+        phone: r.phone.current,
         setCaption: (item) => {
           r.captionTitle.current.textContent = tRef.current(item.title);
-          r.captionCat.current.textContent = metaOf(item, tRef.current);
+          r.captionCat.current.textContent = (item.flag ? `★ ${tRef.current(item.flag)} · ` : "") + metaOf(item, tRef.current);
         },
       },
       onZoom: setZoomed,
@@ -162,13 +169,6 @@ export default function Work() {
   useEffect(() => {
     const s = sphere.current;
     if (!seen || !s || s.played) return;
-    const el = root.current;
-    const fromAbove = el.getBoundingClientRect().top > 0;
-    if (fromAbove && !s.reduced) {
-      // settle the section on screen, then hold it until the intro is over
-      scrollTo({ top: el.getBoundingClientRect().top + scrollY, behavior: "smooth" });
-      unlock.current = lockScroll();
-    }
     s.play();
   }, [seen, near]);
 
@@ -179,29 +179,6 @@ export default function Work() {
 
   return (
     <>
-    <div className="container">
-      <aside className="work-ai" aria-labelledby="work-ai-title">
-        <h2 id="work-ai-title" className="work-ai__title">
-          {t({ ko: "AI 활용에 대해", en: "About AI", ru: "Как я использую ИИ" })}
-        </h2>
-        <div className="work-ai__text">
-          <p>
-            {t({
-              ko: "채용 공고와 최근 업계 트렌드를 참고해, 이번 포트폴리오에는 AI를 활용했습니다.",
-              en: "Following job postings and recent industry trends, I used AI in this portfolio.",
-              ru: "В этом портфолио я использую ИИ: сейчас этого ждут работодатели, и так уже работает вся индустрия.",
-            })}
-          </p>
-          <p>
-            {t({
-              ko: "이 포트폴리오의 사이트들은 대부분 제가 예전에 직접 기획하고 디자인하고 코딩한 작업물이며, 이후 AI와 함께 리디자인했습니다.",
-              en: "Most of the sites here I planned, designed and coded myself earlier, then redesigned with AI.",
-              ru: "Большинство этих сайтов я когда-то сделала полностью сама, от идеи до вёрстки, а потом обновила с помощью ИИ.",
-            })}
-          </p>
-        </div>
-      </aside>
-    </div>
     <section ref={root} id="work" className={`work${zoomed ? " is-zoomed" : ""}`} aria-labelledby="work-title">
       <div className="work__head container">
         <p className="kicker">{t({ ko: "작업", en: "Selected work", ru: "Работы" })}</p>
@@ -239,15 +216,28 @@ export default function Work() {
 
       <div ref={r.cursor} className="cursor-label" aria-hidden="true" />
 
+      {/* iPhone with the live prototype, placed over the zoomed media by sphere.js (wide screens) */}
+      <div ref={r.phone} className="work__phone" hidden={!(zoomed?.phone && cs?.links?.prototype)}>
+        {zoomed?.phone && cs?.links?.prototype && (
+          <div className="work__phone-screen">
+            <iframe src={embedUrl(cs.links.prototype)} title={`${t(zoomed.title)} — ${t(protoLabel)}`} allowFullScreen />
+            <span className="work__phone-island" aria-hidden="true" />
+          </div>
+        )}
+      </div>
+
       <a
         ref={r.go}
         className="work__go"
-        href={previewUrl(zoomed?.href, lang)}
-        hidden={!zoomed?.href}
+        href={zoomed?.href ? previewUrl(zoomed.href, lang) : cs?.links?.prototype}
+        hidden={!zoomed?.href && !cs?.links?.prototype}
         target="_blank"
         rel="noopener noreferrer"
       >
-        {t({ ko: "사이트 바로가기", en: "Visit the site", ru: "Открыть сайт" })} <span aria-hidden="true">↗</span>
+        {zoomed?.href
+          ? t({ ko: "사이트 바로가기", en: "Visit the site", ru: "Открыть сайт" })
+          : t({ ko: "프로토타입 열기", en: "Open the prototype", ru: "Открыть прототип" })}{" "}
+        <span aria-hidden="true">↗</span>
       </a>
 
       {/* close button in the top-right corner */}
@@ -267,6 +257,11 @@ export default function Work() {
               {t(zoomed.title)}
               {cs?.titleEn && t(cs.titleEn) !== t(zoomed.title) && <small>{t(cs.titleEn)}</small>}
             </h3>
+            {zoomed.flag && (
+              <p className="work-flag work-flag--panel">
+                <span aria-hidden="true">★</span> {t(zoomed.flag)}
+              </p>
+            )}
             {zoomed.desc && <p className="overview__desc">{t(zoomed.desc)}</p>}
             <div className="overview__body" tabIndex={cs?.story?.length ? 0 : undefined}>
               {cs && (cs.period || cs.role || cs.tools?.length > 0 || cs.credits?.length > 0) && (
@@ -367,9 +362,14 @@ export default function Work() {
                   {t({ ko: "사이트 바로가기", en: "Visit the site", ru: "Открыть сайт" })} <span aria-hidden="true">↗</span>
                 </a>
               )}
+              {cs?.links?.prototype && (
+                <a className="pill-btn pill-btn--light overview__go overview__go--inline" href={cs.links.prototype} target="_blank" rel="noopener noreferrer">
+                  {t({ ko: "프로토타입 열기", en: "Open the prototype", ru: "Открыть прототип" })} <span aria-hidden="true">↗</span>
+                </a>
+              )}
               {cs?.links?.figma && (
                 <a className="pill-btn" href={cs.links.figma} target="_blank" rel="noopener noreferrer">
-                  Figma ↗
+                  {t({ ko: "Figma 파일", en: "Figma file", ru: "Файл Figma" })} ↗
                 </a>
               )}
             </div>
@@ -378,6 +378,30 @@ export default function Work() {
       </div>
     </section>
 
+    <div className="container">
+      <aside className="work-ai" aria-labelledby="work-ai-title">
+        <h2 id="work-ai-title" className="work-ai__title">
+          {t({ ko: "AI 활용에 대해", en: "About AI", ru: "Как я использую ИИ" })}
+        </h2>
+        <div className="work-ai__text">
+          <p>
+            {t({
+              ko: "채용 공고와 최근 업계 트렌드를 참고해, 이번 포트폴리오에는 AI를 활용했습니다.",
+              en: "Following job postings and recent industry trends, I used AI in this portfolio.",
+              ru: "В этом портфолио я использую ИИ: сейчас этого ждут работодатели, и так уже работает вся индустрия.",
+            })}
+          </p>
+          <p>
+            {t({
+              ko: "이 포트폴리오의 사이트들은 대부분 제가 예전에 직접 기획하고 디자인하고 코딩한 작업물이며, 이후 AI와 함께 리디자인했습니다.",
+              en: "Most of the sites here I planned, designed and coded myself earlier, then redesigned with AI.",
+              ru: "Большинство этих сайтов я когда-то сделала полностью сама, от идеи до вёрстки, а потом обновила с помощью ИИ.",
+            })}
+          </p>
+        </div>
+      </aside>
+    </div>
+
     {/* every project as plain HTML, for keyboard, screen reader and search engines */}
     <section className="work-list container" aria-labelledby="work-list-title">
       <h3 id="work-list-title" className="kicker">
@@ -385,9 +409,22 @@ export default function Work() {
       </h3>
       <ol>
         {work.map((item, i) => (
-          <li key={item.id} className="work-list__row">
+          <li
+            key={item.id}
+            className="work-list__row"
+            onPointerEnter={(e) => e.pointerType === "mouse" && showPeek(item, e)}
+            onPointerMove={(e) => e.pointerType === "mouse" && movePeek(e)}
+            onPointerLeave={hidePeek}
+          >
             <span className="work-list__no">{String(i + 1).padStart(2, "0")}</span>
-            <span className="work-list__title">{t(item.title)}</span>
+            <span className="work-list__title">
+              {t(item.title)}
+              {item.flag && (
+                <span className="work-flag">
+                  <span aria-hidden="true">★</span> {t(item.flag)}
+                </span>
+              )}
+            </span>
             <span className="work-list__cat">{t(item.category)}</span>
             <span className="work-list__year">{item.year}</span>
             <span className="work-list__actions">
@@ -399,7 +436,12 @@ export default function Work() {
                   {t({ ko: "사이트", en: "Site", ru: "Сайт" })} <span aria-hidden="true">↗</span>
                 </a>
               )}
-              {!item.href && caseStudies[item.caseStudy]?.links?.figma && (
+              {!item.href && caseStudies[item.caseStudy]?.links?.prototype && (
+                <a className="pill-btn" href={caseStudies[item.caseStudy].links.prototype} target="_blank" rel="noopener noreferrer">
+                  {t(protoLabel)} <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              {!item.href && !caseStudies[item.caseStudy]?.links?.prototype && caseStudies[item.caseStudy]?.links?.figma && (
                 <a className="pill-btn" href={caseStudies[item.caseStudy].links.figma} target="_blank" rel="noopener noreferrer">
                   Figma <span aria-hidden="true">↗</span>
                 </a>
@@ -408,6 +450,10 @@ export default function Work() {
           </li>
         ))}
       </ol>
+      {/* the hovered project's GIF follows the cursor (mouse only) */}
+      <div ref={peek} className="work-peek" aria-hidden="true">
+        <img ref={peekImg} alt="" decoding="async" />
+      </div>
     </section>
     </>
   );

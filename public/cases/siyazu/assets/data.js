@@ -60,7 +60,7 @@ window.SIYAZU = (() => {
       name: { en: "Faux Mustang Bomber Jacket", ko: "페이크 무스탕 봄버 자켓" },
       colors: [c("Brown", "브라운", "#6E4A33", ["bomber-brown.jpg", "bomber-brown-model.jpg"]),
                c("Black", "블랙", "#1A1A1A", ["bomber-black.jpg", "bomber-black-model.jpg"])],
-      sizes: ["S", "M"], sillage: { en: "Leather, smoked birch", ko: "레더, 스모크 버치" },
+      sizes: ["S", "M"], soldOut: { Black: ["M"] }, sillage: { en: "Leather, smoked birch", ko: "레더, 스모크 버치" },
       desc: { en: "A cropped bomber in faux mustang with a plush collar. Boxy through the body, gathered at the hem.",
               ko: "플러시 칼라를 더한 페이크 무스탕 크롭 봄버. 여유 있는 바디와 밑단 셔링." } },
     { id: "hood-down", sku: "SIOT4176", cat: "outer", fabric: "down", price: 147950, was: 269000,
@@ -78,7 +78,7 @@ window.SIYAZU = (() => {
     { id: "half-coat", sku: "SIOT4225", cat: "outer", fabric: "wool", price: 267750, was: 357000,
       name: { en: "Classic Double Half Coat", ko: "클래식 더블 하프 코트" },
       colors: [c("Melange black", "멜란지 블랙", "#3A3838", ["half-coat.jpg", "half-coat-model.jpg"])],
-      sizes: ["S", "M"], sillage: { en: "Cedar, black pepper", ko: "시더, 블랙 페퍼" },
+      sizes: ["S", "M"], soldOut: { "Melange black": ["S"] }, sillage: { en: "Cedar, black pepper", ko: "시더, 블랙 페퍼" },
       desc: { en: "Double-breasted and hip-length, with clean shoulders and a straight fall.",
               ko: "깨끗한 어깨선과 곧게 떨어지는 힙 기장의 더블 브레스트 코트." } },
     { id: "luster-fur", sku: "SIOT4222", cat: "outer", fabric: "fur", price: 185250, was: 247000, ships: "11/24",
@@ -136,7 +136,7 @@ window.SIYAZU = (() => {
   /* ── UI strings (Korean) ── */
   const t = {
     skip: "본문 바로가기", newIn: "신상품", shop: "쇼핑", about: "브랜드", journal: "저널",
-    search: "검색", account: "계정", bag: "장바구니", menu: "메뉴", close: "닫기",
+    search: "검색", account: "계정", mypage: "마이페이지", login: "로그인", bag: "장바구니", menu: "메뉴", close: "닫기",
     heroTitle: "시야주 SIYAZU, 26 윈터 컬렉션", pauseFilm: "영상 일시정지", playFilm: "영상 재생",
     newForm: "새로운 형태", visualBy: "비주얼 디렉션 · 시야주",
     edIntro: "2020년에 시작된 시야주는 깨끗한 선과 편안한 실루엣을 중심으로 모던하고 미니멀한 옷을 만듭니다.",
@@ -164,6 +164,12 @@ window.SIYAZU = (() => {
     freeShip: (w) => `${w} 이상 구매 시 무료배송`, reviewPoints: (pt) => `리뷰 작성 시 ${pt}P 적립`,
     shipLeft: (w) => `${w} 더 담으면 무료배송`, shipFree: "무료배송이 적용됩니다",
     viewers: (n) => `${n}명이 보는 중`,
+    soldOut: "품절", notifyTitle: "재입고 알림", notifyBtn: "재입고 알림 신청",
+    notifyHint: (s) => `${s} 사이즈가 다시 들어오면 알려드릴게요.`,
+    notifyDone: "신청 완료. 재입고되면 가장 먼저 알려드릴게요.",
+    findSize: "내 사이즈 찾기", mySize: (s) => `추천 사이즈 ${s}`,
+    qtyMinus: "수량 빼기", qtyPlus: "수량 더하기", changeSize: "사이즈 변경",
+    shipProgress: (w) => `${w} 더 담으면 무료배송`,
     wish: "위시리스트", wishAdd: "위시리스트에 담기", wishRemove: "위시리스트에서 빼기",
     wishEmpty: "아직 담은 상품이 없습니다. 하트를 눌러 마음에 드는 상품을 모아 보세요.",
     sillageBlock: (notes) => `${notes}. 안감에 스며든 향은 체온과 함께 천천히 피어올라, 당신이 떠난 뒤에도 공간에 머뭅니다.`,
@@ -180,6 +186,12 @@ window.SIYAZU = (() => {
   /* Product details shown on every product page (accordions under the buy button). */
   const info = {
     freeShip: 30000,     // free delivery from this order total (₩)
+    shipFee: 3000,       // delivery fee under freeShip
+    // promo codes for the checkout (demo)
+    coupons: {
+      WELCOME10: { rate: 0.1, max: 30000, label: "첫 구매 10% 할인 (최대 30,000원)" },
+      SIYAZU5000: { amount: 5000, min: 100000, label: "10만 원 이상 5,000원 할인" },
+    },
     reviewPoints: 1000,  // points for a review
     model: ["MELISSA — 172cm / One size", "YUAN — 172.5cm / One size"],
     care: [

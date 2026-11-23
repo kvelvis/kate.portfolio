@@ -26,6 +26,8 @@
   const productById = (id) => S.products.find((p) => p.id === id);
   const colorKo = (c) => c.ko || c.name;
   const sizeKo = (s) => (s === "F" ? t("sizes").F : s);
+  const isSoldOut = (p, colorName, size) => !!p.soldOut?.[colorName]?.includes(size);
+  const shipFee = (sub) => (sub >= S.info.freeShip || !sub ? 0 : S.info.shipFee);
 
   /* ── Bag ── */
   const bag = {
@@ -40,10 +42,29 @@
       this.save();
     },
     remove(idx) { this.items.splice(idx, 1); this.last = -1; this.save(); },
+    setQty(idx, qty) { this.items[idx].qty = Math.max(1, Math.min(9, qty)); this.save(); },
+    // change size in the bag; merges into an existing line with the same colour + size
+    setSize(idx, size) {
+      const it = this.items[idx];
+      const dup = this.items.findIndex((i, j) => j !== idx && i.id === it.id && i.color === it.color && i.size === size);
+      if (dup > -1) { this.items[dup].qty = Math.min(9, this.items[dup].qty + it.qty); this.items.splice(idx, 1); }
+      else it.size = size;
+      this.save();
+    },
+    subtotal() { return this.items.reduce((s, it) => s + productById(it.id).price * it.qty, 0); },
+    clear() { this.items = []; this.save(); },
     save() { store.set("siyazu-bag", this.items); document.dispatchEvent(new CustomEvent("bag:change")); },
   };
 
-  /* ── Wishlist (heart on cards, quick view and product page; list in its own offcanvas) ── */
+  /* ── Demo account (no backend): { name, email, phone, address, joined } in localStorage ── */
+  const user = {
+    get() { return store.get("siyazu-user", null); },
+    set(u) { store.set("siyazu-user", u); },
+    update(patch) { const u = this.get(); if (u) this.set({ ...u, ...patch }); },
+    logout() { try { localStorage.removeItem("siyazu-user"); } catch { /* ignore */ } },
+  };
+
+  /* ── Wishlist (heart on cards, quick view and product page; the list is in 마이페이지) ── */
   const wish = {
     ids: store.get("siyazu-wish", []).filter((id) => productById(id)),
     has(id) { return this.ids.includes(id); },
@@ -77,20 +98,13 @@
     }).join("") + "</ul>";
   }
   function initWish() {
-    // header button + offcanvas are added here so both pages get them from one place
-    const right = $(".site-header__right"), bagBtn = $(".bag-btn");
-    if (right && bagBtn && !$(".wish-head")) {
-      bagBtn.insertAdjacentHTML("beforebegin",
-        `<button class="label wish-head" type="button" data-bs-toggle="offcanvas" data-bs-target="#wish" aria-controls="wish">${HEART}<span class="wish-head__text">${t("wish")}</span><span>(<span data-wish-count>0</span>)</span></button>`);
-      document.body.insertAdjacentHTML("beforeend", `
-        <div class="offcanvas offcanvas-end sz-offcanvas" tabindex="-1" id="wish" aria-labelledby="wish-title">
-          <div class="offcanvas-header">
-            <h2 id="wish-title" class="label">${t("wish")}</h2>
-            <button class="label link-btn" type="button" data-bs-dismiss="offcanvas">${t("close")}</button>
-          </div>
-          <div class="offcanvas-body" id="wish-list"></div>
-        </div>`);
-    }
+    // the wishlist lives in 마이페이지 (header: 검색 · 마이페이지 · 장바구니).
+    // account link: "로그인" for guests, "마이페이지" once signed in (demo)
+    $$('a[href="order.html"], a[href="mypage.html"]').forEach((a) => {
+      if (a.closest(".od, .co")) return;
+      a.href = "mypage.html";
+      a.textContent = user.get() ? t("mypage") : t("login");
+    });
     document.addEventListener("click", (e) => {
       const b = e.target.closest("[data-wish]");
       if (b) { e.preventDefault(); e.stopPropagation(); wish.toggle(b.dataset.wish); return; }
@@ -125,21 +139,40 @@
     foot.hidden = false;
     list.innerHTML = '<ul class="bag-items">' + bag.items.map((it, i) => {
       const p = productById(it.id); const col = p.colors.find((c) => c.name === it.color) || p.colors[0];
+      const sizeCtl = p.sizes.length > 1
+        ? `<select class="bag-item__size" data-size="${i}" aria-label="${t("changeSize")}: ${L(p.name)}">
+            ${p.sizes.map((s) => `<option value="${s}" ${s === it.size ? "selected" : ""} ${isSoldOut(p, it.color, s) && s !== it.size ? "disabled" : ""}>${t("size")} ${sizeKo(s)}${isSoldOut(p, it.color, s) ? ` (${t("soldOut")})` : ""}</option>`).join("")}
+          </select>`
+        : `<span>${t("size")} ${sizeKo(it.size)}</span>`;
       return `<li class="bag-item${i === bag.last ? " is-new" : ""}">
         <a href="product.html?id=${p.id}"><img src="${col.images[0]}" alt="" width="96" height="128" loading="lazy"></a>
         <div class="bag-item__info">
           <a class="bag-item__name" href="product.html?id=${p.id}">${L(p.name)}</a>
-          <p class="muted">${colorKo(col)} · ${t("size")} ${sizeKo(it.size)} · ${it.qty}개</p>
-          <p>${price(p.price * it.qty)}</p>
+          <p class="muted bag-item__opts">${colorKo(col)} · ${sizeCtl}</p>
+          <div class="bag-item__row">
+            <div class="qty" role="group" aria-label="수량">
+              <button type="button" data-qty="${i}" data-step="-1" aria-label="${t("qtyMinus")}" ${it.qty <= 1 ? "disabled" : ""}>−</button>
+              <output aria-live="polite">${it.qty}</output>
+              <button type="button" data-qty="${i}" data-step="1" aria-label="${t("qtyPlus")}" ${it.qty >= 9 ? "disabled" : ""}>+</button>
+            </div>
+            <p>${price(p.price * it.qty)}</p>
+          </div>
         </div>
         <button class="link-btn label" type="button" data-remove="${i}">${t("remove")}</button>
       </li>`;
     }).join("") + "</ul>";
-    const total = bag.items.reduce((s, it) => s + productById(it.id).price * it.qty, 0);
+    const total = bag.subtotal();
     $("#bag-subtotal").textContent = price(total);
     let ship = $("#bag-ship");
-    if (!ship) { $("#bag-subtotal").closest(".drawer__total").insertAdjacentHTML("afterend", '<p class="bag-ship muted" id="bag-ship"></p>'); ship = $("#bag-ship"); }
-    ship.textContent = total >= S.info.freeShip ? t("shipFree") : t("shipLeft", price(S.info.freeShip - total));
+    if (!ship) {
+      $("#bag-subtotal").closest(".drawer__total").insertAdjacentHTML("afterend",
+        '<div class="ship-meter" id="bag-ship"><p class="ship-meter__text"></p><div class="ship-meter__bar"><i></i></div></div>');
+      ship = $("#bag-ship");
+    }
+    const left = S.info.freeShip - total;
+    $(".ship-meter__text", ship).textContent = left > 0 ? t("shipProgress", price(left)) : t("shipFree");
+    $(".ship-meter__bar i", ship).style.width = Math.min(100, (total / S.info.freeShip) * 100) + "%";
+    ship.classList.toggle("is-done", left <= 0);
   }
 
   /* Bag offcanvas + "closed quickly" toast */
@@ -159,9 +192,22 @@
       bagFromAdd = false; bag.last = -1;
     });
     $("#bag-list").addEventListener("click", (e) => {
+      const q = e.target.closest("[data-qty]");
+      if (q) {
+        const i = +q.dataset.qty;
+        bag.setQty(i, bag.items[i].qty + +q.dataset.step); renderBag();
+        $(`#bag-list [data-qty="${i}"][data-step="${q.dataset.step}"]`)?.focus();
+        return;
+      }
       const b = e.target.closest("[data-remove]"); if (!b) return;
       bag.remove(+b.dataset.remove); renderBag(); $("#bag .offcanvas-header button")?.focus();
     });
+    $("#bag-list").addEventListener("change", (e) => {
+      const sel = e.target.closest("[data-size]"); if (!sel) return;
+      bag.setSize(+sel.dataset.size, sel.value); renderBag();
+    });
+    // "주문하기" → checkout page
+    $$("#bag-foot .sz-btn--solid:not(.co-bag-done)").forEach((b) => b.addEventListener("click", () => { location.href = "checkout.html"; }));
   }
 
   /* Called by the purchase form after a successful add */
@@ -211,11 +257,15 @@
         return;
       }
       if (!window.Vimeo) return;
-      const f = document.createElement("iframe");
-      f.src = `https://player.vimeo.com/video/${id}?background=1&muted=1&autopause=0&dnt=1#t=${start}s`;
-      f.allow = "autoplay; fullscreen; picture-in-picture";
-      f.title = this.title; f.tabIndex = -1; f.setAttribute("aria-hidden", "true");
-      this.frame.append(f);
+      // the hero iframe is created inline in index.html so it starts loading with the page
+      let f = this.frame.querySelector("iframe");
+      if (!f) {
+        f = document.createElement("iframe");
+        f.src = `https://player.vimeo.com/video/${id}?background=1&muted=1&autopause=0&dnt=1&quality=540p#t=${start}s`;
+        f.allow = "autoplay; fullscreen; picture-in-picture";
+        f.title = this.title; f.tabIndex = -1; f.setAttribute("aria-hidden", "true");
+        this.frame.append(f);
+      }
       const p = (this.player = new Vimeo.Player(f));
       p.on("timeupdate", ({ seconds }) => {
         const { start: s, end } = this.seg;
@@ -338,6 +388,6 @@
     reveal();
   }
 
-  window.SZ = { $, $$, S, t, L, price, productById, colorKo, sizeKo, bag, wish, wishBtn, viewers, motion,
+  window.SZ = { $, $$, S, t, L, price, productById, colorKo, sizeKo, isSoldOut, shipFee, store, user, bag, wish, wishBtn, viewers, motion,
     Film, observeFilm, openFilm, openDialog, wireDialog, reveal, showBag, afterAdd, boot };
 })();

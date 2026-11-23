@@ -30,8 +30,8 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <Profile />
         <Work />
+        <Profile />
         <About />
         <Contact />
       </main>

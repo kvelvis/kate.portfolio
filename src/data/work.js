@@ -18,9 +18,23 @@ import cubeGif from "../assets/work/cubehos.gif";
 // files in public/ (the site may live in a sub-folder, e.g. GitHub Pages)
 const pub = (path) => import.meta.env.BASE_URL + path;
 
-export const work = [
+// `hidden: true` keeps a project in the file but off the site
+const all = [
+  {
+    id: "siyazu",
+    title: { ko: "시야주", en: "Siyazu", ru: "Siyazu" },
+    category: { ko: "리디자인 · 커머스", en: "Redesign · Commerce", ru: "Редизайн · e-commerce" },
+    year: "2026",
+    image: siyazuImg,
+    gif: siyazuGif,
+    href: "/cases/siyazu/index.html",
+    caseStudy: "siyazu",
+    // marked on the sphere caption, the project panel and the list
+    flag: { ko: "풀 구매 여정", en: "Full shopping journey", ru: "Полный путь покупателя" },
+  },
   {
     id: "celine27",
+    hidden: true,
    title: { ko: "셀린", en: "Celine 2027", ru: "Celine 2027" },
     category: { ko: "캠페인 웹사이트", en: "Campaign website", ru: "Сайт кампании" },
     year: "2026",
@@ -50,6 +64,8 @@ export const work = [
     category: { ko: "앱 · Weavy, Kling", en: "App · Weavy, Kling", ru: "Приложение · Weavy, Kling" },
     year: "2026",
     gif: danoGif,
+    // wide screens: an iPhone with the live Figma prototype replaces the image (outer w / h of the phone)
+    phone: 421 / 880,
     href: "",
     caseStudy: "dano",
     desc: {
@@ -84,6 +100,7 @@ export const work = [
   },
   {
     id: "fairy",
+    hidden: true,
     title: { ko: "별빛 동화", en: "별빛 동화", ru: "Starlight Tales" },
     category: { ko: "인터랙티브 · 스토리텔링", en: "Interactive · Storytelling", ru: "Интерактив · сторителлинг" },
     year: "2026",
@@ -112,14 +129,6 @@ export const work = [
       ru: "Сайт вымышленной клиники пластической хирургии.",
     },
   },
-  {
-    id: "siyazu",
-    title: { ko: "시야주", en: "Siyazu", ru: "Siyazu" },
-    category: { ko: "리디자인 · 커머스", en: "Redesign · Commerce", ru: "Редизайн · e-commerce" },
-    year: "2026",
-    image: siyazuImg,
-    gif: siyazuGif,
-    href: "/cases/siyazu/index.html",
-    caseStudy: "siyazu",
-  },
 ];
+
+export const work = all.filter((w) => !w.hidden);

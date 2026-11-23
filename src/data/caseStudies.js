@@ -89,7 +89,11 @@ export const caseStudies = {
         },
       },
     ],
-    links: { figma: "https://www.figma.com/design/ziA3DZKe7lxjrnYEWaA6Yj/Dano_App_project?node-id=0-1" },
+    links: {
+      // clickable prototype: a button + an embedded phone in the panel (desktop)
+      prototype: "https://www.figma.com/proto/ziA3DZKe7lxjrnYEWaA6Yj/Dano_App_project?node-id=20-3660&starting-point-node-id=20%3A3660&p=f&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1",
+      figma: "https://www.figma.com/design/ziA3DZKe7lxjrnYEWaA6Yj/Dano_App_project?node-id=0-1",
+    },
   },
   gatto: {
     title: "묘한 커피",
@@ -293,6 +297,42 @@ export const caseStudies = {
           },
         
           
+        ],
+      },
+      {
+        title: { ko: "구매 여정 전체", en: "The whole shopping journey", ru: "Весь путь покупателя" },
+        text: {
+          ko: "보기 좋은 메인 화면에서 끝나지 않고, 들어와서 주문하고 받아 보는 데까지 실제 쇼핑몰처럼 동작하도록 설계했습니다. ‘예시 정보로 채우기’로 몇 번의 클릭만에 끝까지 체험할 수 있어요.",
+          en: "It doesn’t stop at a pretty home page: it works like a real shop from arriving to ordering and receiving. ‘Fill in example details’ lets you go all the way through in a few clicks.",
+          ru: "Проект не заканчивается красивой главной: сайт работает как настоящий магазин — от захода до заказа и получения. Кнопка «заполнить примером» позволяет пройти весь путь за пару кликов.",
+        },
+        items: [
+          {
+            term: { ko: "사이즈 찾기", en: "Size finder", ru: "Подбор размера" },
+            text: { ko: "평소 사이즈와 선호 핏으로 상품별 추천 사이즈를 안내하고, 모든 상품 페이지에서 기억", en: "Usual size + preferred fit → a recommended size for each product, remembered on every product page", ru: "Обычный размер + посадка → рекомендованный размер для каждого товара, запоминается на всех страницах" },
+            why: { ko: "옷 반품의 가장 큰 이유는 사이즈라서, 구매 전에 불안을 줄이는 것이 먼저라고 생각했습니다", en: "Size is the top reason clothes come back, so easing that doubt before buying came first", ru: "Размер — главная причина возвратов одежды, поэтому сначала нужно снять это сомнение" },
+          },
+          {
+            term: { ko: "품절 · 재입고 알림", en: "Sold out · restock alert", ru: "Нет в наличии · уведомление" },
+            text: { ko: "품절 사이즈를 숨기지 않고 표시하고, 바로 재입고 알림을 신청", en: "Sold-out sizes stay visible, with a restock alert right there", ru: "Размеры, которых нет, не прячутся: можно сразу подписаться на поступление" },
+          },
+          {
+            term: { ko: "장바구니", en: "Bag", ru: "Корзина" },
+            text: { ko: "수량 · 사이즈 변경과 무료배송까지 남은 금액 게이지", en: "Change quantity and size in place; a meter shows what’s left until free delivery", ru: "Количество и размер меняются на месте; полоска показывает, сколько осталось до бесплатной доставки" },
+          },
+          {
+            term: { ko: "비회원 주문서", en: "Guest checkout", ru: "Заказ без регистрации" },
+            text: { ko: "다음 우편번호 주소 검색, 쿠폰, 결제 수단, 약관 동의, 빠진 항목을 모아 보여 주는 오류 요약", en: "Korean address search (Daum), coupons, payment methods, agreements and an error summary that lists what’s missing", ru: "Поиск корейского адреса (Daum), купоны, способы оплаты, согласия и список незаполненных полей" },
+            why: { ko: "회원가입을 요구하면 장바구니에서 이탈이 늘어나기 때문에", en: "Forcing sign-up is a classic reason people abandon the bag", ru: "Обязательная регистрация — частая причина брошенных корзин" },
+          },
+          {
+            term: { ko: "주문 완료 · 배송 조회", en: "Order complete · tracking", ru: "Заказ и отслеживание" },
+            text: { ko: "도착 예정일, 배송 단계, 주문 취소, 사이즈 교환 · 반품 신청까지", en: "Arrival date, delivery steps, cancelling, size exchange and returns", ru: "Дата доставки, этапы, отмена заказа, обмен размера и возврат" },
+          },
+          {
+            term: { ko: "마이페이지", en: "My page", ru: "Личный кабинет" },
+            text: { ko: "주문 현황, 위시리스트, 재입고 알림, 내 사이즈, 배송지, 결제 카드를 한곳에서 관리", en: "Orders, wishlist, restock alerts, my size, addresses and saved cards in one place", ru: "Заказы, вишлист, уведомления о поступлении, мой размер, адреса и карты в одном месте" },
+          },
         ],
       },
       {

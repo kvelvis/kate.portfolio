@@ -177,6 +177,8 @@ legend + * { clear: none; }
 .film__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .film__frame { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s var(--ease); }
 .film.is-playing .film__frame { opacity: 1; }
+.film--hero .film__poster { animation: poster-drift 14s cubic-bezier(.25, .1, .25, 1) forwards; transform-origin: 55% 45%; }
+@keyframes poster-drift { from { transform: scale(1.02); } to { transform: scale(1.12) translate(-1%, .5%); } }
 .film__frame iframe, .film__frame video {
   position: absolute; top: 50%; left: 50%; border: 0; pointer-events: none;
   width: max(100cqw, 177.78cqh); height: max(100cqh, 56.25cqw); /* cover a 16:9 film */

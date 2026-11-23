@@ -7,7 +7,7 @@ import { loadGif } from "./gif";
   Project sphere.
   Planes sit on a Fibonacci sphere and always face the camera. Drag / wheel spin it with inertia,
   click opens a project: its plane slides to the right half, the text panel fades in on the left.
-  First visit plays an intro: counter → circle of ten → collapse → explode into the sphere.
+  The sphere shows straight away (runIntro, the old counter → ring → explode intro, is unused).
 */
 
 const DEG = Math.PI / 180;
@@ -23,6 +23,11 @@ export class SphereGallery {
   constructor({ host, items, ui, onZoom }) {
     this.host = host;
     this.ui = ui;
+    // the pointer leaves the page into the prototype iframe: hide the "close" cursor label
+    this.ui.phone?.addEventListener("pointerenter", () => {
+      this.overUi = true;
+      this.label(null);
+    });
     this.onZoom = onZoom;
     this.reduced = reducedMotion();
     this.touch = isTouch();
@@ -63,7 +68,19 @@ export class SphereGallery {
       });
       const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), mat);
       mesh.visible = false;
+      mesh.renderOrder = 1;
       this.scene.add(mesh);
+      // flagged projects (work.js → flag) get a glowing blue frame behind the image
+      let frame = null;
+      if (item.flag) {
+        frame = new THREE.Mesh(
+          new THREE.PlaneGeometry(1, 1),
+          new THREE.MeshBasicMaterial({ color: raw(0x1621ff), transparent: true, side: THREE.DoubleSide, depthWrite: false }),
+        );
+        frame.position.z = -0.002;
+        frame.renderOrder = 0;
+        mesh.add(frame);
+      }
       const N = items.length;
       const y = i * (2 / N) - 1 + 1 / N;
       const rr = Math.sqrt(1 - y * y);
@@ -72,6 +89,7 @@ export class SphereGallery {
         i,
         item,
         mesh,
+        frame,
         base: new THREE.Vector3(Math.cos(a) * rr, y, Math.sin(a) * rr),
         world: new THREE.Vector3(),
         aspect: 16 / 9,
@@ -120,8 +138,9 @@ export class SphereGallery {
     if (this.played) return;
     this.played = true;
     this._playedResolve();
-    if (this.reduced) this.skipIntro();
-    else this.runIntro();
+    // no intro: the projects are already floating in the sphere; the canvas just fades in
+    this.skipIntro();
+    if (!this.reduced) gsap.fromTo(this.renderer.domElement, { opacity: 0 }, { opacity: 1, duration: 0.9, ease: "power2.out" });
   }
 
   /* ---------------- layout ---------------- */
@@ -134,8 +153,8 @@ export class SphereGallery {
     this.unit = (2 * CAM_Z * Math.tan(30 * DEG)) / h;
     const mid = w > 1024 && w <= 1440;
     this.phone = w <= 640;
-    this.planePx = this.phone ? 72 : 104 * (mid ? 0.8 : 1);
-    this.R = this.phone ? w / 2 - 24 - this.planePx / 2 : 250 * (mid ? 0.8 : 1);
+    this.planePx = this.phone ? 96 : 190 * (mid ? 0.85 : 1);
+    this.R = this.phone ? w / 2 - 24 - this.planePx / 2 : 310 * (mid ? 0.85 : 1);
     this.centerPx = (this.planePx * 120) / 82;
   }
 
@@ -215,7 +234,8 @@ export class SphereGallery {
     const rect = this.renderer.domElement.getBoundingClientRect();
     this.ndc.set(((this.mouse.x - rect.left) / rect.width) * 2 - 1, -((this.mouse.y - rect.top) / rect.height) * 2 + 1);
     this.ray.setFromCamera(this.ndc, this.camera);
-    const hits = this.ray.intersectObjects(this.meshes.filter((m) => m.visible && m.material.opacity > 0.2));
+    // not recursive: the blue frame (a child mesh) must not steal hits from its plane
+    const hits = this.ray.intersectObjects(this.meshes.filter((m) => m.visible && m.material.opacity > 0.2), false);
     if (!hits.length) return null;
     // zoomed plane always wins
     const z = this.zoomed && hits.find((h) => h.object === this.zoomed.mesh);
@@ -535,14 +555,17 @@ export class SphereGallery {
     let zh = 0;
     let zx = 0;
     let zy = 0;
+    // projects with a phone prototype (work.js → phone) show an HTML iPhone there instead of the image
+    const phone = split && z?.item?.phone;
     if (z && split) {
-      zh = 0.66 * this.H;
-      zw = zh * z.aspect;
+      const za = phone || z.aspect;
+      zh = (phone ? 0.7 : 0.66) * this.H;
+      zw = zh * za;
       // text panel takes the left ~56%, the media the right ~44%
       const maxW = this.W * 0.44 - 64;
       if (zw > maxW) {
         zw = maxW;
-        zh = zw / z.aspect;
+        zh = zw / za;
       }
       zx = (this.W * 0.28 - 16) * this.ovf;
     } else if (z) {
@@ -559,6 +582,24 @@ export class SphereGallery {
       if (b !== this._mediaB) {
         this._mediaB = b;
         this.ui.overview?.style.setProperty("--media-b", b + "px");
+      }
+    }
+
+    // the phone overlay sits exactly on the zoomed media rect
+    const ph = this.ui.phone;
+    if (ph) {
+      const k = phone ? this.ex * this.ovf : 0;
+      if (k > 0.01) {
+        ph.style.width = zw + "px";
+        ph.style.height = zh + "px";
+        ph.style.padding = (zw * 14) / 421 + "px"; // bezel: 14px on a 421px-wide phone
+        ph.style.transform = `translate(${this.W / 2 + zx - zw / 2}px, ${this.H / 2 - zy - zh / 2 + 16 * (1 - k)}px)`;
+        ph.style.opacity = k;
+        ph.style.visibility = "visible";
+        ph.style.pointerEvents = k > 0.6 ? "auto" : "none";
+      } else if (ph.style.visibility !== "hidden") {
+        ph.style.visibility = "hidden";
+        ph.style.pointerEvents = "none";
       }
     }
 
@@ -612,7 +653,8 @@ export class SphereGallery {
           m.position.lerp(this._tmp.set(zx * s, zy * s, 0.5), this.ex);
           w = lerp(w, zw, this.ex);
           h = lerp(h, zh, this.ex);
-          op = lerp(op, 1, this.ex);
+          // the image fades out under the phone overlay
+          op = lerp(op, phone ? 0 : 1, this.ex);
         } else {
           m.position.multiplyScalar(lerp(1, 1.8, this.ex));
           op *= lerp(1, 0.1 - 0.08 * this.ovf, this.ex);
@@ -620,6 +662,13 @@ export class SphereGallery {
       }
       m.scale.set(Math.max(w, 0.01) * s, Math.max(h, 0.01) * s, 1);
       m.material.opacity = op;
+      if (p.frame) {
+        // 4px border in screen space, gently pulsing; fades out while the project is open
+        const B = 4;
+        p.frame.scale.set(1 + (2 * B) / Math.max(w, 1), 1 + (2 * B) / Math.max(h, 1), 1);
+        const pulse = this.reduced ? 1 : 0.7 + 0.3 * Math.sin(performance.now() / 600);
+        p.frame.material.opacity = op * pulse * (1 - this.ex);
+      }
     }
 
     // hover

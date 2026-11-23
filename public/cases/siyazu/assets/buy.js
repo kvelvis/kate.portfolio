@@ -21,19 +21,33 @@
         </div>
       </fieldset>
       <fieldset class="buy__group" aria-describedby="${uid}-size-err">
-        <legend class="label">${t("size")}</legend>
+        <div class="buy__legend-row">
+          <legend class="label">${t("size")}</legend>
+          ${uid === "pdp" && p.sizes.length > 1 ? `<button type="button" class="link-btn label size-find" data-size-find>${t("findSize")}</button>` : ""}
+        </div>
         <div class="sizes">
           ${p.sizes.map((s) => `
             <label class="size">
               <input type="radio" name="${uid}-size" value="${s}" ${p.sizes.length === 1 ? "checked" : ""}>
-              <span>${sizeKo(s)}</span>
+              <span>${sizeKo(s)}<small class="size__out">${t("soldOut")}</small></span>
             </label>`).join("")}
         </div>
         <p class="field-error" id="${uid}-size-err" hidden><span aria-hidden="true">!</span> ${t("chooseSize")}</p>
+        <p class="size-rec label" data-size-rec hidden></p>
       </fieldset>
       <div class="buy__row">
         <button class="sz-btn sz-btn--add" type="submit">${t("addToBag")}</button>
         ${SZ.wishBtn(p, "wish-btn--box")}
+      </div>
+      <div class="notify" data-notify hidden>
+        <p class="notify__hint"></p>
+        <div class="notify__row">
+          <label class="sr-only" for="${uid}-notify">이메일 또는 휴대폰 번호</label>
+          <input id="${uid}-notify" type="text" inputmode="email" autocomplete="email" placeholder="이메일 또는 010-0000-0000">
+          <button type="button" class="label link-btn" data-notify-send>${t("notifyBtn")}</button>
+        </div>
+        <p class="field-error" data-notify-err hidden><span aria-hidden="true">!</span> 이메일 또는 휴대폰 번호를 확인해 주세요.</p>
+        <p class="notify__ok" data-notify-ok role="status" hidden>${t("notifyDone")}</p>
       </div>
       <p class="buy__status sr-only" role="status" aria-live="polite"></p>
     </form>`;
@@ -42,28 +56,67 @@
     const err = form.querySelector(".field-error");
     const status = form.querySelector(".buy__status");
     const btn = form.querySelector(".sz-btn--add");
+    const notify = form.querySelector("[data-notify]");
     let timer = 0;
+    const colorIdx = () => +form.querySelector('input[name$="-color"]:checked').value;
+    const chosen = () => form.querySelector('input[name$="-size"]:checked');
+    // sold-out sizes follow the colour; a sold-out size turns the button into "재입고 알림 신청"
+    const refresh = () => {
+      const col = p.colors[colorIdx()].name;
+      form.querySelectorAll('input[name$="-size"]').forEach((r) => r.closest(".size").classList.toggle("is-out", SZ.isSoldOut(p, col, r.value)));
+      const c = chosen(), out = c && SZ.isSoldOut(p, col, c.value);
+      form.classList.toggle("is-soldout", !!out);
+      if (!btn.classList.contains("is-done")) btn.textContent = out ? t("notifyBtn") : t("addToBag");
+      if (!out) notify.hidden = true;
+    };
+    SZ.selectSize = (size) => {
+      const r = form.querySelector(`input[name$="-size"][value="${size}"]`);
+      if (r) { r.checked = true; r.dispatchEvent(new Event("change", { bubbles: true })); }
+    };
     form.addEventListener("change", (e) => {
       if (e.target.name.endsWith("-color")) {
         const i = +e.target.value;
         form.querySelector("[data-color-name]").textContent = colorKo(p.colors[i]);
         onColor?.(i);
-      } else { err.hidden = true; form.classList.remove("is-invalid"); }
+      } else if (e.target.name.endsWith("-size")) { err.hidden = true; form.classList.remove("is-invalid"); }
+      refresh();
     });
+    // restock request: email or Korean mobile number
+    form.querySelector("[data-notify-send]").addEventListener("click", () => {
+      const input = notify.querySelector("input"), v = input.value.trim();
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || /^01[016789]-?\d{3,4}-?\d{4}$/.test(v);
+      notify.querySelector("[data-notify-err]").hidden = ok;
+      input.setAttribute("aria-invalid", String(!ok));
+      if (!ok) { input.focus(); return; }
+      notify.querySelector("[data-notify-ok]").hidden = false;
+      notify.querySelector(".notify__row").hidden = true;
+      const size = chosen()?.value, color = p.colors[colorIdx()].name;
+      const list = SZ.store.get("siyazu-restock", []).filter((r) => !(r.id === p.id && r.color === color && r.size === size));
+      SZ.store.set("siyazu-restock", [{ id: p.id, color, size, contact: v, at: Date.now() }, ...list]);
+    });
+    refresh();
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const size = form.querySelector('input[name$="-size"]:checked');
+      const size = chosen();
       if (!size) {
         err.hidden = false; form.classList.add("is-invalid");
         form.querySelector('input[name$="-size"]').focus();
         return;
       }
-      const ci = +form.querySelector('input[name$="-color"]:checked').value;
+      if (SZ.isSoldOut(p, p.colors[colorIdx()].name, size.value)) {
+        notify.hidden = false;
+        notify.querySelector(".notify__hint").textContent = t("notifyHint", `${colorKo(p.colors[colorIdx()])} ${sizeKo(size.value)}`);
+        notify.querySelector(".notify__row").hidden = false;
+        notify.querySelector("[data-notify-ok]").hidden = true;
+        notify.querySelector("input").focus();
+        return;
+      }
+      const ci = colorIdx();
       SZ.bag.add(p.id, p.colors[ci].name, size.value);
       status.textContent = `${t("added")}: ${L(p.name)}, ${sizeKo(size.value)}`;
       btn.classList.add("is-done"); btn.textContent = t("addedBtn");
       clearTimeout(timer);
-      timer = setTimeout(() => { btn.classList.remove("is-done"); btn.textContent = t("addToBag"); }, 2000);
+      timer = setTimeout(() => { btn.classList.remove("is-done"); refresh(); }, 2000);
       SZ.afterAdd();
     });
   };

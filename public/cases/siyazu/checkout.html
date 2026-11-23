@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>주문서 작성 | SIYAZU</title>
+  <meta name="description" content="시야주 주문서 작성 (컨셉 리디자인 데모).">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#17120E" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAF9F6'/%3E%3Ctext x='16' y='24' font-family='Georgia,serif' font-size='22' text-anchor='middle' fill='%231A1A1A'%3ES%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/siyazu.css">
+  <link rel="stylesheet" href="assets/checkout.css">
+
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="assets/data.js"></script>
+  <script defer src="assets/core.js"></script>
+  <script defer src="assets/checkout.js"></script>
+</head>
+<body class="is-checkout">
+  <a class="skip-link" href="#main">본문 바로가기</a>
+
+  <!-- Checkout header: no shop navigation, only the way back and the steps -->
+  <header class="site-header co-header">
+    <div class="site-header__left">
+      <a class="label link-btn" href="index.html#shop">← 쇼핑 계속하기</a>
+    </div>
+    <a class="wordmark serif" href="index.html" aria-label="SIYAZU 홈">SIYAZU</a>
+    <div class="site-header__right">
+      <button class="label bag-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#bag" aria-controls="bag">장바구니 (<span data-bag-count>0</span>)</button>
+    </div>
+  </header>
+
+  <main id="main" class="co">
+    <ol class="co-steps label" aria-label="주문 단계">
+      <li class="is-done"><span>01</span> 장바구니</li>
+      <li class="is-on" aria-current="step"><span>02</span> 주문서 작성</li>
+      <li><span>03</span> 주문 완료</li>
+    </ol>
+
+    <p class="co-demo" role="note">
+      <b>컨셉 리디자인 데모</b> 실제 결제와 배송은 이루어지지 않습니다. 실제 개인정보 대신
+      <button type="button" class="link" data-demo-fill>예시 정보로 채우기</button>를 눌러 보세요.
+    </p>
+
+    <h1 class="co-title">주문서 작성</h1>
+
+    <!-- empty bag -->
+    <section class="co-empty" id="co-empty" hidden>
+      <p>장바구니가 비어 있어 주문을 진행할 수 없습니다.</p>
+      <a class="sz-btn sz-btn--solid" href="index.html#shop">쇼핑하러 가기</a>
+    </section>
+
+    <form class="co-grid" id="co-form" novalidate hidden>
+      <div class="co-main">
+        <!-- errors after a failed submit -->
+        <div class="co-errors" id="co-errors" tabindex="-1" hidden>
+          <p class="co-errors__title">입력하지 않은 항목이 있어요</p>
+          <ul></ul>
+        </div>
+
+        <!-- 1. Orderer -->
+        <section class="co-sec" aria-labelledby="sec-orderer">
+          <h2 class="co-sec__title" id="sec-orderer"><span class="label muted">01</span> 주문자 정보</h2>
+          <p class="muted co-sec__hint">회원가입 없이 주문할 수 있어요. 주문 내역은 주문번호와 휴대폰 번호로 조회합니다.</p>
+          <div class="fields">
+            <div class="field">
+              <label for="o-name">이름</label>
+              <input id="o-name" name="oName" autocomplete="name" required data-msg="주문자 이름을 입력해 주세요.">
+            </div>
+            <div class="field">
+              <label for="o-phone">휴대폰 번호</label>
+              <input id="o-phone" name="oPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" required data-type="phone" data-msg="휴대폰 번호를 010-0000-0000 형식으로 입력해 주세요.">
+            </div>
+            <div class="field field--wide">
+              <label for="o-email">이메일 <span class="muted">주문 확인 메일을 보내드려요</span></label>
+              <input id="o-email" name="oEmail" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" required data-type="email" data-msg="이메일 주소를 확인해 주세요.">
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Delivery -->
+        <section class="co-sec" aria-labelledby="sec-ship">
+          <h2 class="co-sec__title" id="sec-ship"><span class="label muted">02</span> 배송지</h2>
+          <label class="check">
+            <input type="checkbox" id="same" checked>
+            <span>주문자 정보와 동일</span>
+          </label>
+          <div class="fields" id="recipient" hidden>
+            <div class="field">
+              <label for="r-name">받는 분</label>
+              <input id="r-name" name="rName" autocomplete="shipping name" data-req="recipient" data-msg="받는 분 이름을 입력해 주세요.">
+            </div>
+            <div class="field">
+              <label for="r-phone">받는 분 연락처</label>
+              <input id="r-phone" name="rPhone" type="tel" inputmode="numeric" autocomplete="shipping tel" placeholder="010-0000-0000" data-req="recipient" data-type="phone" data-msg="받는 분 연락처를 010-0000-0000 형식으로 입력해 주세요.">
+            </div>
+          </div>
+          <div class="fields">
+            <div class="field field--zip">
+              <label for="zip">우편번호</label>
+              <div class="field__row">
+                <input id="zip" name="zip" inputmode="numeric" autocomplete="shipping postal-code" placeholder="00000" required data-type="zip" data-msg="주소 검색으로 우편번호를 입력해 주세요.">
+                <button type="button" class="sz-btn sz-btn--line" id="find-addr">주소 검색</button>
+              </div>
+            </div>
+            <div class="field field--wide">
+              <label for="addr1">주소</label>
+              <input id="addr1" name="addr1" autocomplete="shipping address-line1" required data-msg="주소를 입력해 주세요.">
+            </div>
+            <div class="field field--wide">
+              <label for="addr2">상세 주소 <span class="muted">동·호수</span></label>
+              <input id="addr2" name="addr2" autocomplete="shipping address-line2" required data-msg="상세 주소를 입력해 주세요.">
+            </div>
+            <div class="field field--wide">
+              <label for="memo">배송 요청사항</label>
+              <select id="memo" name="memo">
+                <option value="">선택 안 함</option>
+                <option>문 앞에 놓아주세요</option>
+                <option>경비실에 맡겨주세요</option>
+                <option>택배함에 넣어주세요</option>
+                <option>배송 전에 연락 부탁드립니다</option>
+                <option value="custom">직접 입력</option>
+              </select>
+              <input id="memo-custom" name="memoCustom" maxlength="50" placeholder="최대 50자" aria-label="배송 요청사항 직접 입력" hidden>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Coupon -->
+        <section class="co-sec" aria-labelledby="sec-coupon">
+          <h2 class="co-sec__title" id="sec-coupon"><span class="label muted">03</span> 할인</h2>
+          <div class="field field--wide">
+            <label for="coupon">쿠폰 코드</label>
+            <div class="field__row">
+              <input id="coupon" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="예: WELCOME10">
+              <button type="button" class="sz-btn sz-btn--line" id="coupon-apply">적용</button>
+            </div>
+            <p class="co-coupon-msg" id="coupon-msg" role="status" aria-live="polite"></p>
+            <p class="muted co-hint">데모 쿠폰: <button type="button" class="link" data-coupon="WELCOME10">WELCOME10</button> · <button type="button" class="link" data-coupon="SIYAZU5000">SIYAZU5000</button></p>
+          </div>
+        </section>
+
+        <!-- 4. Payment method -->
+        <section class="co-sec" aria-labelledby="sec-pay">
+          <h2 class="co-sec__title" id="sec-pay"><span class="label muted">04</span> 결제 수단</h2>
+          <div class="pay-methods" role="radiogroup" aria-labelledby="sec-pay">
+            <label class="pay"><input type="radio" name="pay" value="card" checked><span>신용·체크카드</span></label>
+            <label class="pay"><input type="radio" name="pay" value="kakao"><span>카카오페이</span></label>
+            <label class="pay"><input type="radio" name="pay" value="naver"><span>네이버페이</span></label>
+            <label class="pay"><input type="radio" name="pay" value="toss"><span>토스페이</span></label>
+            <label class="pay"><input type="radio" name="pay" value="bank"><span>무통장 입금</span></label>
+          </div>
+          <div class="fields" id="pay-card">
+            <div class="field">
+              <label for="card">카드사</label>
+              <select id="card" name="card" data-req="card" data-msg="카드사를 선택해 주세요.">
+                <option value="">선택해 주세요</option>
+                <option>신한카드</option><option>KB국민카드</option><option>현대카드</option><option>삼성카드</option>
+                <option>롯데카드</option><option>하나카드</option><option>우리카드</option><option>BC카드</option><option>NH농협카드</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="months">할부</label>
+              <select id="months" name="months">
+                <option value="0">일시불</option><option value="2">2개월 무이자</option><option value="3">3개월 무이자</option><option value="6">6개월</option>
+              </select>
+            </div>
+          </div>
+          <p class="muted co-hint" id="pay-easy" hidden>결제하기를 누르면 간편결제 창이 열립니다. (데모에서는 바로 승인돼요)</p>
+          <div class="fields" id="pay-bank" hidden>
+            <div class="field field--wide">
+              <label for="depositor">입금자명</label>
+              <input id="depositor" name="depositor" data-req="bank" data-msg="입금자명을 입력해 주세요.">
+              <p class="muted co-hint">주문 후 24시간 안에 안내드리는 가상계좌로 입금해 주세요.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Agreements -->
+        <section class="co-sec" aria-labelledby="sec-agree">
+          <h2 class="co-sec__title" id="sec-agree"><span class="label muted">05</span> 약관 동의</h2>
+          <div class="agree">
+            <label class="check check--all"><input type="checkbox" id="agree-all"><span>전체 동의</span></label>
+            <ul>
+              <li><label class="check"><input type="checkbox" name="agree" data-req="agree" data-msg="주문 내용 확인 및 결제 진행에 동의해 주세요."><span>[필수] 주문 상품 정보 확인 및 결제 진행 동의</span></label></li>
+              <li>
+                <label class="check"><input type="checkbox" name="agree" data-req="agree" data-msg="개인정보 수집·이용에 동의해 주세요."><span>[필수] 개인정보 수집·이용 동의</span></label>
+                <details class="agree__more"><summary class="label">보기</summary><p>수집 항목: 이름, 휴대폰 번호, 이메일, 주소 · 목적: 주문 처리와 배송, 고객 상담 · 보유 기간: 관련 법령에 따라 5년</p></details>
+              </li>
+              <li>
+                <label class="check"><input type="checkbox" name="agree" data-req="agree" data-msg="개인정보 제3자 제공에 동의해 주세요."><span>[필수] 개인정보 제3자 제공 동의</span></label>
+                <details class="agree__more"><summary class="label">보기</summary><p>제공받는 자: 배송 업체(CJ대한통운), 결제 대행사 · 목적: 상품 배송과 결제 처리</p></details>
+              </li>
+              <li><label class="check"><input type="checkbox" name="agreeOpt"><span>[선택] 신상품·할인 소식 받기</span></label></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- Order summary (sticky on wide screens) -->
+      <aside class="co-sum" aria-labelledby="sum-title">
+        <div class="co-sum__head">
+          <h2 class="label" id="sum-title">주문 상품 <span id="sum-count"></span></h2>
+          <button type="button" class="label link-btn" data-bs-toggle="offcanvas" data-bs-target="#bag" aria-controls="bag">수정</button>
+        </div>
+        <ul class="co-items" id="sum-items"></ul>
+        <dl class="co-totals" id="sum-totals"></dl>
+        <p class="co-points muted" id="sum-points"></p>
+        <button class="sz-btn sz-btn--solid co-pay" type="submit" id="pay-btn">결제하기</button>
+        <ul class="co-assure">
+          <li>수령 후 7일 이내 교환·반품 가능</li>
+          <li>사이즈가 맞지 않으면 다른 사이즈로 교환할 수 있어요 (단순 변심 시 왕복 배송비 6,000원)</li>
+          <li>평일 오후 2시 이전 결제 시 당일 출고</li>
+        </ul>
+      </aside>
+    </form>
+  </main>
+
+  <!-- address search (Daum postcode, loaded on demand) -->
+  <dialog id="addr-dlg" class="drawer addr" aria-labelledby="addr-title">
+    <div class="drawer__head">
+      <h2 id="addr-title" class="label">주소 검색</h2>
+      <button class="label link-btn" type="button" data-close>닫기</button>
+    </div>
+    <div class="addr__frame" id="addr-frame"></div>
+  </dialog>
+
+  <!-- payment in progress -->
+  <dialog id="paying" class="paying" aria-labelledby="paying-title">
+    <div class="paying__in">
+      <span class="paying__spin" aria-hidden="true"></span>
+      <p id="paying-title" class="paying__title">결제를 진행하고 있어요</p>
+      <p class="muted">창을 닫거나 새로고침하지 마세요. (데모 결제)</p>
+    </div>
+  </dialog>
+
+  <!-- mini cart: edit the order without leaving checkout -->
+  <div class="offcanvas offcanvas-end sz-offcanvas" tabindex="-1" id="bag" aria-labelledby="bag-title">
+    <div class="offcanvas-header">
+      <h2 id="bag-title" class="label">장바구니</h2>
+      <button class="label link-btn" type="button" data-bs-dismiss="offcanvas">닫기</button>
+    </div>
+    <div class="offcanvas-body" id="bag-list"></div>
+    <div class="sz-offcanvas__foot" id="bag-foot" hidden>
+      <p class="drawer__total"><span class="label">합계</span><span id="bag-subtotal"></span></p>
+      <div class="sz-offcanvas__actions">
+        <a class="sz-btn sz-btn--line" href="index.html#shop">상품 더 보기</a>
+        <button class="sz-btn sz-btn--solid co-bag-done" type="button" data-bs-dismiss="offcanvas">주문서로 돌아가기</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="co-foot label muted">© <span data-year>2026</span> SIYAZU · 컨셉 리디자인 (실제 판매 사이트가 아닙니다)</footer>
+</body>
+</html>
