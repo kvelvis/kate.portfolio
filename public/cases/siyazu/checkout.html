@@ -59,11 +59,7 @@
 
     <form class="co-grid" id="co-form" novalidate hidden>
       <div class="co-main">
-        <!-- errors after a failed submit -->
-        <div class="co-errors" id="co-errors" tabindex="-1" hidden>
-          <p class="co-errors__title">입력하지 않은 항목이 있어요</p>
-          <ul></ul>
-        </div>
+        <p class="sr-only" id="co-status" role="status" aria-live="polite"></p>
 
         <!-- 1. Orderer -->
         <section class="co-sec" aria-labelledby="sec-orderer">

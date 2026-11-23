@@ -71,6 +71,7 @@ export default function Work() {
     overview: useRef(null),
     go: useRef(null),
     phone: useRef(null),
+    flagTag: useRef(null),
   };
   const [zoomed, setZoomed] = useState(null);
   const panelTitle = useRef(null);
@@ -81,6 +82,7 @@ export default function Work() {
   const seen = useInView(root, "0px 0px -35% 0px");
 
   const cs = zoomed?.caseStudy && caseStudies[zoomed.caseStudy];
+  const flagged = work.find((w) => w.flag);
   useEffect(() => cs?.fontCss?.forEach(loadCss), [cs]);
 
   // keyboard / screen reader: focus moves into the panel when a project opens, and back when it closes
@@ -139,6 +141,7 @@ export default function Work() {
         overview: r.overview.current,
         go: r.go.current,
         phone: r.phone.current,
+        flagTag: r.flagTag.current,
         setCaption: (item) => {
           r.captionTitle.current.textContent = tRef.current(item.title);
           r.captionCat.current.textContent = (item.flag ? `★ ${tRef.current(item.flag)} · ` : "") + metaOf(item, tRef.current);
@@ -215,6 +218,13 @@ export default function Work() {
    
 
       <div ref={r.cursor} className="cursor-label" aria-hidden="true" />
+
+      {/* "★ full shopping journey" tag that follows the flagged card on the sphere (sphere.js) */}
+      {flagged && (
+        <div ref={r.flagTag} className="work-flag work-flag--sphere" aria-hidden="true">
+          ★ {t(flagged.flag)}
+        </div>
+      )}
 
       {/* iPhone with the live prototype, placed over the zoomed media by sphere.js (wide screens) */}
       <div ref={r.phone} className="work__phone" hidden={!(zoomed?.phone && cs?.links?.prototype)}>

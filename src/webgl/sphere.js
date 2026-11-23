@@ -116,6 +116,7 @@ export class SphereGallery {
     this.mouse = { x: -1, y: -1, in: false };
     this.needsRay = false;
     this._tmp = new THREE.Vector3();
+    this._tagV = new THREE.Vector3();
     this._qa = new THREE.Quaternion();
     this._qb = new THREE.Quaternion();
 
@@ -668,6 +669,14 @@ export class SphereGallery {
         p.frame.scale.set(1 + (2 * B) / Math.max(w, 1), 1 + (2 * B) / Math.max(h, 1), 1);
         const pulse = this.reduced ? 1 : 0.7 + 0.3 * Math.sin(performance.now() / 600);
         p.frame.material.opacity = op * pulse * (1 - this.ex);
+        // the HTML "★ …" tag sits on the card's top-left corner (projected to the screen)
+        const tag = this.ui.flagTag;
+        if (tag) {
+          const v = this._tagV.set(-w * s / 2, h * s / 2, 0).add(m.position).project(this.camera);
+          const show = m.visible && op > 0.3 && this.ex < 0.05 && v.z < 1;
+          tag.style.opacity = show ? Math.min(1, (op - 0.3) * 2.5) : 0;
+          if (show) tag.style.transform = `translate(${((v.x + 1) / 2) * this.W}px, ${((1 - v.y) / 2) * this.H}px) translate(-6px, -60%)`;
+        }
       }
     }
 

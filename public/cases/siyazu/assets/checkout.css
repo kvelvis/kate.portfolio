@@ -361,3 +361,10 @@
 .co-saved { font-size: var(--fs-small); padding: 12px 14px; background: var(--surface); }
 .co-saved .link { min-height: 0; margin-left: 8px; text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 599px) { .mp-cardrow { grid-template-columns: 36px 1fr; } .mp-cardrow__chip { width: 36px; height: 24px; } .mp-cardrow__act { grid-column: 1 / -1; } }
+
+/* a card with something missing: red frame + note in the header (fields and boxes are red too) */
+.co-sec { transition: border-color .25s, box-shadow .25s; }
+.co-sec.is-invalid { border-color: var(--error); box-shadow: inset 3px 0 0 var(--error); }
+.co-sec.is-invalid .co-sec__title > .label { background: var(--error); color: #fff; }
+.co-sec__need { margin-left: auto; font-size: var(--fs-small); font-weight: 500; color: var(--error); }
+.co-sec__need:empty { display: none; }

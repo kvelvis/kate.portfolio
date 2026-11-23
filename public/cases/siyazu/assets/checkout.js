@@ -243,24 +243,29 @@
     e.preventDefault();
     const bad = fieldsToCheck().filter((el) => !isValid(el));
     fieldsToCheck().forEach((el) => showError(el, bad.includes(el)));
-    const box = $("#co-errors");
-    if (fillErrors(bad)) {
-      box.focus();
-      box.scrollIntoView({ block: "start" });
+    if (markSections(bad)) {
+      // go to the first card that needs something and focus the field
+      const first = bad[0];
+      first.closest(".co-sec").scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      first.focus({ preventScroll: true });
+      $("#co-status").textContent = `입력이 필요한 항목이 ${bad.length}개 있어요.`;
       return;
     }
     pay();
   }
-  // the error list at the top; returns true while something is still missing
-  function fillErrors(bad) {
-    const box = $("#co-errors");
-    box.hidden = !bad.length;
-    $("ul", box).innerHTML = bad.map((el) => `<li><a href="#${el.id || ""}">${el.dataset.msg}</a></li>`).join("");
-    $$("a", box).forEach((a, i) => a.addEventListener("click", (ev) => { ev.preventDefault(); focusField(bad[i]); }));
+  // cards with something missing turn red, with a short note in the card header
+  function markSections(bad) {
+    $$(".co-sec", form).forEach((sec) => {
+      const n = bad.filter((el) => sec.contains(el)).length;
+      sec.classList.toggle("is-invalid", n > 0);
+      let note = $(".co-sec__need", sec);
+      if (n && !note) { $(".co-sec__title", sec).insertAdjacentHTML("beforeend", '<span class="co-sec__need"></span>'); note = $(".co-sec__need", sec); }
+      if (note) note.textContent = n ? "입력이 필요해요" : "";
+    });
     return bad.length > 0;
   }
-  // once shown, the list shrinks as fields get fixed
-  const refreshErrors = () => { if (!$("#co-errors").hidden) fillErrors(fieldsToCheck().filter((el) => !isValid(el))); };
+  // once marked, the red goes away as soon as a card is complete
+  const refreshErrors = () => { if ($(".co-sec.is-invalid", form)) markSections(fieldsToCheck().filter((el) => !isValid(el))); };
   function focusField(el) {
     el.scrollIntoView({ block: "center" });
     el.focus({ preventScroll: true });
