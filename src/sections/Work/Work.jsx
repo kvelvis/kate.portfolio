@@ -219,7 +219,7 @@ export default function Work() {
 
       <div ref={r.cursor} className="cursor-label" aria-hidden="true" />
 
-      {/* "★ full shopping journey" tag that follows the flagged card on the sphere (sphere.js) */}
+      {/* "★ Full purchase flow" tag that follows the flagged card on the sphere (sphere.js) */}
       {flagged && (
         <div ref={r.flagTag} className="work-flag work-flag--sphere" aria-hidden="true">
           ★ {t(flagged.flag)}

@@ -26,7 +26,7 @@ const all = [
     href: "/cases/siyazu/index.html",
     caseStudy: "siyazu",
     // marked on the sphere caption, the project panel and the list
-    flag: { ko: "풀 구매 여정", en: "Full shopping journey", ru: "Полный путь покупателя" },
+    flag: "Full purchase flow", // same English label in every language
   },
   {
     id: "gatto",
