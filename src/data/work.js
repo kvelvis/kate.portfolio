@@ -3,13 +3,9 @@
 // Text: a string or { ko, en }.
 
 import catPoster from "../assets/video/cat-poster.webp";
-import fairyPoster from "../assets/video/fairy-poster.webp";
-import celine27Img from "../assets/work/celine.jpg";
 import hanmiImg from "../assets/work/hanmi.jpg";
 import siyazuImg from "../assets/work/siyazu.jpg";
-import celineGif from "../assets/work/celine.gif";
 import catGif from "../assets/work/cat.gif";
-import fairyGif from "../assets/work/fairytail.gif";
 import siyazuGif from "../assets/work/siyazu.gif";
 import feevGif from "../assets/work/feev.gif";
 import danoGif from "../assets/work/danoapp.gif";
@@ -31,17 +27,6 @@ const all = [
     caseStudy: "siyazu",
     // marked on the sphere caption, the project panel and the list
     flag: { ko: "풀 구매 여정", en: "Full shopping journey", ru: "Полный путь покупателя" },
-  },
-  {
-    id: "celine27",
-    hidden: true,
-   title: { ko: "셀린", en: "Celine 2027", ru: "Celine 2027" },
-    category: { ko: "캠페인 웹사이트", en: "Campaign website", ru: "Сайт кампании" },
-    year: "2026",
-    image: celine27Img,
-    gif: celineGif,
-    href: "/cases/celine/renew/index.html",
-    caseStudy: "celine27",
   },
   {
     id: "gatto",
@@ -96,22 +81,6 @@ const all = [
       ko: "B2B 반도체 장비 기업 사이트 리디자인. 주요 페이지 15개와 A/S 엔지니어 캐릭터.",
       en: "A redesign of a B2B semiconductor equipment maker’s site: 15 key pages and an A/S engineer character.",
       ru: "Редизайн сайта B2B-производителя оборудования для полупроводников: 15 ключевых страниц и персонаж — инженер сервисной службы.",
-    },
-  },
-  {
-    id: "fairy",
-    hidden: true,
-    title: { ko: "별빛 동화", en: "별빛 동화", ru: "Starlight Tales" },
-    category: { ko: "인터랙티브 · 스토리텔링", en: "Interactive · Storytelling", ru: "Интерактив · сторителлинг" },
-    year: "2026",
-    image: fairyPoster,
-    gif: fairyGif,
-    href: "/cases/fairy/index.html",
-    caseStudy: "fairy",
-    desc: {
-      ko: "GSAP 스크롤 스토리텔링 웹사이트. 그림으로 읽는 네 편의 이야기.",
-      en: "A GSAP scroll-storytelling site: four stories told in pictures.",
-      ru: "Сайт-история на GSAP: четыре сказки в картинках.",
     },
   },
   {

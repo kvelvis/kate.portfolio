@@ -186,7 +186,7 @@
     });
   }
 
-  function demoFill() {
+  function demoFill({ scroll = true } = {}) {
     const set = (id, v) => { const el = $(id); el.value = v; showError(el, false); };
     set("#o-name", "김시야"); set("#o-phone", "010-1234-5678"); set("#o-email", "siya@example.com");
     set("#zip", "06035"); set("#addr1", "서울 강남구 가로수길 5 (신사동)"); set("#addr2", "3층");
@@ -195,7 +195,7 @@
     if (form.pay.value === "bank") set("#depositor", "김시야");
     saveDraft();
     refreshErrors();
-    $("#sec-pay").scrollIntoView({ block: "start" });
+    if (scroll) $("#sec-pay").scrollIntoView({ block: "start" });
   }
 
   /* ── Draft (sessionStorage): survives "back to shop" and reloads in this tab ── */
@@ -311,5 +311,7 @@
   wire();
   loadDraft();
   prefillMember();
+  // demo: arrive with example details already filled in (agreements stay for the visitor to tick)
+  if (!$("#o-name").value) demoFill({ scroll: false });
   renderSummary();
 })();

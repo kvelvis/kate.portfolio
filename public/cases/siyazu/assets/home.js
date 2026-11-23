@@ -1,6 +1,6 @@
 /* SIYAZU: home page.
    Hero (film inside the SIYAZU letters), NEW FORM clips, sillage trail,
-   catalog (룩 rail), Quick view, journal strip. */
+   catalog preview (6 pieces → shop.html), journal strip. Catalog code: catalog.js. */
 
 (() => {
   const { $, $$, S, t, L } = SZ;
@@ -162,149 +162,8 @@
     section.addEventListener("pointerleave", () => { last = null; });
   }
 
-  /* ═════════ 4. CATALOG ═════════ */
-  const state = { cat: "", color: "", size: "", fabric: "", sort: "featured", q: new URLSearchParams(location.search).get("q") || "" };
-  const cardColor = {};
-  const railWrap = $("#rail-wrap"), rail = $("#rail"), scroller = $("#rail-scroller");
-  const empty = $("#catalog-empty"), count = $("#grid-count"), clearBtn = $("#filters-clear");
-
-  /* Filter dropdowns (Bootstrap) */
-  const colorList = [...new Map(S.products.flatMap((p) => p.colors).map((c) => [c.name, c])).values()];
-  const options = {
-    cat: [["", t("all")], ...Object.entries(S.categories).map(([k, v]) => [k, L(v)])],
-    color: [["", t("all")], ...colorList.map((c) => [c.name, SZ.colorKo(c)])],
-    size: [["", t("all")], ...["S", "M", "L", "F"].map((s) => [s, SZ.sizeKo(s)])],
-    fabric: [["", t("all")], ...Object.entries(S.fabrics).map(([k, v]) => [k, L(v)])],
-    sort: [["featured", t("sortFeatured")], ["low", t("sortLow")], ["high", t("sortHigh")]],
-  };
-  function syncFilters() {
-    $$(".filter[data-filter]").forEach((dd) => {
-      const key = dd.dataset.filter, opts = options[key];
-      const cur = opts.find(([v]) => v === state[key]) || opts[0];
-      $(".filter__val", dd).textContent = cur[1];
-      $(".filter__btn", dd).classList.toggle("is-set", key !== "sort" && !!state[key]);
-      $(".dropdown-menu", dd).innerHTML = opts.map(([v, label]) =>
-        `<li><button type="button" class="dropdown-item${v === state[key] ? " active" : ""}" data-value="${v}"${v === state[key] ? ' aria-current="true"' : ""}>${label}</button></li>`).join("");
-    });
-  }
-  $$(".filter[data-filter]").forEach((dd) => {
-    $(".dropdown-menu", dd).addEventListener("click", (e) => {
-      const item = e.target.closest(".dropdown-item"); if (!item) return;
-      state[dd.dataset.filter] = item.dataset.value;
-      syncFilters(); render();
-      $(".filter__btn", dd).focus();
-    });
-  });
-
-  function results() {
-    const q = state.q.toLowerCase();
-    const list = S.products.filter((p) =>
-      (!state.cat || p.cat === state.cat) &&
-      (!state.fabric || p.fabric === state.fabric) &&
-      (!state.size || p.sizes.includes(state.size)) &&
-      (!state.color || p.colors.some((c) => c.name === state.color)) &&
-      (!q || [p.name.en, p.name.ko, p.sku, L(S.categories[p.cat]), L(S.fabrics[p.fabric])].join(" ").toLowerCase().includes(q)));
-    if (state.sort === "low") list.sort((a, b) => a.price - b.price);
-    else if (state.sort === "high") list.sort((a, b) => b.price - a.price);
-    return list;
-  }
-  const isFiltered = () => !!(state.cat || state.color || state.size || state.fabric || state.q);
-  const colorIdxFor = (p) => cardColor[p.id] ?? Math.max(0, p.colors.findIndex((c) => c.name === state.color));
-
-  function render() {
-    const list = results();
-    count.textContent = t("items", list.length);
-    clearBtn.hidden = !isFiltered();
-    empty.hidden = !!list.length;
-    railWrap.hidden = !list.length;
-    if (!list.length) return;
-    rail.innerHTML = list.map((p, i) => SZ.pcardHTML(p, i + 1, colorIdxFor(p))).join("");
-    scroller.scrollLeft = 0;
-    updateRailNav();
-  }
-
-  function applyFilter(f) {
-    Object.assign(state, { cat: "", color: "", size: "", fabric: "", q: "" }, f);
-    syncFilters(); render();
-  }
-  const scrollToShop = () => { finishHero(); $("#shop").scrollIntoView({ behavior: SZ.motion.reduced ? "auto" : "smooth" }); };
-  clearBtn.addEventListener("click", () => applyFilter({}));
-  empty.querySelector("button").addEventListener("click", () => applyFilter({}));
-
-  /* Rail: card hover / touch (shared), colour dots, Quick view */
-  SZ.wirePcards(rail, { onColor: (id, i) => { cardColor[id] = i; } });
-  rail.addEventListener("click", (e) => {
-    const qv = e.target.closest("[data-qv]"); if (qv) openQuickView(qv.dataset.qv, qv);
-  });
-
-  /* Rail: drag to scroll with a mouse (touch/trackpad scroll natively) */
-  let drag = null;
-  scroller.addEventListener("pointerdown", (e) => {
-    if (e.pointerType !== "mouse" || e.button !== 0 || e.target.closest("button") || railWrap.classList.contains("is-grid")) return;
-    drag = { x: e.clientX, left: scroller.scrollLeft, moved: false };
-  });
-  addEventListener("pointermove", (e) => {
-    if (!drag) return;
-    const dx = e.clientX - drag.x;
-    if (!drag.moved && Math.abs(dx) > 6) { drag.moved = true; scroller.classList.add("is-dragging"); }
-    if (drag.moved) scroller.scrollLeft = drag.left - dx;
-  });
-  addEventListener("pointerup", () => {
-    if (!drag) return;
-    if (drag.moved) {
-      scroller.addEventListener("click", (ev) => { ev.preventDefault(); ev.stopPropagation(); }, { capture: true, once: true });
-      setTimeout(() => scroller.classList.remove("is-dragging"), 0);
-    }
-    drag = null;
-  });
-  const railBtns = $$("[data-rail]");
-  function updateRailNav() {
-    const max = scroller.scrollWidth - scroller.clientWidth - 2;
-    railBtns.forEach((b) => { b.disabled = b.dataset.rail === "prev" ? scroller.scrollLeft <= 2 : scroller.scrollLeft >= max; });
-  }
-  scroller.addEventListener("scroll", () => requestAnimationFrame(updateRailNav), { passive: true });
-  railBtns.forEach((b) => b.addEventListener("click", () => {
-    const step = scroller.clientWidth * 0.7 * (b.dataset.rail === "next" ? 1 : -1);
-    scroller.scrollBy({ left: step, behavior: SZ.motion.reduced ? "auto" : "smooth" });
-  }));
-
-  /* ── Quick view (native dialog drawer) ── */
-  const qv = $("#qv");
-  function openQuickView(id, opener) {
-    const p = SZ.productById(id); if (!p) return;
-    const ci = colorIdxFor(p);
-    const body = $(".drawer__body", qv);
-    const gallery = (i) => p.colors[i].images;
-    body.innerHTML = `
-      <div class="qv__gallery">
-        <img class="qv__main" src="${gallery(ci)[0]}" alt="${L(p.name)}" width="1000" height="1000">
-        <div class="qv__thumbs">${gallery(ci).map((src, i) => `
-          <button type="button" class="qv__thumb" aria-pressed="${i === 0}" aria-label="${i + 1} / ${gallery(ci).length}"><img src="${src}" alt="" width="1000" height="1000"></button>`).join("")}
-        </div>
-      </div>
-      <p class="label muted">${p.sku}${p.ships ? " · " + t("preorder", p.ships) : ""}</p>
-      <h2 class="qv__name" id="qv-title">${L(p.name)}</h2>
-      <p class="qv__price">${SZ.priceHTML(p)}</p>
-      ${SZ.buyForm(p, ci, "qv")}
-      <div class="note">
-        <p class="label">${t("sillageNote")}</p>
-        <p class="note__text">${L(p.sillage)}</p>
-      </div>
-      <a class="link label" href="product.html?id=${p.id}">${t("viewDetails")} →</a>`;
-    const main = $(".qv__main", body), thumbs = $(".qv__thumbs", body);
-    const setGallery = (i) => {
-      main.src = gallery(i)[0];
-      $$(".qv__thumb", thumbs).forEach((b, j) => { $("img", b).src = gallery(i)[j]; b.setAttribute("aria-pressed", String(j === 0)); });
-    };
-    thumbs.addEventListener("click", (e) => {
-      const b = e.target.closest(".qv__thumb"); if (!b) return;
-      main.src = $("img", b).src;
-      $$(".qv__thumb", thumbs).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-    });
-    SZ.wireBuy($(".buy", body), p, setGallery);
-    SZ.openDialog(qv, opener);
-    body.scrollTop = 0;
-  }
+  /* ═════════ 4. CATALOG preview: a few pieces; the whole shop is shop.html ═════════ */
+  SZ.catalog({ limit: 6 });
 
   /* ═════════ 5. JOURNAL strip ═════════ */
   const strip = $("#strip");
@@ -328,26 +187,6 @@
     strip.scrollBy({ left: strip.clientWidth * 0.6 * (b.dataset.strip === "next" ? 1 : -1), behavior: SZ.motion.reduced ? "auto" : "smooth" });
   }));
 
-  window.SIYAZU_HOME = { search(q) { applyFilter({ q }); scrollToShop(); } };
-
-  /* Photo view (product / model shots) and layout (rail / 3-column grid); both remembered */
-  const pref = (k, v) => { try { return v === undefined ? localStorage.getItem(k) : localStorage.setItem(k, v); } catch { return null; } };
-  function setView(v) {
-    railWrap.classList.toggle("is-model", v === "model");
-    $$("[data-view]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === v)));
-    pref("siyazu-view", v);
-  }
-  function setLayout(v) {
-    railWrap.classList.toggle("is-grid", v === "grid");
-    $$("[data-layout]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.layout === v)));
-    scroller.setAttribute("aria-label", v === "grid" ? "컬렉션" : "컬렉션 레일, 옆으로 스크롤");
-    scroller.scrollLeft = 0;
-    pref("siyazu-layout", v);
-  }
-  $$("[data-view]").forEach((b) => b.addEventListener("click", () => setView(b.dataset.view)));
-  $$("[data-layout]").forEach((b) => b.addEventListener("click", () => setLayout(b.dataset.layout)));
-  setView(pref("siyazu-view") || "product");
-  setLayout(pref("siyazu-layout") || "rail");
 
   /* Sale popup: once per visit, when the collection comes into view; "오늘 하루 보지 않기" hides it until tomorrow */
   function initPromo() {
@@ -369,6 +208,5 @@
   }
   initPromo();
 
-  syncFilters(); render(); initTrail();
-  if (state.q) requestAnimationFrame(scrollToShop);
+  initTrail();
 })();

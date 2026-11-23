@@ -341,8 +341,8 @@
       e.preventDefault();
       const q = $("input", dlg).value.trim();
       dlg._noReturn = true; dlg.close();
-      if (window.SIYAZU_HOME) window.SIYAZU_HOME.search(q);
-      else location.href = `index.html?q=${encodeURIComponent(q)}#shop`;
+      if (SZ.catalogSearch) SZ.catalogSearch(q);
+      else location.href = `shop.html?q=${encodeURIComponent(q)}`;
     });
   }
 

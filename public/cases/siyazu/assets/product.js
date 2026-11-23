@@ -11,7 +11,7 @@
 
   if (!p) {
     root.outerHTML = `<section class="pdp-missing"><h1 class="pdp__name">${t("notFound")}</h1>
-      <a class="sz-btn sz-btn--line" href="index.html#shop">${t("backToShop")}</a></section>`;
+      <a class="sz-btn sz-btn--line" href="shop.html">${t("backToShop")}</a></section>`;
     return;
   }
 
@@ -44,8 +44,8 @@
     $('meta[name="description"]').content = `${L(p.name)}. ${L(p.desc)} 잔향: ${L(p.sillage)}.`;
     root.innerHTML = `
       <nav class="crumbs label" aria-label="Breadcrumb">
-        <a href="index.html#shop">${t("shop")}</a><span aria-hidden="true">/</span>
-        <a href="index.html#shop">${L(S.categories[p.cat])}</a>
+        <a href="shop.html">${t("shop")}</a><span aria-hidden="true">/</span>
+        <a href="shop.html?cat=${p.cat}">${L(S.categories[p.cat])}</a>
       </nav>
       <div class="pdp__stack">${stackHTML()}</div>
       <aside class="pdp__panel" aria-labelledby="pdp-name">
@@ -73,17 +73,14 @@
           <details class="acc"><summary class="label">${t("refundTitle")}</summary><div class="acc__body">
             <ul class="acc__list">${S.info.refund.map((r) => `<li>${r}</li>`).join("")}</ul></div></details>
         </div>
-        <section class="sillage-card" aria-labelledby="sillage-h">
-          <h2 id="sillage-h" class="label">${t("sillageLabel")}</h2>
-          <p class="sillage-card__notes">${L(p.sillage)}</p>
-          <p class="muted">${t("sillageBlock", L(p.sillage))}</p>
-        </section>
       </aside>`;
     $("#related-title").textContent = t("related");
     $("#related-grid").innerHTML = related();
 
+    renderDetail();
     SZ.wireBuy($(".buy", root), p, (i) => {
       colorIdx = i;
+      renderDetail();
       const figs = $$(".pdp__stack > figure img", root), imgs = p.colors[i].images;
       figs.forEach((img, j) => { if (imgs[j]) img.src = imgs[j]; });
     });
@@ -91,6 +88,33 @@
     injectJsonLd();
     if (!wired) { SZ.wirePcards($("#related-grid")); wired = true; }
   }
+
+  /* 상세 정보: the long photos, one after another with no gaps (the parts join seamlessly) */
+  function renderDetail() {
+    const list = (S.details[p.id] || []).filter((d) => !d.color || d.color === p.colors[colorIdx].name);
+    let sec = $("#pdp-detail");
+    if (!list.length) { sec?.remove(); return; }
+    if (!sec) {
+      sec = document.createElement("section");
+      sec.className = "pdp-detail"; sec.id = "pdp-detail";
+      sec.setAttribute("aria-labelledby", "pdp-detail-title");
+    }
+    placeDetail(sec);
+    sec.innerHTML = `<h2 class="label pdp-detail__title" id="pdp-detail-title">상세 정보</h2>` + list.map((d) => `
+      <figure class="pdp-detail__item">
+        <figcaption class="label muted">${d.caption}</figcaption>
+        ${d.parts.map(([src, h]) => `<img src="${S.DETAIL}${src}" alt="" width="900" height="${h}" loading="lazy" decoding="async">`).join("")}
+      </figure>`).join("");
+  }
+
+  // wide screens: under the main photos in the left column, so the buy panel stays beside them while scrolling;
+  // phones: after the buy panel, so "담기" isn't pushed far down
+  const wideDetail = matchMedia("(min-width: 900px)");
+  function placeDetail(sec) {
+    const target = wideDetail.matches ? $(".pdp__stack", root) : root;
+    if (sec.parentElement !== target) target.append(sec);
+  }
+  wideDetail.addEventListener("change", () => { const s = $("#pdp-detail"); if (s) placeDetail(s); });
 
   function injectJsonLd() {
     $("#ld-product")?.remove();

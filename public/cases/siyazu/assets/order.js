@@ -62,7 +62,7 @@
           : `${fmtDate(o.created)} 주문`}</p>
         ${!cancelled && i < 3 ? `<p>도착 예정 <b>${eta(o)}</b></p>` : ""}
         <div class="od-hero__actions">
-          <a class="sz-btn sz-btn--solid" href="index.html#shop">쇼핑 계속하기</a>
+          <a class="sz-btn sz-btn--solid" href="shop.html">쇼핑 계속하기</a>
           ${canCancel ? `<button class="sz-btn sz-btn--line" type="button" data-cancel>주문 취소</button>` : ""}
           ${canReturn ? `<button class="sz-btn sz-btn--line" type="button" data-return>교환·반품 신청</button>` : ""}
         </div>

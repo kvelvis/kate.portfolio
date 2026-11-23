@@ -33,6 +33,7 @@
   <script defer src="assets/data.js"></script>
   <script defer src="assets/core.js"></script>
   <script defer src="assets/buy.js"></script>
+  <script defer src="assets/catalog.js"></script>
   <script defer src="assets/home.js"></script>
 </head>
 <body class="is-home">
@@ -43,8 +44,8 @@
     <nav class="site-header__left" aria-label="주 메뉴">
       <button class="menu-btn label" type="button" data-open="menu">메뉴</button>
       <ul class="nav-list">
-        <li><a class="label" href="#shop">신상품</a></li>
-        <li><a class="label" href="#shop">쇼핑</a></li>
+        <li><a class="label" href="shop.html">신상품</a></li>
+        <li><a class="label" href="shop.html">쇼핑</a></li>
         <li><a class="label" href="#about">브랜드</a></li>
         <li><a class="label" href="#journal">저널</a></li>
       </ul>
@@ -94,44 +95,9 @@
           <p class="label">컬렉션</p>
           <h2 id="shop-title" class="shop__title">26 윈터</h2>
         </div>
-        <div class="shop__tools">
-          <div class="view-switch" role="group" aria-label="사진">
-            <button type="button" data-view="product" aria-pressed="true">상품</button>
-            <button type="button" data-view="model" aria-pressed="false">모델</button>
-          </div>
-          <div class="view-switch" role="group" aria-label="배열">
-            <button type="button" data-layout="rail" aria-pressed="true">슬라이드</button>
-            <button type="button" data-layout="grid" aria-pressed="false">그리드</button>
-          </div>
-        </div>
+        <a class="link label shop__all" href="shop.html">전체 상품 보기 (<span data-shop-total>12</span>) →</a>
       </div>
 
-      <div class="filters" role="region" aria-label="필터">
-        <div class="filters__inner">
-          <div class="dropdown filter" data-filter="cat">
-            <button class="filter__btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-popper-config='{"strategy":"fixed"}'><span class="label">카테고리</span> <span class="filter__val">전체</span></button>
-            <ul class="dropdown-menu"></ul>
-          </div>
-          <div class="dropdown filter" data-filter="color">
-            <button class="filter__btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-popper-config='{"strategy":"fixed"}'><span class="label">컬러</span> <span class="filter__val">전체</span></button>
-            <ul class="dropdown-menu"></ul>
-          </div>
-          <div class="dropdown filter" data-filter="size">
-            <button class="filter__btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-popper-config='{"strategy":"fixed"}'><span class="label">사이즈</span> <span class="filter__val">전체</span></button>
-            <ul class="dropdown-menu"></ul>
-          </div>
-          <div class="dropdown filter" data-filter="fabric">
-            <button class="filter__btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-popper-config='{"strategy":"fixed"}'><span class="label">소재</span> <span class="filter__val">전체</span></button>
-            <ul class="dropdown-menu"></ul>
-          </div>
-          <div class="dropdown filter" data-filter="sort">
-            <button class="filter__btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-popper-config='{"strategy":"fixed"}'><span class="label">정렬</span> <span class="filter__val">추천순</span></button>
-            <ul class="dropdown-menu dropdown-menu-end"></ul>
-          </div>
-          <button id="filters-clear" class="link-btn label filters__clear" type="button" hidden>필터 초기화</button>
-          <p id="grid-count" class="filters__count label muted" aria-live="polite"></p>
-        </div>
-      </div>
 
       <div class="catalog">
         <!-- 룩: clothing rail -->
@@ -150,6 +116,8 @@
         </div>
         <noscript><p class="grid-empty">컬렉션을 보려면 JavaScript를 켜 주세요.</p></noscript>
       </div>
+      <p class="shop__more"><a class="sz-btn sz-btn--line" href="shop.html">전체 상품 보기</a></p>
+
     </section>
 
     <!-- ═════════ 2. NEW FORM: editorial wordmark + clips ═════════ -->
@@ -237,10 +205,10 @@
       </form>
       <nav class="footer__links" aria-label="푸터">
         <ul>
-          <li><a class="label" href="#shop">쇼핑</a></li>
-          <li><a class="label" href="#shop">아우터</a></li>
-          <li><a class="label" href="#shop">니트</a></li>
-          <li><a class="label" href="#shop">팬츠</a></li>
+          <li><a class="label" href="shop.html">쇼핑</a></li>
+          <li><a class="label" href="shop.html?cat=outer">아우터</a></li>
+          <li><a class="label" href="shop.html?cat=knit">니트</a></li>
+          <li><a class="label" href="shop.html?cat=pants">팬츠</a></li>
         </ul>
         <ul>
           <li><a class="label" href="#about">브랜드</a></li>
@@ -267,8 +235,8 @@
       <button class="label link-btn" type="button" data-close>닫기</button>
     </div>
     <ul class="menu-list">
-      <li><a href="#shop" data-close>신상품</a></li>
-      <li><a href="#shop" data-close>쇼핑</a></li>
+      <li><a href="shop.html" data-close>신상품</a></li>
+      <li><a href="shop.html" data-close>쇼핑</a></li>
       <li><a href="#about" data-close>브랜드</a></li>
       <li><a href="#journal" data-close>저널</a></li>
     </ul>
@@ -304,13 +272,14 @@
       <p class="label muted">26 윈터 세일</p>
       <h2 id="promo-title" class="promo__title">최대 <b>60%</b><br>할인</h2>
       <p class="promo__text">26 윈터 컬렉션 일부 상품을 한정 기간 동안 할인된 가격으로 만나보세요.</p>
-      <button class="sz-btn sz-btn--solid promo__cta" type="button" data-close>세일 상품 보기</button>
+      <a class="sz-btn sz-btn--solid promo__cta" href="shop.html">세일 상품 보기</a>
       <button class="link-btn label promo__skip" type="button" data-promo-skip>오늘 하루 보지 않기</button>
     </div>
     <button class="promo__close" type="button" data-close aria-label="닫기">
       <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg>
     </button>
   </dialog>
+
 
   <!-- ═════════ BOOTSTRAP: mini cart, toast, fullscreen film ═════════ -->
   <div class="offcanvas offcanvas-end sz-offcanvas" tabindex="-1" id="bag" aria-labelledby="bag-title">

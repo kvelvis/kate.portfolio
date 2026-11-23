@@ -63,12 +63,12 @@ window.SIYAZU = (() => {
       sizes: ["S", "M"], soldOut: { Black: ["M"] }, sillage: { en: "Leather, smoked birch", ko: "레더, 스모크 버치" },
       desc: { en: "A cropped bomber in faux mustang with a plush collar. Boxy through the body, gathered at the hem.",
               ko: "플러시 칼라를 더한 페이크 무스탕 크롭 봄버. 여유 있는 바디와 밑단 셔링." } },
-    { id: "hood-down", sku: "SIOT4176", cat: "outer", fabric: "down", price: 147950, was: 269000,
-      name: { en: "Oversized Hooded Down Jacket", ko: "덕다운 오버 핏 후드 패딩" },
-      colors: [c("Ivory", "아이보리", "#EFEADF", ["hood-down-ivory.jpg", "hood-down-ivory-model.jpg"])],
+    { id: "mountain-down", sku: "SIOT4215", cat: "outer", fabric: "down", price: 261750, was: 349000,
+      name: { en: "Classic Mountain Duck Down Jacket", ko: "덕다운 클래식 마운틴 패딩" },
+      colors: [c("Cream", "크림", "#ECE6D6", ["mountain-cream.jpg", "mountain-cream-model.jpg"])],
       sizes: ["S", "M"], sillage: { en: "White tea, cotton flower", ko: "화이트 티, 코튼 플라워" },
-      desc: { en: "Duck-down fill in a relaxed, oversized shape with a deep hood.",
-              ko: "깊은 후드와 오버사이즈 실루엣의 덕다운 패딩." } },
+      desc: { en: "A classic mountain parka in duck down: stand collar, a hood and roomy flap pockets.",
+              ko: "스탠드 칼라와 후드, 넉넉한 플랩 포켓을 갖춘 클래식 마운틴 실루엣의 덕다운 패딩." } },
     { id: "crop-down", sku: "SIOT4010", cat: "outer", fabric: "down", price: 137900, was: 197000,
       name: { en: "Cropped Duck Down Jacket", ko: "덕다운 크롭 패딩" },
       colors: [c("Black", "블랙", "#1A1A1A", ["crop-down-black.jpg", "crop-down-black-model.jpg"])],
@@ -236,5 +236,44 @@ window.SIYAZU = (() => {
     pants: [["S", "—", 35, 52], ["M", "—", 37, 53], ["L", "—", 39, 54]],
   };
 
-  return { IMG, film, newForm, journal, categories, fabrics, products, t, sizeGuide, info };
+
+  /* Long detail photos under the product page (상세 이미지): img/detail/<id>-<kind>.jpg, 900px wide,
+     lazy-loaded one by one while scrolling.
+     color: null = for every colour, otherwise only when that colour is chosen. */
+  const DETAIL = "img/detail/";
+  const details = {
+    "mountain-down": [
+      { color: null, caption: "360° 뷰", parts: [["mountain-360.jpg", 7832]] },
+      { color: null, caption: "디테일", parts: [["mountain-closeup.jpg", 11614]] },
+    ],
+    "bomber": [
+      { color: "Brown", caption: "착용 컷", parts: [["bomber-pose-brown.jpg", 12773]] },
+      { color: "Black", caption: "착용 컷", parts: [["bomber-pose-black.jpg", 9154]] },
+      { color: "Black", caption: "360° 뷰", parts: [["bomber-360-black.jpg", 10414]] },
+      { color: null, caption: "디테일", parts: [["bomber-closeup.jpg", 8183]] },
+      { color: null, caption: "소재", parts: [["bomber-fabric.jpg", 9981]] },
+    ],
+    "luster-fur": [
+      { color: null, caption: "착용 컷", parts: [["luster-fur-pose.jpg", 9155]] },
+      { color: null, caption: "360° 뷰", parts: [["luster-fur-360.jpg", 10414]] },
+    ],
+    "crop-down": [
+      { color: null, caption: "착용 컷", parts: [["crop-down-pose.jpg", 9156]] },
+    ],
+    "half-coat": [
+      { color: null, caption: "착용 컷", parts: [["half-coat-pose.jpg", 3916]] },
+      { color: null, caption: "360° 뷰", parts: [["half-coat-360.jpg", 3916]] },
+      { color: null, caption: "디테일", parts: [["half-coat-closeup.jpg", 5571]] },
+      { color: null, caption: "디테일", parts: [["half-coat-closeup2.jpg", 9011]] },
+    ],
+    "jacquard-knit": [
+      { color: null, caption: "착용 컷", parts: [["jacquard-knit-pose.jpg", 7784]] },
+    ],
+    "turtleneck": [
+      { color: null, caption: "360° 뷰", parts: [["turtleneck-360.jpg", 9134]] },
+      { color: null, caption: "디테일", parts: [["turtleneck-closeup.jpg", 6440]] },
+    ],
+  };
+
+  return { IMG, DETAIL, film, newForm, journal, categories, fabrics, products, t, sizeGuide, info, details };
 })();

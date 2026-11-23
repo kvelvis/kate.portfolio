@@ -201,31 +201,6 @@ export const caseStudies = {
       
     ],
   },
-  celine27: {
-    title: "CELINE",
-    titleEn: "Printemps 2027",
-    period: "2026.11",
-    tools: ["Figma", "HTML", "CSS", "Bootstrap 5", "JavaScript"],
-    story: [
-      {
-        title: { ko: "컨셉", en: "Concept", ru: "Концепция" },
-        text: {
-          ko: "CELINE의 새 컬렉션을 소개하는 캠페인 랜딩 페이지입니다. 쇼핑몰이 아닌, 한 시즌 컬렉션의 분위기와 이야기를 전하는 사이트로, 패션 매거진을 넘겨보는 듯한 에디토리얼 경험을 목표로 했습니다.",
-          en: "A campaign landing page for CELINE’s new collection. Not a shop but a site that carries the mood and story of one season, aiming for the editorial feel of leafing through a fashion magazine.",
-          ru: "Лендинг кампании новой коллекции CELINE. Не магазин, а сайт, который передаёт настроение и историю одного сезона — как будто листаешь модный журнал.",
-        },
-      },
-      
-      {
-        title: { ko: "집중한 점", en: "What I focused on", ru: "На чём я сосредоточилась" },
-        text: {
-          ko: "콘텐츠(사진 · 영상 · 문구)는 이미 준비되어 있었기 때문에, 그것을 아름답게 편집하는 데 집중했습니다. 사진의 순서와 크기, 여백으로 잡지 같은 리듬을 만드는 것이 핵심이었습니다.",
-          en: "The content (photos, films, copy) already existed, so the work was editing it beautifully. The key was building a magazine-like rhythm through the order and size of photos and the white space.",
-          ru: "Контент (фото, фильмы, тексты) уже был, поэтому задача — красиво его смонтировать. Главное — журнальный ритм через порядок и размер фотографий и воздух.",
-        },
-      },
-    ],
-  },
   siyazu: {
     title: "SIYAZU",
     titleEn: { ko: "웹사이트 리디자인", en: "Website redesign", ru: "Редизайн сайта" },
@@ -267,6 +242,13 @@ export const caseStudies = {
           },
           {
             text: {
+              ko: "상품을 걸러 볼 필터가 전혀 없어, 원하는 옷을 찾으려면 목록 전체를 넘겨 봐야 함",
+              en: "No filters at all: to find a piece you had to scroll through the whole list",
+              ru: "На сайте вообще нет фильтров: чтобы найти нужную вещь, приходилось листать весь список",
+            },
+          },
+          {
+            text: {
               ko: "모바일 위주로 만들어져 PC에서는 쇼핑하기 불편함",
               en: "Built mainly for phones, so shopping on desktop was awkward",
               ru: "Сайт сделан в основном под телефоны, поэтому покупать с компьютера было неудобно",
@@ -289,6 +271,16 @@ export const caseStudies = {
               en: "You first peek through the letters, then scroll into them, like stepping into the brand’s world",
               ru: "Сначала подглядываешь сквозь буквы, потом прокручиваешь внутрь — будто входишь в мир бренда",
             },
+          },
+          {
+            term: { ko: "필터 · 정렬", en: "Filters and sorting", ru: "Фильтры и сортировка" },
+            text: { ko: "카테고리 · 컬러 · 사이즈 · 소재 필터와 정렬, 선택한 조건은 주소에 남아 공유 가능", en: "Category, colour, size and fabric filters plus sorting; the choice stays in the URL so it can be shared", ru: "Фильтры по категории, цвету, размеру и материалу плюс сортировка; выбор сохраняется в адресе, им можно поделиться" },
+            why: { ko: "원본 사이트에는 필터가 없어 PC에서 옷을 찾기가 특히 어려웠기 때문에", en: "The original site had none, which made finding clothes on desktop especially hard", ru: "На оригинальном сайте фильтров не было, и искать одежду с компьютера было особенно трудно" },
+          },
+          {
+            term: { ko: "퀵뷰", en: "Quick view", ru: "Быстрый просмотр" },
+            text: { ko: "목록에서 바로 사진 · 컬러 · 사이즈를 보고 장바구니에 담기", en: "See photos, colours and sizes and add to the bag right from the list", ru: "Фото, цвета и размеры прямо из списка, и сразу в корзину" },
+            why: { ko: "상품 페이지를 오가지 않아도 여러 옷을 빠르게 비교할 수 있도록", en: "So several pieces can be compared quickly without going back and forth to product pages", ru: "Чтобы быстро сравнивать несколько вещей, не переходя туда-обратно по страницам товаров" },
           },
           {
             term: { ko: "한국어 내비게이션", en: "Korean navigation", ru: "Навигация на корейском" },
@@ -444,66 +436,6 @@ export const caseStudies = {
           en: "Making content out of almost nothing. Apart from product photos there was no material, so I planned the pages and copy myself and kept meaningless AI generation to a minimum.",
           ru: "Сделать контент почти из ничего. Кроме фото продуктов материалов не было, поэтому страницы и тексты я продумала сама, а бессмысленную ИИ-генерацию свела к минимуму.",
         },
-      },
-    ],
-  },
-  fairy: {
-    title: "별빛 동화",
-    titleEn: "Fairy Tale",
-    period: "2026.11",
-    tools: ["HTML", "CSS", "JavaScript", "GSAP", "ScrollTrigger", "Lenis"],
-    credits: [{ label: { ko: "일러스트", en: "Illustrations", ru: "Иллюстрации" }, value: "kittykeks", href: "https://www.behance.net/kittykeks" }],
-    story: [
-      
-      {
-        title: { ko: "프로젝트의 시작", en: "How it started", ru: "С чего началось" },
-        text: {
-          ko: "처음에는 GSAP ScrollTrigger를 연습하기 위한 프로젝트였습니다. 스크롤 애니메이션을 일러스트와 스토리텔링으로 보여주면 더 아름다울 것 같아서 동화 형식으로 만들었고, 제가 GSAP을 처음 쓴 프로젝트입니다.",
-          en: "It started as practice for GSAP ScrollTrigger. I thought scroll animation would look most beautiful told as a story with illustrations, so I made it a fairy tale. It was my first GSAP project.",
-          ru: "Всё началось как практика GSAP ScrollTrigger. Мне показалось, что анимация при прокрутке красивее всего выглядит как история с иллюстрациями, поэтому я сделала сказку. Это мой первый проект на GSAP.",
-        },
-      },
-      
-      {
-        title: { ko: "비주얼", en: "Visuals", ru: "Визуал" },
-        items: [
-          {
-            text: {
-              ko: "동화적인 감성을 살린 한글 서체(송명 · 고운바탕 · 고운돋움)로 전체 사이트를 한국어로 구성",
-              en: "The whole site is in Korean, set in storybook-like Hangul faces (Song Myung, Gowun Batang, Gowun Dodum)",
-              ru: "Весь сайт на корейском, набран «книжными» шрифтами хангыля (Song Myung, Gowun Batang, Gowun Dodum)",
-            },
-            why: { ko: "사이트 전체가 제가 들려주는 이야기라서, 책을 읽는 느낌의 서체를 골랐음", en: "The whole site is a story I’m telling, so I chose faces that feel like reading a book", ru: "Весь сайт — это история, которую я рассказываю, поэтому выбрала шрифты, с которыми будто читаешь книгу" },
-          },
-          {
-            text: {
-              ko: "일러스트의 색감과 분위기를 해치지 않도록 UI 요소를 최소화",
-              en: "UI kept to a minimum so it never fights the illustrations’ colour and mood",
-              ru: "Интерфейса минимум, чтобы он не спорил с цветом и настроением иллюстраций",
-            },
-          },
-        ],
-      },
-      {
-        title: { ko: "처음 버전과 리뉴얼", en: "First version and the refresh", ru: "Первая версия и обновление" },
-        items: [
-          {
-            term: { ko: "처음 버전: 직접 작업", en: "First version: all mine", ru: "Первая версия: полностью моя" },
-            text: {
-              ko: "기획, 레이아웃, 코딩 전부 직접. GSAP ScrollTrigger로 가로 스크롤(pin · scrub)과 containerAnimation을 사용한 이미지 효과, Lenis 부드러운 스크롤",
-              en: "Planning, layout and code all by me: a horizontal scroll with GSAP ScrollTrigger (pin, scrub), image effects with containerAnimation, Lenis smooth scrolling",
-              ru: "Идея, вёрстка и код — всё моё: горизонтальная прокрутка на GSAP ScrollTrigger (pin, scrub), эффекты изображений через containerAnimation, плавная прокрутка Lenis",
-            },
-          },
-          {
-            term: { ko: "리뉴얼: AI와 함께", en: "Refresh: with AI", ru: "Обновление: с ИИ" },
-            text: {
-              ko: "서체, 별이 빛나는 마법 같은 배경, 별가루 커서, 둥근 프레임 같은 그림 연출 등 꾸밈 요소는 AI와 함께 더함",
-              en: "Fonts, the magical starry background, the star-dust cursor, rounded picture frames and other finishing touches were added with AI",
-              ru: "Шрифты, волшебный звёздный фон, курсор со звёздной пылью, скруглённые рамки картинок и другие финальные штрихи добавлены с помощью ИИ",
-            },
-          },
-        ],
       },
     ],
   },

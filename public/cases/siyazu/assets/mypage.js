@@ -140,7 +140,7 @@
     return n ? `<span class="mp-nav__n">${n}</span>` : "";
   }
 
-  const empty = (text, link = "index.html#shop", cta = "쇼핑하러 가기") =>
+  const empty = (text, link = "shop.html", cta = "쇼핑하러 가기") =>
     `<div class="mp-empty"><p>${text}</p><a class="sz-btn sz-btn--line" href="${link}">${cta}</a></div>`;
 
   const PANELS = {
