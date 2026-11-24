@@ -143,6 +143,34 @@ export const caseStudies = {
         ],
       },
       {
+        title: { ko: "냥이 만나기 예약", en: "Booking a visit with a cat", ru: "Запись на встречу с котом" },
+        text: {
+          ko: "입양이 이 카페의 핵심이라, 고양이 프로필에서 바로 만남을 예약할 수 있게 만들었습니다.",
+          en: "Adoption is the heart of the café, so a visit can be booked straight from a cat’s profile.",
+          ru: "Главное в этом кафе — найти коту дом, поэтому встречу можно забронировать прямо из профиля кота.",
+        },
+        items: [
+          {
+            term: { ko: "고양이 프로필", en: "Cat profile", ru: "Профиль кота" },
+            text: { ko: "성격, 접종 · 중성화 · 검진, 아이 · 다른 고양이 · 1인 가구와 잘 맞는지", en: "Personality, vaccination / neutering / check-up, and whether it suits kids, other cats or living alone", ru: "Характер, прививки, стерилизация, осмотр и с кем уживается: дети, другие коты, человек, живущий один" },
+            why: { ko: "외부 보호소 사이트로 넘어가지 않고 한 화면에서 판단할 수 있도록", en: "So people can decide on one screen instead of leaving for the shelter’s site", ru: "Чтобы решить на одном экране, не уходя на сайт приюта" },
+          },
+          {
+            term: { ko: "4단계 예약", en: "Booking in 4 steps", ru: "Запись в 4 шага" },
+            text: { ko: "냥이 → 날짜 · 시간 → 정보 → 확인. 월요일 휴무와 마감된 시간은 미리 막아 둠", en: "Cat → date and time → details → check; Mondays and taken slots are blocked up front", ru: "Кот → дата и время → данные → проверка; понедельник и занятые слоты закрыты заранее" },
+          },
+          {
+            term: { ko: "맞춤 안내", en: "Gentle tips", ru: "Подсказки" },
+            text: { ko: "집에 아이나 다른 고양이가 있는데 성향이 다르면, 막지 않고 상담을 안내", en: "If the household doesn’t match the cat’s needs, the form offers advice instead of blocking", ru: "Если семья не совпадает с характером кота, форма не запрещает, а предлагает консультацию" },
+            why: { ko: "입양의 문턱은 낮추고, 신중함은 지키기 위해", en: "To keep the bar to adoption low while keeping it careful", ru: "Чтобы не отпугнуть, но сохранить ответственный подход" },
+          },
+          {
+            term: { ko: "예약 완료", en: "After booking", ru: "После записи" },
+            text: { ko: "예약번호, 캘린더 추가, 예약 취소, 카드에 ‘만남 예약’ 표시", en: "Booking number, add to calendar, cancel, and a ‘visit booked’ tag on the cat’s card", ru: "Номер брони, добавление в календарь, отмена и метка «встреча назначена» на карточке кота" },
+          },
+        ],
+      },
+      {
         title: { ko: "가장 어려웠던 점", en: "The hardest part", ru: "Самое сложное" },
         text: {
           ko: "중요한 것에 집중시키는 것. 입양과 굿즈를 강조하면서도, 결국 이곳은 수익을 내야 하는 카페라서 메뉴와 방문 정보도 놓치지 않게 균형을 맞췄습니다.",

@@ -144,12 +144,12 @@
     .from('.hero__title .char', { yPercent: 120, rotate: 12, opacity: 0, duration: 1.2, stagger: 0.05 })
     .from('.hero__video', { scaleX: 0, duration: 1.2 }, '<.2')
     .from(header, { yPercent: -200, duration: 1 }, '<.1')
-    .from('.hero__lead, .hero__btns .btn', { y: 40, opacity: 0, duration: 1, stagger: 0.1 }, '<.2')
-    .from('.sticker, .badge', { scale: 0, rotate: -30, duration: 1, ease: 'back.out(2)', stagger: 0.08 }, '<');
+    .from('.hero__btns > *', { y: 40, opacity: 0, duration: 1, stagger: 0.1 }, '<.2')
+    .from('.float img', { scale: 0, rotate: -40, duration: 1.2, stagger: 0.08, ease: 'back.out(1.7)' }, '<');
 
   /* ---------- hero: mouse parallax + scroll out ---------- */
   if (finePointer) {
-    const stickers = $$('.hero .sticker');
+    const stickers = $$('.hero .sticker, .hero .float');
     window.addEventListener('mousemove', e => {
       const x = e.clientX / innerWidth - 0.5;
       const y = e.clientY / innerHeight - 0.5;
@@ -165,11 +165,6 @@
     scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
   });
 
-  /* ---------- marquee skew on scroll velocity ---------- */
-  const skewTo = gsap.quickTo('.marquee__track', 'skewX', { duration: .4, ease: 'power3' });
-  ScrollTrigger.create({
-    onUpdate: self => skewTo(gsap.utils.clamp(-12, 12, self.getVelocity() / -250))
-  });
 
   /* ---------- about ---------- */
   gsap.fromTo('.about__statement .w', { opacity: .12 }, {
@@ -180,7 +175,6 @@
   $$('[data-speed]').forEach(el => {
     const sp = parseFloat(el.dataset.speed);
     gsap.to(el, { yPercent: sp * 100, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
-    gsap.fromTo(el.querySelector('img'), { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
 
   // numbers are real in the HTML (so they are right without JS / with reduced motion);
