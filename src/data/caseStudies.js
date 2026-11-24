@@ -100,6 +100,7 @@ export const caseStudies = {
     titleEn: "Myohan Coffee",
     period: "2026.11",
     tools: ["Figma", "Illustrator", "Weavy", "Kling", "HTML · CSS · JS", "GSAP", "Lenis"],
+    links: { brandbook: "/cases/cat cafe/renew/brand.html" },
     story: [
       {
         title: { ko: "아이디어의 출발", en: "Where the idea came from", ru: "Откуда идея" },

@@ -724,3 +724,7 @@ mark { background: var(--yellow); padding: 0 .2em; border-radius: .3em; color: v
 
 /* hero CTA: solid green, no outline */
 .btn--bare { border-color: transparent; }
+
+/* footer: link to the brand book */
+.footer__brand { text-decoration: underline; text-underline-offset: 4px; }
+.footer__brand:hover { color: var(--yellow); }

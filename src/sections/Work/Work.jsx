@@ -71,7 +71,7 @@ export default function Work() {
     overview: useRef(null),
     go: useRef(null),
     phone: useRef(null),
-    flagTag: useRef(null),
+    flagTags: useRef({}), // id → sphere tag element
   };
   const [zoomed, setZoomed] = useState(null);
   const panelTitle = useRef(null);
@@ -82,7 +82,8 @@ export default function Work() {
   const seen = useInView(root, "0px 0px -35% 0px");
 
   const cs = zoomed?.caseStudy && caseStudies[zoomed.caseStudy];
-  const flagged = work.find((w) => w.flag);
+  const flagged = work.filter((w) => w.flag);
+  const flagCls = (item) => `work-flag${item.flagTone ? ` work-flag--${item.flagTone}` : ""}`;
   useEffect(() => cs?.fontCss?.forEach(loadCss), [cs]);
 
   // keyboard / screen reader: focus moves into the panel when a project opens, and back when it closes
@@ -141,10 +142,10 @@ export default function Work() {
         overview: r.overview.current,
         go: r.go.current,
         phone: r.phone.current,
-        flagTag: r.flagTag.current,
+        flagTags: r.flagTags.current,
         setCaption: (item) => {
           r.captionTitle.current.textContent = tRef.current(item.title);
-          r.captionCat.current.textContent = (item.flag ? `★ ${tRef.current(item.flag)} · ` : "") + metaOf(item, tRef.current);
+          r.captionCat.current.textContent = (item.flag ? `${item.flagIcon || "★"} ${tRef.current(item.flag)} · ` : "") + metaOf(item, tRef.current);
         },
       },
       onZoom: setZoomed,
@@ -219,12 +220,12 @@ export default function Work() {
 
       <div ref={r.cursor} className="cursor-label" aria-hidden="true" />
 
-      {/* "★ Full purchase flow" tag that follows the flagged card on the sphere (sphere.js) */}
-      {flagged && (
-        <div ref={r.flagTag} className="work-flag work-flag--sphere" aria-hidden="true">
-          ★ {t(flagged.flag)}
+      {/* "★ Full purchase flow" / "♥ Brand identity" tags that follow the flagged cards on the sphere (sphere.js) */}
+      {flagged.map((f) => (
+        <div key={f.id} ref={(el) => { r.flagTags.current[f.id] = el; }} className={`${flagCls(f)} work-flag--sphere`} aria-hidden="true">
+          {f.flagIcon || "★"} {t(f.flag)}
         </div>
-      )}
+      ))}
 
       {/* iPhone with the live prototype, placed over the zoomed media by sphere.js (wide screens) */}
       <div ref={r.phone} className="work__phone" hidden={!(zoomed?.phone && cs?.links?.prototype)}>
@@ -236,19 +237,25 @@ export default function Work() {
         )}
       </div>
 
-      <a
-        ref={r.go}
-        className="work__go"
-        href={zoomed?.href ? previewUrl(zoomed.href, lang) : cs?.links?.prototype}
-        hidden={!zoomed?.href && !cs?.links?.prototype}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {zoomed?.href
-          ? t({ ko: "사이트 바로가기", en: "Visit the site", ru: "Открыть сайт" })
-          : t({ ko: "프로토타입 열기", en: "Open the prototype", ru: "Открыть прототип" })}{" "}
-        <span aria-hidden="true">↗</span>
-      </a>
+      {/* floating buttons under the zoomed media (sphere.js moves the wrapper) */}
+      <div ref={r.go} className="work__gos" hidden={!zoomed?.href && !cs?.links?.prototype}>
+        {cs?.links?.brandbook && (
+          <a className="work__go work__go--ghost" href={`${import.meta.env.BASE_URL}${cs.links.brandbook.replace(/^\//, "")}`} target="_blank" rel="noopener noreferrer">
+            {t({ ko: "브랜드북", en: "Brand book", ru: "Брендбук" })} <span aria-hidden="true">↗</span>
+          </a>
+        )}
+        <a
+          className="work__go"
+          href={zoomed?.href ? previewUrl(zoomed.href, lang) : cs?.links?.prototype}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {zoomed?.href
+            ? t({ ko: "사이트 바로가기", en: "Visit the site", ru: "Открыть сайт" })
+            : t({ ko: "프로토타입 열기", en: "Open the prototype", ru: "Открыть прототип" })}{" "}
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
 
       {/* close button in the top-right corner */}
       <button type="button" className="work__x" hidden={!zoomed} aria-label={labels.close} onClick={() => sphere.current.collapse()}>
@@ -268,8 +275,8 @@ export default function Work() {
               {cs?.titleEn && t(cs.titleEn) !== t(zoomed.title) && <small>{t(cs.titleEn)}</small>}
             </h3>
             {zoomed.flag && (
-              <p className="work-flag work-flag--panel">
-                <span aria-hidden="true">★</span> {t(zoomed.flag)}
+              <p className={`${flagCls(zoomed)} work-flag--panel`}>
+                <span aria-hidden="true">{zoomed.flagIcon || "★"}</span> {t(zoomed.flag)}
               </p>
             )}
             {zoomed.desc && <p className="overview__desc">{t(zoomed.desc)}</p>}
@@ -372,6 +379,11 @@ export default function Work() {
                   {t({ ko: "사이트 바로가기", en: "Visit the site", ru: "Открыть сайт" })} <span aria-hidden="true">↗</span>
                 </a>
               )}
+              {cs?.links?.brandbook && (
+                <a className="pill-btn" href={`${import.meta.env.BASE_URL}${cs.links.brandbook.replace(/^\//, "")}`} target="_blank" rel="noopener noreferrer">
+                  {t({ ko: "브랜드북", en: "Brand book", ru: "Брендбук" })} <span aria-hidden="true">↗</span>
+                </a>
+              )}
               {cs?.links?.prototype && (
                 <a className="pill-btn pill-btn--light overview__go overview__go--inline" href={cs.links.prototype} target="_blank" rel="noopener noreferrer">
                   {t({ ko: "프로토타입 열기", en: "Open the prototype", ru: "Открыть прототип" })} <span aria-hidden="true">↗</span>
@@ -430,8 +442,8 @@ export default function Work() {
             <span className="work-list__title">
               {t(item.title)}
               {item.flag && (
-                <span className="work-flag">
-                  <span aria-hidden="true">★</span> {t(item.flag)}
+                <span className={flagCls(item)}>
+                  <span aria-hidden="true">{item.flagIcon || "★"}</span> {t(item.flag)}
                 </span>
               )}
             </span>
@@ -444,6 +456,11 @@ export default function Work() {
               {item.href && (
                 <a className="pill-btn" href={previewUrl(item.href, lang)} target="_blank" rel="noopener noreferrer">
                   {t({ ko: "사이트", en: "Site", ru: "Сайт" })} <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              {caseStudies[item.caseStudy]?.links?.brandbook && (
+                <a className="pill-btn" href={`${import.meta.env.BASE_URL}${caseStudies[item.caseStudy].links.brandbook.replace(/^\//, "")}`} target="_blank" rel="noopener noreferrer">
+                  {t({ ko: "브랜드북", en: "Brand book", ru: "Брендбук" })} <span aria-hidden="true">↗</span>
                 </a>
               )}
               {!item.href && caseStudies[item.caseStudy]?.links?.prototype && (

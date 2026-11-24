@@ -75,7 +75,7 @@ export class SphereGallery {
       if (item.flag) {
         frame = new THREE.Mesh(
           new THREE.PlaneGeometry(1, 1),
-          new THREE.MeshBasicMaterial({ color: raw(0x1621ff), transparent: true, side: THREE.DoubleSide, depthWrite: false }),
+          new THREE.MeshBasicMaterial({ color: raw(item.flagTone === "heart" ? 0xff3b6b : 0x1621ff), transparent: true, side: THREE.DoubleSide, depthWrite: false }),
         );
         frame.position.z = -0.002;
         frame.renderOrder = 0;
@@ -670,7 +670,7 @@ export class SphereGallery {
         const pulse = this.reduced ? 1 : 0.7 + 0.3 * Math.sin(performance.now() / 600);
         p.frame.material.opacity = op * pulse * (1 - this.ex);
         // the HTML "★ …" tag sits on the card's top-left corner (projected to the screen)
-        const tag = this.ui.flagTag;
+        const tag = this.ui.flagTags?.[p.item.id];
         if (tag) {
           const v = this._tagV.set(-w * s / 2, h * s / 2, 0).add(m.position).project(this.camera);
           const show = m.visible && op > 0.3 && this.ex < 0.05 && v.z < 1;

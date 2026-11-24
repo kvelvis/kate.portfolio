@@ -27,6 +27,7 @@ const all = [
     caseStudy: "siyazu",
     // marked on the sphere caption, the project panel and the list
     flag: "Full purchase flow", // same English label in every language
+    flagIcon: "★",
   },
   {
     id: "gatto",
@@ -37,6 +38,9 @@ const all = [
     gif: catGif,
     href: "/cases/cat cafe/renew/index.html",
     caseStudy: "gatto",
+    flag: "Brand identity", // same English label in every language
+    flagIcon: "♥",
+    flagTone: "heart", // pink-red mark + frame instead of the default blue
     desc: {
       ko: "고양이 입양 카페 브랜딩 & 웹사이트 컨셉.",
       en: "Branding and a website concept for a cat-adoption café.",

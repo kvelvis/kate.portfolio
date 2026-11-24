@@ -517,11 +517,22 @@
 }
 
 /* big "visit the site" button — the sphere pins it under the zoomed media, right edge */
-.work__go {
+.work__gos {
   position: absolute;
   left: 0;
   top: 0;
   z-index: 4;
+  display: flex;
+  gap: 10px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.work__gos[hidden] {
+  display: none;
+}
+.work__go {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -534,15 +545,18 @@
   font-weight: 600;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  will-change: transform, opacity;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18) inset, 0 10px 40px -6px rgba(22, 33, 255, 0.85);
   transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
-.work__go[hidden] {
-  display: none;
+/* secondary floating button (brand book): dark glass next to the blue one */
+.work__go--ghost {
+  background: rgba(20, 20, 22, 0.72);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28) inset;
+}
+.work__go--ghost:hover {
+  background: rgba(40, 40, 44, 0.9);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
 }
 .work__go:hover {
   background: #3a44ff;
@@ -565,7 +579,7 @@
   display: none;
 }
 @media (max-width: 900px) {
-  .work__go {
+  .work__gos {
     display: none;
   }
   .overview__go--inline {
@@ -749,6 +763,11 @@
   vertical-align: middle;
   white-space: nowrap;
   box-shadow: 0 6px 20px -6px var(--blue-glow);
+}
+/* heart variant: brand-identity projects */
+.work-flag--heart {
+  background: #ff3b6b;
+  box-shadow: 0 6px 20px -6px rgba(255, 59, 107, 0.55);
 }
 .work-flag--panel {
   align-self: flex-start;
