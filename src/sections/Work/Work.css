@@ -639,7 +639,7 @@
 }
 .work-list__row {
   display: grid;
-  grid-template-columns: 40px minmax(0, 1.4fr) minmax(0, 1fr) 120px 220px; /* fixed last column keeps rows aligned */
+  grid-template-columns: 40px minmax(0, 1.4fr) minmax(0, 1fr) 100px 310px; /* fixed last column keeps rows aligned; fits 3 buttons */
   align-items: center;
   gap: 16px;
   padding: 14px 0;
@@ -663,6 +663,7 @@
 .work-list__actions {
   display: flex;
   gap: 6px;
+  white-space: nowrap; /* "설명", "브랜드북" never break inside a button */
   justify-content: flex-end;
 }
 .work-list__row {
