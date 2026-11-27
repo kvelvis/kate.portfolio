@@ -36,6 +36,8 @@ const loadCss = (href) => {
 
 // project titles may differ by language (ru uses the English names); alerts always get the Korean one
 const titleKo = (item) => (typeof item.title === "string" ? item.title : item.title.ko);
+// label for the Telegram "went to …" message (app/notify.js listens for clicks on [data-go])
+const go = (item, what) => (item ? { "data-go": `${titleKo(item)} · ${what}` } : {});
 
 const metaOf = (item, t) => [t(item.category), item.year].filter(Boolean).join(", ");
 
@@ -240,11 +242,12 @@ export default function Work() {
       {/* floating buttons under the zoomed media (sphere.js moves the wrapper) */}
       <div ref={r.go} className="work__gos" hidden={!zoomed?.href && !cs?.links?.prototype}>
         {cs?.links?.brandbook && (
-          <a className="work__go work__go--ghost" href={`${import.meta.env.BASE_URL}${cs.links.brandbook.replace(/^\//, "")}`} target="_blank" rel="noopener noreferrer">
+          <a {...go(zoomed, "брендбук")} className="work__go work__go--ghost" href={`${import.meta.env.BASE_URL}${cs.links.brandbook.replace(/^\//, "")}`} target="_blank" rel="noopener noreferrer">
             {t({ ko: "브랜드북", en: "Brand book", ru: "Брендбук" })} <span aria-hidden="true">↗</span>
           </a>
         )}
         <a
+          {...go(zoomed, zoomed?.href ? "сайт" : "прототип")}
           className="work__go"
           href={zoomed?.href ? previewUrl(zoomed.href, lang) : cs?.links?.prototype}
           target="_blank"
@@ -375,22 +378,22 @@ export default function Work() {
             </div>
             <div className="overview__actions">
               {zoomed.href && (
-                <a className="pill-btn pill-btn--light overview__go overview__go--inline" href={previewUrl(zoomed.href, lang)} target="_blank" rel="noopener noreferrer">
+                <a {...go(zoomed, "сайт")} className="pill-btn pill-btn--light overview__go overview__go--inline" href={previewUrl(zoomed.href, lang)} target="_blank" rel="noopener noreferrer">
                   {t({ ko: "사이트 바로가기", en: "Visit the site", ru: "Открыть сайт" })} <span aria-hidden="true">↗</span>
                 </a>
               )}
               {cs?.links?.brandbook && (
-                <a className="pill-btn" href={`${import.meta.env.BASE_URL}${cs.links.brandbook.replace(/^\//, "")}`} target="_blank" rel="noopener noreferrer">
+                <a {...go(zoomed, "брендбук")} className="pill-btn" href={`${import.meta.env.BASE_URL}${cs.links.brandbook.replace(/^\//, "")}`} target="_blank" rel="noopener noreferrer">
                   {t({ ko: "브랜드북", en: "Brand book", ru: "Брендбук" })} <span aria-hidden="true">↗</span>
                 </a>
               )}
               {cs?.links?.prototype && (
-                <a className="pill-btn pill-btn--light overview__go overview__go--inline" href={cs.links.prototype} target="_blank" rel="noopener noreferrer">
+                <a {...go(zoomed, "прототип")} className="pill-btn pill-btn--light overview__go overview__go--inline" href={cs.links.prototype} target="_blank" rel="noopener noreferrer">
                   {t({ ko: "프로토타입 열기", en: "Open the prototype", ru: "Открыть прототип" })} <span aria-hidden="true">↗</span>
                 </a>
               )}
               {cs?.links?.figma && (
-                <a className="pill-btn" href={cs.links.figma} target="_blank" rel="noopener noreferrer">
+                <a {...go(zoomed, "Figma")} className="pill-btn" href={cs.links.figma} target="_blank" rel="noopener noreferrer">
                   {t({ ko: "Figma 파일", en: "Figma file", ru: "Файл Figma" })} ↗
                 </a>
               )}
@@ -454,22 +457,22 @@ export default function Work() {
                 {t({ ko: "설명", en: "Details", ru: "Подробнее" })}
               </button>
               {item.href && (
-                <a className="pill-btn" href={previewUrl(item.href, lang)} target="_blank" rel="noopener noreferrer">
+                <a {...go(item, "сайт")} className="pill-btn" href={previewUrl(item.href, lang)} target="_blank" rel="noopener noreferrer">
                   {t({ ko: "사이트", en: "Site", ru: "Сайт" })} <span aria-hidden="true">↗</span>
                 </a>
               )}
               {caseStudies[item.caseStudy]?.links?.brandbook && (
-                <a className="pill-btn" href={`${import.meta.env.BASE_URL}${caseStudies[item.caseStudy].links.brandbook.replace(/^\//, "")}`} target="_blank" rel="noopener noreferrer">
+                <a {...go(item, "брендбук")} className="pill-btn" href={`${import.meta.env.BASE_URL}${caseStudies[item.caseStudy].links.brandbook.replace(/^\//, "")}`} target="_blank" rel="noopener noreferrer">
                   {t({ ko: "브랜드북", en: "Brand book", ru: "Брендбук" })} <span aria-hidden="true">↗</span>
                 </a>
               )}
               {!item.href && caseStudies[item.caseStudy]?.links?.prototype && (
-                <a className="pill-btn" href={caseStudies[item.caseStudy].links.prototype} target="_blank" rel="noopener noreferrer">
+                <a {...go(item, "прототип")} className="pill-btn" href={caseStudies[item.caseStudy].links.prototype} target="_blank" rel="noopener noreferrer">
                   {t(protoLabel)} <span aria-hidden="true">↗</span>
                 </a>
               )}
               {!item.href && !caseStudies[item.caseStudy]?.links?.prototype && caseStudies[item.caseStudy]?.links?.figma && (
-                <a className="pill-btn" href={caseStudies[item.caseStudy].links.figma} target="_blank" rel="noopener noreferrer">
+                <a {...go(item, "Figma")} className="pill-btn" href={caseStudies[item.caseStudy].links.figma} target="_blank" rel="noopener noreferrer">
                   Figma <span aria-hidden="true">↗</span>
                 </a>
               )}

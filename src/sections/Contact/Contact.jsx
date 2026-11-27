@@ -17,7 +17,7 @@ export default function Contact() {
         <p className="kicker rv">{t({ ko: "연락", en: "Contact", ru: "Контакты" })}</p>
         <h2 id="contact-title" className="contact__title rv" style={{ "--i": 1 }}>
           {main ? (
-            <a href={main.href} target={main.external === false ? undefined : "_blank"} rel="noopener noreferrer">
+            <a data-go={`контакт: ${main.label}`} href={main.href} target={main.external === false ? undefined : "_blank"} rel="noopener noreferrer">
               <em>{t({ ko: "편하게 연락 주세요", en: "Let’s talk", ru: "Напишите мне" })}</em>
               <span aria-hidden="true">↗</span>
             </a>
@@ -31,7 +31,7 @@ export default function Contact() {
             {profile.contacts.map((c) => (
               <li key={c.label}>
                 <span>{c.label}</span>
-                <a href={c.href} target={c.external === false ? undefined : "_blank"} rel="noopener noreferrer">
+                <a data-go={`контакт: ${c.label}`} href={c.href} target={c.external === false ? undefined : "_blank"} rel="noopener noreferrer">
                   {c.value}
                 </a>
               </li>
@@ -39,7 +39,7 @@ export default function Contact() {
             {profile.resume.map((r) => (
               <li key={r.href}>
                 <span>PDF</span>
-                <a href={r.href} target="_blank" rel="noopener noreferrer">
+                <a data-go="резюме PDF" href={r.href} target="_blank" rel="noopener noreferrer">
                   {r.label}
                 </a>
               </li>

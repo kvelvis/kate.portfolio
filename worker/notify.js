@@ -6,7 +6,13 @@
     1. paste this file as the worker code, Deploy;
     2. Settings → Variables and Secrets → add two secrets:
          TG_TOKEN — the bot token, TG_CHAT — the chat id;
-    3. put the worker's URL into NOTIFY_URL in src/app/notify.js.
+    3. put the worker's URL into ENDPOINT in src/app/notify.js;
+    4. (optional) total opens per client tag: Storage & Databases → KV → create a namespace,
+       then the worker's Settings → Bindings → KV namespace, variable name STATS.
+       Without it the message still shows how many times that device opened the portfolio.
+
+  Messages: 👀 opened (with sound), 📂 project, 🔗 went to a site / brand book / contact,
+  🚪 closed (how long + what was seen) — the last three silent.
 
   Limits: one message of each kind per visitor per 20 s, at most 40 messages an hour
   (kept in memory, so they are best-effort). Nothing about the visitor is saved.
@@ -60,7 +66,7 @@ export default {
     let input;
     try {
       const raw = await req.text();
-      if (raw.length > 2048) return done(413);
+      if (raw.length > 4096) return done(413);
       input = JSON.parse(raw);
     } catch {
       return done(400);
@@ -88,6 +94,8 @@ export default {
 
     // ---- message ----
     const r = clean(input.r, 30);
+    const who0 = r ? `Клиент: ${r}${input.refOld ? " (метка с прошлого раза)" : ""}` : "Клиент: без метки";
+    const tagShort = r ? ` · ${r}` : "";
     const device = { phone: "📱 телефон", tablet: "📱 планшет", desktop: "💻 компьютер" }[input.device] || "";
     const tz = clean(input.tz, 40);
     const lang = clean(input.lang, 12);
@@ -105,17 +113,52 @@ export default {
     const city = clean(req.cf?.city || "", 40);
     const where = cc ? `${flag(cc)} ${[city, countryName(cc)].filter(Boolean).join(", ")}${net ? ` · ${net}` : ""}` : "";
 
+    const list = (a, n) => (Array.isArray(a) ? a.slice(0, n).map((x) => clean(x)).filter(Boolean) : []);
+    const dur = (sec) => {
+      const v = Math.max(0, Math.min(Number(sec) || 0, 86400));
+      const m = Math.floor(v / 60);
+      return m ? `${m} мин ${v % 60} с` : `${v} с`;
+    };
+
     let text;
     let silent = false;
-    if (type === "like") {
-      text = `❤️ Портфолио лайкнули!${r ? `\nСсылка: ${r}` : ""}${where ? `\n${where}` : ""}\n${device} · ${time} (KST)`;
+    if (type === "site") {
+      text = `🔗 Перешли: ${clean(input.title)}${tagShort}`;
+      silent = true;
+    } else if (type === "close") {
+      const projects = list(input.projects, 8);
+      const gos = list(input.gos, 12);
+      text = [
+        `🚪 Портфолио закрыли${tagShort}`,
+        `Пробыли: ${dur(input.secs)}`,
+        projects.length ? `Смотрели: ${projects.join(" · ")}` : "Проекты не открывали",
+        gos.length ? `Переходы: ${gos.join(" · ")}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n");
+      silent = true;
+    } else if (type === "like") {
+      text = `❤️ Портфолио лайкнули!${r ? `\n${who0}` : ""}${where ? `\n${where}` : ""}\n${device} · ${time} (KST)`;
     } else if (type === "project") {
-      text = `📂 Открыли проект: ${clean(input.title)}${r ? `  · ссылка ${r}` : ""}`;
+      text = `📂 Открыли проект: ${clean(input.title)}${tagShort}`;
       silent = true;
     } else {
+      // how many times: on this device (from the page) and in total for the tag (KV, optional)
+      const n = Math.max(1, Math.min(Number(input.n) || 1, 9999));
+      let total = 0;
+      if (env.STATS && r) {
+        try {
+          total = Number((await env.STATS.get(`visits:${r}`)) || 0) + 1;
+          await env.STATS.put(`visits:${r}`, String(total));
+        } catch {
+          total = 0;
+        }
+      }
       text = [
-        "👀 Портфолио открыли",
-        r ? `Ссылка: ${r}` : "Ссылка: без метки",
+        `👀 Портфолио открыли${tagShort}`,
+        who0,
+        n > 1 ? `🔁 ${n}-й раз с этого устройства` : "Впервые с этого устройства",
+        total ? `Всего открытий по метке «${r}»: ${total}` : "",
         where,
         [device, tz, lang].filter(Boolean).join(" · "),
         `${time} (KST)`,
